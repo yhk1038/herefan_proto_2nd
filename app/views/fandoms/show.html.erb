@@ -1,0 +1,64 @@
+<style>
+    #header.init_header {
+        background-color: #2196f3 !important;
+        box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3) !important;
+    }
+    .carousel-caption:before{
+        background-image: url('<%= @fandom.profile_img.include?('round') ? @fandom.profile_img.split('round').first + 'round126_126' : @fandom.profile_img %>')
+    }
+    #footer{ position: initial }
+</style>
+<div id="carousel-example-generic" class="channel carousel slide carousel-fade" data-ride="carousel">
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <div class="carousel-img" style="background-image: url('<%= @fandom.background_img %>');"></div>
+            <div class="carousel-caption">
+                <p class="channel_name"><%= @fandom.name %></p>
+                <p class="channel_follow_count">followers <span class="count"><%= @fandom.user_lists.count %></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="sub-nav">
+    <ul class="tab-group container">
+        <li class="tab"><a href="" class="tab_link">wiki</a></li>
+        <li class="tab"><a href="" class="tab_link">history</a></li>
+        <li class="tab"><a href="" class="tab_link active">library</a></li>
+        <li class="tab"><a href="" class="tab_link">schedule</a></li>
+    </ul>
+</div>
+
+<%= render partial: '/layouts/link_section' %>
+
+<% if user_signed_in? && @fandom.myfandoms.all.map{|s| s.user.id}.include?(current_user.id) %>
+    <button class="btn btn-danger btn-float wave-effect" style="bottom: 50px; right: 50px; position: fixed !important;"  data-toggle="modal" data-target="#add_link_modal">
+        <i class="zmdi zmdi-plus"></i>
+    </button>
+
+
+    <!-- Modal -->
+    <%= render '/fandoms/modal_link_upload' %>
+<% end %>
+<div style="display: none;">
+    <p id="notice"><%= notice %></p>
+
+    <p>
+        <strong>Name:</strong>
+        <%= @fandom.name %>
+    </p>
+
+    <p>
+        <strong>Profile img:</strong>
+        <%= @fandom.profile_img %>
+    </p>
+
+    <p>
+        <strong>Background img:</strong>
+        <%= @fandom.background_img %>
+    </p>
+
+    <%= link_to 'Edit', edit_fandom_path(@fandom) %> |
+    <%= link_to 'Back', fandoms_path %>
+</div>

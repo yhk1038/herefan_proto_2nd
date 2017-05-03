@@ -1,0 +1,12 @@
+var point = $('#card_preview_point');
+point.empty().append(
+    "<%= escape_javascript(render '/layouts/link_card', target: @target) %>"
+);
+
+$('#link_urls').attr('value','<%= @target[:url] %>');
+
+$('#link_title').attr('value','<%= @target[:title] %>');
+
+$('#link_description').attr('value','<%= @target[:description] %>');
+
+$('#link_image').attr('value','<%= @target[:image] %>');

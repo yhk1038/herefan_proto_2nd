@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!--[if IE 9 ]><html class="ie9"><![endif]-->
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
+
+    <title><%= app_title %></title>
+    <%= csrf_meta_tags %>
+
+
+    <!-- T/ Vendor CSS -->
+    <link href="/template/vendors/bower_components/animate.css/animate.min.css" rel="stylesheet">
+    <link href="/template/vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.css" rel="stylesheet">
+    <link href="/template/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" rel="stylesheet">
+    <link href="/template/vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet">
+    <link href="/template/vendors/bootgrid/jquery.bootgrid.min.css" rel="stylesheet">
+
+    <!-- T/ CSS -->
+    <link href="/template/css/app.min.1.css" rel="stylesheet">
+    <link href="/template/css/app.min.2.css" rel="stylesheet">
+
+    <!-- My Custom Style -->
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%#= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <%= javascript_tag "_hf_ = '#{form_authenticity_token}';" %>
+</head>
+
+<body>
+<!-- Navbar -->
+<%= render partial: '/layouts/navbar' %>
+
+<% if notice && alert %>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+<% end %>
+
+<% if params[:controller].in?(skip_include_controllers) %>
+<!--<div style="width: 100%; padding: 50px;"></div>-->
+<% end %>
+<%= yield %>
+
+<!-- Footer -->
+<%= render '/layouts/footer' %>
+
+<!-- Page Loader -->
+<% unless params[:controller].in?(skip_include_controllers) %>
+    <%= render '/layouts/page_loader' %>
+<% end %>
+
+<!-- Older IE warning message -->
+<%= render '/layouts/ie_warning' %>
+
+<!-- Javascript Libraries -->
+<% if params[:controller].in?(skip_include_controllers) %>
+    <script src="/template/vendors/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/template/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/template/vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="/template/vendors/bower_components/Waves/dist/waves.min.js"></script>
+    <script src="/template/vendors/bootstrap-growl/bootstrap-growl.min.js"></script>
+    <%= render '/layouts/common_jsLibSet' %>
+    <%= javascript_include_tag 'application' %>
+    <!--<script type="text/javascript" src="jquery.wookmark.js"></script>-->
+<% else %>
+    <%= render '/layouts/js_librarySet' %>
+<% end %>
+<script src="/js/Grid-A-Licious-master/jquery.grid-a-licious.js"></script>
+<script type="text/javascript" charset="utf-8">
+    $('#libraries_wrapper').gridalicious({
+        selector: '.task',
+        width: 360
+    })
+</script>
+<%= render '/layouts/login_modal' %>
+</body>
+</html>

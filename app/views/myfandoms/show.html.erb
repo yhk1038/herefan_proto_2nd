@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Fandom:</strong>
+  <%= @myfandom.fandom %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @myfandom.user %>
+</p>
+
+<%= link_to 'Edit', edit_myfandom_path(@myfandom) %> |
+<%= link_to 'Back', myfandoms_path %>

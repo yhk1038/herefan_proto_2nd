@@ -1,0 +1,222 @@
+// Place all the styles related to the fandoms controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+html, body { height: 100% }
+
+#header{
+  background: none;
+  box-shadow: none !important;
+  -webkit-transition: all 300ms ease;
+  -moz-transition: all 300ms ease;
+  -ms-transition: all 300ms ease;
+  -o-transition: all 300ms ease;
+  transition: all 300ms ease;
+}
+
+section#page_header{
+  width: 100%;
+  height: 250px;
+  margin-bottom: 25px;
+
+  p.message {
+    text-align: center;
+    color: #fff;
+    font-size: 25px;
+    padding-top: 140px;
+  }
+}
+
+section#sorting_methods {
+
+  .methods-wrapper {
+    float: right;
+
+    .label_text {
+      text-transform: uppercase;
+    }
+  }
+}
+
+section#channels {
+  padding-top: 5px;
+
+  div.row > .col-md_2 {
+    padding: 0 6px;
+
+    .card {
+      .hf-e-header{
+        height: 100px;
+
+        &:before{
+          content: '';
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          margin: 0px -50%;
+          background: rgba(0, 0, 0, 0.35);
+        }
+      }
+
+      .background_img{
+        background-size: cover;
+        background-position: center;
+      }
+
+      .profile_img{
+        border-radius: 100%;
+        box-shadow: none;
+        border: 1px solid #eaeaea;
+        z-index: 1;
+        bottom: -36px;
+        width: 72px;
+        height: 72px;
+      }
+
+      .absolute_center{
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hf-e-body{
+        margin-top: 50px;
+
+        .text{
+          margin: 0;
+          line-height: 100%;
+          font-size: 20px;
+          font-weight: 400;
+          font-family: inherit;
+          color: #000000;
+        }
+
+        .text-sm{
+          font-size: 14px;
+          color: #5e5e5e;
+        }
+
+        .pv-follow{
+          margin: 10px -20px 20px;
+          padding: 5px;
+        }
+      }
+    }
+  }
+}
+
+.channel {
+  &.carousel { padding: initial; }
+  .carousel-inner .carousel-img {
+    background-color: rgb(113, 94, 62);
+    background-size: contain !important;
+  }
+
+  &.carousel .carousel-caption {
+    background: rgba(251, 173, 62, 0.75);
+    height: 50%;
+
+    &:before {
+      content: '';
+      width: 90px;
+      height: 90px;
+      background-color: #000;
+      position: absolute;
+      left: 47%;
+      top: -45px;
+      border: 1px solid #dedede;
+      border-radius: 100%;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .channel_name {
+      margin-top: 35px;
+      font-size: 22px;
+      font-weight: 600;
+      text-shadow: none;
+    }
+    .channel_follow_count {
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.75);
+      text-shadow: none;
+      text-transform: capitalize;
+
+      .count { font-size: 17px }
+    }
+  }
+}
+
+section.contents_box {
+  padding-top: 35px;
+
+  .task{
+    margin-bottom: 20px;
+  }
+
+  .bp-header {
+
+    .user_profile {
+      position: absolute;
+      width: 100%;
+      height: 60px;
+      margin-top: -60px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.35) 75%, rgba(0, 0, 0, 0.01) 100%);
+
+      .lv-item {
+        padding: 5px 0 0 17px;
+
+        img{
+          border-radius: 100%;
+          border: 1px solid #fff;
+        }
+
+        .lv-title, .lv-small {
+          color: #ffffff;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          max-height: 20px;
+          white-space: pre;
+          max-width: 90%;
+        }
+        .lv-title{
+          font-weight: 600;
+          font-size: 15px;
+        }
+      }
+    }
+
+    .bp-title {
+      h2 {
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  .msg{
+    color: #333;
+    font-weight: 600;
+  }
+  .url{
+    text-align: right;
+    color: #a3a3a3;
+    font-size: 11px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 100%;
+    float: right;
+  }
+
+
+}
+
+.modal-body > .input-group i.input-helper{
+  top: 4px;
+  position: relative;
+  left: -25px;
+}
+.modal-body > .input-group .label_text{
+  font-size: 10px;
+}

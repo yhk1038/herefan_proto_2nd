@@ -1,0 +1,27 @@
+<%= form_for(myfandom) do |f| %>
+  <% if myfandom.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(myfandom.errors.count, "error") %> prohibited this myfandom from being saved:</h2>
+
+      <ul>
+      <% myfandom.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :fandom_id %>
+    <%= f.text_field :fandom_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :user_id %>
+    <%= f.text_field :user_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

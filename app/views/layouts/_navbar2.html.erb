@@ -1,0 +1,140 @@
+<div id="main_nav">
+    <div id="important_header">
+        <a class="logo_container" href="/">
+            <img src="/resource/svg/main_logo.svg" alt="main logo" class="main_logo">
+        </a>
+    </div>
+    <% validator = %w(users/sessions#new users/registrations#new) %>
+    <% unless validator.include? "#{params[:controller]}##{params[:action]}" %>
+        <nav id="global_nav" class="navbar navbar-default">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!--<a class="navbar-brand font-size" href="#">HereFan</a>-->
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="<%= 'active' unless flash[:current_active_menu] %>">
+                            <a href="/" class="font-size">home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="<%= 'active' if flash[:current_active_menu] == 'fanmap' %>">
+                            <%= link_to 'fanmap', '#', class: 'font-size' %>
+                        </li>
+                        <li class="<%= 'active' if flash[:current_active_menu] == 'community' %>">
+                            <%= link_to 'community', posts_path, class: 'font-size' %>
+                        </li>
+                        <li class="<%= 'active' if flash[:current_active_menu] == 'storybook' %>">
+                            <%= link_to 'storybook', '#', class: 'font-size' %>
+                        </li>
+                        <li class="<%= 'active' if flash[:current_active_menuv] == 'poll' %>">
+                            <%= link_to 'poll', '#', class: 'font-size' %>
+                        </li>
+                        <li class="<%= 'active' if flash[:current_active_menu] == 'collection' %>">
+                            <%= link_to 'collection', collection_index_path, class: 'font-size' %>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown hidden-xs">
+
+                            <% if user_signed_in? %>
+                                <a href="#" class="dropdown-toggle font-size" data-toggle="dropdown" aria-expanded="false" style="padding: 10px;">
+                                    <% if current_fan_id %>
+                                        <div class="profile_photo" style="background: url('<%= current_fan_id.fan_img %>'), no-repeat !important; background-size: cover !important;"></div>
+                                    <% else %>
+                                        <div class="profile_photo" style="background: url('/default-user-image.png'), no-repeat !important; background-size: cover !important;"></div>
+                                    <% end %>
+                                </a>
+                                <ul id="user_dropdown" class="dropdown-menu pull-right dropdown-menu-lg">
+                                    <span class="dropdown_pointer"></span>
+                                    <div class="listview profile">
+                                        <div class="main_profile">
+                                            <div class="left_and_right">
+                                                <div>
+                                                    <p class="f5"><%= current_user.mail %></p>
+                                                    <p class="f5">103pt</p>
+                                                </div>
+                                                <div>
+                                                    <a data-method="get" href="/users/edit">Edit</a><br>
+                                                    <a data-method="delete" href="/users/sign_out">Sign out</a>
+                                                </div>
+                                              </div>
+                                        </div>
+
+                                        <% if current_user.fan_id %>
+                                            <% current_user.fan_ids.all.each do |fan_id| %>
+                                                <% point = (fan_id.posts.count * 5) + (fan_id.comments.count * 2) + (fan_id.replies.count * 1) + (fan_id.shares.count * 10) + (fan_id.maums.count * 2) + (fan_id.clips.count * 2) %>
+                                                <% my_leveling = leveling(level: point%40) %>
+                                                <div class="fanid_profile <%= 'selected' if @current_fan_id&.id == fan_id.id %>">
+                                                    <div class="fanid_img" style="background: url('<%= fan_id.fan_img %>')"></div>
+                                                    <div>
+                                                        <p class="f5"><span class="fanid_name">@<%= fan_id.nickname %></span> | <b><span class="fanid_fandom">"<%= fan_id.fandom&.name %>"</span></b></p>
+                                                        <p class="f4"><span class="fanid_level">Lv.<%= my_leveling[:point] %></span> | <span class="fanid_exp">exp <%= (my_leveling[:min]..my_leveling[:max]).to_a.sample %>/<%= my_leveling[:max] %></span></p>
+                                                        <p class="f4"><span class="fanid_msg"><%= fan_id.msg %></span></p>
+                                                    </div>
+                                                </div>
+                                            <% end %>
+                                        <% else %>
+
+                                        <% end %>
+
+                                        <div class="add_fanid_button">
+                                            <p class="f3">add fanID</p>
+                                        </div>
+                                    </div>
+                                </ul>
+
+                            <% else %>
+                                <a href="#" class="dropdown-toggle font-size" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    <span>join<span class="caret"></span></span>
+                                </a>
+                                <ul id="user_dropdown" class="dropdown-menu pull-right dropdown-menu-lg" role="menu">
+                                    <span class="dropdown_pointer"></span>
+                                    <div class="listview join">
+                                        <h1>Welcom to Here Fans!</h1>
+                                        <div class="login_form">
+                                            <%= render '/users/sessions/new' %>
+                                        </div>
+                                    </div>
+                                </ul>
+                            <% end %>
+
+                        </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+    <% end %>
+</div>
+<div id="hahaha" style="display: none;"></div>
+
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function () {
+        var header = $("#global_nav");
+        var content_index   = $("#content_ground");
+        var content_show    = $("#content_ground2");
+
+        $(window).scroll(function() {
+            var scr = $(this).scrollTop();
+            if (scr > 150) {
+                header.addClass('fix');
+                $("#toolbar").addClass('fix');
+                content_index.attr('style','padding-top: 210px');
+                content_show.attr('style','margin-top: -18px; padding-top: 80px;');
+                //console.log(toolbar);
+            } else {
+                header.removeClass('fix');
+                $("#toolbar").removeClass('fix');
+                content_index.attr('style','padding-top: 50px');
+                content_show.attr('style','margin-top: -18px;');
+            }
+        });
+    })
+</script>

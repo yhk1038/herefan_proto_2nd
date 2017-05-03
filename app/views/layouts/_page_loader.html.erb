@@ -1,0 +1,12 @@
+<% if params[:controller] != 'home' %>
+    <div class="page-loader">
+        <div class="preloader pls-blue">
+            <svg class="pl-circular" viewBox="25 25 50 50">
+                <circle class="plc-path" cx="50" cy="50" r="20" />
+            </svg>
+
+            <p>Please wait...</p>
+            <p style="position: absolute;left: -150px;top: 100px;text-decoration: overline">If it takes <b>more than 5 seconds</b>, please <b>refresh</b> your page Sorry..</p>
+        </div>
+    </div>
+<% end %>
