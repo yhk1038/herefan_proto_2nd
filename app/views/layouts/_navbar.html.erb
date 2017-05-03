@@ -1,12 +1,14 @@
 <header id="header" class=" clearfix" data-current-skin="blue">
     <ul class="container header-inner">
-        <li id="menu-trigger" data-trigger="#sidebar" class="only-show-xs">
-            <div class="line-wrap">
-                <div class="line top"></div>
-                <div class="line center"></div>
-                <div class="line bottom"></div>
-            </div>
-        </li>
+        <% if user_signed_in? %>
+            <li id="menu-trigger" data-trigger="#sidebar" class="only-show-xs">
+                <div class="line-wrap">
+                    <div class="line top"></div>
+                    <div class="line center"></div>
+                    <div class="line bottom"></div>
+                </div>
+            </li>
+        <% end %>
 
         <li class="logo">
             <%= link_to 'herefan', root_path, class: '' %>
