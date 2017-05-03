@@ -45,15 +45,16 @@
 <% if user_signed_in? %>
     <%= render '/layouts/mobile_nav' %>
 <% end %>
+
 <%= yield %>
 
 <!-- Footer -->
 <%= render '/layouts/footer' %>
 
 <!-- Page Loader -->
-<% unless params[:controller].in?(skip_include_controllers) %>
+<%# unless params[:controller].in?(skip_include_controllers) %>
     <%= render '/layouts/page_loader' %>
-<% end %>
+<%# end %>
 
 <!-- Older IE warning message -->
 <%= render '/layouts/ie_warning' %>
@@ -67,7 +68,6 @@
     <script src="/template/vendors/bootstrap-growl/bootstrap-growl.min.js"></script>
     <%= render '/layouts/common_jsLibSet' %>
     <%= javascript_include_tag 'application' %>
-    <!--<script type="text/javascript" src="jquery.wookmark.js"></script>-->
 <% else %>
     <%= render '/layouts/js_librarySet' %>
 <% end %>
