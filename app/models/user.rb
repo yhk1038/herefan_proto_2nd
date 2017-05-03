@@ -16,10 +16,11 @@ class User < ApplicationRecord
         self.myfandoms.all&.map{|mf| mf.fandom}
     end
     
-    after_create :set_default_role, if: Proc.new { User.count > 1 }
+    # after_create :set_default_role, if: Proc.new { User.count > 1 }
 
     TEMP_EMAIL_PREFIX = 'change@me'
     TEMP_EMAIL_REGEX = /\Achange@me/
+    TEMP_EMAIL_HEREFAN = '@herefan.com'
 
     validates_presence_of :name
     validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
@@ -29,11 +30,12 @@ class User < ApplicationRecord
         u = where(provider: auth.provider, uid: auth.uid).first
         if u.nil?
             u = User.create do |user|
-                user.email      = auth.info.email
+                email = auth.info.email
+                if email then user.email = email else user.email = (auth.info.name + TEMP_EMAIL_HEREFAN) end
                 user.password   = Devise.friendly_token[0,20]
                 user.provider   = auth.provider
                 user.uid        = auth.uid
-                user.name       = auth.info.name   # assuming the user model has a name
+                user.name       = auth.info.name  # assuming the user model has a name
                 user.image      = auth.info.image # assuming the user model has an image
                 # If you are using confirmable and the provider(s) you use validate emails,
                 # uncomment the line below to skip the confirmation emails.
