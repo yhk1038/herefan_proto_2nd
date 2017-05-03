@@ -16,7 +16,7 @@ module ApplicationHelper
         app_config_info[:title]         = app_title
         app_config_info[:description]   = app_description
         app_config_info[:url]           = app_domain
-        app_config_info[:image]         = app_domain + '/svg/main_logo.svg'
+        app_config_info[:image]         = app_domain + '/svg/facebook_send.png'
         
         return app_config_info
     end
