@@ -1,0 +1,105 @@
+<aside id="sidebar" class="sidebar c-overflow mCustomScrollbar _mCS_1 mCS-autoHide" style="overflow: visible; z-index: 12; top: 70px;">
+    <div id="mCSB_1" class="mCustomScrollBox mCS-minimal-dark mCSB_vertical_horizontal mCSB_outside" tabindex="0">
+        <div id="mCSB_1_container" class="mCSB_container mCS_x_hidden mCS_no_scrollbar_x" style="position: relative; top: 0px; left: 0px; width: 100%;" dir="ltr">
+            <div class="profile-menu">
+                <a href="">
+                    <div class="profile-pic">
+                        <img src="<%= current_user.image %>" alt="" class="mCS_img_loaded">
+                    </div>
+
+                    <div class="profile-info">
+                        <%= current_user.name %>
+
+                        <i class="zmdi zmdi-caret-down"></i>
+                    </div>
+                </a>
+
+                <ul class="main-menu" style="display: none;">
+                    <li>
+                        <a href="" style="text-transform: capitalize"><i class="zmdi zmdi-account"></i> my page</a>
+                    </li>
+                    <li>
+                        <a href="/users/sign_out" style="text-transform: capitalize"><i class="zmdi zmdi-time-restore"></i> Logout</a>
+                    </li>
+                </ul>
+            </div>
+
+            <ul class="main-menu">
+                <li><a href="<%= root_path %>"><i class="zmdi zmdi-balance"></i> HereFan</a></li>
+                <li class="sub-menu">
+                    <a href=""><i class="zmdi zmdi-home"></i> Home</a>
+
+                    <ul>
+                        <li><a href="<%= home_my_path %>">New</a></li>
+                        <li><a href="<%= home_my_path %>">Favorite</a></li>
+                        <li><a href="<%= home_my_path %>">My</a></li>
+                    </ul>
+                </li>
+
+                <li class="sub-menu active toggled">
+                    <a href=""><i class="zmdi zmdi-menu"></i> Follow List</a>
+                    <% current_user.fandom_lists.each do |fandom| %>
+                        <ul>
+                            <li class="sub-menu">
+                                <a href=""><%= fandom.name %></a>
+
+                                <ul>
+                                    <li><a href="<%= fandom_path(fandom) %>" style="padding-left: 175px;">
+                                        <i class="zmdi zmdi-collection-text"></i>
+                                        <span class="pull-right">Wiki</span>
+                                    </a></li>
+                                    <li><a href="<%= fandom_path(fandom) %>" style="padding-left: 175px;">
+                                        <i class="zmdi zmdi-view-list"></i>
+                                        <span class="pull-right">History</span>
+                                    </a></li>
+                                    <li><a href="<%= fandom_path(fandom) %>" style="padding-left: 175px;">
+                                        <i class="zmdi zmdi-widgets"></i>
+                                        <span class="pull-right">Library</span>
+                                    </a></li>
+                                    <li><a href="<%= fandom_path(fandom) %>" style="padding-left: 175px;">
+                                        <i class="zmdi zmdi-calendar"></i>
+                                        <span class="pull-right">Schedule</span>
+                                    </a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    <% end %>
+                </li>
+                <li class="sub-menu">
+                    <a href=""><i class="zmdi zmdi-collection-item"></i> Sample Pages</a>
+                    <ul>
+
+                        <li><a href="profile-about.html">Profile</a></li>
+                        <li><a href="list-view.html">List View</a></li>
+                        <li><a href="messages.html">Messages</a></li>
+                        <li><a href="pricing-table.html">Pricing Table</a></li>
+                        <li><a href="contacts.html">Contacts</a></li>
+                        <li><a href="wall.html">Wall</a></li>
+                        <li><a href="invoice.html">Invoice</a></li>
+                        <li><a href="login.html">Login and Sign Up</a></li>
+                        <li><a href="lockscreen.html">Lockscreen</a></li>
+                        <li><a href="404.html">Error 404</a></li>
+
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    <div id="mCSB_1_scrollbar_vertical" class="mCSB_scrollTools mCSB_1_scrollbar mCS-minimal-dark mCSB_scrollTools_vertical" style="display: block;">
+        <div class="mCSB_draggerContainer">
+            <div id="mCSB_1_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 50px; display: block; height: 657px; max-height: 728px;" oncontextmenu="return false;">
+                <div class="mCSB_dragger_bar" style="line-height: 50px;"></div>
+            </div>
+            <div class="mCSB_draggerRail"></div>
+        </div>
+    </div>
+    <div id="mCSB_1_scrollbar_horizontal" class="mCSB_scrollTools mCSB_1_scrollbar mCS-minimal-dark mCSB_scrollTools_horizontal" style="display: none;">
+        <div class="mCSB_draggerContainer">
+            <div id="mCSB_1_dragger_horizontal" class="mCSB_dragger" style="position: absolute; min-width: 50px; width: 0px; left: 0px;" oncontextmenu="return false;">
+                <div class="mCSB_dragger_bar"></div>
+            </div>
+            <div class="mCSB_draggerRail"></div>
+        </div>
+    </div>
+</aside>

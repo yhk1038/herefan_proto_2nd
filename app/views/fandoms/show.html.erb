@@ -33,7 +33,7 @@
 <%= render partial: '/layouts/link_section' %>
 
 <% if user_signed_in? && @fandom.myfandoms.all.map{|s| s.user.id}.include?(current_user.id) %>
-    <button class="btn btn-danger btn-float wave-effect" style="bottom: 50px; right: 50px; position: fixed !important;"  data-toggle="modal" data-target="#add_link_modal">
+    <button class="btn btn-danger btn-float wave-effect" style="bottom: 50px; right: 3%; position: fixed !important; z-index: 3;"  data-toggle="modal" data-target="#add_link_modal">
         <i class="zmdi zmdi-plus"></i>
     </button>
 

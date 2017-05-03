@@ -1,10 +1,18 @@
 <header id="header" class=" clearfix" data-current-skin="blue">
     <ul class="container header-inner">
-        <li class="logo hidden-xs">
+        <li id="menu-trigger" data-trigger="#sidebar" class="only-show-xs">
+            <div class="line-wrap">
+                <div class="line top"></div>
+                <div class="line center"></div>
+                <div class="line bottom"></div>
+            </div>
+        </li>
+
+        <li class="logo">
             <%= link_to 'herefan', root_path, class: '' %>
         </li>
 
-        <li class="main_menu">
+        <li class="main_menu hidden-xs">
             <ul class="top-menu font-capital">
                 <li class="<%= 'open' if params[:controller] == 'home' %>">
                     <%= link_to 'home', home_my_path %>
@@ -21,7 +29,7 @@
                     <a href=""><i class="tm-icon zmdi zmdi-search"></i></a>
                 </li>
 
-                <li class="dropdown" style="padding: 2px 0">
+                <li class="dropdown hidden-xs" style="padding: 2px 0">
                     <% if user_signed_in? %>
                         <%= link_to '', data: {toggle: 'dropdown'} do %>
                             <div class="nav_profile" style="background-image: url('<%= current_user.image %>')">
@@ -167,7 +175,7 @@
     <!-- Top Search Content -->
     <div id="top-search-wrap">
         <div class="tsw-inner">
-            <i id="top-search-close" class="zmdi zmdi-arrow-left"></i>
+            <i id="top-search-close" class="zmdi zmdi-close"></i>
             <input type="text">
         </div>
     </div>

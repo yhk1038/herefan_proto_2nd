@@ -790,6 +790,44 @@ div.super.row:before{
     background-color: #edecec;
 }
 
+/*#menu-trigger{*/
+    /*width: 45px !important;*/
+/*}*/
+/*#menu-trigger .line-wrap{*/
+    /*margin: 12px 10px;*/
+/*}*/
+#sidebar .profile-menu > a {
+    display: block;
+    height: 129px;
+    margin-bottom: 5px;
+    width: 100%;
+    background: url('/svg/main_logo.svg') no-repeat center;
+    background-size: contain;
+    background-color: #f5146c;
+}
+
+@media (max-width: 767px){
+    #header .logo{
+        position: absolute;
+        left: 10%;
+        right: 10%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        font-weight: bold;
+    }
+}
+@media (min-width: 768px){
+    .only-show-xs{
+        display: none !important;
+    }
+}
+
+
+
+
+
+
 /*
  * HereFan Font Family */
 .herefan_special_font {
