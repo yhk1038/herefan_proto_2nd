@@ -4,24 +4,43 @@
             <div class="profile-menu">
                 <a href="">
                     <div class="profile-pic">
-                        <img src="<%= current_user.image %>" alt="" class="mCS_img_loaded">
+                        <% if user_signed_in? %>
+                            <img src="<%= current_user.image %>" alt="" class="mCS_img_loaded">
+                        <% else %>
+                            <img src="/img/default-user-image.png" alt="" class="mCS_img_loaded">
+                        <% end %>
                     </div>
 
                     <div class="profile-info">
-                        <%= current_user.name %>
+                        <% if user_signed_in? %>
+                            <%= current_user.name %>
+                        <% else %>
+                            <%= 'Login first :D' %>
+                        <% end %>
+
 
                         <i class="zmdi zmdi-caret-down"></i>
                     </div>
                 </a>
 
-                <ul class="main-menu" style="display: none;">
-                    <li>
-                        <a href="" style="text-transform: capitalize"><i class="zmdi zmdi-account"></i> my page</a>
-                    </li>
-                    <li>
-                        <a href="/users/sign_out" style="text-transform: capitalize"><i class="zmdi zmdi-time-restore"></i> Logout</a>
-                    </li>
-                </ul>
+                <% if user_signed_in? %>
+                    <ul class="main-menu" style="display: none;">
+                        <li>
+                            <a href="" style="text-transform: capitalize"><i class="zmdi zmdi-account"></i> my page</a>
+                        </li>
+                        <li>
+                            <a href="/users/sign_out" style="text-transform: capitalize"><i class="zmdi zmdi-time-restore"></i> Logout</a>
+                        </li>
+                    </ul>
+                <% else %>
+                    <ul class="main-menu" style="display: none;">
+                        <li>
+                            <%= link_to '', data: {toggle: 'modal', target: '#login_modal'} do %>
+                                <i class="zmdi zmdi-time-restore"></i> Login
+                            <% end %>
+                        </li>
+                    </ul>
+                <% end %>
             </div>
 
             <ul class="main-menu">
@@ -36,35 +55,37 @@
                     </ul>
                 </li>
 
-                <li class="sub-menu active toggled">
-                    <a href=""><i class="zmdi zmdi-menu"></i> Follow List</a>
-                    <% current_user.fandom_lists.each do |fandom| %>
-                        <ul>
-                            <li class="sub-menu">
-                                <a href=""><%= fandom.name %></a>
+                <% if user_signed_in? %>
+                    <li class="sub-menu active toggled">
+                        <a href=""><i class="zmdi zmdi-menu"></i> Follow List</a>
+                        <% current_user.fandom_lists.each do |fandom| %>
+                            <ul>
+                                <li class="sub-menu">
+                                    <a href=""><%= fandom.name %></a>
 
-                                <ul>
-                                    <li><a href="<%= fandom_path(fandom) %>" style="padding-left: 175px;">
-                                        <i class="zmdi zmdi-collection-text"></i>
-                                        <span class="pull-right">Wiki</span>
-                                    </a></li>
-                                    <li><a href="<%= fandom_path(fandom) %>" style="padding-left: 175px;">
-                                        <i class="zmdi zmdi-view-list"></i>
-                                        <span class="pull-right">History</span>
-                                    </a></li>
-                                    <li><a href="<%= fandom_path(fandom) %>" style="padding-left: 175px;">
-                                        <i class="zmdi zmdi-widgets"></i>
-                                        <span class="pull-right">Library</span>
-                                    </a></li>
-                                    <li><a href="<%= fandom_path(fandom) %>" style="padding-left: 175px;">
-                                        <i class="zmdi zmdi-calendar"></i>
-                                        <span class="pull-right">Schedule</span>
-                                    </a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    <% end %>
-                </li>
+                                    <ul>
+                                        <li><a href="<%= fandom_path(fandom) %>" style="padding-left: 175px;">
+                                            <i class="zmdi zmdi-collection-text"></i>
+                                            <span class="pull-right">Wiki</span>
+                                        </a></li>
+                                        <li><a href="<%= fandom_path(fandom) %>" style="padding-left: 175px;">
+                                            <i class="zmdi zmdi-view-list"></i>
+                                            <span class="pull-right">History</span>
+                                        </a></li>
+                                        <li><a href="<%= fandom_path(fandom) %>" style="padding-left: 175px;">
+                                            <i class="zmdi zmdi-widgets"></i>
+                                            <span class="pull-right">Library</span>
+                                        </a></li>
+                                        <li><a href="<%= fandom_path(fandom) %>" style="padding-left: 175px;">
+                                            <i class="zmdi zmdi-calendar"></i>
+                                            <span class="pull-right">Schedule</span>
+                                        </a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        <% end %>
+                    </li>
+                <% end %>
                 <li class="sub-menu">
                     <a href=""><i class="zmdi zmdi-collection-item"></i> Sample Pages</a>
                     <ul>

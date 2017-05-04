@@ -42,9 +42,7 @@
 <!--<div style="width: 100%; padding: 50px;"></div>-->
 <% end %>
 
-<% if user_signed_in? %>
-    <%= render '/layouts/mobile_nav' %>
-<% end %>
+<%= render '/layouts/mobile_nav' %>
 
 <%= yield %>
 
