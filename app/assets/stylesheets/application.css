@@ -255,6 +255,7 @@
 .carousel .carousel-caption {
     height: 100%;
     background: rgba(0, 0, 0, 0.35);
+    display: block;
 }
 .carousel .carousel-indicators {
     background: initial;
@@ -403,10 +404,14 @@
 /*        5등분 그리드 시스템        */
 /********************************/
 
-.col-xs_1, .col-xs_2, .col-xs_3, .col-xs_4, .col-xs_5, .col-xs_6, .col-xs_7, .col-xs_8, .col-xs_9, .col-xs_10,
-.col-sm_1, .col-sm_2, .col-sm_3, .col-sm_4, .col-sm_5, .col-sm_6, .col-sm_7, .col-sm_8, .col-sm_9, .col-sm_10,
-.col-md_1, .col-md_2, .col-md_3, .col-md_4, .col-md_5, .col-md_6, .col-md_7, .col-md_8, .col-md_9, .col-md_10,
-.col-lg_1 .col-lg_2, .col-lg_3, .col-lg_4, .col-lg_5, .col-lg_6, .col-lg_7, .col-lg_8, .col-lg_9, .col-lg_10 {
+.col-xs_1, .col-xs_2, .col-xs_3, .col-xs_4, .col-xs_5,
+.col-xs_6, .col-xs_7, .col-xs_8, .col-xs_9, .col-xs_10,
+.col-sm_1, .col-sm_2, .col-sm_3, .col-sm_4, .col-sm_5,
+.col-sm_6, .col-sm_7, .col-sm_8, .col-sm_9, .col-sm_10,
+.col-md_1, .col-md_2, .col-md_3, .col-md_4, .col-md_5,
+.col-md_6, .col-md_7, .col-md_8, .col-md_9, .col-md_10,
+.col-lg_1 .col-lg_2, .col-lg_3, .col-lg_4, .col-lg_5,
+.col-lg_6, .col-lg_7, .col-lg_8, .col-lg_9, .col-lg_10 {
     position: relative;
     min-height: 1px;
     padding-right: 10px;

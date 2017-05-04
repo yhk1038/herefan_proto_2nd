@@ -23,24 +23,22 @@
                     </div>
                 </a>
 
-                <% if user_signed_in? %>
-                    <ul class="main-menu" style="display: none;">
+                <ul class="main-menu" style="display: none;">
+                    <% if user_signed_in? %>
                         <li>
                             <a href="" style="text-transform: capitalize"><i class="zmdi zmdi-account"></i> my page</a>
                         </li>
                         <li>
                             <a href="/users/sign_out" style="text-transform: capitalize"><i class="zmdi zmdi-time-restore"></i> Logout</a>
                         </li>
-                    </ul>
-                <% else %>
-                    <ul class="main-menu" style="display: none;">
+                    <% else %>
                         <li>
                             <%= link_to '', data: {toggle: 'modal', target: '#login_modal'} do %>
                                 <i class="zmdi zmdi-time-restore"></i> Login
                             <% end %>
                         </li>
-                    </ul>
-                <% end %>
+                    <% end %>
+                </ul>
             </div>
 
             <ul class="main-menu">
