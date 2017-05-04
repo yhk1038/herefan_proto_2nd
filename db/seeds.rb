@@ -1,9 +1,9 @@
 Fandom.create!([
-  {name: "GFRIEND", profile_img: "http://v.phinf.naver.net/20170227_234/1488185249169X3UdV_PNG/profile128_63568.png?type=round52_52", background_img: "http://v.phinf.naver.net/20170227_176/1488185221428Fv5EP_JPEG/upload_%BB%D1%BE%DB%C7%D8%B4%F5.jpg?type=nf720_342"},
-  {name: "TWICE", profile_img: "http://v.phinf.naver.net/20170501_233/1493567726766l58YX_PNG/profile6_48396.png?type=round52_52", background_img: "http://v.phinf.naver.net/20170501_241/1493567719063z1yWz_JPEG/upload_v_720x764.jpg?type=w228"},
-  {name: "ORANGE CARAMEL", profile_img: "http://www.avexnet.or.jp/orangecaramel/images/common/favicon.ico", background_img: "http://www.pledis.co.kr/data/bbsData/1403856990_2.jpg"},
-  {name: "EXO", profile_img: "http://v.phinf.naver.net/20161216_8/14818796069675cVP2_PNG/upload_profile_k.png?type=round52_52", background_img: "http://v.phinf.naver.net/20161216_85/1481879599066K111g_JPEG/upload_naver-V.jpg?type=w228"},
-  {name: "BLACK PINK", profile_img: "http://v.phinf.naver.net/20170117_291/1484617204295FhtFO_PNG/profile362_72630.png?type=round52_52", background_img: "http://v.phinf.naver.net/20170119_273/1484807789879Ven2o_JPEG/upload_naver_v_blackpink_20161111.jpg?type=w228"}
+  {name: "GFRIEND", profile_img: "http://v.phinf.naver.net/20170227_234/1488185249169X3UdV_PNG/profile128_63568.png?type=round52_52", background_img: "http://v.phinf.naver.net/20170227_176/1488185221428Fv5EP_JPEG/upload_%BB%D1%BE%DB%C7%D8%B4%F5.jpg?type=nf720_342", published: false},
+  {name: "TWICE", profile_img: "http://v.phinf.naver.net/20170501_233/1493567726766l58YX_PNG/profile6_48396.png?type=round52_52", background_img: "http://v.phinf.naver.net/20170501_241/1493567719063z1yWz_JPEG/upload_v_720x764.jpg?type=w228", published: false},
+  {name: "ORANGE CARAMEL", profile_img: "http://www.avexnet.or.jp/orangecaramel/images/common/favicon.ico", background_img: "http://www.pledis.co.kr/data/bbsData/1403856990_2.jpg", published: false},
+  {name: "EXO", profile_img: "http://v.phinf.naver.net/20161216_8/14818796069675cVP2_PNG/upload_profile_k.png?type=round52_52", background_img: "http://v.phinf.naver.net/20161216_85/1481879599066K111g_JPEG/upload_naver-V.jpg?type=w228", published: false},
+  {name: "BLACK PINK", profile_img: "http://v.phinf.naver.net/20170117_291/1484617204295FhtFO_PNG/profile362_72630.png?type=round52_52", background_img: "http://v.phinf.naver.net/20170119_273/1484807789879Ven2o_JPEG/upload_naver_v_blackpink_20161111.jpg?type=w228", published: false}
 ])
 Link.create!([
   {user_id: 1, fandom_id: 1, type: nil, url: "http://www.vlive.tv/video/29068", title: "[V LIVE] 하루의 마무리는 버디와☕️", description: "Try watching videos on V LIVE!", message: "is it real???", image: "http://v.phinf.naver.net/20170430_105/1493554675503k9Vgc_JPEG/531C05F3B30BF3EC1C33BE2893A86533F06_muploader_d_360P_640_1228_128_logo.jpg?type=a720_play"},
@@ -17,8 +17,8 @@ Link.create!([
   {user_id: 1, fandom_id: 1, type: nil, url: "https://www.youtube.com/watch?v=ApTzDAo7ASw", title: "여자친구 / GFRIEND - FINGERTIP 교차편집 Stage Mix", description: "영상과 관련없는 다른 가수를 언급하며 비교하거나 악플을 달면 제 채널에서 차단됩니다. 아래 URL을 클릭하면 영상을 다운받을 수 있습니다. https://drive.google.com/open?id=0ByTwvK6PV-_OZFJuaTFtNUJCTDQ", message: "", image: "https://i.ytimg.com/vi/ApTzDAo7ASw/maxresdefault.jpg"},
   {user_id: 1, fandom_id: 2, type: nil, url: "https://namu.wiki/w/TWICE", title: "TWICE - 나무위키", description: "", message: "트와이스 나무위키", image: "/svg/main_logo.svg"},
   {user_id: 1, fandom_id: 2, type: nil, url: "https://www.youtube.com/watch?v=8A2t_tAjMz8", title: "TWICE(트와이스) &quot;KNOCK KNOCK&quot; M/V", description: "TWICE(트와이스) &quot;KNOCK KNOCK&quot; M/V TWICE SPECIAL ALBUM &quot;TWICEcoaster : LANE 2&quot; 2017.02.20 NEW RELEASE iTunes Apple Music: https://goo.gl/t9L891 TWICE Official Hom...", message: "무려 공식 버전임 스밍 ㄱㄱ", image: "https://i.ytimg.com/vi/8A2t_tAjMz8/hqdefault.jpg"},
-  {user_id: 4, fandom_id: 1, type: nil, url: "https://www.youtube.com/watch?v=UHlnudZttkQ", title: "데뷔하기도 전에 사라질뻔한 걸그룹, 흥미도는 여자친구 데뷔 일화 (feat.갓자친구)", description: "여자친구가 좋다 좋아요 꾸우욱 !!!!!!! ★눈살이 찌푸려지는 과한 악플은 당사자에게 신고당할 수 있습니다 조금만 살살 말해주시는 센스!!★ 구독과 댓글은 새댁을 춤추게 합니다 ♪ 원하는 자료가 있으면 댓글로 요청주세요 :-)", message: "보진 않았지만 일단 링크 -> 보고왔다 짠내폴폴ㅠ 꽤 디테일하게 잘만듦 (엄지척) 볼만함.ㅇㅇ", image: "https://i.ytimg.com/vi/UHlnudZttkQ/maxresdefault.jpg"}
+  {user_id: 1, fandom_id: 1, type: nil, url: "https://www.youtube.com/watch?v=UHlnudZttkQ", title: "데뷔하기도 전에 사라질뻔한 걸그룹, 흥미도는 여자친구 데뷔 일화 (feat.갓자친구)", description: "여자친구가 좋다 좋아요 꾸우욱 !!!!!!! ★눈살이 찌푸려지는 과한 악플은 당사자에게 신고당할 수 있습니다 조금만 살살 말해주시는 센스!!★ 구독과 댓글은 새댁을 춤추게 합니다 ♪ 원하는 자료가 있으면 댓글로 요청주세요 :-)", message: "보진 않았지만 일단 링크 -> 보고왔다 짠내폴폴ㅠ 꽤 디테일하게 잘만듦 (엄지척) 볼만함.ㅇㅇ", image: "https://i.ytimg.com/vi/UHlnudZttkQ/maxresdefault.jpg"}
 ])
 Myfandom.create!([
-  {fandom_id: 1, user_id: 4}
+  {fandom_id: 1, user_id: 1}
 ])
