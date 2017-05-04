@@ -23,9 +23,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # end
     
     # DELETE /resource
-    # def destroy
-    #   super
-    # end
+    def destroy
+        # super
+        if current_user.update(active: false)
+            puts "\tDestroy Session! and Active Falsed!"
+            redirect_to destroy_user_session_path
+        else
+            redirect_to :back
+        end
+    end
     
     # GET /resource/cancel
     # Forces the session data which is usually expired after sign

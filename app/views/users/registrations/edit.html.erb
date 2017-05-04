@@ -1,43 +1,130 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
+<%= render partial: '/layouts/plane_header', locals: { color_class: 'bgm-deeporange', message: 'Account Edit Page X0', style: 'height: 180px;', msg_style: 'padding-top: 85px;' } %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+<div class="container" style="padding-top: 40px;">
+    <div class="col-md-2 col-xs-1"></div>
+    <div class="col-md-8 col-xs-10">
+        <div class="row">
+            <div class="block-header">
+                <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
+                <ul class="actions">
+                    <li>
+                        <a href="">
+                            <i class="zmdi zmdi-trending-up"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="zmdi zmdi-check-all"></i>
+                        </a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="" data-toggle="dropdown">
+                            <i class="zmdi zmdi-more-vert"></i>
+                        </a>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li>
+                                <a href="">Refresh</a>
+                            </li>
+                            <li>
+                                <a href="">Manage Widgets</a>
+                            </li>
+                            <li>
+                                <a href="">Widgets Settings</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="card">
 
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
-  </div>
+                <!--<form class="form-horizontal" role="form">-->
+                <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, role: 'form', class: 'form-horizontal' }) do |f| %>
+                    <%= devise_error_messages! %>
+                    <div class="card-header">
+                        <h2>Horizontal Form <small>Use Bootstrap's predefined grid classes to align labels and groups of form controls in a horizontal layout by adding '.form-horizontal' to the form. Doing so changes '.form-groups' to behave as grid rows, so no need for '.row'.</small></h2>
+                    </div>
 
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
+                    <div class="card-body card-padding">
+                        <div class="form-group">
+                            <%= f.label :nickname, for: 'inputNickName', class: 'col-sm-3 control-label' %>
+                            <div class="col-sm-9">
+                                <div class="fg-line">
+                                    <%= f.text_field :nickname, class: 'form-control input-sm', id: 'inputNickName', placeholder: 'Nick Name' %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <%= f.label :name, for: 'inputName', class: 'col-sm-3 control-label' %>
+                            <div class="col-sm-9">
+                                <div class="fg-line">
+                                    <%= f.text_field :name, class: 'form-control input-sm', id: 'inputName', placeholder: 'Name' %>
+                                </div>
+                            </div>
+                        </div>
 
-<h3>Cancel my account</h3>
+                        <div class="form-group">
+                            <%= f.label :email, for: 'inputEmail3', class: 'col-sm-3 control-label' %>
+                            <div class="col-sm-9">
+                                <div class="fg-line">
+                                    <%= f.email_field :email, autofocus: true, class: 'form-control input-sm', id: 'inputEmai3', placeholder: 'Email' %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <%= f.label :new_password, for: 'inputNewPassword', class: 'col-sm-3 control-label'%>
+                            <div class="col-sm-9">
+                                <div class="fg-line">
+                                    <%= f.password_field :password, autocomplete: "off", placeholder: 'New Password what you wanna change', class: 'form-control input-sm', id: 'inputNewPassword' %>
+                                </div>
+                                <% if @minimum_password_length %>
+                                    <br />
+                                    <em><%= @minimum_password_length %> characters minimum / WAIT!! <i>(leave blank if you don't want to change it)</i></em>
+                                <% end %>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <%= f.label :new_password_confirm, for: 'inputNewPasswordConfirm', class: 'col-sm-3 control-label'%>
+                            <div class="col-sm-9">
+                                <div class="fg-line">
+                                    <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: 'Repeat New Password at Once', class: 'form-control input-sm', id: 'inputNewPasswordConfirm' %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <%= f.label :current_password, for: 'inputCurrentPassword', class: 'col-sm-3 control-label'%>
+                            <div class="col-sm-9">
+                                <div class="fg-line">
+                                    <%= f.password_field :current_password, autocomplete: "off", placeholder: 'Password', class: 'form-control input-sm', id: 'inputCurrentPassword' %>
+                                </div>
+                                <% if @minimum_password_length %>
+                                    <br />
+                                    <em><i>(we need your current password to confirm your changes)</i></em>
+                                <% end %>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-3 col-sm-9">
+                                <%= link_to "Go Back", :back, class: 'hf-btn btn-info btn-sm waves-effect' %>
+                                <%= f.submit "Update", class: 'hf-btn btn-primary btn-sm waves-effect' %>
+                            </div>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+            <div class="card">
+                <%#= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, role: 'form', class: 'form-horizontal' }) do |f| %>
+                    <%#= devise_error_messages! %>
+                    <div class="card-header">
+                        <h2>Cancel my account <small>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), class: 'hf-btn btn-danger btn-sm waves-effect button_to', style: 'padding: 5px 10px; font-size: 12px; line-height: 1.5; border-radius: 2px; float: right; width: inherit; color: #ffffff; background-color: #f44336; border-color: #f32c1e; top: -30px;', data: { confirm: "Are you sure?" }, method: :delete %></small></h2>
+                    </div>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+                <%# end %>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 col-xs-1"></div>
+</div>
