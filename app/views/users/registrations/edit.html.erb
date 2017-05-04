@@ -105,7 +105,7 @@
                             <div class="input-group input-group-lg" style="border: 2px solid #EAEAEA;border-bottom: 0;">
                                 <span class="input-group-addon c-blue"><i class="zmdi zmdi-cake" style="top: 0;"></i></span>
                                 <div class="fg-line">
-                                    <input type="date" class="form-control input-lg" value="<%= resource.birthday.to_date %>" placeholder="BirthDay">
+                                    <input type="date" class="form-control input-lg" value="<%= resource.birthday.to_date if resource.birthday %>" placeholder="BirthDay">
                                 </div>
                                 <span class="input-group-addon last c-blue f-14 btn btn-default bgm-blue waves-effect" style="display: table-cell"></span>
                             </div>
