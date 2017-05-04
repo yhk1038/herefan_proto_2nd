@@ -1,130 +1,283 @@
 
-<%= render partial: '/layouts/plane_header', locals: { color_class: 'bgm-deeporange', message: 'Account Edit Page X0', style: 'height: 180px;', msg_style: 'padding-top: 85px;' } %>
+<%= render partial: '/layouts/plane_header', locals: { color_class: 'bgm-deeporange', message: 'Account Edit Page @~@', style: 'height: 180px;', msg_style: 'padding-top: 85px;' } %>
 
 
-<div class="container" style="padding-top: 40px;">
-    <div class="col-md-2 col-xs-1"></div>
-    <div class="col-md-8 col-xs-10">
+<div class="container" style="padding-top: 75px;">
+    <div class="col-md-3 col-xs-1"></div>
+    <div class="col-md-6 col-xs-10">
         <div class="row">
+            <!--<div class="block-header">-->
+                <!--<h2>Edit <%#= resource_name.to_s.humanize %></h2>-->
+
+                <!--<ul class="actions">-->
+                    <!--<li>-->
+                        <!--<a href="">-->
+                            <!--<i class="zmdi zmdi-trending-up"></i>-->
+                        <!--</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a href="">-->
+                            <!--<i class="zmdi zmdi-check-all"></i>-->
+                        <!--</a>-->
+                    <!--</li>-->
+                    <!--<li class="dropdown">-->
+                        <!--<a href="" data-toggle="dropdown">-->
+                            <!--<i class="zmdi zmdi-more-vert"></i>-->
+                        <!--</a>-->
+
+                        <!--<ul class="dropdown-menu dropdown-menu-right">-->
+                            <!--<li>-->
+                                <!--<a href="">Refresh</a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<a href="">Manage Widgets</a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<a href="">Widgets Settings</a>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    <!--</li>-->
+                <!--</ul>-->
+            <!--</div>-->
+
             <div class="block-header">
-                <h2>Edit <%= resource_name.to_s.humanize %></h2>
-
-                <ul class="actions">
-                    <li>
-                        <a href="">
-                            <i class="zmdi zmdi-trending-up"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <i class="zmdi zmdi-check-all"></i>
-                        </a>
-                    </li>
-                    <li class="dropdown">
-                        <a href="" data-toggle="dropdown">
-                            <i class="zmdi zmdi-more-vert"></i>
-                        </a>
-
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <li>
-                                <a href="">Refresh</a>
-                            </li>
-                            <li>
-                                <a href="">Manage Widgets</a>
-                            </li>
-                            <li>
-                                <a href="">Widgets Settings</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+                <h2><b>Public Info</b></h2>
             </div>
             <div class="card">
+                <div class="card-body card-padding">
 
-                <!--<form class="form-horizontal" role="form">-->
-                <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, role: 'form', class: 'form-horizontal' }) do |f| %>
-                    <%= devise_error_messages! %>
-                    <div class="card-header">
-                        <h2>Horizontal Form <small>Use Bootstrap's predefined grid classes to align labels and groups of form controls in a horizontal layout by adding '.form-horizontal' to the form. Doing so changes '.form-groups' to behave as grid rows, so no need for '.row'.</small></h2>
+                    <div class="row">
+
+                        <div class="col-sm-12 text-center">
+                            <p class="f-500 c-black m-b-20 text-capitalize">profile image</p>
+                            <div id="hf-fileinput" class="fileinput fileinput-new m-b-30 p-0" data-provides="fileinput">
+                                <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="background-image: url('<%= resource.image %>');"></div>
+                                <div>
+                                    <span class="btn btn-info btn-file waves-effect hf-fileinput-btn">
+                                        <span class="fileinput-new bgm-blue"><i class="zmdi zmdi-camera"></i></span>
+                                        <span class="fileinput-exists bgm-green"><i class="zmdi zmdi-camera"></i></span>
+                                        <input type="file" name="">
+                                    </span>
+                                    <a href="#" class="btn btn-danger fileinput-exists waves-effect w-100" data-dismiss="fileinput">Remove</a>
+                                </div>
+                            </div>
+                            <!-- 디버깅 단서로 활용하도록 주석 삭제하지 않고 남겨둠. -->
+                            <!-- <p><em>Image preview only works in IE10+, FF3.6+, Safari6.0+, Chrome6.0+ and Opera11.1+. In older browsers the filename is shown instead.</em></p> -->
+                        </div>
+
+                        <div class="col-sm-12">
+                            <!--<p class="c-black f-500 m-b-5 m-t-20">NickName</p>-->
+                            <div class="input-group input-group-lg" style="border: 2px solid #EAEAEA;">
+                                <span class="input-group-addon c-blue"><i class="zmdi zmdi-face" style="top: 0;"></i></span>
+                                <div class="fg-line">
+                                    <input type="text" id="checkNickNameLength_from" class="form-control input-lg" value="<%= resource.nickname %>" placeholder="NickName">
+                                </div>
+                                <span class="input-group-addon last c-blue f-14"><span id="checkNickNameLength_to"><%= resource.nickname.length %></span>/20</span>
+                            </div>
+                        </div>
+
                     </div>
 
-                    <div class="card-body card-padding">
-                        <div class="form-group">
-                            <%= f.label :nickname, for: 'inputNickName', class: 'col-sm-3 control-label' %>
-                            <div class="col-sm-9">
-                                <div class="fg-line">
-                                    <%= f.text_field :nickname, class: 'form-control input-sm', id: 'inputNickName', placeholder: 'Nick Name' %>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <%= f.label :name, for: 'inputName', class: 'col-sm-3 control-label' %>
-                            <div class="col-sm-9">
-                                <div class="fg-line">
-                                    <%= f.text_field :name, class: 'form-control input-sm', id: 'inputName', placeholder: 'Name' %>
-                                </div>
-                            </div>
-                        </div>
+                </div>
+            </div>
 
-                        <div class="form-group">
-                            <%= f.label :email, for: 'inputEmail3', class: 'col-sm-3 control-label' %>
-                            <div class="col-sm-9">
-                                <div class="fg-line">
-                                    <%= f.email_field :email, autofocus: true, class: 'form-control input-sm', id: 'inputEmai3', placeholder: 'Email' %>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <%= f.label :new_password, for: 'inputNewPassword', class: 'col-sm-3 control-label'%>
-                            <div class="col-sm-9">
-                                <div class="fg-line">
-                                    <%= f.password_field :password, autocomplete: "off", placeholder: 'New Password what you wanna change', class: 'form-control input-sm', id: 'inputNewPassword' %>
-                                </div>
-                                <% if @minimum_password_length %>
-                                    <br />
-                                    <em><%= @minimum_password_length %> characters minimum / WAIT!! <i>(leave blank if you don't want to change it)</i></em>
-                                <% end %>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <%= f.label :new_password_confirm, for: 'inputNewPasswordConfirm', class: 'col-sm-3 control-label'%>
-                            <div class="col-sm-9">
-                                <div class="fg-line">
-                                    <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: 'Repeat New Password at Once', class: 'form-control input-sm', id: 'inputNewPasswordConfirm' %>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <%= f.label :current_password, for: 'inputCurrentPassword', class: 'col-sm-3 control-label'%>
-                            <div class="col-sm-9">
-                                <div class="fg-line">
-                                    <%= f.password_field :current_password, autocomplete: "off", placeholder: 'Password', class: 'form-control input-sm', id: 'inputCurrentPassword' %>
-                                </div>
-                                <% if @minimum_password_length %>
-                                    <br />
-                                    <em><i>(we need your current password to confirm your changes)</i></em>
-                                <% end %>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-3 col-sm-9">
-                                <%= link_to "Go Back", :back, class: 'hf-btn btn-info btn-sm waves-effect' %>
-                                <%= f.submit "Update", class: 'hf-btn btn-primary btn-sm waves-effect' %>
-                            </div>
-                        </div>
-                    </div>
-                <% end %>
+            <div class="block-header">
+                <h2><b>Personal Info</b></h2>
             </div>
             <div class="card">
+                <div class="card-body card-padding">
+
+                    <div class="row">
+
+                        <!--Name Field-->
+                        <div class="col-sm-12">
+                            <div class="input-group input-group-lg" style="border: 2px solid #EAEAEA;border-bottom: 0;">
+                                <span class="input-group-addon c-blue"><i class="zmdi zmdi-account" style="top: 0;"></i></span>
+                                <div class="fg-line">
+                                    <input type="text" id="checkNameLength_from" class="form-control input-lg" value="<%= resource.name %>" placeholder="Name">
+                                </div>
+                                <span class="input-group-addon last c-blue f-14"><span id="checkNameLength_to"><%= resource.name.length %></span>/20</span>
+                            </div>
+                        </div>
+
+                        <!--BirthDay Field-->
+                        <div class="col-sm-12">
+                            <div class="input-group input-group-lg" style="border: 2px solid #EAEAEA;border-bottom: 0;">
+                                <span class="input-group-addon c-blue"><i class="zmdi zmdi-cake" style="top: 0;"></i></span>
+                                <div class="fg-line">
+                                    <input type="date" class="form-control input-lg" value="<%= resource.birthday.to_date %>" placeholder="BirthDay">
+                                </div>
+                                <span class="input-group-addon last c-blue f-14 btn btn-default bgm-blue waves-effect" style="display: table-cell"></span>
+                            </div>
+                        </div>
+
+                        <!--Email Filed-->
+                        <div class="col-sm-12">
+                            <div class="input-group input-group-lg" style="border: 2px solid #EAEAEA;">
+                                <span class="input-group-addon c-blue"><i class="zmdi zmdi-email" style="top: 0;"></i></span>
+                                <div class="fg-line">
+                                    <input type="text" class="form-control input-lg" value="<%= resource.email %>" placeholder="Email">
+                                </div>
+                                <span class="input-group-addon last c-blue f-14 btn btn-default bgm-blue waves-effect" style="display: table-cell"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="block-header">
+                <h2><b>Password Zone <em>(Attention !!)</em></b> <small><b>New Password</b> : <em>leave blank if you don't want to change it</em> <br><b>Current Password</b> : <em>we need your current password to confirm your changes</em></small></h2>
+            </div>
+            <div class="card brd-2" style="border: 2px solid #F44336">
+                <div class="card-body card-padding">
+
+                    <div class="row">
+
+                        <!--New Password Field-->
+                        <div class="col-sm-12">
+                            <div class="input-group input-group-lg" style="border: 2px solid #EAEAEA;border-bottom: 0;">
+                                <span class="input-group-addon c-blue"><i class="zmdi zmdi-lock" style="top: 0;"></i></span>
+                                <div class="fg-line">
+                                    <input type="password" id="checkNewPWDLength_from" class="form-control input-lg" placeholder="New Password">
+                                </div>
+                                <span class="input-group-addon last c-blue f-14 btn btn-default bgm-bluegray waves-effect" style="display: table-cell"></span>
+                            </div>
+                        </div>
+
+                        <!--New Password Confirm Field-->
+                        <div class="col-sm-12">
+                            <div class="input-group input-group-lg" style="border: 2px solid #EAEAEA;border-bottom: 0;">
+                                <span class="input-group-addon c-blue"><i class="zmdi zmdi-lock" style="top: 0;"></i></span>
+                                <div class="fg-line">
+                                    <input type="password" id="checkNewPWDconfirmLength_from" class="form-control input-lg" placeholder="New Password Confirm">
+                                </div>
+                                <span class="input-group-addon last c-blue f-14 btn btn-default bgm-bluegray waves-effect" style="display: table-cell"></span>
+                            </div>
+                        </div>
+
+                        <!--Current Password Filed-->
+                        <div class="col-sm-12">
+                            <div class="input-group input-group-lg" style="border: 2px solid #EAEAEA;">
+                                <span class="input-group-addon c-blue"><i class="zmdi zmdi-key" style="top: 0;"></i></span>
+                                <div class="fg-line">
+                                    <input type="password" id="checkPWDLength_from" class="form-control input-lg" placeholder="Current Password">
+                                </div>
+                                <span class="input-group-addon last c-blue f-14 btn btn-default bgm-blue waves-effect" style="display: table-cell"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <%= link_to "Go Back", :back, class: 'hf-btn btn-info bgm-lightgreen waves-effect w-100 m-t-10 m-b-5 p-15 f-16', style: 'box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);' %>
+            <button type="submit" class="card hf-btn btn-primary bgm-blue waves-effect w-100 m-t-5 m-b-30 p-15 f-16" style="box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);">Update</button>
+
+            <div class="hf-hr-wrap" style="padding: 0 25%;">
+                <hr class="hf-hr">
+                <span class="zmdi zmdi-star"></span>
+            </div>
+
+            <div class="block-header m-t-30 p-t-30">
+                <h2><b>Advanced Zone</b></h2>
+            </div>
+            <div class="card brd-2" style="border: 2px solid #F44336">
                 <%#= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, role: 'form', class: 'form-horizontal' }) do |f| %>
-                    <%#= devise_error_messages! %>
-                    <div class="card-header">
-                        <h2>Cancel my account <small>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), class: 'hf-btn btn-danger btn-sm waves-effect button_to', style: 'padding: 5px 10px; font-size: 12px; line-height: 1.5; border-radius: 2px; float: right; width: inherit; color: #ffffff; background-color: #f44336; border-color: #f32c1e; top: -30px;', data: { confirm: "Are you sure?" }, method: :delete %></small></h2>
+                <%#= devise_error_messages! %>
+                <div class="card-header">
+                    <h2>Danger Zone</h2>
+                    <div class="row m-t-20">
+                        <h2 class="col-sm-8"><small><span class="c-red f-500">Delete Account?</span> <br>(To protect your information, your account will be retained for two months even if you delete it.)</small></h2>
+                        <%= link_to "delete my account", registration_path(resource_name), class: 'hf-btn btn-danger btn-sm waves-effect col-sm-4 col-xs-12 m-t-20', data: { confirm: "Are you sure?" }, method: :delete %>
                     </div>
+                </div>
 
                 <%# end %>
             </div>
+
+
+
+
+            <!--<div class="card">-->
+
+                <!--&lt;!&ndash;<form class="form-horizontal" role="form">&ndash;&gt;-->
+                <!--<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, role: 'form', class: 'form-horizontal' }) do |f| %>-->
+                    <!--<%= devise_error_messages! %>-->
+                    <!--<div class="card-header">-->
+                        <!--<h2>Horizontal Form <small>Use Bootstrap's predefined grid classes to align labels and groups of form controls in a horizontal layout by adding '.form-horizontal' to the form. Doing so changes '.form-groups' to behave as grid rows, so no need for '.row'.</small></h2>-->
+                    <!--</div>-->
+
+                    <!--<div class="card-body card-padding">-->
+                        <!--<div class="form-group">-->
+                            <!--<%= f.label :nickname, for: 'inputNickName', class: 'col-sm-3 col-xs-4 control-label btn btn-default bgm-pink', style: 'box-shadow: none' %>-->
+                            <!--<div class="col-sm-9 col-xs-8">-->
+                                <!--<div class="fg-line">-->
+                                    <!--<%= f.text_field :nickname, class: 'form-control input-sm', id: 'inputNickName', placeholder: 'Nick Name' %>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<%= f.label :name, for: 'inputName', class: 'col-sm-3 col-xs-4 control-label btn btn-default bgm-pink', style: 'box-shadow: none' %>-->
+                            <!--<div class="col-sm-9 col-xs-8">-->
+                                <!--<div class="fg-line">-->
+                                    <!--<%= f.text_field :name, class: 'form-control input-sm', id: 'inputName', placeholder: 'Name' %>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+                        <!--<div class="form-group">-->
+                            <!--<%= f.label :email, for: 'inputEmail3', class: 'col-sm-3 col-xs-4 control-label btn btn-default bgm-pink', style: 'box-shadow: none' %>-->
+                            <!--<div class="col-sm-9 col-xs-8">-->
+                                <!--<div class="fg-line">-->
+                                    <!--<%= f.email_field :email, class: 'form-control input-sm', id: 'inputEmai3', placeholder: 'Email', required: 'required' %>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<%= f.label :new_password, for: 'inputNewPassword', class: 'col-sm-3 col-xs-4 control-label btn btn-default bgm-pink', style: 'box-shadow: none' %>-->
+                            <!--<div class="col-sm-9 col-xs-8">-->
+                                <!--<div class="fg-line">-->
+                                    <!--<%= f.password_field :password, autocomplete: "off", placeholder: 'New Password what you wanna change', class: 'form-control input-sm', id: 'inputNewPassword' %>-->
+                                <!--</div>-->
+                                <!--<% if @minimum_password_length %>-->
+                                    <!--<br />-->
+                                    <!--<em><%= @minimum_password_length %> characters minimum / WAIT!! <i>(leave blank if you don't want to change it)</i></em>-->
+                                <!--<% end %>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<%= f.label :new_password_confirm, for: 'inputNewPasswordConfirm', class: 'col-sm-3 col-xs-4 control-label btn btn-default bgm-pink', style: 'box-shadow: none' %>-->
+                            <!--<div class="col-sm-9 col-xs-8">-->
+                                <!--<div class="fg-line">-->
+                                    <!--<%= f.password_field :password_confirmation, autocomplete: "off", placeholder: 'Repeat New Password at Once', class: 'form-control input-sm', id: 'inputNewPasswordConfirm' %>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<%= f.label :current_password, for: 'inputCurrentPassword', class: 'col-sm-3 col-xs-4 control-label btn btn-default bgm-pink', style: 'box-shadow: none' %>-->
+                            <!--<div class="col-sm-9 col-xs-8">-->
+                                <!--<div class="fg-line">-->
+                                    <!--<%= f.password_field :current_password, autocomplete: "off", placeholder: 'Password', class: 'form-control input-sm', id: 'inputCurrentPassword' %>-->
+                                <!--</div>-->
+                                <!--<% if @minimum_password_length %>-->
+                                    <!--<br />-->
+                                    <!--<em><i>(we need your current password to confirm your changes)</i></em>-->
+                                <!--<% end %>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<div class="col-sm-offset-3 col-sm-9 col-xs-12 m-t-30">-->
+                                <!--<%= link_to "Go Back", :back, class: 'col-xs-5 m-r-25 hf-btn btn-info btn-sm waves-effect' %>-->
+                                <!--<%= f.submit "Update", class: 'col-xs-5 m-l-25 hf-btn btn-primary btn-sm waves-effect' %>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--<% end %>-->
+            <!--</div>-->
+
         </div>
     </div>
-    <div class="col-md-2 col-xs-1"></div>
+    <div class="col-md-3 col-xs-1"></div>
 </div>

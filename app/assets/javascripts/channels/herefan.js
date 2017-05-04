@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+    //
+    // 상단 네비게이션 전환
     var header = $('#header');
     $(window).scroll(function () {
         var scroll = $(this).scrollTop();
@@ -13,6 +15,8 @@ $(document).ready(function () {
     });
 
 
+    //
+    // 링크 카드 미리보기 상태에서 메세지 입력
     $('#msg-content').keydown(function () {
         var value = $(this).val();
         $('#link_message').attr('value', value);
@@ -22,6 +26,43 @@ $(document).ready(function () {
         var value = $(this).val();
         $('#link_message').attr('value', value);
         $('#editable_msg').text(value);
+    });
+
+
+    //
+    // 회원 정보 수정 페이지 글자수 트래커
+    // 닉네임 필드
+    var nickname_input          = $('#checkNickNameLength_from');
+    var nickname_lenght_counter = $('#checkNickNameLength_to');
+    // 마지막 편집 없이 인풋 창을 이탈했을 때.
+    nickname_input.blur(function () {
+        var str = $('#checkNickNameLength_from').val();
+        nickname_lenght_counter.text(str.length);
+    });
+    // 특정 키를 클릭 하는 경우의 이벤트를 잡아서 처리.
+    nickname_input.keydown(function (e) {
+        if (e.keyCode == 9) {
+            // Clicked 'Tab'
+            var str = $('#checkNickNameLength_from').val();
+            nickname_lenght_counter.text(str.length);
+        }
+    });
+
+    // 네임 필드
+    var name_input          = $('#checkNameLength_from');
+    var name_lenght_counter = $('#checkNameLength_to');
+    // 마지막 편집 없이 인풋 창을 이탈했을 때.
+    name_input.blur(function () {
+        var str = $('#checkNameLength_from').val();
+        name_lenght_counter.text(str.length);
+    });
+    // 특정 키를 클릭 하는 경우의 이벤트를 잡아서 처리.
+    name_input.keydown(function (e) {
+        if (e.keyCode == 9) {
+            // Clicked 'Tab'
+            var str = $('#checkNameLength_from').val();
+            name_lenght_counter.text(str.length);
+        }
     });
 
 });

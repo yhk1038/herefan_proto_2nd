@@ -668,6 +668,57 @@
 
 
 
+.hf-hr-wrap{
+    width: 100%;
+    text-align: center;
+}
+hr.hf-hr{
+    margin: 30px 0;
+    border-top: 1px solid #777;
+}
+.hf-hr-wrap > span{
+    padding: 5px 25px;
+    font-size: 24px;
+    top: -48px;
+    position: relative;
+    background-color: #edecec;
+}
+
+
+
+
+
+
+
+#hf-fileinput{
+
+}
+#hf-fileinput.fileinput .hf-fileinput-btn {
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}
+#hf-fileinput.fileinput .hf-fileinput-btn > span{
+    padding: 6px 4px;
+    font-size: 18px;
+}
+#hf-fileinput.fileinput .fileinput-preview.thumbnail {
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    line-height: 100px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border: 3px solid #4caf50;
+}
+
+
+
 
 
 .hf-logo {
