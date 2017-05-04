@@ -1,14 +1,4 @@
-<style>
-    #header.init_header {
-        background-color: #2196f3 !important;
-        box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3) !important;
-    }
-    #footer{ position: initial }
-</style>
-
-<section id="page_header" class="bgm-green">
-    <p class="message">Choose the channel you want to follow!</p>
-</section>
+<%= render partial: '/layouts/plane_header', locals: { color_class: 'bgm-green', message: 'Choose the channel you want to follow!', style: '', msg_style: '' } %>
 
 <section id="sorting_methods" class="container">
     <div class="row">

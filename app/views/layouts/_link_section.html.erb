@@ -2,6 +2,7 @@
     <div class="row" id="libraries_wrapper">
         <% @links.order(id: :desc).each do |link| %>
             <% user = link.user %>
+            <% user ||= User.first %>
             <!--col-md-4 col-sm-3 col-xs-6-->
             <div class="task">
                 <div class="card blog-post">

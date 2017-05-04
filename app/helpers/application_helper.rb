@@ -26,6 +26,6 @@ module ApplicationHelper
     end
     
     def skip_include_controllers
-        %w(users/registrations users/sessions links)
+        %w(users/sessions links)
     end
 end
