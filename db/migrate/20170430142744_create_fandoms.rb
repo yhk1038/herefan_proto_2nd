@@ -5,6 +5,8 @@ class CreateFandoms < ActiveRecord::Migration[5.0]
             t.string :profile_img
             t.string :background_img
             
+            t.boolean :published,           null: false, default: false
+            
             t.timestamps
         end
     end

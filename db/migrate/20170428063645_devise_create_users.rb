@@ -6,8 +6,16 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.0]
             t.string :encrypted_password, null: false, default: ""
             
             ## My Custom Attributes
+            t.boolean  :active,           null: false, default: true
+            t.integer  :role,             null: false, default: 1
+            t.integer  :point,            null: false, default: 0
+            
+            t.string   :nickname,         null: false, default: 'Anonymous'
+            t.datetime :birthday
+            
             t.string :name,               null: false, default: 'Anonymous'
             t.string :image,              null: false, default: '/img/default-user-image.png'
+            
             t.string :provider
             t.string :uid
             

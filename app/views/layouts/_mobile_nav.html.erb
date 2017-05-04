@@ -17,32 +17,26 @@
                         <% else %>
                             <%= 'Login first :D' %>
                         <% end %>
-
-
-                        <i class="zmdi zmdi-caret-down"></i>
                     </div>
                 </a>
-
-                <ul class="main-menu" style="display: none;">
-                    <% if user_signed_in? %>
-                        <li>
-                            <a href="" style="text-transform: capitalize"><i class="zmdi zmdi-account"></i> my page</a>
-                        </li>
-                        <li>
-                            <a href="/users/sign_out" style="text-transform: capitalize"><i class="zmdi zmdi-time-restore"></i> Logout</a>
-                        </li>
-                    <% else %>
-                        <li>
-                            <%= link_to '', data: {toggle: 'modal', target: '#login_modal'} do %>
-                                <i class="zmdi zmdi-time-restore"></i> Login
-                            <% end %>
-                        </li>
-                    <% end %>
-                </ul>
             </div>
 
+            <ul class="main-menu" style="margin: 0 0 0; border-bottom: 1px solid #E6E6E6;">
+                <% if user_signed_in? %>
+                    <li><a href="" style="text-transform: capitalize"><i class="zmdi zmdi-account"></i> my page</a></li>
+                    <li><a href="<%= edit_user_registration_path %>" style="text-transform: capitalize"><i class="zmdi zmdi-settings"></i> account setting</a></li>
+                    <li><a href="/users/sign_out" style="text-transform: capitalize"><i class="zmdi zmdi-time-restore"></i> Logout</a></li>
+                <% else %>
+                    <li>
+                        <%= link_to '', data: {toggle: 'modal', target: '#login_modal'} do %>
+                            <i class="zmdi zmdi-time-restore"></i> Login
+                        <% end %>
+                    </li>
+                <% end %>
+            </ul>
             <ul class="main-menu">
-                <li><a href="<%= root_path %>"><i class="zmdi zmdi-balance"></i> HereFan</a></li>
+
+                <!--<li class=""><a href="" style="text-transform: capitalize"><i class="zmdi zmdi-account"></i> my page</a></li>-->
                 <li class="sub-menu">
                     <a href=""><i class="zmdi zmdi-home"></i> Home</a>
 
