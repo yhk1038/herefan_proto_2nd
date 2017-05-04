@@ -1,38 +1,10 @@
-function gogo_crawler() {
-    var value = $('#link_url').val();
-    console.log(value);
-
-    var preloader = $('#linkModalPreLoader');
-    preloader.show();
-
-    var ajax =  $.ajax({
-        url: '/crawler/uri_spy',
-        method: 'post',
-        data: {url: value}
-    });
-    ajax.done(function (result) {
-        console.log(result);
-        preloader.hide();
-        $("#saveBtn").show();
-        $('#msg-wrap').show();
-    });
-
-    ajax.fail(function (result) {
-        console.log('fail');
-        console.log(result);
-        preloader.hide();
-        $("#saveBtn").hide();
-        $('#msg-wrap').hide();
-    });
-}
-
 $(document).ready(function () {
 
     var header = $('#header');
     $(window).scroll(function () {
         var scroll = $(this).scrollTop();
 
-        if (scroll > 220) {
+        if (scroll > 190) {
             header.addClass('init_header')
         } else {
             header.removeClass('init_header')
@@ -53,6 +25,37 @@ $(document).ready(function () {
     });
 
 });
+
+function gogo_crawler() {
+    var value = $('#link_url').val();
+    console.log(value);
+
+    var preloader = $('#linkModalPreLoader');
+    preloader.show();
+
+    var ajax =  $.ajax({
+        url: '/crawler/uri_spy',
+        method: 'post',
+        data: {
+            url: value,
+            authenticity_token: _hf_
+        }
+    });
+    ajax.done(function (result) {
+        console.log(result);
+        preloader.hide();
+        $("#saveBtn").show();
+        $('#msg-wrap').show();
+    });
+
+    ajax.fail(function (result) {
+        console.log('fail');
+        console.log(result);
+        preloader.hide();
+        $("#saveBtn").hide();
+        $('#msg-wrap').hide();
+    });
+}
 
 function followBtn(command, id, channel_id, user_id) {
     if (command === 'follow') {
