@@ -25,3 +25,7 @@
 
 .DS_Store
 */.DS_Store
+.idea/*
+.idea
+*/*.idea
+.idea/workspace.xml
