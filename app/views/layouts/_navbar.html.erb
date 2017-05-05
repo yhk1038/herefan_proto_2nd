@@ -32,9 +32,10 @@
                 <li class="dropdown hidden-xs" style="padding: 2px 0">
                     <% if user_signed_in? %>
                         <%= link_to '', data: {toggle: 'dropdown'} do %>
-                            <div class="nav_profile" style="background-image: url('<%= current_user.image %>')">
-                                <span class="nav_profile-name"><%= current_user.name %> <i class="zmdi zmdi-caret-down"></i></span>
-                            </div>
+                            <ul class="new_nav_profile">
+                                <li class="nav_profile2"><img src="<%= current_user.image %>"></li>
+                                <li class="nav_profile2-name"><%= current_user.nickname %> <i class="zmdi zmdi-caret-down"></i></li>
+                            </ul>
                         <% end %>
                         <div class="dropdown-menu dropdown-menu-lg pull-right" style="width: 80px;">
                             <div class="listview">

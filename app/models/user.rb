@@ -32,7 +32,7 @@ class User < ApplicationRecord
             u = User.create do |user|
                 email = auth.info.email
                 if email then user.email = email else user.email = (auth.info.name + TEMP_EMAIL_HEREFAN) end
-                user.password   = Devise.friendly_token[0,20]
+                user.password   = user.email
                 user.provider   = auth.provider
                 user.uid        = auth.uid
                 user.name       = auth.info.name  # assuming the user model has a name
@@ -95,6 +95,30 @@ class User < ApplicationRecord
 
     def email_verified?
         self.email && self.email !~ TEMP_EMAIL_REGEX
+    end
+
+    def my_update_with_password(user_params)
+        status = false
+        if self.valid_password?(user_params[:current_password])
+            user_params.permit!.each do |key, value|
+                if value.to_s.length.zero?
+                    user_params.except!(key.to_s.to_sym)
+                else
+                    if key.to_s == 'password'
+                        if value != user_params[:password_confirmation]
+                            user_params.except!(key.to_s.to_sym)
+                            user_params.except!(:password_confirmation)
+                            user_params[:password] = user_params[:current_password]
+                        end
+                    end
+                end
+                user_params.except!(:current_password)
+            end
+            status = self.update(user_params)
+            # raise :test
+        end
+        
+        return status
     end
 
     private

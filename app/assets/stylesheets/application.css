@@ -45,30 +45,56 @@
     height: 35px;
 }
 
-#header .nav_profile{
-    width: 36px;
-    height: 36px;
-    border: 1px solid #d3d3d3;
-    border-radius: 100%;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    margin-right: 80px;
-    margin-left: 10px;
-}
-#header .nav_profile .nav_profile-name{
-    position: absolute;
-    left: 60px;
-    font-size: 15px;
-    top: 6px;
-}
-#header .nav_profile .nav_profile-name > i{
-    font-size: 24px;
-    position: absolute;
-    top: -2px;
-    right: -15px;
+/*#header .nav_profile{*/
+    /*width: 36px;*/
+    /*height: 36px;*/
+    /*border: 1px solid #d3d3d3;*/
+    /*border-radius: 100%;*/
+    /*background-position: center;*/
+    /*background-size: cover;*/
+    /*background-repeat: no-repeat;*/
+    /*margin-right: 80px;*/
+    /*margin-left: 10px;*/
+/*}*/
+/* #header .nav_profile .nav_profile-name{ */
+    /*position: absolute;*/
+    /*left: 60px;*/
+    /*font-size: 15px;*/
+    /*top: 6px;*/
+/* } */
+/* #header .nav_profile .nav_profile-name > i{ */
+    /*font-size: 24px;*/
+    /*position: absolute;*/
+    /*top: -2px;*/
+    /*right: -15px;*/
 
+/* } */
+
+#header .new_nav_profile{
+    list-style: none;
+    padding: 0 5px;
 }
+#header .new_nav_profile > li{
+    float: left;
+    display: inline-block;
+}
+.new_nav_profile .nav_profile2{
+    margin: 0 5px;
+}
+.new_nav_profile .nav_profile2 > img{
+    border-radius: 100%;
+    width: 34px;
+    height: auto;
+    border: 1px solid #fafafa;
+}
+
+.new_nav_profile .nav_profile2-name{
+    margin: 7px 5px;
+    font-weight: 500;
+}
+
+
+
 
 
 

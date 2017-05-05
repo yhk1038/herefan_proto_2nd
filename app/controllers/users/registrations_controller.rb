@@ -14,13 +14,30 @@ class Users::RegistrationsController < Devise::RegistrationsController
     
     # GET /resource/edit
     # def edit
-    #   super
+    #     super
     # end
     
     # PUT /resource
-    # def update
-    #   super
-    # end
+    def update
+        self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
+        
+        if resource.my_update_with_password(params[resource_name])
+            if is_navigational_format?
+                if resource.respond_to?(:pending_reconfirmation?) && resource.pending_reconfirmation?
+                    flash_key = :update_needs_confirmation
+                end
+                set_flash_message :notice, flash_key || :updated
+            end
+            sign_in resource_name, resource, :bypass => true
+            respond_with resource, :location => after_update_path_for(resource)
+        else
+            clean_up_passwords resource
+        
+            # collecting an errors and redirecting to the custom route
+            flash[:error] = resource.errors.full_messages
+            redirect_to edit_user_registration_path # => original: settings_path(current_user)
+        end
+    end
     
     # DELETE /resource
     def destroy
@@ -42,7 +59,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     #   super
     # end
     
-    # protected
+    protected
     
     # If you have extra params to permit, append them to the sanitizer.
     def configure_sign_up_params
@@ -53,7 +70,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # If you have extra params to permit, append them to the sanitizer.
     def configure_account_update_params
         # devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
-        devise_parameter_sanitizer.permit(:account_update, keys: [:name])
+        @back_path = params[:back_path]
+        devise_parameter_sanitizer.permit(:account_update, keys: [:name, :nickname, :birthday, :image])
     end
     
     # The path used after sign up.
@@ -65,4 +83,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # def after_inactive_sign_up_path_for(resource)
     #   super(resource)
     # end
+
+    # The path used after update.
+    def after_update_path_for(resource)
+        # super(resource)
+        @back_path
+    end
+    
 end
