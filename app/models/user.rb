@@ -11,6 +11,7 @@ class User < ApplicationRecord
     # has_many :links
     has_many :myfandoms, dependent: :destroy
     has_many :links
+    has_many :visited_links, dependent: :destroy
 
     def fandom_lists
         self.myfandoms.all&.map{|mf| mf.fandom}

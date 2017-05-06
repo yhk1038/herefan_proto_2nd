@@ -2,6 +2,7 @@ require 'nokogiri'
 require 'open-uri'
 
 class HomeController < ApplicationController
+    before_action :filling_tab_group, only: [:index]
     
     def go_for
         if user_signed_in?
@@ -21,15 +22,18 @@ class HomeController < ApplicationController
         @fandom_lists = current_user.fandom_lists if user_signed_in?
     end
     
+    # POST '/utils/user_watched_this_link' :: params[:user_id], params[:link_id], as: visited_link_counter
+    def visited_link_counter
+        VisitedLink.find_or_create2(params[:user_id], params[:link_id])
+        render json: nil, status: :ok
+    end
+    
     # POST '/crawler/uri_spy :: params[:url]' as: crawling_uri_path(url)
     def uri_spy
-        # puts "\n\n\n\n"
         
         uri = params[:url]
         doc = Nokogiri::HTML(open(uri), 'utf-8')
-        
         # puts doc.search('meta', 'title')
-        # puts "\n\n\n\n"
 
         title       = doc.at("meta[property='og:title']")
         if title.nil?
@@ -90,5 +94,10 @@ class HomeController < ApplicationController
             image: image,
             url: url
         }
+    end
+    
+    def filling_tab_group
+        @tabs = []
+        @tabs << { name: 'my', path: '', active: 'active' }
     end
 end

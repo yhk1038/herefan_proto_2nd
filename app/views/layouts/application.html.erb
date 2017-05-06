@@ -38,10 +38,6 @@
     <p class="alert"><%= alert %></p>
 <% end %>
 
-<% if params[:controller].in?(skip_include_controllers) %>
-<!--<div style="width: 100%; padding: 50px;"></div>-->
-<% end %>
-
 <%= render '/layouts/mobile_nav' %>
 
 <%= yield %>

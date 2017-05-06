@@ -1,0 +1,12 @@
+<%= render partial: '/mypage/partials/plane_header', locals: {color_class: 'bgm-pink', style: ''} %>
+
+<%= render partial: '/layouts/sub_nav', locals: {tabs: @tabs} %>
+
+<% if !@links.count.zero? %>
+<%= render partial: '/layouts/link_section' %>
+<% else %>
+    <section style="text-align: center">
+        <h1 style="margin: 40px 0; color: #666;">Meet various contents about your K-Dol<br>that you haven't seen yet!</h1>
+        <%= link_to 'Nyaaaah!', home_my_path, class: 'btn btn-default btn-lg bgm-blue' %>
+    </section>
+<% end %>

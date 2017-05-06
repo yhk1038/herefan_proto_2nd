@@ -1,0 +1,57 @@
+<%= render partial: '/mypage/partials/plane_header', locals: {color_class: 'bgm-pink', style: ''} %>
+
+<%= render partial: '/layouts/sub_nav', locals: {tabs: @tabs} %>
+
+<section id="sorting_methods" class="container" style="margin-top: 25px;">
+    <div class="row hf-hr_at_after">
+        <div class="col-sm-6">
+            <h2><%= @fandoms.count %> channels are being followed.</h2>
+        </div>
+        <div class="col-sm-6">
+            <div class="col-md-4"></div>
+            <div class="col-md-8">
+                <ul class="methods-wrapper" style="margin-top: 29px;">
+                    <label class="radio radio-inline">
+                        <input type="radio" name="sort_option" value="popular" checked="">
+                        <i class="input-helper"></i>
+                        <span class="label_text">popular</span>
+                    </label>
+                    <label class="radio radio-inline">
+                        <input type="radio" name="sort_option" value="recent">
+                        <i class="input-helper"></i>
+                        <span class="label_text">recent</span>
+                    </label>
+                    <label class="radio radio-inline">
+                        <input type="radio" name="sort_option" value="abc">
+                        <i class="input-helper"></i>
+                        <span class="label_text">abc</span>
+                    </label>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="channels" class="container">
+    <div class="row">
+        <% @fandoms.each do |fandom| %>
+            <div class="col-md_2 col-sm-4 col-xs_5">
+                <%= link_to fandom_path(fandom) do %>
+                    <div class="card profile-view">
+                        <div class="pv-header hf-e-header"  style="background-image: url('<%= fandom.background_img %>')">
+                            <img src="<%= fandom.profile_img %>" class="pv-main profile_img absolute_center" alt="" data-pin-nopin="true">
+                        </div>
+
+                        <div class="pv-body hf-e-body">
+                            <h2 class="text"><%= fandom.name %></h2>
+
+                            <ul class="pv-follow" style="margin-bottom: 0;">
+                                <li class="text text-sm"><span id="follower_count_<%= fandom.id %>"><%= fandom.user_lists.count %></span> Followers</li>
+                            </ul>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+        <% end %>
+    </div>
+</section>

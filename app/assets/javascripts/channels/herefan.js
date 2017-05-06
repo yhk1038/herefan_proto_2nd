@@ -30,6 +30,27 @@ $(document).ready(function () {
 
 
     //
+    // 링크 방문시 나의 방문 링크 기록으로 카운팅
+    $('.link_wrapping_anchor').click(function () {
+        var id = $(this).attr('id');
+        var user_id = $(this).attr('noiser');
+        id = id.replace('link_','');
+
+        $.ajax({
+            url: '/utils/user_watched_this_link',
+            method: 'post',
+            data: {
+                user_id: user_id,
+                link_id: id,
+                authenticity_token: _hf_
+            }
+        }).done(function (result) {
+            console.log(result);
+        });
+    });
+
+
+    //
     // 회원 정보 수정 페이지 글자수 트래커
     // 닉네임 필드
     var nickname_input          = $('#checkNickNameLength_from');

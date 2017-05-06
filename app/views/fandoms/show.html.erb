@@ -25,14 +25,7 @@
     </div>
 </div>
 
-<div id="sub-nav">
-    <ul class="tab-group container">
-        <li class="tab"><a href="" class="tab_link">wiki</a></li>
-        <li class="tab"><a href="" class="tab_link">history</a></li>
-        <li class="tab"><a href="" class="tab_link active">library</a></li>
-        <li class="tab"><a href="" class="tab_link">schedule</a></li>
-    </ul>
-</div>
+<%= render partial: '/layouts/sub_nav', locals: {tabs: @tabs} %>
 
 <%= render partial: '/layouts/link_section' %>
 

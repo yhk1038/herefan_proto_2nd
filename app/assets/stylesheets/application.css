@@ -769,6 +769,12 @@ hr.hf-hr{
     margin-left: auto;
     margin-right: auto;
 }
+.absolute_center{
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+}
 
 
 /*
@@ -912,6 +918,32 @@ div.super.row:before{
         display: none !important;
     }
 }
+
+
+
+
+
+
+#sidebar:before{
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: rgba(92, 92, 92, 0.2);
+    position: absolute;
+    top: -2px;
+}
+
+
+@media (max-width: 768px){
+    small.linkcard-description {
+        display: none;
+    }
+}
+
+
+
+
+
 
 
 

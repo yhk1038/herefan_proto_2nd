@@ -1,5 +1,6 @@
 class FandomsController < ApplicationController
     before_action :set_fandom, only: [:show, :edit, :update, :destroy]
+    before_action :filling_tab_group, only: [:show]
     
     # GET /fandoms
     # GET /fandoms.json
@@ -71,5 +72,13 @@ class FandomsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def fandom_params
         params.require(:fandom).permit(:name, :profile_img, :background_img)
+    end
+
+    def filling_tab_group
+        @tabs = []
+        @tabs << { name: 'wiki', path: '', active: '' }
+        @tabs << { name: 'history', path: '', active: '' }
+        @tabs << { name: 'library', path: '', active: 'active' }
+        @tabs << { name: 'schedule', path: '', active: '' }
     end
 end

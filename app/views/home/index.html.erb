@@ -61,11 +61,7 @@
     </a>
 </div>
 
-<div id="sub-nav">
-    <ul class="tab-group container">
-        <li class="tab"><a href="" class="tab_link active">my</a></li>
-    </ul>
-</div>
+<%= render partial: '/layouts/sub_nav', locals: {tabs: @tabs} %>
 
 <% if user_signed_in? %>
 <div id="follow_list_box">
@@ -84,7 +80,7 @@
         </div>
         <div class="follow_list">
             <%= link_to fandoms_path do %>
-                <div id="add_follow_btn" class="follow_artists" style="background-image: url()">
+                <div id="add_follow_btn" class="follow_artists">
                     <span class="zmdi zmdi-plus"></span>
                     <span>Add Channels</span>
                 </div>

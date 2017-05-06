@@ -5,7 +5,7 @@
             <% user ||= User.first %>
             <!--col-md-4 col-sm-3 col-xs-6-->
             <div class="task">
-                <div class="card blog-post">
+                <div id="link_<%= link.id %>" noiser="<%= user_signed_in? ? current_user.id : '0' %>" class="card blog-post link_wrapping_anchor">
                     <div class="bp-header">
                         <a href="<%= link.url %>" target="_blank">
                             <img style="width: 100%; background: #000;" src="<%= link.image %>" height="171" alt="">
@@ -16,7 +16,7 @@
                                             <img class="lv-img-sm" src="<%= user.image %>" alt="" data-pin-nopin="true">
                                         </div>
                                         <div class="media-body">
-                                            <div class="lv-title"><%= user.name %></div>
+                                            <div class="lv-title"><%= user.nickname %></div>
                                             <small class="lv-small"><%= distance_of_time_in_words(link.created_at.to_time, Time.now) %> before</small>
                                         </div>
                                     </div>
@@ -37,8 +37,8 @@
                             </ul>
                         </a>
                         <a href="<%= link.url %>" target="_blank" class="bp-title">
-                            <h2><%== link.title %></h2>
-                            <small><%== link.description %></small>
+                            <h2 class="linkcard-title"><%== link.title %></h2>
+                            <small class="linkcard-description"><%== link.description %></small>
                         </a>
                         <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn bgm-green btn-float waves-effect" style="right: 20px; bottom: -23px;"><i class="zmdi zmdi-share"></i></button>
                         <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dLabel">
