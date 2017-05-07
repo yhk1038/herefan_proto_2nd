@@ -29,3 +29,5 @@
 .idea
 */*.idea
 .idea/workspace.xml
+.idea/herefan_link.iml
+.idea/
