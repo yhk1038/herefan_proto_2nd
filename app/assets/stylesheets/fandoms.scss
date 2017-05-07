@@ -270,3 +270,104 @@ section.contents_box {
 .modal-body > .input-group .label_text{
   font-size: 10px;
 }
+
+
+.inactive {
+  cursor: not-allowed;
+
+  .hf-e-body {
+    .pv-follow{
+      height: 30px;
+
+      li{
+        z-index: 3;
+        color: #fff !important;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 65px;
+        font-weight: bold;
+        font-family: -webkit-pictograph !important;
+        font-size: 17px !important;
+        -webkit-transition: all 350ms ease;
+        -moz-transition: all 350ms ease;
+        -ms-transition: all 350ms ease;
+        -o-transition: all 350ms ease;
+        transition: all 350ms ease;
+
+        &:after {
+          content: 'show proposers';
+          display: block;
+          margin-bottom: 20px;
+          line-height: 140%;
+          font-size: xx-large;
+          opacity: 0;
+          -webkit-transition: all 350ms ease;
+          -moz-transition: all 350ms ease;
+          -ms-transition: all 350ms ease;
+          -o-transition: all 350ms ease;
+          transition: all 350ms ease;
+        }
+
+        &:hover:after{
+          opacity: 1;
+        }
+      }
+    }
+
+    .proposed_follow_btn {
+      position: absolute;
+      bottom: 60px;
+      z-index: 2;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      padding: 0 16px;
+      font-size: 22px;
+    }
+  }
+
+  &:before {
+    content: 'comming soon';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    color: #fff;
+    padding: 22px 10px;
+    font-size: 25px;
+    font-family: cursive;
+    font-weight: 500;
+  }
+}
+
+#suggest_btn {
+  top: 220px;
+  right: 3%;
+  position: absolute !important;
+  z-index: 3;
+  font-size: 11px;
+  background-color: transparent !important;
+  box-shadow: none;
+  text-transform: initial;
+}
+.unpublished_channels {
+  h2 {
+    color: #777;
+    font-weight: 700;
+    text-transform: capitalize;
+
+    small {
+      display: block;
+      text-transform: none;
+      margin-top: 8px;
+      margin-bottom: 20px;
+      color: #9E9E9E;
+      line-height: 140%;
+      font-size: 14px;
+    }
+  }
+}

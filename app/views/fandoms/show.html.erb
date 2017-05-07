@@ -1,4 +1,3 @@
-<% is_my_fandom = @fandom.myfandoms.all.map{|s| s.user.id}.include?(current_user.id) %>
 <style>
     #header.init_header {
         background-color: #2196f3 !important;
@@ -16,10 +15,10 @@
             <div class="carousel-img" style="background-image: url('<%= @fandom.background_img %>');"></div>
             <div class="carousel-caption">
                 <a href="" class="btn btn-default waves-effect waves-circle waves-float"><span class="zmdi zmdi-trending-up"></span></a>
-                <a href="" class="btn btn-default waves-effect waves-circle waves-float"><span class="zmdi zmdi-favorite<%= '-outline' if !is_my_fandom %>"></span></a>
+                <a id="channel_<%= @fandom.id %>" onclick="followBtn('<%= @follow_control[:follow_cmd] %>', <%= @follow_control[:myfandom_id] %>, <%= @follow_control[:channel_id] %>, <%= @follow_control[:user_id] %>, 'no-text')" class="btn btn-default waves-effect waves-circle waves-float"><span class="zmdi zmdi-favorite<%= '-outline' unless is_my_fandom? %> <%= 'c-pink' if is_my_fandom? %>"></span></a>
                 <a href="" class="btn btn-default waves-effect waves-circle waves-float"><span class="zmdi zmdi-share"></span></a>
                 <p class="channel_name"><%= @fandom.name %></p>
-                <p class="channel_follow_count">followers <span class="count"><%= @fandom.user_lists.count %></span></p>
+                <p class="channel_follow_count">followers <span id="follower_count_<%= @fandom.id %>" class="count"><%= @fandom.user_lists.count %></span></p>
             </div>
         </div>
     </div>
@@ -29,15 +28,15 @@
 
 <%= render partial: '/layouts/link_section' %>
 
-<% if user_signed_in? && is_my_fandom %>
+<% if user_signed_in? && is_my_fandom? %>
     <button class="btn btn-danger btn-float wave-effect" style="bottom: 50px; right: 3%; position: fixed !important; z-index: 3;"  data-toggle="modal" data-target="#add_link_modal">
         <i class="zmdi zmdi-plus"></i>
     </button>
 
-
     <!-- Modal -->
     <%= render '/fandoms/modal_link_upload' %>
 <% end %>
+
 <div style="display: none;">
     <p id="notice"><%= notice %></p>
 

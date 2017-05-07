@@ -119,15 +119,15 @@ function gogo_crawler() {
     });
 }
 
-function followBtn(command, id, channel_id, user_id) {
+function followBtn(command, myfandom_id, channel_id, user_id, option) {
     if (command === 'follow') {
-        ajax_follow_add(channel_id, user_id)
+        ajax_follow_add(channel_id, user_id, option)
     } else if (command === 'cancel') {
-        ajax_follow_cancel(channel_id, user_id, id)
+        ajax_follow_cancel(channel_id, user_id, myfandom_id, option)
     }
 }
 
-function ajax_follow_add(channel_id, user_id) {
+function ajax_follow_add(channel_id, user_id, option) {
     $.ajax({
         url: '/myfandoms.json',
         method: 'post',
@@ -142,10 +142,21 @@ function ajax_follow_add(channel_id, user_id) {
         var target = $('#channel_' + channel_id);
 
         if (result.id) {
-            target
-                .addClass('bgm-red')
-                .attr('onclick', 'followBtn("cancel", ' + result.id + ', ' + channel_id + ', ' + user_id + ')')
-                .text('FOLLOWED');
+            target;
+
+            if (option === 'no-text') {
+                target
+                    .attr('onclick', 'followBtn("cancel", ' + result.id + ', ' + channel_id + ', ' + user_id + ', "no-text")');
+                target.children('span')
+                    .removeClass('zmdi-favorite-outline')
+                    .addClass('zmdi-favorite')
+                    .addClass('c-pink');
+            } else {
+                target
+                    .attr('onclick', 'followBtn("cancel", ' + result.id + ', ' + channel_id + ', ' + user_id + ', "")')
+                    .addClass('bgm-red')
+                    .text('FOLLOWED');
+            }
 
             var counter = $('#follower_count_' + channel_id);
             var count = parseInt(counter.text()) + 1;
@@ -154,18 +165,27 @@ function ajax_follow_add(channel_id, user_id) {
     });
 }
 
-function ajax_follow_cancel(channel_id, user_id, id) {
+function ajax_follow_cancel(channel_id, user_id, myfandom_id, option) {
     $.ajax({
-        url: '/myfandoms/'+ id + '.json',
+        url: '/myfandoms/'+ myfandom_id + '.json',
         method: 'delete',
         data: { authenticity_token: _hf_ }
     }).done(function (result) {
         var target = $('#channel_' + channel_id);
 
-        target
-            .removeClass('bgm-red')
-            .attr('onclick', 'followBtn("follow", 0, '+ channel_id +', '+ user_id +')')
-            .text('FOLLOW');
+        if (option === 'no-text') {
+            target
+                .attr('onclick', 'followBtn("follow", 0, '+ channel_id +', '+ user_id +', "no-text")');
+            target.children('span')
+                .removeClass('zmdi-favorite')
+                .addClass('zmdi-favorite-outline')
+                .removeClass('c-pink');
+        } else {
+            target
+                .attr('onclick', 'followBtn("follow", 0, '+ channel_id +', '+ user_id +', "")')
+                .removeClass('bgm-red')
+                .text('FOLLOW');
+        }
 
         var counter = $('#follower_count_' + channel_id);
         var count = parseInt(counter.text()) - 1;
