@@ -7,7 +7,7 @@ class FandomsController < ApplicationController
     # GET /fandoms.json
     def index
         @fandoms = Fandom.where(published: true).all.sort_by { |fandom| 0 - fandom.myfandoms.count }
-        @fandoms_not_active = Fandom.where(published: false).all
+        @fandoms_not_active = Fandom.where(published: false).all.sort_by { |fandom| 0 - fandom.myfandoms.count }
         @my_fandoms = current_user.myfandoms.all.map{|s| s.fandom.id}
     end
     
