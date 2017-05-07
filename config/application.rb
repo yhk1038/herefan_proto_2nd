@@ -6,6 +6,9 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+# RAIlS_ADMIN_THEME environment variable configuration
+ENV['RAILS_ADMIN_THEME'] = 'rollincode'
+
 module HerefanLink
     class Application < Rails::Application
         # Settings in config/environments/* take precedence over those specified here.
