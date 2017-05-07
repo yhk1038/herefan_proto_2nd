@@ -7,6 +7,7 @@ end
 
 # Crawler
 gem 'nokogiri'
+gem 'open_uri_redirections'
 
 # App method expanding module
 gem 'rails_autolink'
