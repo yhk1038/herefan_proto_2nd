@@ -1,5 +1,39 @@
 RailsAdmin.config do |config|
-    config.main_app_name = ['BackOffice - HereFan :: ']
+    config.main_app_name = ['BackOffice - HereFan :: DB']
+
+    # Model Config
+    config.included_models = %w(Fandom Link User Myfandom VisitedLink)
+    # config.config.excluded_models = %w()
+    
+    config.model 'Fandom' do
+        label '채널'
+        label_plural '채널'
+        navigation_icon 'icon-flag'
+    end
+
+    config.model 'Link' do
+        label '라이브러리 컨텐츠'
+        label_plural '라이브러리 컨텐츠'
+        navigation_icon 'icon-th'
+    end
+
+    config.model 'User' do
+        label '사용자'
+        label_plural '사용자'
+        navigation_icon 'icon-user'
+    end
+
+    config.model 'Myfandom' do
+        label '채널 팔로우'
+        label_plural '채널 팔로우'
+        navigation_icon 'icon-heart'
+    end
+
+    config.model 'VisitedLink' do
+        label '조회된 컨텐츠'
+        label_plural '조회된 컨텐츠'
+        navigation_icon 'icon-glass'
+    end
     
     ### Popular gems integration
     
