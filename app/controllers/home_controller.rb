@@ -100,4 +100,10 @@ class HomeController < ApplicationController
         @tabs = []
         @tabs << { name: 'my', path: '', active: 'active' }
     end
+    
+    
+    # GET /letter_count
+    def letter_count
+        render layout: false
+    end
 end

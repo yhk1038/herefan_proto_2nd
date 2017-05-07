@@ -33,5 +33,8 @@ Rails.application.routes.draw do
     # > link visiting counter
     post '/utils/user_watched_this_link', to: 'home#visited_link_counter', as: 'visited_link_counter'
     
+    # > letter_counter
+    get '/letter_counter', to: 'home#letter_count'
+    
     # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
