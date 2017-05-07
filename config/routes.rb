@@ -37,4 +37,7 @@ Rails.application.routes.draw do
     get '/letter_counter', to: 'home#letter_count'
     
     # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+    # Admin Dashboard
+    mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 end

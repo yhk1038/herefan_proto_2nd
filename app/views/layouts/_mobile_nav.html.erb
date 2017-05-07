@@ -25,6 +25,9 @@
                 <% if user_signed_in? %>
                     <li><a href="<%= mypage_watched_path %>" style="text-transform: capitalize"><i class="zmdi zmdi-account"></i> my page</a></li>
                     <li><a href="<%= edit_user_registration_path %>" style="text-transform: capitalize"><i class="zmdi zmdi-settings"></i> account setting</a></li>
+                    <% if current_user.try(:admin?) %>
+                        <li><a href="/admin" style="text-transform: capitalize"><i class="zmdi zmdi-wrench"></i> admin dashboard</a></li>
+                    <% end %>
                     <li><a href="/users/sign_out" style="text-transform: capitalize"><i class="zmdi zmdi-time-restore"></i> Logout</a></li>
                 <% else %>
                     <li>
