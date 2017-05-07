@@ -261,6 +261,7 @@ DEPENDENCIES
   devise
   faker
   figaro
+  i18n
   jbuilder (~> 2.5)
   jquery-rails
   letter_opener

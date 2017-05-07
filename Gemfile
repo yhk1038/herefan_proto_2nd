@@ -11,6 +11,7 @@ gem 'open_uri_redirections'
 
 # Admin environment
 gem 'rails_admin'
+gem 'i18n'
 
 # App method expanding module
 gem 'rails_autolink'
