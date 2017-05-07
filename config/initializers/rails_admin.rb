@@ -34,6 +34,12 @@ RailsAdmin.config do |config|
         label_plural '조회된 컨텐츠'
         navigation_icon 'icon-glass'
     end
+
+    config.navigation_static_links = {
+            Github: 'https://github.com/StarStreamOfficial/HereFan_renew',
+            '레일즈 어드민 - 공식 문서' => 'https://github.com/sferik/rails_admin/wiki',
+            '레일즈 어드민 - 한글 가이드' => 'https://say8425.github.io/setup-rails-admin-1/'
+    }
     
     ### Popular gems integration
     
