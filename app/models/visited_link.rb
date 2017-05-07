@@ -6,7 +6,7 @@ class VisitedLink < ApplicationRecord
         v = where(user_id: user_id, link_id: link_id).first
         if v
             original_viewcount = v.viewcount
-            original_viewcount = 0 if v.viewcount.nil?
+            original_viewcount = 1 if v.viewcount.nil?
         
             viewcount = original_viewcount + 1
             v.update(viewcount: viewcount)
@@ -14,7 +14,7 @@ class VisitedLink < ApplicationRecord
             VisitedLink.create do |vl|
                 vl.user_id = user_id
                 vl.link_id = link_id
-                vl.viewcount = 0
+                vl.viewcount = 1
             end
         end
     end
