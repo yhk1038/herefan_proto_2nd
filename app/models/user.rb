@@ -32,7 +32,7 @@ class User < ApplicationRecord
         if u.nil?
             u = User.create do |user|
                 email = auth.info.email
-                if email then user.email = email else user.email = (auth.info.name + TEMP_EMAIL_HEREFAN) end
+                if email then user.email = email else user.email = (auth.info.name.gsub(' ','_') + TEMP_EMAIL_HEREFAN) end
                 user.password   = user.email
                 user.provider   = auth.provider
                 user.uid        = auth.uid
