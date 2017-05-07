@@ -17,7 +17,7 @@ $(document).ready(function () {
 
     //
     // 링크 카드 미리보기 상태에서 메세지 입력
-    $('#msg-content').keydown(function () {
+    $('#msg-content').keyup(function () {
         var value = $(this).val();
         $('#link_message').attr('value', value);
         $('#editable_msg').text(value);
@@ -60,13 +60,9 @@ $(document).ready(function () {
         var str = $('#checkNickNameLength_from').val();
         nickname_lenght_counter.text(str.length);
     });
-    // 특정 키를 클릭 하는 경우의 이벤트를 잡아서 처리.
-    nickname_input.keydown(function (e) {
-        if (e.keyCode == 9) {
-            // Clicked 'Tab'
-            var str = $('#checkNickNameLength_from').val();
-            nickname_lenght_counter.text(str.length);
-        }
+    nickname_input.keyup(function (e) {
+        var str = $('#checkNickNameLength_from').val();
+        nickname_lenght_counter.text(str.length);
     });
 
     // 네임 필드
@@ -77,13 +73,9 @@ $(document).ready(function () {
         var str = $('#checkNameLength_from').val();
         name_lenght_counter.text(str.length);
     });
-    // 특정 키를 클릭 하는 경우의 이벤트를 잡아서 처리.
-    name_input.keydown(function (e) {
-        if (e.keyCode == 9) {
-            // Clicked 'Tab'
-            var str = $('#checkNameLength_from').val();
-            name_lenght_counter.text(str.length);
-        }
+    name_input.keyup(function (e) {
+        var str = $('#checkNameLength_from').val();
+        name_lenght_counter.text(str.length);
     });
 
 });
@@ -112,7 +104,9 @@ function gogo_crawler() {
 
     ajax.fail(function (result) {
         console.log('fail');
-        console.log(result);
+        console.log(result.responseText);
+        var txt = result.responseText;
+        eval(txt);
         preloader.hide();
         $("#saveBtn").hide();
         $('#msg-wrap').hide();

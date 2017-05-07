@@ -1,5 +1,6 @@
 require 'nokogiri'
 require 'open-uri'
+require 'open_uri_redirections'
 
 class HomeController < ApplicationController
     before_action :filling_tab_group, only: [:index]
@@ -32,7 +33,8 @@ class HomeController < ApplicationController
     def uri_spy
         
         uri = params[:url]
-        doc = Nokogiri::HTML(open(uri), 'utf-8')
+        
+        doc = Nokogiri::HTML(open(uri, :allow_redirections => :all))
         # puts doc.search('meta', 'title')
 
         title       = doc.at("meta[property='og:title']")
@@ -90,7 +92,7 @@ class HomeController < ApplicationController
         
         return @target = {
             title: title,
-            description: description,
+            description: description.gsub(/\n/,' ').gsub(/\r/,' '),
             image: image,
             url: url
         }
