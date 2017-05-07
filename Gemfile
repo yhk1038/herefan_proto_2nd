@@ -12,6 +12,7 @@ gem 'open_uri_redirections'
 # Admin environment
 gem 'rails_admin'
 gem 'i18n'
+gem 'rails_admin_rollincode', '~> 1.0'
 
 # App method expanding module
 gem 'rails_autolink'
