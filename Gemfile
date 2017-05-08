@@ -5,6 +5,11 @@ git_source(:github) do |repo_name|
     "https://github.com/#{repo_name}.git"
 end
 
+# Image Upload
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+gem 'mini_magick'
+gem 'fog-aws'
+
 # Crawler
 gem 'nokogiri'
 gem 'open_uri_redirections'

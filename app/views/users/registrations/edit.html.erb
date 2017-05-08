@@ -39,7 +39,7 @@
                     <!--</li>-->
                 <!--</ul>-->
             <!--</div>-->
-            <form role="form" class="form-horizontal" id="edit_user" action="/users" accept-charset="UTF-8" method="post">
+            <form role="form" class="form-horizontal" id="edit_user" action="/users" accept-charset="UTF-8" method="post" enctype="multipart/form-data">
                 <input name="utf8" type="hidden" value="&#x2713;" />
                 <input type="hidden" name="_method" value="put" />
                 <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
@@ -61,7 +61,7 @@
                                         <span class="btn btn-info btn-file waves-effect hf-fileinput-btn">
                                             <span class="fileinput-new bgm-blue"><i class="zmdi zmdi-camera"></i></span>
                                             <span class="fileinput-exists bgm-green"><i class="zmdi zmdi-camera"></i></span>
-                                            <input id="my_profile_img_input" type="file" name="user[image]" value="<%= resource.image %>">
+                                            <input id="my_profile_img_input" type="file" name="user[image]" value="<%= resource.image.url %>">
                                         </span>
                                         <a href="#" class="btn btn-danger fileinput-exists waves-effect w-100" data-dismiss="fileinput">Remove</a>
                                     </div>
@@ -190,18 +190,18 @@
                 <h2><b>Advanced Zone</b></h2>
             </div>
             <div class="card brd-2" style="border: 2px solid #F44336">
-                    <%#= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, role: 'form', class: 'form-horizontal' }) do |f| %>
-                    <%#= devise_error_messages! %>
-                    <div class="card-header">
-                        <h2>Danger Zone</h2>
-                        <div class="row m-t-20">
-                            <h2 class="col-sm-8"><small><span class="c-red f-500">Delete Account?</span> <br>(To protect your information, your account will be retained for two months even if you delete it.)</small></h2>
-                            <%= link_to "delete my account", registration_path(resource_name), class: 'hf-btn btn-danger btn-sm waves-effect col-sm-4 col-xs-12 m-t-20', data: { confirm: "Are you sure?" }, method: :delete %>
-                        </div>
+                <%#= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, role: 'form', class: 'form-horizontal' }) do |f| %>
+                <%#= devise_error_messages! %>
+                <div class="card-header">
+                    <h2>Danger Zone</h2>
+                    <div class="row m-t-20">
+                        <h2 class="col-sm-8"><small><span class="c-red f-500">Delete Account?</span> <br>(To protect your information, your account will be retained for two months even if you delete it.)</small></h2>
+                        <%= link_to "delete my account", registration_path(resource_name), class: 'hf-btn btn-danger btn-sm waves-effect col-sm-4 col-xs-12 m-t-20', data: { confirm: "Are you sure?" }, method: :delete %>
                     </div>
-
-                    <%# end %>
                 </div>
+
+                <%# end %>
+            </div>
 
 
 
@@ -210,6 +210,7 @@
                 <!--&lt;!&ndash;<form class="form-horizontal" role="form">&ndash;&gt;-->
                 <!--<%#= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, role: 'form', class: 'form-horizontal' }) do |f| %>-->
                     <!--<%#= devise_error_messages! %>-->
+                <%#= f.file_field :image %>
                     <!--<div class="card-header">-->
                         <!--<h2>Horizontal Form <small>Use Bootstrap's predefined grid classes to align labels and groups of form controls in a horizontal layout by adding '.form-horizontal' to the form. Doing so changes '.form-groups' to behave as grid rows, so no need for '.row'.</small></h2>-->
                     <!--</div>-->

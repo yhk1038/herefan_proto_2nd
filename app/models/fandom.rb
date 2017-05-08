@@ -1,7 +1,7 @@
 class Fandom < ApplicationRecord
     has_many :myfandoms, dependent: :destroy
     has_many :links, dependent: :destroy
-    has_many :users, through: :links
+    has_many :users, through: :myfandoms
     
     # default_scope { where(published: true) }
     scope :published,   -> { where(published: true) }
@@ -11,7 +11,7 @@ class Fandom < ApplicationRecord
         self.myfandoms.all&.map{|mf| mf.user}
     end
     
-    def get_myfandom
-        user_signed_in? ? self.myfandoms.where(user: current_user).take : false
+    def get_myfandom(user)
+        self.myfandoms.where(user: user).take
     end
 end

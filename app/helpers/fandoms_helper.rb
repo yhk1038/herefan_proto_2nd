@@ -15,13 +15,14 @@ module FandomsHelper
         btn
     end
     
-    def is_my_fandom?(users_fandom_lists: nil, this_fandom: nil)
-        users_fandom_lists = @my_fandom if users_fandom_lists.nil?
-        if this_fandom
-            users_fandom_lists.include? this_fandom.id
-        else
-            users_fandom_lists.count.zero? ? false : true
-        end
+    def is_my_fandom?(user: nil, fandom: nil)
+        # users_fandom_lists = @my_fandom if users_fandom_lists.nil?
+        # if this_fandom
+        #     users_fandom_lists.include? this_fandom.id
+        # else
+        #     users_fandom_lists.count.zero? ? false : true
+        # end
         
+        fandom.get_myfandom(user)
     end
 end

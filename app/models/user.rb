@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+    mount_uploader :image, S3Uploader
+    
     # rolify
     # include Authority::UserAbilities
     
