@@ -28,4 +28,27 @@ module ApplicationHelper
     def skip_include_controllers
         %w(users/sessions links)
     end
+    
+    def image_with_sns(img_path)
+        is_contain = false
+        return default_profile_img if img_path.include? default_profile_img
+        
+        split = img_path.split('%3A//')
+        path        = split.last
+        protocol    = split.first.split('/').last
+        
+        sns_asset_domains.each do |domain|
+            is_contain = true if path.include? domain
+        end
+        
+        return is_contain ? protocol + path : img_path
+    end
+    
+    def default_profile_img
+        '/img/default-user-image.png'
+    end
+    
+    def sns_asset_domains
+        %w(graph.facebook.com pbs.twimg.com lh3.googleusercontent.com)
+    end
 end

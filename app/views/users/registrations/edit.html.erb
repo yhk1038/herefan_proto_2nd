@@ -56,7 +56,7 @@
                             <div class="col-sm-12 text-center">
                                 <p class="f-500 c-black m-b-20 text-capitalize">profile image</p>
                                 <div id="hf-fileinput" class="fileinput fileinput-new m-b-30 p-0" data-provides="fileinput">
-                                    <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="background-image: url('<%= resource.image %>');"></div>
+                                    <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="background-image: url('<%= resource.img.nil? ? image_with_sns(resource.image.to_s) : resource.img %>');"></div>
                                     <div>
                                         <span class="btn btn-info btn-file waves-effect hf-fileinput-btn">
                                             <span class="fileinput-new bgm-blue"><i class="zmdi zmdi-camera"></i></span>

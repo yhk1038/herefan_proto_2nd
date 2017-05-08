@@ -5,7 +5,7 @@
                 <a href="">
                     <div class="profile-pic">
                         <% if user_signed_in? %>
-                            <div style="background: url(<%= current_user.image %>)" alt="" class="mCS_img_loaded bg_img_cover"></div>
+                            <div style="background: url(<%= current_user.img.nil? ? image_with_sns(current_user.image.to_s) : current_user.img %>)" alt="" class="mCS_img_loaded bg_img_cover"></div>
                         <% else %>
                             <div style="background: url(/img/default-user-image.png)" alt="" class="mCS_img_loaded bg_img_cover"></div>
                         <% end %>

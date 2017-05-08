@@ -13,7 +13,7 @@
                                 <div class="lv-item">
                                     <div class="media">
                                         <div class="pull-left">
-                                            <img class="lv-img-sm" src="<%= user.image %>" alt="" data-pin-nopin="true">
+                                            <img class="lv-img-sm" src="<%= user.img.nil? ? image_with_sns(user.image.to_s) : user.img %><%#= image_with_sns(user.image) %>" alt="" data-pin-nopin="true">
                                         </div>
                                         <div class="media-body">
                                             <div class="lv-title"><%= user.nickname %></div>

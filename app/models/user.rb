@@ -41,7 +41,7 @@ class User < ApplicationRecord
                 user.uid        = auth.uid
                 user.name       = auth.info.name  # assuming the user model has a name
                 user.image      = auth.info.image # assuming the user model has an image
-                
+                user.img        = auth.info.image
                 
                 user.nickname   = user.name
                 # If you are using confirmable and the provider(s) you use validate emails,
@@ -114,6 +114,10 @@ class User < ApplicationRecord
                             user_params.except!(:password_confirmation)
                             user_params[:password] = user_params[:current_password]
                         end
+                    end
+                    
+                    if key.to_s == 'image'
+                        self.update(img: nil)
                     end
                 end
                 user_params.except!(:current_password)

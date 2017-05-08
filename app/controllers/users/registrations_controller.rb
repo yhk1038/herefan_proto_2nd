@@ -71,7 +71,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     def configure_account_update_params
         # devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
         @back_path = params[:back_path]
-        devise_parameter_sanitizer.permit(:account_update, keys: [:name, :nickname, :birthday, :image])
+        devise_parameter_sanitizer.permit(:account_update, keys: [:name, :nickname, :birthday, :image, :img])
     end
     
     # The path used after sign up.
