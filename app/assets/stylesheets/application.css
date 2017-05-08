@@ -70,6 +70,46 @@
 
 /* } */
 
+.new_nav_profile .nav_profile2 > .bg_img_cover {
+    border-radius: 100%;
+    width: 34px;
+    height: 34px;
+    border: 1px solid #fafafa;
+}
+
+.profile-menu > a .profile-pic > .mCS_img_loaded {
+    width: 47px;
+    height: 47px;
+    border-radius: 50%;
+    border: 3px solid rgba(0, 0, 0, 0.14);
+    box-sizing: content-box;
+    position: relative;
+}
+
+#hf-fileinput.fileinput .fileinput-preview.thumbnail > img{
+    position: absolute;
+    min-width: 100%;
+    min-height: 100%;
+    left: -100%;
+    right: -100%;
+    top: -100%;
+    bottom: -100%;
+    margin: auto;
+    text-align: left;
+    max-height: 200%;
+    max-width: 200%;
+    padding: 40% 0;
+}
+
+body .bg_img_cover{
+    background-color: #B3B3B3 !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: center !important;
+}
+
+
+
 #header .new_nav_profile{
     list-style: none;
     padding: 0 5px;

@@ -5,9 +5,9 @@
                 <a href="">
                     <div class="profile-pic">
                         <% if user_signed_in? %>
-                            <img src="<%= current_user.image %>" alt="" class="mCS_img_loaded">
+                            <div style="background: url(<%= current_user.image %>)" alt="" class="mCS_img_loaded bg_img_cover"></div>
                         <% else %>
-                            <img src="/img/default-user-image.png" alt="" class="mCS_img_loaded">
+                            <div style="background: url(/img/default-user-image.png)" alt="" class="mCS_img_loaded bg_img_cover"></div>
                         <% end %>
                     </div>
 

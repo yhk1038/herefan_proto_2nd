@@ -132,10 +132,10 @@
                 </div>
 
 
-                <div class="block-header">
+                <div class="block-header" style="display: none;">
                     <h2><b>Password Zone <em>(Attention !!)</em></b> <small><b>New Password</b> : <em>leave blank if you don't want to change it</em> <br><b>Current Password</b> : <em>we need your current password to confirm your changes</em></small></h2>
                 </div>
-                <div class="card brd-2" style="border: 2px solid #F44336">
+                <div class="card brd-2" style="border: 2px solid #F44336; display: none">
                     <div class="card-body card-padding">
 
                         <div class="row">
@@ -167,7 +167,7 @@
                                 <div class="input-group input-group-lg" style="border: 2px solid #EAEAEA;">
                                     <span class="input-group-addon c-blue"><i class="zmdi zmdi-key" style="top: 0;"></i></span>
                                     <div class="fg-line">
-                                        <input type="password" name="user[current_password]" id="checkPWDLength_from" class="form-control input-lg" placeholder="Current Password (First time? It's like your email)">
+                                        <input type="hidden" value="<%= resource.email %>" name="user[current_password]" id="checkPWDLength_from" class="form-control input-lg" placeholder="Current Password (First time? It's like your email)">
                                     </div>
                                     <span class="input-group-addon last c-blue f-14 btn btn-default bgm-blue waves-effect" style="display: table-cell"></span>
                                 </div>

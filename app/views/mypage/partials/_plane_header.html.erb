@@ -1,6 +1,6 @@
 <section id="mypage_header" class="<%= color_class %>" style="<%= style %>">
     <div class="header">
-        <img class="my-profile-image" src="<%= current_user.image.url %>" alt="<%= current_user.name %>'s profile image" width="100" height="100">
+        <div class="my-profile-image bg_img_cover" style="background: url(<%= current_user.image %>); width: 100px; height: 100px;" alt="<%= current_user.name %>'s profile image"></div>
         <div class="absolute_center my-profile-name">
             <%= current_user.nickname %>
             <div class="hover-effect"><a href="<%= edit_user_registration_path %>" class="btn btn-sm btn-default bgm-pink" style="background: none !important;"><span class="zmdi zmdi-edit"></span></a></div>

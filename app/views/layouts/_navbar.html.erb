@@ -33,7 +33,7 @@
                     <% if user_signed_in? %>
                         <%= link_to '', data: {toggle: 'dropdown'} do %>
                             <ul class="new_nav_profile">
-                                <li class="nav_profile2"><img src="<%= current_user.image.url %>"></li>
+                                <li class="nav_profile2"><div class="bg_img_cover" style="background: url(<%= current_user.image %>)"></div></li>
                                 <li class="nav_profile2-name"><%= current_user.nickname %> <i class="zmdi zmdi-caret-down"></i></li>
                             </ul>
                         <% end %>
