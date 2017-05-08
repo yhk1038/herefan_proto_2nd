@@ -3,7 +3,7 @@
 <%= render partial: '/layouts/sub_nav', locals: {tabs: @tabs} %>
 
 <% if !@links.count.zero? %>
-<%= render partial: '/layouts/link_section' %>
+    <%= render partial: '/layouts/link_section' %>
 <% else %>
     <section style="text-align: center">
         <h1 style="margin: 40px 0; color: #666;">Meet various contents about your K-Dol<br>that you haven't seen yet!</h1>

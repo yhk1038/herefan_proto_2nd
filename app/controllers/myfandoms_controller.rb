@@ -59,6 +59,10 @@ class MyfandomsController < ApplicationController
     # DELETE /myfandoms/1.json
     def destroy
         @myfandom.destroy
+        fandom = @myfandom.fandom
+        if fandom.myfandoms.count < config_update_publish_limit
+            fandom.update(published: false)
+        end
         respond_to do |format|
             format.html { redirect_to myfandoms_url, notice: 'Myfandom was successfully destroyed.' }
             format.json { head :no_content }

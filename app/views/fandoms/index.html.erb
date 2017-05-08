@@ -82,11 +82,11 @@
                                 <h2 class="text"><%= un_fandom.name %></h2>
 
                                 <ul class="pv-follow">
-                                    <li class="text text-sm"><span id="follower_count_<%= un_fandom.id %>"><%= un_fandom.user_lists.count %></span> proposers Now</li>
+                                    <li class="text text-sm"><span id="follower_count_<%= un_fandom.id %>"><%= un_fandom.users.count %></span> proposers Now</li>
                                 </ul>
                                 <% if user_signed_in? %>
                                     <% if is_my_fandom?(users_fandom_lists: @my_fandoms, this_fandom: un_fandom) %>
-                                        <a id="channel_<%= un_fandom.id %>" onclick="followBtn('cancel', <%= current_user.myfandoms.where(fandom_id: un_fandom.id).take.id %>, <%= un_fandom.id %>, <%= current_user.id %>, 'no-text')" class="proposed_follow_btn btn btn-default waves-effect waves-circle waves-float">
+                                        <a id="channel_<%= un_fandom.id %>" onclick="followBtn('cancel', <%= un_fandom.get_myfandom.id %>, <%= un_fandom.id %>, <%= current_user.id %>, 'no-text')" class="proposed_follow_btn btn btn-default waves-effect waves-circle waves-float">
                                             <span class="zmdi zmdi-favorite c-pink"></span>
                                         </a>
                                     <% else %>

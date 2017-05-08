@@ -7,7 +7,7 @@ class HomeController < ApplicationController
     
     def go_for
         if user_signed_in?
-            if current_user.myfandoms.count.zero?
+            if current_user.fandoms.published.count.zero?
                 redirect_to fandoms_path
             else
                 redirect_to '/home/index'
@@ -20,7 +20,7 @@ class HomeController < ApplicationController
     def index
         @links = []
         @links = current_user.links if user_signed_in?
-        @fandoms = current_user.fandoms if user_signed_in?
+        @fandoms = current_user.fandoms.published if user_signed_in?
     end
     
     # POST '/utils/user_watched_this_link' :: params[:user_id], params[:link_id], as: visited_link_counter

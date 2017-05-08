@@ -8,7 +8,7 @@ class FandomsController < ApplicationController
     def index
         @fandoms = Fandom.all.sort_by { |fandom| 0 - fandom.myfandoms.count }
         @fandoms_not_active = Fandom.unpublished.all.sort_by { |fandom| 0 - fandom.myfandoms.count }
-        @my_fandoms = current_user.fandoms.ids if user_signed_in?
+        @my_fandoms = current_user.fandoms.published.ids if user_signed_in?
     end
     
     # GET /fandoms/1
