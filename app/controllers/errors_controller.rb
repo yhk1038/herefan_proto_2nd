@@ -3,7 +3,7 @@ class ErrorsController < ApplicationController
     layout '/errors/layout'
     
     def show
-        render status_code.to_s, status: status_code
+        render "/errors/#{status_code.to_s}", status: status_code
     end
 
     private
