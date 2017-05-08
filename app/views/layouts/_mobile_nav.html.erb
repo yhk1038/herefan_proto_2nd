@@ -53,7 +53,7 @@
                 <% if user_signed_in? %>
                     <li class="sub-menu active toggled">
                         <a href=""><i class="zmdi zmdi-menu"></i> Follow List</a>
-                        <% current_user.fandom_lists.each do |fandom| %>
+                        <% current_user.fandoms.each do |fandom| %>
                             <ul>
                                 <li class="sub-menu">
                                     <a href=""><%= fandom.name %></a>

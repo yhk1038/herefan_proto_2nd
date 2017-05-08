@@ -6,16 +6,18 @@ class FandomsController < ApplicationController
     # GET /fandoms
     # GET /fandoms.json
     def index
-        @fandoms = Fandom.where(published: true).all.sort_by { |fandom| 0 - fandom.myfandoms.count }
-        @fandoms_not_active = Fandom.where(published: false).all.sort_by { |fandom| 0 - fandom.myfandoms.count }
-        @my_fandoms = current_user.myfandoms.all.map{|s| s.fandom.id} if user_signed_in?
+        @fandoms = Fandom.all.sort_by { |fandom| 0 - fandom.myfandoms.count }
+        @fandoms_not_active = Fandom.unpublished.all.sort_by { |fandom| 0 - fandom.myfandoms.count }
+        @my_fandoms = current_user.fandoms.ids if user_signed_in?
     end
     
     # GET /fandoms/1
     # GET /fandoms/1.json
     def show
+        redirect_to root_path unless @fandom.published
+        
         @links = @fandom.links
-        @my_fandom = user_signed_in? ? @fandom.myfandoms.where(user_id: current_user.id) : []
+        @my_fandom = user_signed_in? ? current_user.myfandoms.where(fandom_id: @fandom.id) : []
         
         # 팔로우 버튼 토글 전용 키값 해시 데이터
         @follow_control = { follow_cmd: '', myfandom_id: 0, channel_id: '', user_id: '' }

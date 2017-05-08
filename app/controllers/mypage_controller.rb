@@ -5,7 +5,7 @@ class MypageController < ApplicationController
         @tabs[0][:active] = 'active'
         
         if user_signed_in?
-            @fandoms = current_user.fandom_lists
+            @fandoms = current_user.fandoms
         else
             @fandoms = []
         end
@@ -19,7 +19,8 @@ class MypageController < ApplicationController
     def watched
         @tabs[2][:active] = 'active'
         ids = current_user.visited_links.pluck(:link_id)
-        @links = Link.where(id: ids)
+        fandom_ids = current_user.fandoms.ids
+        @links = Link.where(id: ids, fandom_id: fandom_ids)
     end
     
     def filling_tab_group

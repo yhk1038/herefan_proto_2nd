@@ -70,7 +70,7 @@
             <span class="zmdi zmdi-chevron-left"></span>
         </a>
         <div class="follow_list">
-            <% @fandom_lists.each do |fandom| %>
+            <% @fandoms.each do |fandom| %>
                 <%= link_to fandom_path(fandom) do %>
                     <div class="follow_artists" style="background: url('<%= fandom.profile_img %>');">
                         <span><%= fandom.name %></span>
@@ -94,7 +94,7 @@
 <% end %>
 
 <% if user_signed_in? %>
-    <% if @fandom_lists.count.zero? %>
+    <% if @fandoms.count.zero? %>
         <section style="text-align: center">
             <h1 style="margin: 40px 0;">There is no content to display .. :(<br>Please check your follow list.</h1>
             <a class="btn btn-default bgm-green btn-lg waves-effect" href="<%= fandoms_path %>">Select Channel</a>
