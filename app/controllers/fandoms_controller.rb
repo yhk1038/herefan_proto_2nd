@@ -15,7 +15,7 @@ class FandomsController < ApplicationController
     # GET /fandoms/1.json
     def show
         @links = @fandom.links
-        @my_fandom = @fandom.myfandoms.where(user_id: current_user.id)
+        @my_fandom = user_signed_in? ? @fandom.myfandoms.where(user_id: current_user.id) : []
         
         # 팔로우 버튼 토글 전용 키값 해시 데이터
         @follow_control = { follow_cmd: '', myfandom_id: 0, channel_id: '', user_id: '' }
