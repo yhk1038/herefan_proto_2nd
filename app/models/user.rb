@@ -1,6 +1,5 @@
 class User < ApplicationRecord
     mount_uploader :image, StoragesUploader
-    serialize :avatars, JSON
     
     # rolify
     # include Authority::UserAbilities
