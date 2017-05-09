@@ -1,4 +1,4 @@
-class S3Uploader < CarrierWave::Uploader::Base
+class StoragesUploader < CarrierWave::Uploader::Base
     
     # 이미지를 조정할 수 있는 툴 설정
     # Include RMagick or MiniMagick support:
