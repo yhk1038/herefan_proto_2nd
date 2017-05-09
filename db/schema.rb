@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170508214136) do
+ActiveRecord::Schema.define(version: 20170506154623) do
 
   create_table "fandoms", force: :cascade do |t|
     t.string   "name"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20170508214136) do
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",                            null: false
     t.string   "encrypted_password",     default: "",                            null: false
+    t.boolean  "admin",                  default: false,                         null: false
     t.boolean  "active",                 default: true,                          null: false
     t.integer  "role",                   default: 1,                             null: false
     t.integer  "point",                  default: 0,                             null: false
@@ -55,6 +56,7 @@ ActiveRecord::Schema.define(version: 20170508214136) do
     t.datetime "birthday"
     t.string   "name",                   default: "Anonymous",                   null: false
     t.string   "image",                  default: "/img/default-user-image.png", null: false
+    t.string   "img"
     t.string   "provider"
     t.string   "uid"
     t.string   "reset_password_token"
@@ -67,8 +69,6 @@ ActiveRecord::Schema.define(version: 20170508214136) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                                                     null: false
     t.datetime "updated_at",                                                     null: false
-    t.boolean  "admin",                  default: false
-    t.string   "img"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
