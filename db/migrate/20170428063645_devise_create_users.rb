@@ -15,7 +15,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.0]
             t.datetime :birthday
             
             t.string :name,               null: false, default: 'Anonymous'
-            t.string :image,              null: false, default: '/img/default-user-image.png'
+            t.string :image
             t.string :img
             
             t.string :provider
