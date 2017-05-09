@@ -34,3 +34,6 @@
 /.idea/*
 
 /public/assets/*
+/db/seeds.rb
+db/seeds.rb
+*/seeds.rb
