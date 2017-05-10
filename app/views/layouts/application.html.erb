@@ -47,9 +47,7 @@
 <%= render '/layouts/footer' %>
 
 <!-- Page Loader -->
-<%# unless params[:controller].in?(skip_include_controllers) %>
-    <%= render '/layouts/page_loader' %>
-<%# end %>
+<%= render '/layouts/page_loader' %>
 
 <!-- Older IE warning message -->
 <%= render '/layouts/ie_warning' %>
@@ -78,13 +76,16 @@
 <%= render '/layouts/login_modal' %>
 
 <div class="login-content" style="display: none;">
-    <span class="grl_msg"><%= request.referer.nil? ? 'nothing' : 'nothing' %></span>
+    <span class="grl_msg"><%= request.referer.nil? ? 'You Are Reported!!! Please See The Logs of JavaScript Console' : 'You Are Reported!!! Please See The Logs of JavaScript Console' %></span>
     <span class="grl_method">inverse</span>
 </div>
 <script type="text/javascript" charset="utf-8">
     $(window).load(function () {
+        $('html.login-content').removeClass('login-content');
+        console.log('Hey Wassup');
         //Welcome Message (not for login page)
         function notify(message, type){
+            console.log('Thank YOU, But Do Not Be A Devil');
             $.growl({
                 message: message
             },{
@@ -96,7 +97,7 @@
                     from: 'bottom',
                     align: 'center'
                 },
-                delay: 1024,
+                delay: 12048,
                 animate: {
                     enter: 'animated bounceIn',
                     exit: 'animated bounceOut'
@@ -106,12 +107,16 @@
                     y: 85
                 }
             });
-        };
+        }
 
         if ($('.login-content')[0]) {
-            if ($('.grl_msg').text() !== 'nothing') {
+            console.log('Are You Interested In Our Site?');
+            if ($('.grl_msg').text() === 'nothing') {
                 notify($('.grl_msg').text(), $('.grl_method').text());
             }
+            console.log('Hmm. So Are We! The Mail Is "yhkks1038@gmail.com" Contact Us!');
+            console.log('Maybe We Wanna Think About Your Employment! COME ON!');
+            console.log('-*- HereFan inc -*-')
         }
     });
 </script>
