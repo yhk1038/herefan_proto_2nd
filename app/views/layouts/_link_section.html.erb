@@ -13,7 +13,7 @@
                                 <div class="lv-item">
                                     <div class="media">
                                         <div class="pull-left">
-                                            <img class="lv-img-sm" src="<%= user.img.nil? ? image_with_sns(user.image.to_s) : user.img %><%#= image_with_sns(user.image) %>" alt="" data-pin-nopin="true">
+                                            <div class="lv-img-sm bg_img_cover" style="background: url('<%= user.img.nil? ? image_with_sns(user.image.to_s) : user.img %>'); width: 40px; height: 40px; border: 1px solid #fff;" data-pin-nopin="true"></div>
                                         </div>
                                         <div class="media-body">
                                             <div class="lv-title"><%= user.nickname %></div>
@@ -28,7 +28,7 @@
                                     <ul class="dropdown-menu dropdown-menu-right">
                                         <% if link.user == current_user %>
                                             <li><%= link_to 'edit', edit_link_path(link) %></li>
-                                            <li><%= button_to 'Destroy', link, method: :delete, :onclick => "return confirm('Are you sure you want to delete this link?')", class: 'likes_link_to' %><%#= link_to 'Destroy', link, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+                                            <li><%= button_to 'Destroy', link, method: :delete, onclick: "return confirm('Are you sure you want to delete this link?')", class: 'likes_link_to' %></li>
                                         <% else %>
                                             <li><%= link_to 'report', '#' %></li>
                                         <% end %>

@@ -82,10 +82,18 @@
 <script type="text/javascript" charset="utf-8">
     $(window).load(function () {
         $('html.login-content').removeClass('login-content');
-        console.log('Hey Wassup');
+
+        <% if Rails.env.production? %>
+            console.log('Hey Wassup');
+        <% end %>
+
         //Welcome Message (not for login page)
         function notify(message, type){
-            console.log('Thank YOU, But Do Not Be A Devil');
+
+            <% if Rails.env.production? %>
+                console.log('Thank YOU, But Do Not Be A Devil');
+            <% end %>
+
             $.growl({
                 message: message
             },{
@@ -110,13 +118,19 @@
         }
 
         if ($('.login-content')[0]) {
-            console.log('Are You Interested In Our Site?');
+            <% if Rails.env.production? %>
+                console.log('Are You Interested In Our Site?');
+            <% end %>
+
             if ($('.grl_msg').text() === 'nothing') {
                 notify($('.grl_msg').text(), $('.grl_method').text());
             }
-            console.log('Hmm. So Are We! The Mail Is "yhkks1038@gmail.com" Contact Us!');
-            console.log('Maybe We Wanna Think About Your Employment! COME ON!');
-            console.log('-*- HereFan inc -*-')
+
+            <% if Rails.env.production? %>
+                console.log('Hmm. So Are We! The Mail Is "yhkks1038@gmail.com" Contact Us!');
+                console.log('Maybe We Wanna Think About Your Employment! COME ON!');
+                console.log('-*- HereFan inc -*-');
+            <% end %>
         }
     });
 </script>

@@ -9,7 +9,7 @@
                         <div class="lv-item">
                             <div class="media">
                                 <div class="pull-left">
-                                    <img class="lv-img-sm" src="<%= current_user.img.nil? ? image_with_sns(current_user.image.to_s) : current_user.img %>" alt="" data-pin-nopin="true">
+                                    <div class="lv-img-sm bg_img_cover" style="background: url('<%= user.img.nil? ? image_with_sns(user.image.to_s) : user.img %>'); width: 40px; height: 40px; border: 1px solid #fff;" data-pin-nopin="true"></div>
                                 </div>
                                 <div class="media-body">
                                     <div class="lv-title"><%= current_user.nickname %></div>
