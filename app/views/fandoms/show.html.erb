@@ -12,7 +12,7 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
         <div class="item active">
-            <div class="carousel-img" style="background-image: url('<%= @fandom.background_img %>');"></div>
+            <div class="carousel-img" style="background-image: url('<%= @fandom.background_img %>'); background-attachment: fixed;"></div>
             <div class="carousel-caption">
                 <a href="" class="btn btn-default waves-effect waves-circle waves-float"><span class="zmdi zmdi-trending-up"></span></a>
                 <a id="channel_<%= @fandom.id %>" onclick="followBtn('<%= @follow_control[:follow_cmd] %>', <%= @follow_control[:myfandom_id] %>, <%= @follow_control[:channel_id] %>, <%= @follow_control[:user_id] %>, 'no-text')" class="btn btn-default waves-effect waves-circle waves-float">
