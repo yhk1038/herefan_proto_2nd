@@ -129,7 +129,7 @@ class User < ApplicationRecord
         
         return status
     end
-
+    
     private
     def set_default_role
         add_role :user

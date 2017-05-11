@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+    match 'hf_util/user_must_have_unique_myfandom/:id', to: 'hf_util#user_must_have_unique_myfandom', via: [:get]
+
     resources :links
     resources :myfandoms
     resources :fandoms

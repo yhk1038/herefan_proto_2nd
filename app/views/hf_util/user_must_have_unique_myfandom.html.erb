@@ -1,0 +1,36 @@
+<%
+    require 'json'
+%>
+
+<div class="row">
+    <div class="card">
+        <div class="card-header bgm-blue">
+            <h2>HfUtil#user_must_have_unique_myfandom <small>Find me in app/views/hf_util/user_must_have_unique_myfandom.html.erb</small></h2>
+        </div>
+        <div class="card-body card-padding">
+            <div style="position: relative;"><pre><%=  JSON.pretty_generate(@report).html_safe %></pre></div>
+            <%= link_to '뒤로', :back, class: 'btn btn-default bgm-blue' %>
+        </div>
+    </div>
+</div>
+
+<style>
+    pre{
+        color: greenyellow;
+        background: #000;
+        background-image: url(/img/yuju_mama2016.jpg);
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center right;
+    }
+    span{ font-weight: bold }
+    .value {
+        text-decoration: underline;
+        font-weight: inherit;
+        color: orangered;
+    }
+    .key{
+        font-size: 13px;
+        background: blue;
+    }
+</style>
