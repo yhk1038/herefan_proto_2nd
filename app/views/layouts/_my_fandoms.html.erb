@@ -4,7 +4,7 @@
             <span class="zmdi zmdi-chevron-left"></span>
         </a>
         <div class="follow_list">
-            <% @fandoms.each do |fandom| %>
+            <% @my_published_fandoms.each do |fandom| %>
                 <%= link_to fandom_path(fandom) do %>
                     <div class="follow_artists" style="background: url('<%= fandom.profile_img %>');">
                         <span><%= fandom.name %></span>

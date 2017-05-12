@@ -2,6 +2,7 @@ class FandomsController < ApplicationController
     include FandomsHelper
     before_action :set_fandom, only: [:show, :edit, :update, :destroy]
     before_action :filling_tab_group, only: [:show]
+    before_action :my_published_fandoms
     
     # GET /fandoms
     # GET /fandoms.json

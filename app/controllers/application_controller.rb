@@ -9,4 +9,8 @@ class ApplicationController < ActionController::Base
     def set_locale
         I18n.locale = params[:locale] || :en
     end
+
+    def my_published_fandoms
+        @my_published_fandoms = current_user.fandoms.published if user_signed_in?
+    end
 end

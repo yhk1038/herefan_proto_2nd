@@ -4,6 +4,7 @@ require 'open_uri_redirections'
 
 class HomeController < ApplicationController
     before_action :filling_tab_group, only: [:index]
+    before_action :my_published_fandoms
     
     def go_for
         if user_signed_in?

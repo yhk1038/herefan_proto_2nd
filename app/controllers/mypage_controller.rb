@@ -1,5 +1,6 @@
 class MypageController < ApplicationController
     before_action :filling_tab_group, only: [:my_channels, :contributed, :watched]
+    before_action :my_published_fandoms
     
     def my_channels
         @tabs[0][:active] = 'active'
