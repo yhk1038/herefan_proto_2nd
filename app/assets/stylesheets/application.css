@@ -133,6 +133,14 @@ body .bg_img_cover{
     font-weight: 500;
 }
 
+#top-search-wrap .tsw-inner input[type="text"]{
+    padding: 0 55px 0 10px;
+}
+#top-search-wrap .tsw-inner #top-search-close{
+    left: inherit;
+    right: 15px;
+}
+
 
 
 
@@ -391,13 +399,33 @@ body .bg_img_cover{
 
 #follow_list_box {
     width: 100%;
-    background: #ffffff;
-    border-bottom: 1px solid #D3D3D3;
+    position: fixed;
+    top: 72px;
+    background: none;
+    text-align: right;
+    z-index: 4;
+    text-shadow: 1px 1px 2px #000;
+    -webkit-transition: all 200ms ease;
+    -moz-transition: all 200ms ease;
+    -ms-transition: all 200ms ease;
+    -o-transition: all 200ms ease;
+    transition: all 200ms ease;
 }
+#follow_list_box.scrolled{
+}
+
+@media (max-width: 430px) {
+    #follow_list_box {
+        display: none;
+    }
+}
+
+
 #follow_list_box .follow_list_wrap {
 }
 .follow_move {
-    font-size: 70px;
+    display: none;
+    font-size: 48px;
     color: #eaeaea;
     position: relative;
     cursor: pointer;
@@ -419,11 +447,26 @@ body .bg_img_cover{
 .follow_list{
     max-width: 94%;
     display: inline-block;
-    padding: 10px 25px;
+    padding: 10px 5px;
+    position: relative;
+    top: 0px;
+    -webkit-transition: all 200ms ease;
+    -moz-transition: all 200ms ease;
+    -ms-transition: all 200ms ease;
+    -o-transition: all 200ms ease;
+    transition: all 200ms ease;
 }
+.follow_list:hover {
+    top: -10px;
+}
+.follow_list.active {
+    top: -100px;
+}
+
+
 .follow_artists{
-    width: 52px;
-    height: 52px;
+    width: 42px;
+    height: 42px;
     border: 1px solid rgba(239, 239, 239, 1);
     border-radius: 100px;
     position: relative;
@@ -435,6 +478,7 @@ body .bg_img_cover{
     background-position: center !important;
 }
 .follow_artists > span{
+    width: 52px;
     font-size: 12px;
     font-weight: bold;
     position: absolute;
@@ -447,26 +491,33 @@ body .bg_img_cover{
     -o-transition: all 200ms ease;
     transition: all 200ms ease;
     text-align: center;
-    left: 0;
+    left: -6px;
     right: 0;
     margin-left: auto;
     margin-right: auto;
+    color: #FFFFFF;
+    opacity: 0.5;
 }
 .follow_artists:hover{
     border: 1px solid #D3D3D3;
 }
 .follow_artists:hover > span{
-    bottom: -37px;
+    /*bottom: -38px;*/
+    opacity: 1;
 }
 #add_follow_btn.follow_artists {
     background: #777
 }
 #add_follow_btn.follow_artists > span:nth-child(1){
+    width: initial;
     height: initial;
+    left: 0;
     bottom: initial;
-    margin: 13px;
+    margin: 7.5px 13px;
     font-size: 25px;
     color: #fff;
+    text-shadow: none;
+    opacity: 1;
     transition: all 400ms ease;
 }
 #add_follow_btn.follow_artists:hover > span:nth-child(1){

@@ -77,8 +77,12 @@
     <!-- Top Search Content -->
     <div id="top-search-wrap">
         <div class="tsw-inner">
-            <i id="top-search-close" class="zmdi zmdi-close"></i>
             <input type="text">
+            <i id="top-search-close" class="zmdi zmdi-close"></i>
         </div>
     </div>
 </header>
+
+<% if user_signed_in? %>
+    <%= render '/layouts/my_fandoms' %>
+<% end %>

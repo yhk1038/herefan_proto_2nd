@@ -3,13 +3,16 @@ $(document).ready(function () {
     //
     // 상단 네비게이션 전환
     var header = $('#header');
+    var myfandoms = $('#follow_list_box');
     $(window).scroll(function () {
         var scroll = $(this).scrollTop();
 
         if (scroll > 190) {
-            header.addClass('init_header')
+            header.addClass('init_header');
+            myfandoms.addClass('scrolled');
         } else {
-            header.removeClass('init_header')
+            header.removeClass('init_header');
+            myfandoms.removeClass('scrolled');
         }
 
     });
