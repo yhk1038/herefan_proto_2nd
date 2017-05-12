@@ -3,23 +3,23 @@
         <a href="" class="follow_left follow_move">
             <span class="zmdi zmdi-chevron-left"></span>
         </a>
-        <div class="follow_list">
-            <% @my_published_fandoms.each do |fandom| %>
+        <% @my_published_fandoms.each do |fandom| %>
+            <div class="follow_list">
                 <%= link_to fandom_path(fandom) do %>
                     <div class="follow_artists" style="background: url('<%= fandom.profile_img %>');">
                         <span><%= fandom.name %></span>
                     </div>
                 <% end %>
-            <% end %>
-        </div>
-        <div class="follow_list">
-            <%= link_to fandoms_path do %>
-                <div id="add_follow_btn" class="follow_artists">
-                    <span class="zmdi zmdi-plus"></span>
-                    <span>Add Channels</span>
-                </div>
-            <% end %>
-        </div>
+            </div>
+        <% end %>
+        <!--<div class="follow_list">-->
+            <!--<%#= link_to fandoms_path do %>-->
+                <!--<div id="add_follow_btn" class="follow_artists">-->
+                    <!--<span class="zmdi zmdi-plus"></span>-->
+                    <!--<span>Add Channels</span>-->
+                <!--</div>-->
+            <!--<%# end %>-->
+        <!--</div>-->
         <a href="" class="follow_right follow_move">
             <span class="zmdi zmdi-chevron-right"></span>
         </a>
