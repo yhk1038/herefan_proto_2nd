@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+    
     match 'hf_util/user_must_have_unique_myfandom/:id', to: 'hf_util#user_must_have_unique_myfandom', via: [:get]
 
     resources :links
@@ -11,6 +12,11 @@ Rails.application.routes.draw do
             passwords: 'users/passwords',
             omniauth_callbacks: 'users/omniauth_callbacks'
     }
+
+    scope module: :action do
+        resources :likes, path: '/action/likes'
+        resources :clips, path: '/action/clips'
+    end
     
     root 'home#go_for'
     

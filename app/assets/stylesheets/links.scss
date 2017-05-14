@@ -1,3 +1,299 @@
 // Place all the styles related to the links controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.bp-header {
+  .link_main_image {
+    width: 100%;
+    background: #000;
+  }
+}
+
+
+.user_profile {
+
+  .media {
+    margin-top: 5px;
+
+    .pull-left {
+      padding-right: 0;
+
+      .lv-img-sm {
+        width: 40px;
+        height: 40px;
+        border: 1px solid #fff;
+      }
+    }
+
+    .media-body {
+      padding-left: 10px;
+    }
+  }
+}
+
+
+.actions_box{
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  margin: 0;
+  padding: 25px 0 0;
+  list-style: none;
+  max-width: 180px;
+  min-width: 90px;
+
+  .action {
+    position: relative;
+    float: left;
+    text-align: right;
+    width: 50%;
+    height: 100%;
+    padding-right: 10px;
+    cursor: pointer;
+
+    &.maum{
+      .zmdi-favorite-outline{
+        color: #FFFFFF !important;
+      }
+      .zmdi-favorite{
+        color: #e91e63 !important;
+      }
+    }
+    &.viewcount{
+
+    }
+
+    span {
+      color: #fff;
+
+      &:nth-child(1) {
+        position: relative;
+        top: 3px;
+        font-size: 20px;
+      }
+      &:nth-child(2) {
+        margin-left: 3px;
+      }
+    }
+  }
+}
+
+//.task:hover {
+//  .link_main_image:before{
+//
+//  }
+//}
+.clip_btn{
+  cursor: pointer;
+}
+
+.clip{
+  display: none;
+  color: rgba(255, 235, 59, 0.75);
+  position: absolute;
+  right: 10px;
+  top: -8px;
+  font-size: 40px;
+
+  -webkit-transition: all 250ms ease;
+  -moz-transition: all 250ms ease;
+  -ms-transition: all 250ms ease;
+  -o-transition: all 250ms ease;
+  transition: all 250ms ease;
+
+  &:before{
+    content: '\f11d';
+  }
+}
+
+.clipped{
+  .clip{
+    display: block;
+    color: rgb(255, 235, 59);
+    text-shadow: 0px 2px 5px rgba(0,0,0, 0.5);
+
+    &:before{
+      content: '\f11e';
+    }
+  }
+}
+
+.usi:not(.clipped):hover .clip,
+.usi:not(.clipped) .clip:hover{
+  display: block;
+  text-shadow: 0px 2px 5px rgba(0,0,0, 0.99);
+
+  &:after{
+    content: 'Wanna Clip? ↘';
+    position: absolute;
+    width: 150px;
+    height: 25px;
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.4);
+    left: -350%;
+    text-shadow: none;
+    top: -30%;
+    font-style: italic;
+    font-weight: 700;
+  }
+}
+
+
+.blog-post .share_box{
+
+  .dropdown-menu{
+    width: 70%;
+    text-align: center;
+
+    .sns_share{
+      display: inline-flex;
+      width: 100%;
+      padding-bottom: 0;
+    }
+
+    .clipboarding{
+      .input-group{
+        padding: 5px 15px;
+
+        .input-group-addon{
+          background: #9e9e9e;
+          color: #fff;
+          padding: 0 10px !important;
+          min-width: 0;
+
+          &:nth-child(1){
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+          }
+          &:last-child{
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+            cursor: pointer;
+          }
+
+          & > .zmdi{
+            top: 1px;
+          }
+
+          &.hf-tooltip:before{
+            content: 'Copied!';
+            background: rgba(35, 35, 35, 0.8);
+            color: #FFFFFF;
+            position: absolute;
+            top: -18px;
+            right: 2px;
+            width: 60px;
+            height: 20px;
+            padding: 3px;
+            font-size: 12px;
+            border-radius: 3px;
+          }
+        }
+
+        .form-control{
+          height: 25px;
+          border-left: 0;
+          border-right: 0;
+          color: #9e9e9e;
+          padding: 2px 5px 3px;
+          width: 157px;
+          overflow: scroll;
+
+
+          &::-webkit-scrollbar {
+            display: none;
+          }
+
+          &::-webkit-scrollbar-track {
+            display: none;
+          }
+
+          &::-webkit-scrollbar-thumb {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+#Pshare-dd-menu {
+  position: absolute;
+  width: 250px;
+  top: 165px;
+  left: 450px;
+  right: 0;
+  margin: 0 auto;
+
+  .sns_share{
+    display: inline-flex;
+    width: 100%;
+    padding-bottom: 0;
+  }
+
+  .clipboarding{
+    .input-group{
+      padding: 5px 15px;
+      text-shadow: none;
+
+      .input-group-addon{
+        background: #9e9e9e;
+        color: #fff;
+        padding: 0 10px !important;
+        min-width: 0;
+
+        &:nth-child(1){
+          border-top-left-radius: 4px;
+          border-bottom-left-radius: 4px;
+        }
+        &:last-child{
+          border-top-right-radius: 4px;
+          border-bottom-right-radius: 4px;
+          cursor: pointer;
+        }
+
+        & > .zmdi{
+          top: 1px;
+        }
+
+        &.hf-tooltip:before{
+          content: 'Copied!';
+          background: rgba(35, 35, 35, 0.8);
+          color: #FFFFFF;
+          position: absolute;
+          top: -18px;
+          right: 2px;
+          width: 60px;
+          height: 20px;
+          padding: 3px;
+          font-size: 12px;
+          border-radius: 3px;
+        }
+      }
+
+      .form-control{
+        height: 25px;
+        border-left: 0;
+        border-right: 0;
+        color: #9e9e9e;
+        padding: 2px 5px 3px;
+        width: 157px;
+        overflow: scroll;
+
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
+
+        &::-webkit-scrollbar-track {
+          display: none;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          display: none;
+        }
+      }
+    }
+  }
+}

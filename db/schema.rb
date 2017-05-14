@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170506154623) do
+ActiveRecord::Schema.define(version: 20170514173232) do
+
+  create_table "clips", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "link_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["link_id"], name: "index_clips_on_link_id"
+    t.index ["user_id"], name: "index_clips_on_user_id"
+  end
 
   create_table "fandoms", force: :cascade do |t|
     t.string   "name"
@@ -19,6 +28,15 @@ ActiveRecord::Schema.define(version: 20170506154623) do
     t.boolean  "published",      default: false, null: false
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "link_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["link_id"], name: "index_likes_on_link_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "links", force: :cascade do |t|

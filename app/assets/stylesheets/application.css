@@ -398,9 +398,10 @@ body .bg_img_cover{
 /********************************/
 
 #follow_list_box {
-    width: 100%;
+    /*width: 100%;*/
     position: fixed;
     top: 72px;
+    right: 10%;
     background: none;
     text-align: right;
     z-index: 4;
@@ -449,7 +450,8 @@ body .bg_img_cover{
     display: inline-block;
     padding: 10px 5px;
     position: relative;
-    top: 0px;
+    top: 0;
+    /*z-index: 4;*/
     -webkit-transition: all 200ms ease;
     -moz-transition: all 200ms ease;
     -ms-transition: all 200ms ease;
@@ -461,6 +463,9 @@ body .bg_img_cover{
 }
 .follow_list.active {
     top: -100px;
+}
+.follow_list:hover .follow_artists > span{
+    opacity: 1;
 }
 
 
@@ -502,8 +507,7 @@ body .bg_img_cover{
     border: 1px solid #D3D3D3;
 }
 .follow_artists:hover > span{
-    /*bottom: -38px;*/
-    opacity: 1;
+    /*opacity: 1;*/
 }
 #add_follow_btn.follow_artists {
     background: #777
@@ -847,10 +851,8 @@ hr.hf-hr{
 
 
 .hf-logo {
-    background: url(/svg/main_logo.svg);
-    background-repeat: no-repeat;
+    background: url('/svg/main_logo.svg'), no-repeat, center;
     background-size: contain;
-    background-position: center;
 }
 
 .force_center{
@@ -943,7 +945,7 @@ div.super.row:before{
 
 #library .moreBtn{
     position: absolute;
-    right: 0px;
+    right: 0;
     padding: 0;
     list-style: none;
     margin-top: 5px;

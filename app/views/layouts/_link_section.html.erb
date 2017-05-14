@@ -1,27 +1,53 @@
 <section id="library" class="container contents_box">
     <div class="row" id="libraries_wrapper">
         <% @links.order(id: :desc).each do |link| %>
-            <% user = link.user %>
-            <% user ||= User.first %>
+            <%
+                user = link.user
+                user ||= User.first
+                current_user_id = $current_user_id
+
+                myclips = Clip.where(link: link, user_id: current_user_id)
+                myclips_already = myclips.count.zero? ? false : true
+
+                mylikes = Like.where(link: link, user_id: current_user_id)
+                mylikes_already = mylikes.count.zero? ? false : true
+
+                visited_count = link.visited_links.pluck(:viewcount).inject(:+)
+            %>
             <!--col-md-4 col-sm-3 col-xs-6-->
             <div class="task">
-                <div id="link_<%= link.id %>" noiser="<%= user_signed_in? ? current_user.id : '0' %>" class="card blog-post link_wrapping_anchor">
+                <div id="link_<%= link.id %>" noiser="<%= current_user_id %>" class="card blog-post link_wrapping_anchor <%= 'usi' if user_signed_in? %> <%= 'clipped' if myclips_already %>">
                     <div class="bp-header">
                         <a href="<%= link.url %>" target="_blank">
-                            <img style="width: 100%; background: #000;" src="<%= link.image %>" height="171" alt="">
-                            <div class="user_profile">
-                                <div class="lv-item">
-                                    <div class="media">
-                                        <div class="pull-left">
-                                            <div class="lv-img-sm bg_img_cover" style="background: url('<%= user.img.nil? ? image_with_sns(user.image.to_s) : user.img %>'); width: 40px; height: 40px; border: 1px solid #fff;" data-pin-nopin="true"></div>
-                                        </div>
-                                        <div class="media-body">
-                                            <div class="lv-title"><%= user.nickname %></div>
-                                            <small class="lv-small"><%= distance_of_time_in_words(link.created_at.to_time, Time.now) %> before</small>
+                            <a class="clip_btn" action_status="<%= myclips_already ? 'delete' : 'post' %>" action_target="<%= myclips_already ? myclips.take.id : link.id %>" action_noiser="<%= current_user_id %>">
+                                <span id="cliped_<%= link.id %>" class="clip zmdi zmdi-bookmark-outline"></span>
+                            </a>
+                            <a href="<%= link.url %>" target="_blank">
+                                <img class="link_main_image" src="<%= link.image %>" height="171" alt="">
+                            </a>
+                            <a href="<%= link.url %>" target="_blank">
+                                <div class="user_profile">
+                                    <div class="lv-item">
+                                        <div class="media">
+                                            <div class="pull-left">
+                                                <div class="lv-img-sm bg_img_cover" style="background: url('<%= user.img.nil? ? image_with_sns(user.image.to_s) : user.img %>');" data-pin-nopin="true"></div>
+                                            </div>
+                                            <div class="media-body">
+                                                <div class="lv-title"><%= user.nickname %></div>
+                                                <small class="lv-small"><%= distance_of_time_in_words(link.created_at.to_time, Time.now) %> before</small>
+                                            </div>
+                                            <ul id="actions_<%= link.id %>" class="actions_box">
+                                                <a class="action maum" action_status="<%= mylikes_already ? 'delete' : 'post' %>" action_target="<%= mylikes_already ? mylikes.take.id : link.id %>" action_noiser="<%= current_user_id %>">
+                                                    <span class="zmdi zmdi-favorite<%= '-outline' unless mylikes_already %>"></span> <span class="counter"><%= link.likes.count %></span>
+                                                </a>
+                                                <a class="action viewcount" href="<%= link.url %>" target="_blank">
+                                                    <span class="zmdi zmdi-eye"></span> <span class="counter"><%= visited_count ? visited_count : 0 %></span>
+                                                </a>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                             <ul class="actions actions-alt moreBtn">
                                 <li class="dropdown">
                                     <a href="" data-toggle="dropdown" aria-expanded="false"><i class="zmdi zmdi-more-vert"></i></a>
@@ -40,10 +66,25 @@
                             <h2 class="linkcard-title"><%== link.title %></h2>
                             <small class="linkcard-description"><%== link.description %></small>
                         </a>
-                        <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn bgm-green btn-float waves-effect" style="right: 20px; bottom: -23px;"><i class="zmdi zmdi-share"></i></button>
-                        <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dLabel">
-
-                        </ul>
+                        <div class="dropdown share_box">
+                            <a data-toggle="dropdown" aria-expanded="false" class="btn bgm-green btn-float waves-effect no-vl" style="right: 20px; bottom: -23px;"><i class="zmdi zmdi-share"></i></a>
+                            <ul class="dropdown-menu pull-right no-vl go-social">
+                                <li role="presentation" class="dropdown-header">share this contents!</li>
+                                <li class="sns_share card-body clearfix">
+                                    <a class="col-xs-4" href=""><img src="/template/img/social/facebook-128.png" class="img-responsive" alt=""></a>
+                                    <a class="col-xs-4" href=""><img src="/template/img/social/twitter-128.png" class="img-responsive" alt=""></a>
+                                    <a class="col-xs-4" href=""><img src="/template/img/social/googleplus-128.png" class="img-responsive" alt=""></a>
+                                </li>
+                                <li class="divider"></li>
+                                <li class="clipboarding">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="zmdi zmdi-globe"></i></span>
+                                        <div id="text_url_<%= link.id %>" type="text" class="form-control fc-alt" aria-label="Amount (to the nearest dollar)"><%= link.url %></div>
+                                        <span target="<%= link.id %>" data-clipboard-target="#text_url_<%= link.id %>" class="input-group-addon url_copy"><i class="zmdi zmdi-copy"></i></span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
 
                     <a href="<%= link.url %>" target="_blank">

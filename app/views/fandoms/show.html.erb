@@ -13,12 +13,27 @@
     <div class="carousel-inner" role="listbox">
         <div class="item active">
             <div class="carousel-img" style="background-image: url('<%= @fandom.background_img %>'); background-attachment: fixed;"></div>
-            <div class="carousel-caption">
+            <div class="carousel-caption dropdown">
                 <a href="" class="btn btn-default waves-effect waves-circle waves-float"><span class="zmdi zmdi-trending-up"></span></a>
                 <a id="channel_<%= @fandom.id %>" onclick="followBtn('<%= @follow_control[:follow_cmd] %>', <%= @follow_control[:myfandom_id] %>, <%= @follow_control[:channel_id] %>, <%= @follow_control[:user_id] %>, 'no-text')" class="btn btn-default waves-effect waves-circle waves-float">
                     <span class="zmdi zmdi-favorite<%= '-outline' unless is_my_fandom?(fandom: @fandom, user: current_user) %> <%= 'c-pink' if is_my_fandom?(fandom: @fandom, user: current_user) %>"></span>
                 </a>
-                <a href="" class="btn btn-default waves-effect waves-circle waves-float"><span class="zmdi zmdi-share"></span></a>
+                <a href="" id="Pshare-dd" data-toggle="dropdown" aria-expanded="false" class="btn btn-default waves-effect waves-circle waves-float dropdown-toggle"><span class="zmdi zmdi-share"></span></a>
+                <ul id="Pshare-dd-menu" class="dropdown-menu no-vl go-social" role="menu" aria-labelledby="Pshare-dd">
+                    <li class="sns_share card-body clearfix">
+                        <a class="col-xs-4" href=""><img src="/template/img/social/facebook-128.png" class="img-responsive" alt=""></a>
+                        <a class="col-xs-4" href=""><img src="/template/img/social/twitter-128.png" class="img-responsive" alt=""></a>
+                        <a class="col-xs-4" href=""><img src="/template/img/social/googleplus-128.png" class="img-responsive" alt=""></a>
+                    </li>
+                    <li class="divider"></li>
+                    <li class="clipboarding">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="zmdi zmdi-globe"></i></span>
+                            <div id="channel_url_<%= @fandom.id %>" type="text" class="form-control fc-alt" aria-label="Amount (to the nearest dollar)"><%= request.url %></div>
+                            <span target="<%= @fandom.id %>" data-clipboard-target="#channel_url_<%= @fandom.id %>" class="input-group-addon url_copy"><i class="zmdi zmdi-copy"></i></span>
+                        </div>
+                    </li>
+                </ul>
                 <p class="channel_name"><%= @fandom.name %></p>
                 <p class="channel_follow_count">followers <span id="follower_count_<%= @fandom.id %>" class="count"><%= @fandom.user_lists.count %></span></p>
             </div>
@@ -27,6 +42,8 @@
 </div>
 
 <%= render partial: '/layouts/sub_nav', locals: {tabs: @tabs} %>
+
+<%= render partial: '/layouts/toolbar' %>
 
 <%= render partial: '/layouts/link_section' %>
 

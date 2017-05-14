@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    $('.no-waves').removeClass('waves-effect');
 
     //
     // 상단 네비게이션 전환
@@ -34,7 +35,9 @@ $(document).ready(function () {
 
     //
     // 링크 방문시 나의 방문 링크 기록으로 카운팅
-    $('.link_wrapping_anchor').click(function () {
+    $('.link_wrapping_anchor.no-mute').click(function () {
+        console.log('.link_wrapping_anchor clicked!!');
+        // alert('.link_wrapping_anchor clicked!!');
         var id = $(this).attr('id');
         var user_id = $(this).attr('noiser');
         id = id.replace('link_','');
@@ -81,6 +84,135 @@ $(document).ready(function () {
         name_lenght_counter.text(str.length);
     });
 
+
+    //
+    // 링크 카드 Like 기능
+    $('.actions_box .maum').click(function (event) {
+        var btn     = $(this);
+        var user_id = $(this).attr('action_noiser');
+        var target_id = $(this).attr('action_target');
+        var method  = $(this).attr('action_status');
+        var url     = '';
+
+        if (user_id !== '0'){
+            if (method === 'post'){
+                url += '/action/likes.json'
+            } else if (method === 'delete'){
+                url += '/action/likes/'+target_id+'.json'
+            }
+
+            var req = $.ajax({
+                url: url,
+                method: method,
+                data: {
+                    like: {
+                        user_id: user_id,
+                        link_id: target_id
+                    },
+                    authenticity_token: _hf_
+                }
+            });
+
+            req.done(function (result) {
+                console.log(result);
+                var icon = $('#actions_'+result.data.link_id+' .maum span.zmdi');
+                var counter = $('#actions_'+result.data.link_id+' .maum span.counter');
+
+                if (result.status === 'created'){
+                    icon.removeClass('zmdi-favorite-outline').addClass('zmdi-favorite');
+                    counter.text(result.count);
+                    btn
+                        .attr('action_status', 'delete')
+                        .attr('action_target', result.data.id);
+
+                } else if (result.status === 'deleted'){
+                    icon.removeClass('zmdi-favorite').addClass('zmdi-favorite-outline');
+                    counter.text(result.count);
+                    btn
+                        .attr('action_status', 'post')
+                        .attr('action_target', result.data.link_id);
+                }
+            });
+
+            req.fail(function (result) { console.log('failed'); alert(result.responseText) })
+
+        } else {
+            alert('you should login to use like button')
+        }
+
+        event.stopPropagation();
+    });
+
+
+    //
+    // 링크 카드 Clip 기능
+    $('.clip_btn').click(function (event) {
+        var btn = $(this);
+        var user_id = $(this).attr('action_noiser');
+        var target_id = $(this).attr('action_target');
+        var method  = $(this).attr('action_status');
+        var url     = '';
+
+        if (user_id !== '0'){
+            if (method === 'post'){
+                url += '/action/clips.json'
+            } else if (method === 'delete'){
+                url += '/action/clips/'+target_id+'.json'
+            }
+
+            var req = $.ajax({
+                url: url,
+                method: method,
+                data: {
+                    clip: {
+                        user_id: user_id,
+                        link_id: target_id
+                    },
+                    authenticity_token: _hf_
+                }
+            });
+
+            req.done(function (result) {
+                console.log(result);
+                var grand = $('#link_'+result.data.link_id);
+
+                if (result.status === 'created'){
+                    grand.addClass('clipped');
+                    btn
+                        .attr('action_status', 'delete')
+                        .attr('action_target', result.data.id);
+
+                } else if (result.status === 'deleted'){
+                    grand.removeClass('clipped');
+                    btn
+                        .attr('action_status', 'post')
+                        .attr('action_target', result.data.link_id);
+                }
+            });
+
+            req.fail(function (result) { console.log('failed'); alert(result.responseText) })
+
+        }
+
+        event.stopPropagation()
+    });
+
+    //
+    // 공유 주소 복사 했을 때, 툴팁 띄우기.
+    $('.url_copy').click(function () {
+        $(this).addClass('hf-tooltip');
+        $(this).hover(function () {
+            $(this).removeClass('hf-tooltip');
+        });
+    });
+
+    //
+    // 의도치 않은 방문기록 방지
+    $('.no-vl').hover(function () {
+        $('.link_wrapping_anchor').removeClass('no-mute');
+    }, function () {
+        $('.link_wrapping_anchor').addClass('no-mute');
+    })
 });
 
 function gogo_crawler() {
