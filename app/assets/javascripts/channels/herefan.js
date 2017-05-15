@@ -8,7 +8,7 @@ $(document).ready(function () {
     $('.no-waves').removeClass('waves-effect');
 
     // 2. 부드러운 스크롤
-    $('body').smoothWheel();
+    // $('body:not(.modal-open)').smoothWheel();
 
     //
     // 상단 네비게이션 전환
