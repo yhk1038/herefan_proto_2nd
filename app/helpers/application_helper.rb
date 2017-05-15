@@ -8,15 +8,29 @@ module ApplicationHelper
     end
     
     def app_domain
-        'http://13.124.91.0'
+        'http://test.herefan.com'
+    end
+    
+    def app_fandom
+        'Planet'
+        # 'Cloud'
+        # 'Stream'
+        # 'Wave'
     end
     
     def app_config
         app_config_info = {}
-        app_config_info[:title]         = app_title
-        app_config_info[:description]   = app_description
-        app_config_info[:url]           = app_domain
-        app_config_info[:image]         = app_domain + '/svg/facebook_send.png'
+
+        if @fandom
+            app_config_info[:title]         = "#{@fandom.name} with #{app_title}"
+            app_config_info[:description]   = "Welcome to #{@fandom.name} #{app_fandom}!!"
+            app_config_info[:url]           = "#{app_domain}/fandoms/#{@fandom.id}"
+            app_config_info[:image]         = "#{@fandom.profile_img}"
+        end
+        app_config_info[:title]         ||= app_title
+        app_config_info[:description]   ||= app_description
+        app_config_info[:url]           ||= app_domain
+        app_config_info[:image]         ||= app_domain + '/svg/facebook_send.png'
         
         return app_config_info
     end
