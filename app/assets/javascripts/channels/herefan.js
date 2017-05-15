@@ -1,4 +1,5 @@
 //= require ./lib/smoothwheel.js
+//= require ./feature/toolbar.js
 
 $(document).ready(function () {
 

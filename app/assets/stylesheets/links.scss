@@ -80,11 +80,7 @@
   }
 }
 
-//.task:hover {
-//  .link_main_image:before{
-//
-//  }
-//}
+
 .clip_btn{
   cursor: pointer;
 }
@@ -108,11 +104,14 @@
   }
 }
 
-.clipped{
+//
+// 클립으로 저장한 경우
+// 라이브러리 링크 스타일
+.blog-post.clipped{
   .clip{
     display: block;
     color: rgb(255, 235, 59);
-    text-shadow: 0px 2px 5px rgba(0,0,0, 0.5);
+    text-shadow: 0 2px 5px rgba(0,0,0, 0.5);
 
     &:before{
       content: '\f11e';
@@ -297,4 +296,80 @@
       }
     }
   }
+}
+
+//
+// 방문한 적이 있는
+// 라이브러리 링크 스타일
+.blog-post:not(.visited):after{
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 0;
+  bottom: 0;
+  width: 7px;
+  height: auto;
+  background-color: #f44336;
+}
+.blog-post.visited{
+  //border-left: 5px solid #3a87ad !important;
+
+  .bp-title{
+    //background: #607d8b !important;
+    background: #4083c5;
+
+    & > .linkcard-title,
+    & > .linkcard-description {
+      opacity: 0.7;
+    }
+  }
+}
+
+
+//
+// 필터링 관련.
+// 링크 타입에 따른 스타일
+//.blog-post.type-3,
+.blog-post.type-2,
+.blog-post.type-1{
+  &:before {
+    position: absolute;
+    top: 0;
+    left: -1px;
+
+    display: inline-block;
+    font: normal normal normal 14px/1 'Material-Design-Iconic-Font';
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    font-size: 25px;
+    z-index: 1;
+
+    background: #edecec;
+    width: 40px;
+    text-align: right;
+    height: 34px;
+    padding: 5px;
+    box-shadow: 3px 3px 3px #6d6d6d;
+  }
+
+  &:not(.visited):after{
+    top: 33px !important;
+  }
+}
+
+.blog-post.type-1:before{
+  content: '\f28c';
+  color: #3f51b5;
+}
+
+.blog-post.type-2:before{
+  content: '\f2db';
+  color: #f44336;
+}
+
+.blog-post.type-3:before{
+  //content: '\f28c';
+  //color: #24e5f3;
 }

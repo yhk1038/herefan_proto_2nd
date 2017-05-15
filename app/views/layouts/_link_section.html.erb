@@ -12,11 +12,14 @@
                 mylikes = Like.where(link: link, user_id: current_user_id)
                 mylikes_already = mylikes.count.zero? ? false : true
 
+                myvisites = VisitedLink.where(link: link, user_id: current_user_id)
+                myvisites_already = myvisites.count.zero? ? false : true
+
                 visited_count = link.visited_links.pluck(:viewcount).inject(:+)
             %>
             <!--col-md-4 col-sm-3 col-xs-6-->
             <div class="task">
-                <div id="link_<%= link.id %>" noiser="<%= current_user_id %>" class="card blog-post link_wrapping_anchor no-mute <%= 'usi' if user_signed_in? %> <%= 'clipped' if myclips_already %>">
+                <div id="link_<%= link.id %>" noiser="<%= current_user_id %>" class="card blog-post link_wrapping_anchor no-mute <%= 'usi' if user_signed_in? %> <%= 'clipped' if myclips_already %> <%= 'visited' if myvisites_already %> <%= "type-#{(1..3).to_a.sample}" %>">
                     <div class="bp-header">
                         <a href="<%= link.url %>" target="_blank">
                             <a class="clip_btn" action_status="<%= myclips_already ? 'delete' : 'post' %>" action_target="<%= myclips_already ? myclips.take.id : link.id %>" action_noiser="<%= current_user_id %>">
