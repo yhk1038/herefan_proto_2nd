@@ -115,8 +115,8 @@ section#channels {
   &.carousel { padding: initial; }
   .carousel-inner .carousel-img {
     background-color: rgb(113, 94, 62);
-    background-size: contain !important;
-    background-position-y: center !important;
+    background-size: auto 350px !important;
+    background-position-y: 0 !important;
 
     &:before {
       content: '';

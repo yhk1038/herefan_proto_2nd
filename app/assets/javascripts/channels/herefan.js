@@ -1,5 +1,14 @@
+//= require ./lib/smoothwheel.js
+
 $(document).ready(function () {
+
+    //
+    // 초기 설정 그룹
+    // 1. 웨이브 효과 없애기
     $('.no-waves').removeClass('waves-effect');
+
+    // 2. 부드러운 스크롤
+    $('body').smoothWheel();
 
     //
     // 상단 네비게이션 전환
