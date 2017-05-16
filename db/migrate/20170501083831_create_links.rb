@@ -3,7 +3,7 @@ class CreateLinks < ActiveRecord::Migration[5.0]
     create_table :links do |t|
       t.references :user, foreign_key: true
       t.references :fandom, foreign_key: true
-      t.integer :type
+      t.integer :type   # 1: photo / 2: video / 3: others
       t.string :url
       t.string :title
       t.string :description

@@ -18,6 +18,10 @@ Rails.application.routes.draw do
         resources :clips, path: '/action/clips'
     end
     
+    scope module: :planet do
+        resources :schedules, path: '/planet/schedules'
+    end
+    
     root 'home#go_for'
     
     # home

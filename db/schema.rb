@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170514173232) do
+ActiveRecord::Schema.define(version: 20170516005442) do
 
   create_table "clips", force: :cascade do |t|
     t.integer  "user_id"
@@ -48,8 +48,9 @@ ActiveRecord::Schema.define(version: 20170514173232) do
     t.string   "description"
     t.string   "message"
     t.string   "image"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "typee",       default: 0, null: false
     t.index ["fandom_id"], name: "index_links_on_fandom_id"
     t.index ["user_id"], name: "index_links_on_user_id"
   end
@@ -61,6 +62,20 @@ ActiveRecord::Schema.define(version: 20170514173232) do
     t.datetime "updated_at", null: false
     t.index ["fandom_id"], name: "index_myfandoms_on_fandom_id"
     t.index ["user_id"], name: "index_myfandoms_on_user_id"
+  end
+
+  create_table "schedules", force: :cascade do |t|
+    t.integer  "fandom_id"
+    t.string   "category"
+    t.string   "title"
+    t.text     "content"
+    t.datetime "event_start"
+    t.datetime "event_end"
+    t.string   "url"
+    t.string   "class_name"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["fandom_id"], name: "index_schedules_on_fandom_id"
   end
 
   create_table "users", force: :cascade do |t|

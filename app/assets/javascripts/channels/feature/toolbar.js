@@ -77,3 +77,11 @@ function fadeInByFilteringType(type) {
         .fadeIn()
         .parent('.task').toggle(true);
 }
+
+
+//
+// Sorting Functions
+
+// function sortDefault() {
+//
+// }
