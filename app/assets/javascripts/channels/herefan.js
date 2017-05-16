@@ -67,6 +67,16 @@ $(document).ready(function () {
 
 
     //
+    // 링크 업로드 시 typee 필드를
+    // form tag 안쪽의 hidden field로 옮겨주는 함수
+    $('.radio-link_typee').click(function () {
+        var value = $(this).attr('vc');
+        console.log(value);
+        $('#link_typee').attr('value',value);
+    });
+
+
+    //
     // 회원 정보 수정 페이지 글자수 트래커
     // 닉네임 필드
     var nickname_input          = $('#checkNickNameLength_from');
@@ -222,7 +232,7 @@ $(document).ready(function () {
         $('.link_wrapping_anchor').removeClass('no-mute');
     }, function () {
         $('.link_wrapping_anchor').addClass('no-mute');
-    })
+    });
 });
 
 function gogo_crawler() {

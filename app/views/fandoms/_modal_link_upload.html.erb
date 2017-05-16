@@ -11,18 +11,18 @@
                         <i class="zmdi zmdi-label" style="top: 3px; font-size: 22px;"></i> TYPE
                     </span>
                     <div class="fg-line" style="top: 5px; text-align: center; font-size: 15px; width: 110%; margin-left: -4%;">
-                        <label class="radio radio-inline m-r-5">
-                            <input type="radio" name="sort_option" value="1" checked="">
+                        <label vc="1" class="radio radio-inline m-r-5 radio-link_typee">
+                            <input type="radio" name="link[typee]" value="1" checked="">
                             <i class="input-helper"></i>
                             <span class="label_text">PHOTOs or GIFs</span>
                         </label>
-                        <label class="radio radio-inline m-r-5 m-l-5">
-                            <input type="radio" name="sort_option" value="2">
+                        <label vc="2" class="radio radio-inline m-r-5 m-l-5 radio-link_typee">
+                            <input type="radio" name="link[typee]" value="2">
                             <i class="input-helper"></i>
                             <span class="label_text">VIDEO or CAST</span>
                         </label>
-                        <label class="radio radio-inline m-l-5">
-                            <input type="radio" name="sort_option" value="3">
+                        <label vc="3" class="radio radio-inline m-l-5 radio-link_typee">
+                            <input type="radio" name="link[typee]" value="3">
                             <i class="input-helper"></i>
                             <span class="label_text">ARTICLE or PAGE</span>
                         </label>
@@ -60,7 +60,7 @@
                 <div class="modal-footer">
                     <input type="hidden" id="link_user_id" name="link[user_id]" value="<%= current_user.id %>">
                     <input type="hidden" id="link_fandom_id" name="link[fandom_id]" value="<%= @fandom.id %>">
-                    <input type="hidden" id="link_type" name="link[type]" value="1">
+                    <input type="hidden" id="link_typee" name="link[typee]" value="1">
                     <input type="hidden" id="link_urls" name="link[url]">
                     <input type="hidden" id="link_title" name="link[title]">
                     <input type="hidden" id="link_description" name="link[description]">
