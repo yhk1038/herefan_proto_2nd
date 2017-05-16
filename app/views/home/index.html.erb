@@ -63,6 +63,8 @@
 
 <%= render partial: '/layouts/sub_nav', locals: {tabs: @tabs} %>
 
+<%= render partial: '/layouts/toolbar' %>
+
 <% if user_signed_in? %>
     <% if @fandoms.count.zero? %>
         <section style="text-align: center">

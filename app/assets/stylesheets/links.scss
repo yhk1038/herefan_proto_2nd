@@ -334,8 +334,8 @@
 .blog-post.type-1{
   &:before {
     position: absolute;
-    top: 0;
-    left: -1px;
+    top: -1px;
+    left: -2px;
 
     display: inline-block;
     font: normal normal normal 14px/1 'Material-Design-Iconic-Font';

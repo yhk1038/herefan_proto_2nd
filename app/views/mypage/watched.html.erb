@@ -2,6 +2,8 @@
 
 <%= render partial: '/layouts/sub_nav', locals: {tabs: @tabs} %>
 
+<%= render partial: '/layouts/toolbar' %>
+
 <% if !@links.count.zero? %>
     <%= render partial: '/layouts/link_section' %>
 <% else %>
