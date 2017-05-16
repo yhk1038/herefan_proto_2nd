@@ -6,6 +6,12 @@ class HfUtilController < ApplicationController
     #
     # GET 'hf_util/user_must_have_unique_myfandom/:id'
     def user_must_have_unique_myfandom
+        
+        ## 꼽사리 잠깐 낄께요 ~
+        check_and_modify_record_value_for_error_fix
+        ## 꼽사리 끝 ~
+        
+        
         me = User.find(params[:id])
         myfandoms = me.myfandoms
         count = myfandoms.count
@@ -61,5 +67,16 @@ class HfUtilController < ApplicationController
             end
             format.json { render json: @report }
         end
+    end
+    
+    
+    # 임시 함수
+    # 데이터베이스에 콘솔을 통해 접근할 수 없고,
+    # 스키마 상의 에러에 의해 작업물 변경이 요구되어 만들게 됨.
+    #
+    # 다음 함수로 부터 호출되도록 만들어짐.
+    # 5:7 'hf_util/user_must_have_unique_myfandom/:id'
+    def check_and_modify_record_value_for_error_fix
+        Link.update_all(type: nil)
     end
 end
