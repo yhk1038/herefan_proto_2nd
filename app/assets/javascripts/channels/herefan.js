@@ -1,5 +1,5 @@
 //= require ./lib/smoothwheel.js
-//= require ./feature/toolbar.js
+//= require_tree ./feature/.
 
 $(document).ready(function () {
 

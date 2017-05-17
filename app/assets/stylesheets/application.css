@@ -851,8 +851,10 @@ hr.hf-hr{
 
 
 .hf-logo {
-    background: url('/svg/main_logo.svg'), no-repeat, center;
+    background-image: url('/svg/main_logo.svg');
     background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .force_center{

@@ -13,4 +13,21 @@ class ApplicationController < ActionController::Base
     def my_published_fandoms
         @my_published_fandoms = current_user.fandoms.published if user_signed_in?
     end
+    
+    def set_for_fandom_show_template_data
+        redirect_to root_path unless @fandom.published
+    
+        @links = @fandom.links
+        @my_fandom = user_signed_in? ? current_user.myfandoms.where(fandom_id: @fandom.id) : []
+    
+        # 팔로우 버튼 토글 전용 키값 해시 데이터
+        @follow_control = { follow_cmd: '', myfandom_id: 0, channel_id: '', user_id: '' }
+
+        # Tab Group for each planet view
+        @tabs = []
+        @tabs << { name: 'wiki', path: '', active: '' }
+        @tabs << { name: 'history', path: '', active: '' }
+        @tabs << { name: 'library', path: "/fandoms/#{@fandom.id}", active: '' }
+        @tabs << { name: 'schedule', path: "/fandoms/#{@fandom.id}/schedules", active: '' }
+    end
 end

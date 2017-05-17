@@ -1,7 +1,6 @@
 class FandomsController < ApplicationController
     include FandomsHelper
     before_action :set_fandom, only: [:show, :edit, :update, :destroy]
-    before_action :filling_tab_group, only: [:show]
     before_action :my_published_fandoms
     
     # GET /fandoms
@@ -15,20 +14,15 @@ class FandomsController < ApplicationController
     # GET /fandoms/1
     # GET /fandoms/1.json
     def show
-        redirect_to root_path unless @fandom.published
-        
-        @links = @fandom.links
-        @my_fandom = user_signed_in? ? current_user.myfandoms.where(fandom_id: @fandom.id) : []
-        
-        # 팔로우 버튼 토글 전용 키값 해시 데이터
-        @follow_control = { follow_cmd: '', myfandom_id: 0, channel_id: '', user_id: '' }
+        set_for_fandom_show_template_data
+        @tabs[2][:active] = 'active'
+
         if user_signed_in?
             @follow_control[:follow_cmd]    = is_my_fandom?(user: current_user, fandom: @fandom) ? 'cancel' : 'follow'
             @follow_control[:myfandom_id]   = @my_fandom.take.nil? ? 0 : @my_fandom.take.id
             @follow_control[:channel_id]    = @fandom.id
             @follow_control[:user_id]       = current_user.id
         end
-        
     end
     
     # GET /fandoms/new
@@ -90,13 +84,5 @@ class FandomsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def fandom_params
         params.require(:fandom).permit(:name, :profile_img, :background_img)
-    end
-
-    def filling_tab_group
-        @tabs = []
-        @tabs << { name: 'wiki', path: '', active: '' }
-        @tabs << { name: 'history', path: '', active: '' }
-        @tabs << { name: 'library', path: '', active: 'active' }
-        @tabs << { name: 'schedule', path: '', active: '' }
     end
 end

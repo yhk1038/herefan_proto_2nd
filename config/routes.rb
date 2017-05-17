@@ -1,10 +1,6 @@
 Rails.application.routes.draw do
     
-    match 'hf_util/user_must_have_unique_myfandom/:id', to: 'hf_util#user_must_have_unique_myfandom', via: [:get]
-
-    resources :links
-    resources :myfandoms
-    resources :fandoms
+    ## User
     devise_for :users, :controllers => {
             sessions: 'users/sessions',
             registrations: 'users/registrations',
@@ -13,13 +9,18 @@ Rails.application.routes.draw do
             omniauth_callbacks: 'users/omniauth_callbacks'
     }
 
+    resources :myfandoms
+
+    resources :links
+    resources :fandoms do
+        scope module: :planet do
+            resources :schedules
+        end
+    end
+    
     scope module: :action do
         resources :likes, path: '/action/likes'
         resources :clips, path: '/action/clips'
-    end
-    
-    scope module: :planet do
-        resources :schedules, path: '/planet/schedules'
     end
     
     root 'home#go_for'
@@ -57,5 +58,8 @@ Rails.application.routes.draw do
     %w( 404 422 500 ).each do |code|
         get "/#{code}", to: 'errors#show', code: code
     end
+    
+    # Debug
+    match 'hf_util/user_must_have_unique_myfandom/:id', to: 'hf_util#user_must_have_unique_myfandom', via: [:get]
 
 end
