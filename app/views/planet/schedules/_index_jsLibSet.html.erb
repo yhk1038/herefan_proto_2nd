@@ -52,30 +52,33 @@
         console.log(<%== @schedules_for_js.to_json %>);
 
         //Create and ddd Action button with dropdown in Calendar header.
-        var actionMenu = '';
-//        var actionMenu = ''+
-//            '<ul class="actions actions-alt" id="fc-actions">' +
-//            '<li class="dropdown">' +
-//                '<a href="" data-toggle="dropdown"><i class="zmdi zmdi-more-vert"></i></a>' +
-//                '<ul class="dropdown-menu dropdown-menu-right">' +
-//                    '<li class="active">' +
-//                        '<a data-view="month" href="">Month View</a>' +
-//                    '</li>' +
+        <% if user_signed_in? && current_user.admin %>
+        var actionMenu = ''+
+            '<ul class="actions actions-alt" id="fc-actions">' +
+            '<li class="dropdown">' +
+                '<a href="" data-toggle="dropdown"><i class="zmdi zmdi-more-vert"></i></a>' +
+                '<ul class="dropdown-menu dropdown-menu-right">' +
+                    '<li class="active">' +
+                        '<a data-view="month" href="">Month View</a>' +
+                    '</li>' +
 //                    '<li>' +
 //                        '<a data-view="basicWeek" href="">Week View</a>' +
 //                    '</li>' +
-//                    '<li>' +
-//                        '<a data-view="agendaWeek" href="">Agenda Week View</a>' +
-//                    '</li>' +
+                    '<li>' +
+                        '<a data-view="agendaWeek" href="">Agenda Week View</a>' +
+                    '</li>' +
 //                    '<li>' +
 //                        '<a data-view="basicDay" href="">Day View</a>' +
 //                    '</li>' +
-//                    '<li>' +
-//                        '<a data-view="agendaDay" href="">Agenda Day View</a>' +
-//                    '</li>' +
-//                '</ul>' +
-//            '</div>' +
-//            '</li>';
+                    '<li>' +
+                        '<a data-view="agendaDay" href="">Agenda Day View</a>' +
+                    '</li>' +
+                '</ul>' +
+            '</div>' +
+            '</li>';
+        <% else %>
+        var actionMenu = '';
+        <% end %>
 
 
         cId.find('.fc-toolbar').append(actionMenu);
@@ -92,7 +95,13 @@
         $('body').on('click', '#addEvent', function(){
             var eventName = $('#eventName').val();
             var eventContent = $('#eventContent').val();
+            var eventAllDay = true;
             var tagColor = $('.event-tag > span.selected').attr('data-tag');
+            var interval = getIntervalStartToEnd($('#getStart').val(), $('#getEnd').val());
+
+            if (interval !== 1){
+                eventAllDay = false;
+            }
 
             if (eventName != '') {
                 //Render Event
@@ -100,11 +109,11 @@
                     title: eventName,
                     start: $('#getStart').val(),
                     end:  $('#getEnd').val(),
-                    allDay: true,
+                    allDay: eventAllDay,
                     className: tagColor
 
                 },true ); //Stick the event
-                addEventRecord(<%= @fandom.id %>, eventName, $('#getStart').val(), $('#getEnd').val(), true, tagColor, eventContent);
+                addEventRecord(<%= @fandom.id %>, eventName, $('#getStart').val(), $('#getEnd').val(), eventAllDay, tagColor, eventContent);
 
                 $('#addNew-event form')[0].reset();
                 $('#addNew-event').modal('hide');

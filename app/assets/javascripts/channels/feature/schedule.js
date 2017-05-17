@@ -56,12 +56,12 @@ function imgMessanger() {
         var popover_modify = popover.replace('<div class="popover_img"></div>','<div class="popover_img"><img src="'+img_url+'"></div>');
         target.attr('data-template', popover_modify);
 
-        console.log(id);
-        console.log(img_url);
-        console.log(target_id_class);
-        console.log(target);
-        console.log(popover_modify);
-        console.log('/* ====================== */');
+        // console.log(id);
+        // console.log(img_url);
+        // console.log(target_id_class);
+        // console.log(target);
+        // console.log(popover_modify);
+        // console.log('/* ====================== */');
     });
 
 }
@@ -96,4 +96,24 @@ function addEventRecord(fandom_id, e_title, e_start, e_end, e_allDay, e_classNam
         console.log(result.data.title, result.data);
         console.log(result.fandom.name, result.fandom);
     })
+}
+
+
+/*
+ * About Date Parser
+ */
+
+function parseDateFormat(str) {
+    var date = new Date(str);
+    return date
+}
+
+function getIntervalStartToEnd(startD, endD) {
+    var _dateStart  = parseDateFormat(startD);
+    var _dateEnd    = parseDateFormat(endD);
+
+    var interval = _dateEnd.getTime() - _dateStart.getTime();
+    interval = Math.floor(interval / (1000 * 60 * 60 * 24));
+
+    return interval
 }
