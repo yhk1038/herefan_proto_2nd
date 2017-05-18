@@ -38,50 +38,20 @@
                 <% end %>
             </ul>
             <ul class="main-menu">
+                <% lists = nav_menu_lists(version: 'narrow', fandoms: user_signed_in? ? current_user.fandoms.published : nil) %>
+                <% lists.each do |list| %>
+                    <li class="sub-menu <%= list[:li_class] %>">
+                        <a href=""><i class="zmdi <%= list[:icon] %>"></i> <%= list[:name] %></a>
 
-                <!--<li class=""><a href="" style="text-transform: capitalize"><i class="zmdi zmdi-account"></i> my page</a></li>-->
-                <li class="sub-menu">
-                    <a href=""><i class="zmdi zmdi-home"></i> Home</a>
-
-                    <ul>
-                        <li><a href="<%= home_my_path %>">New</a></li>
-                        <li><a href="<%= home_my_path %>">Favorite</a></li>
-                        <li><a href="<%= home_my_path %>">My</a></li>
-                    </ul>
-                </li>
-
-                <% if user_signed_in? %>
-                    <li class="sub-menu active toggled">
-                        <a href=""><i class="zmdi zmdi-menu"></i> Follow List</a>
-                        <% current_user.fandoms.published.each do |fandom| %>
-                            <ul>
-                                <li class="sub-menu">
-                                    <a href=""><%= fandom.name %></a>
-
-                                    <ul>
-                                        <li><a href="<%= fandom_path(fandom) %>" style="padding-left: 175px;">
-                                            <i class="zmdi zmdi-collection-text"></i>
-                                            <span class="pull-right">Wiki</span>
-                                        </a></li>
-                                        <li><a href="<%= fandom_path(fandom) %>" style="padding-left: 175px;">
-                                            <i class="zmdi zmdi-view-list"></i>
-                                            <span class="pull-right">History</span>
-                                        </a></li>
-                                        <li><a href="<%= fandom_path(fandom) %>" style="padding-left: 175px;">
-                                            <i class="zmdi zmdi-widgets"></i>
-                                            <span class="pull-right">Library</span>
-                                        </a></li>
-                                        <li><a href="<%= fandom_path(fandom) %>" style="padding-left: 175px;">
-                                            <i class="zmdi zmdi-calendar"></i>
-                                            <span class="pull-right">Schedule</span>
-                                        </a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        <% end %>
+                        <ul style="<%= list[:ul_style] %>">
+                            <% list[:sub_menu].each do |submenu| %>
+                                <li><a href="<%= submenu[:path] %>"><%= submenu[:name] %></a></li>
+                            <% end %>
+                        </ul>
                     </li>
                 <% end %>
-                <li class="sub-menu">
+
+                <li class="sub-menu" style="display: none;">
                     <a href=""><i class="zmdi zmdi-collection-item"></i> Sample Pages</a>
                     <ul>
 

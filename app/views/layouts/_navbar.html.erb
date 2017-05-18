@@ -9,17 +9,16 @@
         </li>
 
         <li class="logo">
-            <%= link_to 'herefan', root_path, class: '' %>
+            <%= link_to app_title, root_path, class: '' %>
         </li>
 
         <li class="main_menu hidden-xs">
             <ul class="top-menu font-capital">
-                <li class="<%= 'open' if params[:controller] == 'home' %>">
-                    <%= link_to 'home', home_my_path %>
-                </li>
-                <li class="<%= 'open' if params[:controller] == 'fandoms' %>">
-                    <%= link_to 'channel', fandoms_path %>
-                </li>
+                <% nav_menu_lists.each do |menu| %>
+                    <li class="<%= 'open' if params[:controller] == menu[:controller] %>">
+                        <%= link_to menu[:name], menu[:path] %>
+                    </li>
+                <% end %>
             </ul>
         </li>
 
