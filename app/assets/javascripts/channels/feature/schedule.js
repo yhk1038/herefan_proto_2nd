@@ -24,12 +24,14 @@ function setPopOverIntoEachSchedule() {
         .attr('data-template', popOverDom())
         .attr('data-container','body');
 
+    deleteBtnFiller();
     imgMessanger();
     schedule.popover();
 }
 
 
 function popOverDom() {
+    var admin = $('#wrap-status').attr('class').split(' ').indexOf('admin');
     var html = ''+
             '<div class="popover" role="tooltip">' +
                 '<span class="zmdi zmdi-close"></span>' +
@@ -37,36 +39,100 @@ function popOverDom() {
                 '<h3 class="popover-title"></h3>' +
                 '<div class="popover-content"></div>' +
                 '<div class="popover_img"></div>' +
+                '<div class="popover_actions"></div>' +
             '</div>';
     return html
 }
 
-function imgMessanger() {
+/*
+ * 팝 오버 액션의 Html 포멧. / 관리자일 때만 유효.
+ */
+function adminPopOverActions(fandom_id, id) {
+    var admin = $('#wrap-status').attr('class').split(' ').indexOf('admin');
+    var actionsDom = '';
+    if (admin !== -1) {
+        actionsDom =
+            '<a href="/admin/schedule/'+ id +'/edit" class="btn btn-default btn-info btn-xs" target="_blank">Edit</a>' +
+            '<a href="#" class="delete_schedule btn btn-default btn-danger btn-xs" onclick="delete_schedule('+fandom_id+', '+id+'); return false;">Delete</a>'
+    }
+
+    return actionsDom
+}
+
+/*
+ * 팝 오버 액션 Ajax request : Delete
+ */
+function delete_schedule(fandom_id, schedule_id) {
+    if (fandom_id && schedule_id) {
+        $.ajax({
+            url: '/fandoms/'+ fandom_id +'/schedules/'+schedule_id+'.json',
+            method: 'delete',
+            data: {
+                authenticity_token: _hf_
+            }
+        }).done(function (result) {
+            console.log('delete request called');
+            if (result.status === 'deleted'){
+                console.log('result status: deleted');
+                $('.schedule-hf-'+result.data.id).hide();
+            }
+        })
+    }
+}
+
+/*
+ * 팜 오버 액션 채우기. delete 만 가능
+ */
+function deleteBtnFiller() {
     var dataWrap = $('#dataImgSet');
     var img_scdls = dataWrap.children('span');
     $.each(img_scdls, function (i, img_scdl) {
         img_scdl = img_scdls.get(i);
         var id = img_scdl.id;
-        console.log(id);
-
-        var img_url = img_scdl.innerHTML;
-        console.log(img_url);
+        var schedule_id = id.split('-')[1];
+        var fandom_id = $('#'+id).attr('fandom_id');
+        // console.log(schedule_id, fandom_id);
 
         var target_id_class = id.replace('schedule_image-','schedule-hf-');
         var target = $('.'+target_id_class);
 
         var popover = target.attr('data-template');
 
-        console.log(popover);
+        // console.log(popover);
+        var popover_modify = popover.replace('<div class="popover_actions"></div>', '<div class="popover_actions">'+ adminPopOverActions(fandom_id, schedule_id) +'</div>');
+        target.attr('data-template', popover_modify);
+
+        // console.log(id);
+        // console.log('/* =====delete================= */');
+    });
+
+}
+
+/*
+ * 팝오버 이미지 채우기.
+ */
+function imgMessanger() {
+    var dataWrap = $('#dataImgSet');
+    var img_scdls = dataWrap.children('span');
+    $.each(img_scdls, function (i, img_scdl) {
+        img_scdl = img_scdls.get(i);
+        var id = img_scdl.id;
+        // console.log(id);
+
+        var img_url = img_scdl.innerHTML;
+        // console.log(img_url);
+
+        var target_id_class = id.replace('schedule_image-','schedule-hf-');
+        var target = $('.'+target_id_class);
+
+        var popover = target.attr('data-template');
+
+        // console.log(popover);
         var popover_modify = popover.replace('<div class="popover_img"></div>','<div class="popover_img"><img src="'+img_url+'"></div>');
         target.attr('data-template', popover_modify);
 
-        console.log(id);
-        // console.log(img_url);
-        // console.log(target_id_class);
-        // console.log(target);
-        // console.log(popover_modify);
-        console.log('/* ====================== */');
+        // console.log(id);
+        // console.log('/* ====================== */');
     });
 
 }

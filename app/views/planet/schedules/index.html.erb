@@ -7,7 +7,7 @@
     <div class="container c-alt">
 
         <div class="col-md-1"></div>
-        <div class="col-md-10">
+        <div id="wrap-status" class="col-md-10 <%= 'session-up' if user_signed_in? %> <%= 'admin' if user_signed_in? && current_user.admin %>">
             <style>
                 #calendar .fc-toolbar{
                     background-image: url(<%== find_celandar_header_image(@schedules) %>) !important;
@@ -76,45 +76,7 @@
 </section>
 <div id="dataImgSet">
     <% @schedules.each do |schedule| %>
-        <span id="schedule_image-<%= schedule.id %>"><%= schedule.content %></span>
+        <span id="schedule_image-<%= schedule.id %>" fandom_id="<%= @fandom.id %>"><%= schedule.content %></span>
     <% end %>
 </div>
 <!--</section>-->
-
-<div style="display: none;">
-    <table style="display: none;">
-        <thead>
-        <tr>
-            <th>Fandom</th>
-            <th>Category</th>
-            <th>Title</th>
-            <th>Content</th>
-            <th>Event start</th>
-            <th>Event end</th>
-            <th>Url</th>
-            <th>Class name</th>
-            <th colspan="3"></th>
-        </tr>
-        </thead>
-
-        <tbody>
-        <%# @schedules.each do |schedule| %>
-        <tr>
-            <td><%#= schedule.fandom %></td>
-            <td><%#= schedule.category %></td>
-            <td><%#= schedule.title %></td>
-            <td><%#= schedule.content %></td>
-            <td><%#= schedule.event_start %></td>
-            <td><%#= schedule.event_end %></td>
-            <td><%#= schedule.url %></td>
-            <td><%#= schedule.class_name %></td>
-            <td><%#= link_to 'Show', schedule %></td>
-            <td><%#= link_to 'Edit', edit_fandom_schedule_path(schedule) %></td>
-            <td><%#= link_to 'Destroy', schedule, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-        <%# end %>
-        </tbody>
-    </table>
-    <br>
-    <%#= link_to 'New Schedule', new_fandom_schedule_path %>
-</div>

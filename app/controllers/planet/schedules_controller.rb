@@ -92,7 +92,8 @@ class Planet::SchedulesController < ApplicationController
         @schedule.destroy
         respond_to do |format|
             format.html { redirect_to schedules_url, notice: 'Schedule was successfully destroyed.' }
-            format.json { head :no_content }
+            # format.json { head :no_content }
+            format.json { return render json: { data: @schedule, status: 'deleted'} }
         end
     end
     
