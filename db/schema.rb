@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170516005442) do
+ActiveRecord::Schema.define(version: 20170522041651) do
 
   create_table "clips", force: :cascade do |t|
     t.integer  "user_id"
@@ -114,6 +114,16 @@ ActiveRecord::Schema.define(version: 20170516005442) do
     t.datetime "updated_at", null: false
     t.index ["link_id"], name: "index_visited_links_on_link_id"
     t.index ["user_id"], name: "index_visited_links_on_user_id"
+  end
+
+  create_table "wikis", force: :cascade do |t|
+    t.integer  "fandom_id"
+    t.integer  "wiki_id"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fandom_id"], name: "index_wikis_on_fandom_id"
+    t.index ["wiki_id"], name: "index_wikis_on_wiki_id"
   end
 
 end

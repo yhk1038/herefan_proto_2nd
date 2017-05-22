@@ -1,0 +1,146 @@
+<%= render partial: '/fandoms/partials/planet_header' %>
+
+<%= render partial: '/layouts/sub_nav', locals: {tabs: @tabs} %>
+
+<% sections = %w(summary member member) %>
+
+<section id="wiki-ground">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-md-push-9 m-t-30">
+                <div id="language_control-box" class="card">
+                    <div class="card-body">
+                        <ul>
+                            <li class="active">english</li>
+                            <li>spanish</li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="contents_widget-box" class="card">
+                    <div class="card-header">
+                        <h2>contents</h2>
+                    </div>
+                    <div class="card-body card-padding">
+                        <ul><%= @wiki.name %>
+                            <ol>official sites</ol>
+                            <ol>members</ol>
+                            <% i=1; sections.each do |section| %>
+                                <ol><a href="#main-section-<%= i %>"><%= section %></a></ol>
+                            <% i+=1; end %>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9 col-md-pull-3">
+                <div id="main_contents-box" class="card">
+                    <div class="card-body card-padding">
+
+                        <!-- Main title -->
+                        <h1 id="main-title"><%= @wiki.name %></h1>
+
+                        <!-- Main image -->
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-6">
+                                <img id="main-img" src="http://mimgnews1.naver.net/image/311/2016/01/24/1453595875396_99_20160124094104.png" alt="<%= @wiki.name %> 사진">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+
+                        <!-- Main information -->
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-10 table-responsive">
+                                <table id="main-information" class="table table-bordered table-hover">
+                                    <tbody>
+                                    <tr>
+                                        <td>agency</td>
+                                        <td>1-1</td>
+                                        <td>1-비고</td>
+                                    </tr>
+                                    <tr>
+                                        <td>distributor</td>
+                                        <td>2-1</td>
+                                        <td>2-비고</td>
+                                    </tr>
+                                    <tr>
+                                        <td>debut</td>
+                                        <td><%= Faker::Lorem.paragraphs(3).join(' ') %></td>
+                                        <td>3-비고</td>
+                                    </tr>
+                                    <tr>
+                                        <td>fandom</td>
+                                        <td>boddy</td>
+                                        <td>3-비고</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+
+                        <!-- Main official-site -->
+                        <div class="row">
+                            <div id="main-official-sites" class="col-md-12 wrap-box">
+                                <h2 class="sub_title">official sites</h2>
+                                <ul class="site-info">
+                                    <% %w(hompage youtube twitter instagram vlive).each do |site| %>
+                                        <li>
+                                            <a class="member-link" href="#" onclick="return false;"><%= site %></a>
+                                        </li>
+                                    <% end %>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Main members-info -->
+                        <div class="row">
+                            <div id="main-members-info" class="col-md-12 wrap-box">
+                                <h2 class="sub_title">members</h2>
+                                <% @sub_wikis.each do |member_wiki| %>
+                                    <div class="col-sm-2 col-xs-3">
+                                        <ul class="member-thumbnail">
+                                            <li>
+                                                <img src="https://cdn.namuwikiusercontent.com/4f/4f829d37d93e3e91b3bc57dc69ae33854708a0b22acc7b0297929bedf1f403c3.jpg?e=1498567954&k=tj6niBbw_0AmXEEbJlc7WQ" alt="<%= member_wiki.name %> image">
+                                            </li>
+                                            <li>
+                                                <a class="member-link" href="#" onclick="return false;"><%= member_wiki.name %></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                <% end %>
+                            </div>
+                        </div>
+
+                        <!-- Main sections -->
+                        <% i=1; sections.each do |section| %>
+                            <div class="row">
+                                <div id="main-section-<%= i %>" class="col-md-12 wrap-box wiki-section">
+                                    <h2 class="sub_title"><%= section %>
+                                        <a href="#" class="btn btn-default pull-right feature feature-logs c-cyan" onclick="return false;">logs</a>
+                                        <a href="#" class="btn btn-default pull-right feature feature-edit c-cyan" onclick="return false;">edit</a>
+                                    </h2>
+                                    <div class="section-contents">
+                                        <%== Faker::Lorem.paragraphs(15).join('<br>') %>
+                                    </div>
+                                </div>
+                            </div>
+                        <% i+=1; end %>
+
+                        <!-- Main Clearfix -->
+                        <div class="row">
+                            <h1 id="main-clearfix"></h1>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .border{
+        border: 1px solid #000000;
+    }
+</style>

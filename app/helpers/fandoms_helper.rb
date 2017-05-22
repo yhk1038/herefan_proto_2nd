@@ -25,4 +25,9 @@ module FandomsHelper
         
         fandom.get_myfandom(user)
     end
+    
+    private
+    def set_fandom
+        @fandom = Fandom.find(params[:fandom_id])
+    end
 end

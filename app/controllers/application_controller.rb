@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
 
         # Tab Group for each planet view
         @tabs = []
-        @tabs << { name: 'wiki', path: '', active: '' }
+        @tabs << { name: 'wiki', path: "/fandoms/#{@fandom.id}/wikis", active: '' }
         @tabs << { name: 'history', path: '', active: '' }
         @tabs << { name: 'library', path: "/fandoms/#{@fandom.id}", active: '' }
         @tabs << { name: 'schedule', path: "/fandoms/#{@fandom.id}/schedules", active: '' }

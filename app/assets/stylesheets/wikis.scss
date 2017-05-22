@@ -1,0 +1,228 @@
+// Place all the styles related to the wikis controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+//
+//  언어 설정 위젯
+//
+#language_control-box{
+  width: 70%;
+
+  ul{
+    padding: 0;
+    list-style: none;
+    border: 1px solid #B3B3B3;
+    border-top: none;
+
+    li{
+      padding: 12px 15px;
+      text-align: center;
+      border-top: 1px solid #B3B3B3;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+
+      &.active{
+        background-color: #c3c3c3;
+        color: #FFFFFF;
+
+        &:hover{
+          background-color: #bfbfbf;
+        }
+      }
+      &:hover{
+        background-color: #EAEAEA;
+      }
+    }
+  }
+}
+
+//
+// 언어 설정 위젯 반응형
+@media (max-width: 767px) {
+  #language_control-box{
+    width: 100%;
+  }
+}
+
+
+
+
+//
+// 컨텐츠 목록 위젯
+//
+#contents_widget-box{
+  .card-header{
+    h2{
+      text-align: center;
+      border-bottom: 1px solid #B3B3B3;
+      padding: 0 0 15px;
+      color: #666;
+      font-weight: bold;
+    }
+  }
+}
+
+
+
+//
+//  메인 위키!
+//
+#main_contents-box{
+  #main-title{
+    text-align: center;
+  }
+
+  #main-img{
+    margin: 34px 0 40px;
+    min-width: 100%;
+    height: auto;
+    min-height: 200px;
+    max-height: 350px;
+    border: 1px solid #B3B3B3;
+  }
+
+  #main-information{
+    tr{
+      &:first-child{
+        border-top: 2px solid #B3B3B3;
+      }
+      &:last-child{
+        border-bottom: 2px solid #B3B3B3;
+      }
+
+      td{
+        padding: 10px;
+        text-align: center;
+        color: #666;
+        font-weight: 400;
+        text-transform: capitalize;
+        vertical-align: middle;
+
+        &:first-child{
+          color: #000;
+          font-weight: 700;
+          text-transform: uppercase;
+        }
+        &:first-child,
+        &:last-child{
+          width: 20%;
+        }
+      }
+    }
+  }
+
+  #main-official-sites{
+    ul.site-info{
+      list-style: none;
+
+      li{
+        display: inline-block;
+        width: 100px;
+        border-bottom: 1px solid #B3B3B3;
+        color: #000;
+      }
+    }
+  }
+
+  #main-members-info{
+    ul{
+      list-style: none;
+      padding: 0;
+      min-height: 50px;
+      //border: 1px solid #000000;
+
+      &.member-thumbnail{
+
+        li{
+          text-align: center !important;
+          cursor: pointer;
+
+          img{
+            width: 100%;
+            height:auto;
+            max-height: 150px;
+          }
+
+          a{
+            width: 100%;
+            padding: 6px 12px;
+            font-size: 16px;
+            text-align: center;
+            color: #000;
+            font-weight: bold;
+            text-transform: uppercase;
+            -webkit-transition: all 150ms ease;
+            -moz-transition: all 150ms ease;
+            -ms-transition: all 150ms ease;
+            -o-transition: all 150ms ease;
+            transition: all 150ms ease;
+          }
+
+          &:last-child{
+            padding: 6px 0;
+          }
+        }
+
+        &:hover a{
+          color: #999 !important;
+        }
+      }
+    }
+  }
+
+  .wiki-section{
+    .sub_title{
+      border-top: 3px solid #b3b3b3;
+      border-bottom: 3px solid #b3b3b3;
+      padding: 12px 0 15px;
+
+      .feature{
+        padding: 6px 20px;
+        background-image: none;
+        box-shadow: none;
+        font-weight: bold;
+        font-size: 16px;
+
+        &.feature-edit{
+
+        }
+        &.feature-logs{
+
+        }
+      }
+    }
+
+    .section-contents{
+      padding-left: 10px;
+      font-size: 16px;
+    }
+  }
+}
+
+#wiki-ground {
+  .wrap-box{
+    margin-top: 40px;
+  }
+
+  h2.sub_title{
+    text-transform: capitalize;
+    margin-bottom: 15px;
+  }
+
+  #main-clearfix{
+    height: 100px;
+    margin: 10px 0;
+  }
+
+  #language_control-box li,
+  #contents_widget-box .card-header h2{
+    text-transform: capitalize;
+  }
+
+  #contents_widget-box{
+    ul,ol,li{
+      padding-left: 20px;
+    }
+  }
+}

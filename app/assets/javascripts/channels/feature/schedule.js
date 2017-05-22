@@ -1,13 +1,9 @@
 $(document).ready(function () {
-
-    setPopOverIntoEachSchedule();
     $('.schedule').hover(function () {
         var txt = $(this).text();
         // alert('일정 알림 : '+txt);
         $(this).attr('title', txt).attr('data-original-title', txt);
     });
-
-
 });
 
 function setPopOverIntoEachSchedule() {

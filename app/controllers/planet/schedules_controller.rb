@@ -103,10 +103,6 @@ class Planet::SchedulesController < ApplicationController
         @schedule = Schedule.find(params[:id])
     end
     
-    def set_fandom
-        @fandom = Fandom.find(params[:fandom_id])
-    end
-    
     # Never trust parameters from the scary internet, only allow the white list through.
     def schedule_params
         params.require(:schedule).permit(:fandom_id, :category, :title, :content, :event_start, :event_end, :url, :class_name)
