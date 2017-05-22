@@ -1,5 +1,6 @@
 class Planet::WikisController < ApplicationController
     include FandomsHelper
+    include WikisHelper
     before_action :set_fandom
     before_action :set_wiki, only: [:show, :edit, :update, :destroy]
     before_action :inheritance_for_front_view
@@ -9,6 +10,7 @@ class Planet::WikisController < ApplicationController
     # GET /fandoms/:fandom_id/wikis.json
     def index
         @wikis = Wiki.where(fandom_id: params[:fandom_id])
+        dummy_wiki_append if @wikis.count.zero?
         @wiki   = @wikis.find_by(wiki: nil)
         @sub_wikis = @wiki.wikis
     end
