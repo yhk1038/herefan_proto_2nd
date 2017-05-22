@@ -1,5 +1,5 @@
 module ApplicationHelper
-    include NavbarHelper
+    include NavbarHelper    # 메인 네비게이션
     
     # 어플리케이션 메타정보
     # ==============================================================================================================================
@@ -15,8 +15,12 @@ module ApplicationHelper
         'http://test.herefan.com'
     end
     
+    def app_home
+        'home'
+    end
+    
     def app_fandom
-        'Planet'
+        'planet'
         # 'Cloud'
         # 'Stream'
         # 'Wave'
@@ -69,8 +73,4 @@ module ApplicationHelper
     def sns_asset_domains
         %w(graph.facebook.com pbs.twimg.com lh3.googleusercontent.com)
     end
-
-
-    # 메인 네비게이션
-    # ==============================================================================================================================
 end

@@ -47,21 +47,26 @@ function imgMessanger() {
     $.each(img_scdls, function (i, img_scdl) {
         img_scdl = img_scdls.get(i);
         var id = img_scdl.id;
+        console.log(id);
+
         var img_url = img_scdl.innerHTML;
+        console.log(img_url);
 
         var target_id_class = id.replace('schedule_image-','schedule-hf-');
         var target = $('.'+target_id_class);
 
         var popover = target.attr('data-template');
+
+        console.log(popover);
         var popover_modify = popover.replace('<div class="popover_img"></div>','<div class="popover_img"><img src="'+img_url+'"></div>');
         target.attr('data-template', popover_modify);
 
-        // console.log(id);
+        console.log(id);
         // console.log(img_url);
         // console.log(target_id_class);
         // console.log(target);
         // console.log(popover_modify);
-        // console.log('/* ====================== */');
+        console.log('/* ====================== */');
     });
 
 }
@@ -92,9 +97,16 @@ function addEventRecord(fandom_id, e_title, e_start, e_end, e_allDay, e_classNam
     });
 
     req.done(function (result) {
-        console.log(result.status);
-        console.log(result.data.title, result.data);
-        console.log(result.fandom.name, result.fandom);
+        // console.log(result.status);
+        // console.log(result.data.title, result.data);
+        // console.log(result.fandom.name, result.fandom);
+        var id = result.data.id;
+        var last_dataImg_dom = $('#dataImgSet > span').last();
+        var this_dom = '<span id="schedule_image-'+id+'">"'+result.data.content+'"</span>';
+
+        last_dataImg_dom.after(this_dom);
+
+        setTimeout(setPopOverIntoEachSchedule(), 1000);
     })
 }
 

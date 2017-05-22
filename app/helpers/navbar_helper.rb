@@ -14,10 +14,8 @@ module NavbarHelper
     
     def nav_menu_lists_desktop
         lists = []
-    
-        lists << { name: 'home', path: home_my_path, controller: 'home' }
-        lists << { name: 'planet', path: fandoms_path, controller: 'fandoms' }
-    
+        lists << { name: app_home, path: home_my_path, controller: 'home' }
+        lists << { name: app_fandom, path: fandoms_path, controller: 'fandoms' }
         lists
     end
     
@@ -25,7 +23,7 @@ module NavbarHelper
         lists = []
     
         home_tab = {
-                name: 'home',
+                name: app_home,
                 icon: 'zmdi-home',
                 sign_in: false,
                 li_class: '',
@@ -40,7 +38,7 @@ module NavbarHelper
         
         if my_fandoms
             followed = {
-                    name: 'followed planets',
+                    name: "followed #{app_fandom}s",
                     icon: 'zmdi-menu',
                     sign_in: true,
                     li_class: 'active toggled',
