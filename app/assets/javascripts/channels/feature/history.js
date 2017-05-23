@@ -13,7 +13,7 @@ $(document).ready(function () {
         if ($(this).attr('class') === 'light-gallery' && event.target.id === 'lg-action')  {
             var duration = 0;
             $('img.object').attr('style', 'transform: rotate3d(1,1,1,0); opacity: 0;');
-            event.setTimeout(hideViewer(), 1500);
+            hideViewer()
         }
     });
 
@@ -26,4 +26,5 @@ $(document).ready(function () {
 function hideViewer() {
     $('#lg-outer').hide(); //.fadeOut(duration);
     $('#titleShadow').hide(); //.fadeOut(duration);
+    $('body').removeClass('light-gallery')
 }
