@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :fandoms do
         scope module: :planet do
             resources :wikis
+            resources :histories
             resources :schedules
         end
     end

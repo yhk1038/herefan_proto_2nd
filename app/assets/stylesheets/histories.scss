@@ -1,0 +1,155 @@
+// Place all the styles related to the histories controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+//
+// 아이템 추가 버튼 스타일
+//
+.item-plus-box{
+  float: left;
+  width: 70px;
+  height: 70px;
+  margin: 0 3px 3px 0;
+}
+.item-plus{
+  width: 100%;
+  border-radius: 2px;
+  vertical-align: middle;
+  padding: 2.5px 15.5px;
+  position: relative;
+  text-align: center;
+  font-size: 45px;
+  float: left;
+}
+.item-plus > .zmdi{
+  -webkit-transition: all 250ms ease;
+  -moz-transition: all 250ms ease;
+  -ms-transition: all 250ms ease;
+  -o-transition: all 250ms ease;
+  transition: all 250ms ease;
+}
+.item-plus-box:hover .zmdi{
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+  color: #3464d9;
+}
+.lightbox-item2 a:before {
+  left: 0;
+  top: 0;
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-transform: scale3d(0, 0, 0);
+  -moz-transform: scale3d(0, 0, 0);
+  -ms-transform: scale3d(0, 0, 0);
+  -o-transform: scale3d(0, 0, 0);
+  transform: scale3d(0, 0, 0);
+  -webkit-transition: all;
+  -o-transition: all;
+  transition: all;
+  -webkit-transition-duration: 250ms;
+  transition-duration: 250ms;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  backface-visibility: hidden;
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: 0;
+  border-radius: 0;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+.lightbox-item2:hover a:before{
+  opacity: 1;
+  transform: initial;
+}
+.p-timeline [addkey] {
+  float: left;
+  width: 70px;
+  height: 70px;
+  margin: 0 3px 3px 0;
+  position: relative;
+  top: -72px;
+}
+[addkey]:before,
+[addkey]:after {
+  content: " ";
+  display: table;
+}
+[addkey]:after {
+  clear: both;
+}
+[addkey]:before,
+[addkey]:after {
+  content: " ";
+  display: table;
+}
+
+//
+// 이미지 뷰어 전/후 이동 리폼
+//
+#lg-action{
+  height: 100%;
+  font-family: 'Material-Design-Iconic-Font';
+
+  #lg-prev,
+  #lg-next{
+    width: 50%;
+    top: 15%;
+    height: 70%;
+    font-size: 50px;
+    position: absolute;
+    font-family: 'Slide-icons';
+
+    &:before,
+    &:after{
+      position: absolute;
+      right: 20% !important;
+      top: 45%;
+    }
+  }
+
+  #lg-prev{
+    left: 0;
+  }
+
+  #lg-next{
+    right: 0;
+
+    &:before,
+    &:after{
+      left: initial !important;
+    }
+  }
+
+  &:before{
+    content: '\f136';
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 40px;
+    z-index: 100001;
+    cursor: pointer;
+    height: 75px;
+    width: 100%;
+    text-align: right;
+    padding: 10px 25px;
+  }
+}
+
+#titleShadow{
+  display: none;
+  position: fixed;
+  top: 3%;
+  left: 10%;
+  right: 10%;
+  text-align: center;
+  font-size: 30px;
+  color: #000;
+  font-family: 'Roboto', "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: bold;
+  z-index: 100000;
+}

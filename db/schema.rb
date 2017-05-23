@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170522041651) do
+ActiveRecord::Schema.define(version: 20170523011203) do
 
   create_table "clips", force: :cascade do |t|
     t.integer  "user_id"
@@ -28,6 +28,20 @@ ActiveRecord::Schema.define(version: 20170522041651) do
     t.boolean  "published",      default: false, null: false
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
+  end
+
+  create_table "histories", force: :cascade do |t|
+    t.integer  "fandom_id"
+    t.integer  "user_id"
+    t.string   "title"
+    t.datetime "event_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "history_id"
+    t.string   "img"
+    t.string   "thumb_img"
+    t.index ["fandom_id"], name: "index_histories_on_fandom_id"
+    t.index ["user_id"], name: "index_histories_on_user_id"
   end
 
   create_table "likes", force: :cascade do |t|
