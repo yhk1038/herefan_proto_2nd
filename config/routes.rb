@@ -63,5 +63,5 @@ Rails.application.routes.draw do
     
     # Debug
     match 'hf_util/user_must_have_unique_myfandom/:id', to: 'hf_util#user_must_have_unique_myfandom', via: [:get]
-
+    match 'hf_util/history/dummy/:to_do', to: 'hf_util#dummy_push', via: [:get]
 end
