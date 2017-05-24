@@ -116,7 +116,48 @@
                     </div>
 
                     <div class="card-body card-padding">
-                        <% if @histories.count.zero? %>
+
+                        <!-- Add History line -->
+                        <div class="p-timeline adding">
+                            <div class="pt-line c-gray text-right">
+                                <span class="d-block">Year</span> :d/ :m
+                            </div>
+
+                            <div class="pt-body">
+
+                                <h2 class="ptb-title" id="timeline-add-title"><span>Add a new Line whenever you want :D</span>
+                                    <a id="history_add_line-edit" href="#" class="btn btn-default feature feature-edit c-cyan" onclick="return false;">add</a>
+                                </h2>
+
+                                <div id="timeline-add-title-edit" class="input-group form-group" style="display: none;">
+                                    <div class="fg-line">
+                                        <input id="new-history-title" type="text" class="form-control" placeholder="Add a new Line whenever you want :D" autofocus required>
+                                    </div>
+                                    <div class="input-group form-group" style="width: 50%; float: right;">
+                                        <span class="input-group-addon"><i class="zmdi zmdi-calendar"></i></span>
+                                        <div class="dtp-container fg-line">
+                                            <input type="text" class="form-control date-picker" id="history-event_date" placeholder="When was the event? ...">
+                                        </div>
+                                    </div>
+
+                                    <span class="input-group-addon last">
+                                        <a id="history_add_line-save" data-fandom="<%= @fandom.id %>" data-author="<%= $current_user_id %>" href="#" class="btn btn-default feature feature-edit c-cyan" onclick="return false;">save</a>
+                                    </span>
+                                </div>
+
+                                <div class="pull-right" addkey="">
+                                    <div class="lightbox-item2 item-plus-box">
+                                        <a href="#" class="item-plus" data-title="Add a new Line whenever you want :D" data-history="0" data-toggle="modal" data-target="#imgUploadModal"><span class="zmdi zmdi-plus-circle"></span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 바로 아래에 새로운 히스토리를 붙이는 위치 -->
+                        <div id="target-zone"></div>
+
+
+                        <% if @histories.count.zero? %>         <!-- Dummy for Nothing to show -->
                             <% dummy_history.reverse.each do |history| %>
                                 <div class="p-timeline">
                                     <div class="pt-line c-gray text-right">
@@ -124,368 +165,338 @@
                                     </div>
 
                                     <div class="pt-body">
-                                        <h2 class="ptb-title" id="timeline-<%= history[:id] %>-title"><%= history[:title] %></h2>
+                                        <h2 class="ptb-title" id="timeline-<%= history[:id] %>-title"><%= history[:title] %>
+                                            <a href="#" class="btn btn-default feature feature-edit c-cyan" onclick="return false;">Edit</a>
+                                        </h2>
 
                                         <div class="lightbox clearfix" value="timeline-<%= history[:id] %>">
                                             <% if history[:img] %>
-                                                <div data-src="<%= history[:square_img] %>">
+                                                <div data-src="<%= history[:img] %>">
                                                     <div class="lightbox-item p-item">
-                                                        <img src="<%= history[:img] %>" alt="" />
+                                                        <img src="<%= history[:square_img] %>" alt="" />
                                                     </div>
                                                 </div>
                                             <% end %>
                                             <% history[:sub].each do |attachment| %>
-                                                <div data-src="<%= attachment[:square_img] %>">
+                                                <div data-src="<%= attachment[:img] %>">
                                                     <div class="lightbox-item p-item">
-                                                        <img src="<%= attachment[:img] %>" alt="" />
+                                                        <img src="<%= attachment[:square_img] %>" alt="" />
                                                     </div>
                                                 </div>
                                             <% end %>
                                         </div>
                                         <div class="pull-right" addkey="">
                                             <div class="lightbox-item2 item-plus-box">
-                                                <a href="#" class="item-plus" onclick="return false;"><span class="zmdi zmdi-plus-circle"></span></a>
+                                                <a href="#" class="item-plus" data-title="<%=  history[:title] %>" data-history="<%= history[:id] %>" data-toggle="modal" data-target="#imgUploadModal"><span class="zmdi zmdi-plus-circle"></span></a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             <% end %>
-                        <% else %>
-                                <% @histories.each do |history| %>
-                                    <div class="p-timeline"">
-                                        <div class="pt-line c-gray text-right">
-                                            <span class="d-block"><%= history[:event_date].year %></span> <%= history[:event_date].strftime('%d/%m') %>
-                                        </div>
-
-                                        <div class="pt-body">
-                                            <h2 class="ptb-title"><%= history[:title] %></h2>
-
-                                            <div class="lightbox clearfix" id="timeline-<%= history[:id] %>>
-                                                <% if history[:img] %>
-                                                    <div data-src="<%= history[:square_img] %>">
-                                                        <div class="lightbox-item p-item">
-                                                            <img src="<%= history[:img] %>" alt="" />
-                                                        </div>
-                                                    </div>
-                                                <% end %>
-                                                <% history[:sub].each do |attachment| %>
-                                                    <div data-src="<%= attachment[:square_img] %>">
-                                                        <div class="lightbox-item p-item">
-                                                            <img src="<%= attachment[:img] %>" alt="" />
-                                                        </div>
-                                                    </div>
-                                                <% end %>
-                                            </div>
-                                            <div class="pull-right" addkey="">
-                                                <div class="lightbox-item2 item-plus-box">
-                                                    <a href="#" class="item-plus" onclick="return false;"><span class="zmdi zmdi-plus-circle"></span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <% end %>
+                        <% else %>                              <!-- Real history parse powered by partial template -->
+                            <%= render partial: '/planet/histories/partials/event', collection: @histories, as: :history, locals: { new_history: false } %>
                         <% end %>
 
+                        <div style="display: none;">
+                            <div class="p-timeline">
+                                <div class="pt-line c-gray text-right">
+                                    <span class="d-block">2015</span>
+                                    10/07
+                                </div>
 
-                        <div class="p-timeline">
-                            <div class="pt-line c-gray text-right">
-                                <span class="d-block">2015</span>
-                                10/07
-                            </div>
+                                <div class="pt-body">
+                                    <h2 class="ptb-title">Trip to Orbit</h2>
 
-                            <div class="pt-body">
-                                <h2 class="ptb-title">Trip to Orbit</h2>
-
-                                <div class="lightbox clearfix">
-                                    <div data-src="/template/media/gallery/10.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/10.jpg" alt="" />
+                                    <div class="lightbox clearfix">
+                                        <div data-src="/template/media/gallery/10.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/10.jpg" alt="" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/11.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/11.jpg" alt="" />
+                                        <div data-src="/template/media/gallery/11.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/11.jpg" alt="" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/12.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/12.jpg" alt="" />
+                                        <div data-src="/template/media/gallery/12.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/12.jpg" alt="" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/13.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/13.jpg" alt="" />
+                                        <div data-src="/template/media/gallery/13.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/13.jpg" alt="" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/14.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/14.jpg" alt="" />
+                                        <div data-src="/template/media/gallery/14.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/14.jpg" alt="" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/15.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/15.jpg" alt="" />
+                                        <div data-src="/template/media/gallery/15.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/15.jpg" alt="" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/16.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/16.jpg" alt="" />
+                                        <div data-src="/template/media/gallery/16.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/16.jpg" alt="" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/17.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/17.jpg" alt="" />
+                                        <div data-src="/template/media/gallery/17.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/17.jpg" alt="" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
 
-                        </div>
+                            <div class="p-timeline">
+                                <div class="pt-line c-gray text-right">
+                                    <span class="d-block">2015</span>
+                                    12/06
+                                </div>
 
-                        <div class="p-timeline">
-                            <div class="pt-line c-gray text-right">
-                                <span class="d-block">2015</span>
-                                12/06
-                            </div>
+                                <div class="pt-body">
+                                    <h2 class="ptb-title">Purchased for print</h2>
 
-                            <div class="pt-body">
-                                <h2 class="ptb-title">Purchased for print</h2>
+                                    <div class="lightbox clearfix">
 
-                                <div class="lightbox clearfix">
+                                        <div data-src="/template/media/gallery/4.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/4.jpg" alt="" />
+                                            </div>
+                                        </div>
 
-                                    <div data-src="/template/media/gallery/4.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/4.jpg" alt="" />
+                                        <div data-src="/template/media/gallery/5.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/5.jpg" alt="" />
+                                            </div>
                                         </div>
-                                    </div>
-
-                                    <div data-src="/template/media/gallery/5.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/5.jpg" alt="" />
+                                        <div data-src="/template/media/gallery/6.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/6.jpg" alt="" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/6.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/6.jpg" alt="" />
+                                        <div data-src="/template/media/gallery/7.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/7.jpg" alt="" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/7.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/7.jpg" alt="" />
+                                        <div data-src="/template/media/gallery/8.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/8.jpg" alt="" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/8.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/8.jpg" alt="" />
+                                        <div data-src="/template/media/gallery/9.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/9.jpg" alt="" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/9.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/9.jpg" alt="" />
+                                        <div data-src="/template/media/gallery/10.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/10.jpg" alt="" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/10.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/10.jpg" alt="" />
+                                        <div data-src="/template/media/gallery/11.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/11.jpg" alt="" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/11.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/11.jpg" alt="" />
+                                        <div data-src="/template/media/gallery/12.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/12.jpg" alt="" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/12.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/12.jpg" alt="" />
+                                        <div data-src="/template/media/gallery/13.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/13.jpg" alt="" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/13.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/13.jpg" alt="" />
+                                        <div data-src="/template/media/gallery/14.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/14.jpg" alt="" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/14.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/14.jpg" alt="" />
-                                        </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/15.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/15.jpg" alt="" />
+                                        <div data-src="/template/media/gallery/15.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/15.jpg" alt="" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
 
-                        </div>
+                            <div class="p-timeline">
+                                <div class="pt-line c-gray text-right">
+                                    <span class="d-block">2015</span>
+                                    01/06
+                                </div>
 
-                        <div class="p-timeline">
-                            <div class="pt-line c-gray text-right">
-                                <span class="d-block">2015</span>
-                                01/06
-                            </div>
+                                <div class="pt-body">
+                                    <h2 class="ptb-title">For Website</h2>
 
-                            <div class="pt-body">
-                                <h2 class="ptb-title">For Website</h2>
+                                    <div class="lightbox clearfix">
+                                        <div data-src="/template/media/gallery/1.jpg">
+                                            <div class="lightbox-item">
+                                                <img src="/template/media/gallery/thumbs/1.jpg" alt="" />
+                                            </div>
+                                        </div>
 
-                                <div class="lightbox clearfix">
-                                    <div data-src="/template/media/gallery/1.jpg">
-                                        <div class="lightbox-item">
-                                            <img src="/template/media/gallery/thumbs/1.jpg" alt="" />
+                                        <div data-src="/template/media/gallery/2.jpg">
+                                            <div class="lightbox-item">
+                                                <img src="/template/media/gallery/thumbs/2.jpg" alt="" />
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div data-src="/template/media/gallery/2.jpg">
-                                        <div class="lightbox-item">
-                                            <img src="/template/media/gallery/thumbs/2.jpg" alt="" />
+                                        <div data-src="/template/media/gallery/3.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/3.jpg" alt="" />
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div data-src="/template/media/gallery/3.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/3.jpg" alt="" />
+                                        <div data-src="/template/media/gallery/4.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/4.jpg" alt="" />
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div data-src="/template/media/gallery/4.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/4.jpg" alt="" />
+                                        <div data-src="/template/media/gallery/5.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/5.jpg" alt="" />
+                                            </div>
                                         </div>
-                                    </div>
+                                        <div data-src="/template/media/gallery/6.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/6.jpg" alt="" />
+                                            </div>
+                                        </div>
+                                        <div data-src="/template/media/gallery/7.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/7.jpg" alt="" />
+                                            </div>
+                                        </div>
+                                        <div data-src="/template/media/gallery/8.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/8.jpg" alt="" />
+                                            </div>
+                                        </div>
+                                        <div data-src="/template/media/gallery/9.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/9.jpg" alt="" />
+                                            </div>
+                                        </div>
+                                        <div data-src="/template/media/gallery/10.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/10.jpg" alt="" />
+                                            </div>
+                                        </div>
+                                        <div data-src="/template/media/gallery/11.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/11.jpg" alt="" />
+                                            </div>
+                                        </div>
+                                        <div data-src="/template/media/gallery/12.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/12.jpg" alt="" />
+                                            </div>
+                                        </div>
+                                        <div data-src="/template/media/gallery/13.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/13.jpg" alt="" />
+                                            </div>
+                                        </div>
+                                        <div data-src="/template/media/gallery/14.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/14.jpg" alt="" />
+                                            </div>
+                                        </div>
+                                        <div data-src="/template/media/gallery/15.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/15.jpg" alt="" />
+                                            </div>
+                                        </div>
+                                        <div data-src="/template/media/gallery/16.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/16.jpg" alt="" />
+                                            </div>
+                                        </div>
+                                        <div data-src="/template/media/gallery/17.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/17.jpg" alt="" />
+                                            </div>
+                                        </div>
 
-                                    <div data-src="/template/media/gallery/5.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/5.jpg" alt="" />
+                                        <div data-src="/template/media/gallery/4.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/4.jpg" alt="" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/6.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/6.jpg" alt="" />
-                                        </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/7.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/7.jpg" alt="" />
-                                        </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/8.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/8.jpg" alt="" />
-                                        </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/9.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/9.jpg" alt="" />
-                                        </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/10.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/10.jpg" alt="" />
-                                        </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/11.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/11.jpg" alt="" />
-                                        </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/12.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/12.jpg" alt="" />
-                                        </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/13.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/13.jpg" alt="" />
-                                        </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/14.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/14.jpg" alt="" />
-                                        </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/15.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/15.jpg" alt="" />
-                                        </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/16.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/16.jpg" alt="" />
-                                        </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/17.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/17.jpg" alt="" />
-                                        </div>
-                                    </div>
 
-                                    <div data-src="/template/media/gallery/4.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/4.jpg" alt="" />
+                                        <div data-src="/template/media/gallery/5.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/5.jpg" alt="" />
+                                            </div>
                                         </div>
-                                    </div>
-
-                                    <div data-src="/template/media/gallery/5.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/5.jpg" alt="" />
+                                        <div data-src="/template/media/gallery/6.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/6.jpg" alt="" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/6.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/6.jpg" alt="" />
+                                        <div data-src="/template/media/gallery/7.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/7.jpg" alt="" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/7.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/7.jpg" alt="" />
+                                        <div data-src="/template/media/gallery/8.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/8.jpg" alt="" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/8.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/8.jpg" alt="" />
+                                        <div data-src="/template/media/gallery/9.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/9.jpg" alt="" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/9.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/9.jpg" alt="" />
+                                        <div data-src="/template/media/gallery/10.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/10.jpg" alt="" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/10.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/10.jpg" alt="" />
+                                        <div data-src="/template/media/gallery/11.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/11.jpg" alt="" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/11.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/11.jpg" alt="" />
+                                        <div data-src="/template/media/gallery/12.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/12.jpg" alt="" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/12.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/12.jpg" alt="" />
+                                        <div data-src="/template/media/gallery/13.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/13.jpg" alt="" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/13.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/13.jpg" alt="" />
+                                        <div data-src="/template/media/gallery/14.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/14.jpg" alt="" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/14.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/14.jpg" alt="" />
-                                        </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/15.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/15.jpg" alt="" />
+                                        <div data-src="/template/media/gallery/15.jpg">
+                                            <div class="lightbox-item p-item">
+                                                <img src="/template/media/gallery/thumbs/15.jpg" alt="" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
 
-                        </div>
-
-                        <div class="p-timeline">
+                            <div class="p-timeline">
                             <div class="pt-line c-gray text-right">
                                 <span class="d-block">2015</span>
                                 22/04
@@ -524,6 +535,7 @@
                             </div>
 
                         </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -532,3 +544,53 @@
 
 </section>
 <span id="titleShadow"></span>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="imgUploadModal" tabindex="-1" role="dialog" aria-labelledby="imgUploadModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="imgUploadModalLabel">Modal title</h4>
+            </div>
+            <form action="/fandoms/<%= @fandom.id %>/histories" method="post" enctype="multipart/form-data">
+
+                <input name="authenticity_token" id="inputHistory-authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+                <input type="hidden" name="history[history_id]" id="inputHistory-history_id">
+
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                    <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="line-height: 150px;"></div>
+                                    <div>
+                                        <span class="btn btn-info btn-file waves-effect w-100">
+                                            <span class="fileinput-new">Select image</span>
+                                            <span class="fileinput-exists">Change</span>
+                                            <input type="hidden"><input type="file" name="history[img]">
+                                        </span>
+                                        <a href="#" class="btn btn-danger fileinput-exists waves-effect w-100" data-dismiss="fileinput">Remove</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="display: none">
+                                <div class="card">
+                                    <div class="card-boddy card-padding">
+                                        <a href="#" class="btn btn-info fileinput-exists w-100" data-dismiss="fileinput" style="text-align: center; text-transform: capitalize">Save & Add Another</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

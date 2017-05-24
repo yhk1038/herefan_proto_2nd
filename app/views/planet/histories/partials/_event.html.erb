@@ -1,0 +1,34 @@
+
+<div class="p-timeline <%= 'new_added' if new_history %> <%= 'adding' if history.histories.count.zero? %>">
+    <div class="pt-line c-gray text-right">
+        <span class="d-block"><%= history.event_date.year %></span> <%= history.event_date.strftime('%d/%m') %>
+    </div>
+
+    <div class="pt-body">
+        <h2 class="ptb-title" id="timeline-<%= history[:id] %>-title"><%= history.title %>
+            <a href="#" class="btn btn-default feature feature-edit c-cyan" onclick="return false;">Edit</a>
+        </h2>
+
+        <div class="lightbox clearfix" id="timeline-<%= history.id %>">
+            <% if history.img.url %>
+                <div data-src="<%= history.thumb_img %>">
+                    <div class="lightbox-item p-item">
+                        <img src="<%= history.img %>" alt="" />
+                    </div>
+                </div>
+            <% end %>
+            <% history.histories.each do |attachment| %>
+                <div data-src="<%= attachment.img %>">
+                    <div class="lightbox-item p-item">
+                        <img src="<%= attachment.thumb_img %>" alt="" />
+                    </div>
+                </div>
+            <% end %>
+        </div>
+        <div class="pull-right" addkey="">
+            <div class="lightbox-item2 item-plus-box">
+                <a href="#" class="item-plus" data-title="<%= history.title %>" data-history="<%= history.id %>" data-toggle="modal" data-target="#imgUploadModal"><span class="zmdi zmdi-plus-circle"></span></a>
+            </div>
+        </div>
+    </div>
+</div>
