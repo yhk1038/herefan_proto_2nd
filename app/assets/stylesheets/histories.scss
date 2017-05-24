@@ -153,3 +153,85 @@
   font-weight: bold;
   z-index: 100000;
 }
+
+.ptb-title,
+#timeline-add-title-edit {
+
+  .feature{
+    box-shadow: none;
+    padding: 6px 12px;
+    font-family: initial;
+    font-size: 16px;
+    font-weight: bold;
+    top: 1.5px;
+  }
+}
+
+.p-timeline.adding [addkey] {
+  top: -20px;
+  left: -90% !important;
+}
+
+#timeline-add-title-edit{
+  top: -10px;
+  width: 80%;
+  margin-top: 25px;
+}
+
+.p-timeline{
+
+  &.new_added{
+
+    &:after{
+      content: '';
+      position: absolute;
+      right: 0;
+      top: -10px;
+      width: 5px;
+      height: calc(100% + 73px);
+      background-color: #ff9999;
+      margin-right: -26px;
+      padding: 4px;
+    }
+
+    .pt-body{
+
+      &:after{
+        content: 'it\'s new! It\'ll be reorder';
+        position: absolute;
+        text-transform: capitalize;
+        right: -6em;
+        top: -15px;
+        font-size: 16px;
+        font-family: inherit;
+        color: #666;
+        font-weight: bold;
+        width: 65px;
+      }
+    }
+  }
+}
+
+
+
+
+
+/*
+ * 이미지 업로더
+ */
+.fileinput{
+  padding: 0;
+  margin-bottom: 0;
+
+  .fileinput-preview {
+    width: 100%;
+    height: auto;
+    border: 4px solid #eeeeee;
+    padding: 0;
+    min-width: 200px;
+    line-height: initial !important;
+    min-height: 100px;
+
+  }
+
+}

@@ -1,0 +1,11 @@
+
+$('#target-zone').after(
+    '<%= escape_javascript( render partial: '/planet/histories/partials/event', locals: { history: @history, new_history: true } ) %>'
+);
+
+$('#new-history-title').val('');
+$('#history-event_date').val('');
+$('#timeline-add-title-edit').hide();
+$('#timeline-add-title').show();
+$('#history_add_line-save').attr('style', 'opacity: 1;').text('save');
+$('.lightbox-item2').show();

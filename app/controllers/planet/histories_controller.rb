@@ -9,7 +9,7 @@ class Planet::HistoriesController < ApplicationController
     # GET /fandoms/:fandom_id/histories
     # GET /fandoms/:fandom_id/histories.json
     def index
-        @histories = History.where(fandom_id: params[:fandom_id])
+        @histories = History.where(fandom_id: params[:fandom_id]).order(event_date: :desc)
     end
     
     # GET /fandoms/:fandom_id/histories/1
@@ -30,16 +30,43 @@ class Planet::HistoriesController < ApplicationController
     # POST /fandoms/:fandom_id/histories.json
     def create
         @history = History.new(history_params)
-        
-        respond_to do |format|
-            if @history.save
-                format.html { redirect_to @history, notice: 'History was successfully created.' }
-                format.json { render :show, status: :created, location: @history }
-            else
-                format.html { render :new }
-                format.json { render json: @history.errors, status: :unprocessable_entity }
-            end
+        is_second_level = @history.fandom_id ? false : true
+
+        saved = false
+        if !is_second_level
+            saved = @history.save # if History.where(event_date: @history.event_date).count.zero?
+            message = "The History's Date (#{@history.event_date.strftime('%F')}) is already exist!" unless saved
+        else
+            @history.thumb_img = params[:history][:img]
+            saved = @history.save if History.where(id: @history.history_id).count > 0
+            message = "Sorry, History item not found!" unless saved
         end
+
+        
+        if saved
+            if is_second_level
+                redirect_to fandom_histories_path(params[:fandom_id])
+            else
+                return render '/planet/histories/create'
+            end
+        else
+            return render json: { data: @history, status: :unprocessable_entity, message: message }
+        end
+    
+        
+        # respond_to do |format|
+        #     if saved
+        #         return render '/planet/histories/create'
+        #         # format.html { redirect_to @history, notice: 'History was successfully created.' }
+        #         # format.json { render :show, status: :created, location: @history }
+        #         # upper = @history.fandom_id ? @history.fandom : @history.history
+        #         # format.json { return render json: { data: @history, upper: upper, status: :created } }
+        #     else
+        #         # format.html { render :new }
+        #         # format.json { render json: @history.errors, status: :unprocessable_entity }
+        #         return render json: { data: @history, status: :unprocessable_entity, message: "The History's Date (#{@history.event_date.strftime('%F')}) is already exist!" }
+        #     end
+        # end
     end
     
     # PATCH/PUT /fandoms/:fandom_id/histories/1
@@ -74,7 +101,7 @@ class Planet::HistoriesController < ApplicationController
     
     # Never trust parameters from the scary internet, only allow the white list through.
     def history_params
-        params.require(:history).permit(:fandom_id, :user_id, :title, :event_date)
+        params.require(:history).permit(:fandom_id, :user_id, :title, :event_date, :img, :thumb_img, :history_id)
     end
 
     def inheritance_for_front_view
