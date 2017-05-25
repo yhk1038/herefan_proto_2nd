@@ -2,6 +2,25 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
+#content .content-ground{
+  padding-right: 27%;
+}
+#history-index-wrap{
+  position: relative;
+  width: 20%;
+  float: right;
+  z-index: 1;
+  top: 75px;
+  box-shadow: none;
+
+  p{
+    font-size: 18px;
+    font-weight: bold;
+  }
+}
+
+
 //
 // 아이템 추가 버튼 스타일
 //

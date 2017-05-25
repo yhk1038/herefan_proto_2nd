@@ -41,15 +41,20 @@
         <!--</div>-->
 
         <div class="row">
-            <div class="col-md-3 col-md-push-9">
-                <div class="card">
+            <div class="col-md-12">
+                <div class="card" id="history-index-wrap">
                     <div class="card-body card-padding">
-                        timeline index
+                        <p>Edit Mode</p>
+                        <% years = @histories.all.map{|history| history.event_date.year}.uniq %>
+                        <ul>
+                            <% years.each do |year| %>
+                                <li><%= year %></li>
+                            <% end %>
+                        </ul>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-9 col-md-pull-3">
                 <div class="card">
+                    <!--
                     <div class="lv-header-alt clearfix">
                         <h2 class="lvh-label hidden-xs">Some text here</h2>
 
@@ -114,8 +119,9 @@
                             </li>
                         </ul>
                     </div>
+                    -->
 
-                    <div class="card-body card-padding">
+                    <div class="card-body card-padding content-ground">
 
                         <!-- Add History line -->
                         <div class="p-timeline adding">
@@ -197,7 +203,8 @@
                             <%= render partial: '/planet/histories/partials/event', collection: @histories, as: :history, locals: { new_history: false } %>
                         <% end %>
 
-                        <div style="display: none;">
+
+                        <div style="display: block;">
                             <div class="p-timeline">
                                 <div class="pt-line c-gray text-right">
                                     <span class="d-block">2015</span>
@@ -536,6 +543,7 @@
 
                         </div>
                         </div>
+
                     </div>
                 </div>
             </div>
