@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $('.lightbox').hover(function () {
-        var element_id = $(this).attr('value');
+        var element_id = $(this).data('history');
         var title = $('#'+element_id+'-title').text();
         $('#titleShadow').text(title);
     });
