@@ -1,8 +1,22 @@
 $(document).ready(function () {
     $('.lightbox').hover(function () {
         var element_id = $(this).data('history');
-        var title = $('#'+element_id+'-title').text();
-        $('#titleShadow').text(title);
+        var date = new Date($(this).data('edate'));
+        var h2 = $('#'+element_id+'-title');
+        var title = h2.text();
+        var garbage = h2.children().text();
+
+        if (title.indexOf(garbage) !== -1) {
+            title = title.replace(garbage, '').trim();
+        }
+
+        var y = date.getFullYear();
+        var m = date.getMonth()+1;
+        var d = date.getDate();
+        var time = y + '.' + m + '.' + d;
+        var html = '<span>'+time+'</span> '+ title;
+
+        $('#titleShadow').html(html);
     });
 
     $('.p-item').click(function () {
