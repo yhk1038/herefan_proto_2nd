@@ -147,7 +147,7 @@
 
                                 <div class="pull-right" addkey="">
                                     <div class="lightbox-item2 item-plus-box">
-                                        <a href="#" class="item-plus" data-title="Add a new Line whenever you want :D" data-history="0" data-toggle="modal" data-target="#imgUploadModal"><span class="zmdi zmdi-plus-circle"></span></a>
+                                        <a href="#" class="item-plus" data-title="Add a new Line whenever you want :D" data-history="0" data-toggle="modal" style="opacity: 0.25;"><span class="zmdi zmdi-plus-circle"></span></a>
                                     </div>
                                 </div>
                             </div>
@@ -171,16 +171,16 @@
 
                                         <div class="lightbox clearfix" value="timeline-<%= history[:id] %>">
                                             <% if history[:img] %>
-                                                <div data-src="<%= history[:img] %>">
+                                                <div data-src="<%= history[:square_img] %>">
                                                     <div class="lightbox-item p-item">
-                                                        <img src="<%= history[:square_img] %>" alt="" />
+                                                        <img src="<%= history[:img] %>" alt="" />
                                                     </div>
                                                 </div>
                                             <% end %>
                                             <% history[:sub].each do |attachment| %>
-                                                <div data-src="<%= attachment[:img] %>">
+                                                <div data-src="<%= attachment[:square_img] %>">
                                                     <div class="lightbox-item p-item">
-                                                        <img src="<%= attachment[:square_img] %>" alt="" />
+                                                        <img src="<%= attachment[:img] %>" alt="" />
                                                     </div>
                                                 </div>
                                             <% end %>

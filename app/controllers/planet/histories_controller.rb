@@ -75,10 +75,13 @@ class Planet::HistoriesController < ApplicationController
         respond_to do |format|
             if @history.update(history_params)
                 format.html { redirect_to @history, notice: 'History was successfully updated.' }
-                format.json { render :show, status: :ok, location: @history }
+                # format.json { render :show, status: :ok, location: @history }
+                upper = @history.fandom_id ? @history.fandom : @history.history
+                format.json { return render json: { data: @history, upper: upper, status: :ok } }
             else
                 format.html { render :edit }
-                format.json { render json: @history.errors, status: :unprocessable_entity }
+                # format.json { render json: @history.errors, status: :unprocessable_entity }
+                format.json { return render json: { data: @history, status: :unprocessable_entity, message: "The History's Date (#{@history.event_date.strftime('%F')}) is already exist!" } }
             end
         end
     end

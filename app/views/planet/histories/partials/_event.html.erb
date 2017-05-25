@@ -1,13 +1,32 @@
 
 <div class="p-timeline <%= 'new_added' if new_history %> <%= 'adding' if history.histories.count.zero? %>">
-    <div class="pt-line c-gray text-right">
+    <div class="pt-line c-gray text-right" id="timeline-<%= history.id %>-date">
         <span class="d-block"><%= history.event_date.year %></span> <%= history.event_date.strftime('%d/%m') %>
     </div>
 
     <div class="pt-body">
-        <h2 class="ptb-title" id="timeline-<%= history[:id] %>-title"><%= history.title %>
-            <a href="#" class="btn btn-default feature feature-edit c-cyan" onclick="return false;">Edit</a>
+
+        <!-- history title -->
+        <h2 class="ptb-title" id="timeline-<%= history.id %>-title"><%= history.title %>
+            <a href="#" class="btn btn-default feature feature-edit c-cyan history-edit" data-history="<%= history.id %>" onclick="return false;">Edit</a>
         </h2>
+
+        <!-- edit history form -->
+        <div id="timeline-<%= history.id %>-title-edit" class="input-group form-group" style="display: none;">
+            <div class="fg-line">
+                <input id="history-<%= history.id %>-title" type="text" class="form-control" value="<%= history.title %>" autofocus required>
+            </div>
+            <div class="input-group form-group" style="width: 50%; float: right;">
+                <span class="input-group-addon"><i class="zmdi zmdi-calendar"></i></span>
+                <div class="dtp-container fg-line">
+                    <input type="text" class="form-control date-picker" id="history-<%= history.id %>-event_date" placeholder="When was the event? ...">
+                </div>
+            </div>
+
+            <span class="input-group-addon last">
+                <a id="history_<%= history.id %>_line-save" data-history="<%= history.id %>" data-fandom="<%= @fandom.id %>" data-author="<%= $current_user_id %>" href="#" class="btn btn-default feature feature-edit c-cyan history-save" onclick="return false;">save</a>
+            </span>
+        </div>
 
         <div class="lightbox clearfix" id="timeline-<%= history.id %>">
             <% if history.img.url %>
@@ -25,6 +44,7 @@
                 </div>
             <% end %>
         </div>
+
         <div class="pull-right" addkey="">
             <div class="lightbox-item2 item-plus-box">
                 <a href="#" class="item-plus" data-title="<%= history.title %>" data-history="<%= history.id %>" data-toggle="modal" data-target="#imgUploadModal"><span class="zmdi zmdi-plus-circle"></span></a>
