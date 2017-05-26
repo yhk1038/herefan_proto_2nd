@@ -1,4 +1,34 @@
 $(document).ready(function () {
+
+    /*
+     * ========================================
+     *      툴바 인덱스
+     * ========================================
+     */
+    $(window).scroll(function () {
+        if ($(this).scrollTop() >= 330) {
+            $('#history-index-wrap').addClass('fixed')
+        } else {
+            $('#history-index-wrap').removeClass('fixed')
+        }
+    });
+
+    $('.index_list').click(function () {
+        $('#history-index-wrap .active').removeClass('active');
+        $(this).addClass('active');
+    });
+
+
+    /*
+     * ========================================
+     *      이미지 뷰어
+     * ========================================
+     */
+
+    /*
+     * 이미지 뷰어를 위한 타이틀을 준비하는 함수.
+     *///=========================
+    // 1. 준비하고.
     $('.lightbox').hover(function () {
         var element_id = $(this).data('history');
         var date = new Date($(this).data('edate'));
@@ -19,22 +49,51 @@ $(document).ready(function () {
         $('#titleShadow').html(html);
     });
 
+    // 2. 보여준다.
     $('.p-item').click(function () {
         $('#titleShadow').show();
     });
+    //============================
 
+    /*
+     * 이미지 뷰어를 종료하기 위한 함수들.
+     *///=========================
+    // 1. ESC 버튼을 누르면, 뷰어가 열려있는 상태인지 확인하고, 열려있는 상태라면 종료한다.
     $('body').click(function (event) {
         if ($(this).attr('class') === 'light-gallery' && event.target.id === 'lg-action')  {
-            var duration = 0;
+            // var duration = 0;
             $('img.object').attr('style', 'transform: rotate3d(1,1,1,0); opacity: 0;');
             hideViewer()
         }
     });
 
+    // 2. 그런다음 다음 뷰어 오픈 시에 가려둔 이전 뷰어를 없애버린다.
     $('.lightbox').mouseenter(function () {
         $('#lg-outer').remove();
         $('body').removeClass('light-gallery');
     });
+    //============================
+
+    /*
+     * ESC 버튼으로 이미지 뷰어를 닫을 때.
+     */
+    $(document).keyup(function (e) {
+        var classes = $('body').attr('class');
+
+        if (classes) {
+            if (classes.indexOf('light-gallery') !== -1){
+                if (e.keyCode === 27) { // escape key maps to keycode `27`
+                    $('#titleShadow').hide();
+                }
+            }
+        }
+    });
+
+    /*
+     * ========================================
+     *      히스토리 CRUD
+     * ========================================
+     */
 
     /*
      * 히스토리 추가하는 함수
@@ -76,25 +135,9 @@ $(document).ready(function () {
     });
 
     /*
-     * ESC 버튼으로 이미지 뷰어를 닫을 때.
-     */
-    $(document).keyup(function (e) {
-        console.log('dddd');
-        var classes = $('body').attr('class');
-
-        if (classes) {
-            if (classes.indexOf('light-gallery') !== -1){
-                if (e.keyCode === 27) { // escape key maps to keycode `27`
-                    $('#titleShadow').hide();
-                }
-            }
-        }
-    });
-
-    /*
-     * 이미지 추가 모달 띄울 때 타이틀에 히스토리 타이틀 입히기.
+     * 이미지 추가 모달 띄울 때, 타이틀에 히스토리 타이틀 입히기.
      *
-     * 이미지 추가 모달 띄울 때 히든필드에 히스토리 아이디 값 넣기.
+     * 이미지 추가 모달 띄울 때, 히든필드에 히스토리 아이디 값 넣기.
      */
     $('.item-plus').click(function () {
         var title = $(this).data('title');
@@ -166,7 +209,7 @@ function edit_history_line(history_id, fandom_id, user_id, context, event_date) 
 function add_history_line(fandom_id, user_id, context, event_date) {
     if (parseInt(user_id) !== 0 && fandom_id && context.length !== 0 && event_date) {
         var req = $.ajax({
-            url: '/fandoms/'+fandom_id+'/histories.json',
+            url: '/fandoms/'+fandom_id+'/histories',
             method: 'post',
             data: {
                 history: {
@@ -191,9 +234,9 @@ function add_history_line(fandom_id, user_id, context, event_date) {
 }
 
 /*
- * 히스토리 추가모드 또는 제거모드를 종료할 때
- * 요소의 상태를 원래대로 복구하는 함수
- */
+ * 히스토리 추가모드 또는 수정모드를 종료할 때
+ * 요소의 상태를 원래대로 복구하는 함수들.
+ *///===================
 function close_add_mode() {
     $('#new-history-title').val('');
     $('#history-event_date').val('');
@@ -211,3 +254,19 @@ function close_edit_mode(history_id) {
     $('#history_'+history_id+'_line-save').attr('style', 'opacity: 1;').text('save');
     $('.lightbox-item2').show();
 }
+//======================
+
+
+/*
+ * 툴바 인덱스 클릭 시, 해당 인덱스 위치로 이동.
+ */
+function fnMove(seq) {
+    var offset = $('#history-'+seq+'-line').offset();
+    $('html, body').animate(
+        {
+            scrollTop : offset.top - 90
+        },
+        400
+    )
+}
+

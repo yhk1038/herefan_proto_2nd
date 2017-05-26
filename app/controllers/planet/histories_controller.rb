@@ -10,6 +10,12 @@ class Planet::HistoriesController < ApplicationController
     # GET /fandoms/:fandom_id/histories.json
     def index
         @histories = History.where(fandom_id: params[:fandom_id]).order(event_date: :desc)
+        
+        hash = {}
+        @histories.unscope(:order).order(event_date: :asc).each do |history|
+            hash[history.event_date.year.to_s.to_sym] = history.event_date.strftime('%F')
+        end
+        @years_hash = hash.to_a.reverse.to_h
     end
     
     # GET /fandoms/:fandom_id/histories/1
@@ -38,7 +44,11 @@ class Planet::HistoriesController < ApplicationController
             message = "The History's Date (#{@history.event_date.strftime('%F')}) is already exist!" unless saved
         else
             @history.thumb_img = params[:history][:img]
-            saved = @history.save if History.where(id: @history.history_id).count > 0
+            if History.where(id: @history.history_id).count > 0
+                if params[:history][:img] != nil && params[:history][:img].length > 1
+                    saved = @history.save
+                end
+            end
             message = "Sorry, History item not found!" unless saved
         end
 

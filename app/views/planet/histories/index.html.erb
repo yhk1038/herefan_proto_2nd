@@ -44,16 +44,17 @@
             <div class="col-md-12">
                 <div class="card" id="history-index-wrap">
                     <div class="card-body card-padding">
-                        <p>Edit Mode</p>
-                        <% years = @histories.all.map{|history| history.event_date.year}.uniq %>
+                        <p id="edit_toggleBtn" data-mode="inactive">Edit Mode</p>
                         <ul>
-                            <% years.each do |year| %>
-                                <li><%= year %></li>
-                            <% end %>
+                            <% i=0; @years_hash.each do |year, date| %>
+                                <li class="index_list <%= 'active' if i.zero? %>">
+                                    <a href="#" onclick="fnMove('<%= date %>'); return false;"><span><%= year %></span></a>
+                                </li>
+                            <% i+=1; end %>
                         </ul>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card" id="historyGround">
                     <!--
                     <div class="lv-header-alt clearfix">
                         <h2 class="lvh-label hidden-xs">Some text here</h2>
@@ -120,6 +121,9 @@
                         </ul>
                     </div>
                     -->
+                    <div class="card-header">
+                        <h2 class="c-indigo"><%= @fandom.name %>'s history</h2>
+                    </div>
 
                     <div class="card-body card-padding content-ground">
 
@@ -203,8 +207,8 @@
                             <%= render partial: '/planet/histories/partials/event', collection: @histories, as: :history, locals: { new_history: false } %>
                         <% end %>
 
-
-                        <div style="display: block;">
+                        <!--
+                        <div style="display: none;">
                             <div class="p-timeline">
                                 <div class="pt-line c-gray text-right">
                                     <span class="d-block">2015</span>
@@ -543,6 +547,7 @@
 
                         </div>
                         </div>
+                        -->
 
                     </div>
                 </div>
