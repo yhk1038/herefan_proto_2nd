@@ -31,6 +31,9 @@
 
     <%= javascript_tag "_hf_ = '#{form_authenticity_token}';" %>
     <% $current_user_id = user_signed_in? ? current_user.id : '0' %>
+
+    <!-- Google Web Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800" rel="stylesheet">
 </head>
 
 <body>
