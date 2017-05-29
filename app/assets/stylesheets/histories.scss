@@ -326,12 +326,15 @@
 #history-index-wrap{
 
   &.fixed {
-    position: fixed;
+    //position: fixed;
     margin-left: auto;
     margin-right: auto;
     width: 200px;
-    right: 12%;
-    top: 170px;
+    //right: 12%;
+    //top: 170px;
+      position: absolute;
+      top: 76px;
+      right: 43px;
   }
 
   // Edit mode 전환 버튼

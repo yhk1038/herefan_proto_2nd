@@ -45,7 +45,7 @@ class Planet::HistoriesController < ApplicationController
         else
             @history.thumb_img = params[:history][:img]
             if History.where(id: @history.history_id).count > 0
-                if params[:history][:img] != nil && params[:history][:img].length > 1
+                if params[:history][:img] != nil
                     saved = @history.save
                 end
             end

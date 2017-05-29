@@ -7,7 +7,9 @@ $(document).ready(function () {
      */
     $(window).scroll(function () {
         if ($(this).scrollTop() >= 330) {
-            $('#history-index-wrap').addClass('fixed')
+            $('#history-index-wrap').addClass('fixed');
+            var topScroll = $(this).scrollTop() - 254;
+            $('#history-index-wrap').attr('style', 'top: '+topScroll+'px;');
         } else {
             $('#history-index-wrap').removeClass('fixed')
         }
