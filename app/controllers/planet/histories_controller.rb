@@ -57,7 +57,8 @@ class Planet::HistoriesController < ApplicationController
             if is_second_level
                 redirect_to fandom_histories_path(params[:fandom_id])
             else
-                return render '/planet/histories/create'
+                # return render '/planet/histories/create'
+                redirect_to :back
             end
         else
             return render json: { data: @history, status: :unprocessable_entity, message: message }
