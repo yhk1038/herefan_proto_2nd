@@ -6,7 +6,7 @@
 
 <section id="wiki-ground">
     <div class="container">
-        <div class="row">
+        <div class="row" style="margin-top: 30px;">
             <div class="col-md-3 col-md-push-9 m-t-30">
                 <div id="language_control-box" class="card">
                     <div class="card-body">
@@ -16,18 +16,18 @@
                         </ul>
                     </div>
                 </div>
-                <div id="contents_widget-box" class="card">
+                <div id="contents_widget-box" class="card" style="width: 230px;">
                     <div class="card-header">
                         <h2>contents</h2>
                     </div>
                     <div class="card-body card-padding">
                         <ul><%= @wiki.name %>
                             <% if @fandom.id == 2 %>
-                                <ol>Members</ol>
-                                <ol>Preview</ol>
-                                <ol>Member</ol>
-                                <ol>Features</ol>
-                                <ol>Music Albums</ol>
+                                <li>Members</li>
+                                <li>Preview</li>
+                                <li>Member</li>
+                                <li>Features</li>
+                                <li>Music Albums</li>
                             <% else %>
                                 <ol>official sites</ol>
                                 <ol>members</ol>
@@ -44,7 +44,7 @@
                     <div class="card-body card-padding">
 
                         <!-- Main title -->
-                        <h1 id="main-title"><%= @wiki.name %></h1>
+                        <h1 id="main-title" style="font-weight: 700;"><%= @wiki.name %></h1>
 
                         <!-- Main image -->
                         <div class="row">
@@ -169,8 +169,8 @@
                         <div class="row">
                             <div id="main-section-<%#= i %>" class="col-md-12 wrap-box wiki-section">
                                 <h2 class="sub_title">1. preview
-                                    <a href="#" class="btn btn-default pull-right feature feature-logs c-cyan" onclick="return false;">logs</a>
-                                    <a href="#" class="btn btn-default pull-right feature feature-edit c-cyan" onclick="return false;">edit</a>
+                                    <a href="#" class="btn btn-default feature feature-edit c-cyan" onclick="return false;">edit</a>
+                                    <a href="#" class="btn btn-default feature feature-logs c-cyan" onclick="return false;">logs</a>
                                 </h2>
                                 <div class="section-contents">
                                     <%#== Faker::Lorem.paragraphs(15).join('<br>') %>
@@ -187,8 +187,8 @@
                         <div class="row">
                             <div id="main-section-<%#= i %>" class="col-md-12 wrap-box wiki-section">
                                 <h2 class="sub_title">2. member
-                                    <a href="#" class="btn btn-default pull-right feature feature-logs c-cyan" onclick="return false;">logs</a>
-                                    <a href="#" class="btn btn-default pull-right feature feature-edit c-cyan" onclick="return false;">edit</a>
+                                    <a href="#" class="btn btn-default feature feature-edit c-cyan" onclick="return false;">edit</a>
+                                    <a href="#" class="btn btn-default feature feature-logs c-cyan" onclick="return false;">logs</a>
                                 </h2>
                                 <div class="section-contents">
                                     <%#== Faker::Lorem.paragraphs(15).join('<br>') %>
@@ -205,8 +205,8 @@
                         <div class="row">
                             <div id="main-section-<%#= i %>" class="col-md-12 wrap-box wiki-section">
                                 <h2 class="sub_title">3. features
-                                    <a href="#" class="btn btn-default pull-right feature feature-logs c-cyan" onclick="return false;">logs</a>
-                                    <a href="#" class="btn btn-default pull-right feature feature-edit c-cyan" onclick="return false;">edit</a>
+                                    <a href="#" class="btn btn-default feature feature-edit c-cyan" onclick="return false;">edit</a>
+                                    <a href="#" class="btn btn-default feature feature-logs c-cyan" onclick="return false;">logs</a>
                                 </h2>
                                 <div class="section-contents">
                                     <%#== Faker::Lorem.paragraphs(15).join('<br>') %>
@@ -239,8 +239,8 @@
                         <div class="row">
                             <div id="main-section-<%#= i %>" class="col-md-12 wrap-box wiki-section">
                                 <h2 class="sub_title">4. music albums
-                                    <a href="#" class="btn btn-default pull-right feature feature-logs c-cyan" onclick="return false;">logs</a>
-                                    <a href="#" class="btn btn-default pull-right feature feature-edit c-cyan" onclick="return false;">edit</a>
+                                    <a href="#" class="btn btn-default feature feature-edit c-cyan" onclick="return false;">edit</a>
+                                    <a href="#" class="btn btn-default feature feature-logs c-cyan" onclick="return false;">logs</a>
                                 </h2>
                                 <div class="section-contents">
                                     <%#== Faker::Lorem.paragraphs(15).join('<br>') %>

@@ -434,3 +434,37 @@ body{
         }
     }
 }
+
+
+
+#wiki-ground h2.sub_title{
+    margin-bottom: 30px !important;
+    margin-top: 30px !important;
+    font-weight: 600 !important;
+}
+
+#main_contents-box .wiki-section .section-contents{
+    line-height: 32px;
+    padding: 0 70px !important;
+}
+
+#main_contents-box .wiki-section .sub_title .feature{
+    padding: 6px 10px !important;
+    
+    &:nth-child(1){
+        margin-left: 50px;
+    }
+}
+
+#wiki-ground #contents_widget-box ul,
+#wiki-ground #contents_widget-box ol,
+#wiki-ground #contents_widget-box li{
+    font-size: 16px;
+    line-height: 40px;
+    list-style-type: lower-roman;
+}
+
+#language_control-box {
+    width: 150px !important;
+}
+
