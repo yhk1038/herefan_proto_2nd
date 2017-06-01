@@ -1,4 +1,10 @@
+<%
+    bgcolor = '#07174b'
+%>
 <style>
+    #header{
+        background: <%= bgcolor %> !important;
+    }
     #header.init_header {
         background-color: #2196f3 !important;
         box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3) !important;
@@ -12,13 +18,14 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
         <div class="item active">
-            <div class="carousel-img" style="background-image: url('<%= @fandom.background_img %>'); background-attachment: fixed;"></div>
+            <div class="carousel-img" style="background-image: url('<%= @fandom.background_img %>'); background-attachment: fixed; background-color: <%= bgcolor %> !important;"></div>
             <div class="carousel-caption dropdown">
-                <a href="" class="btn btn-default waves-effect waves-circle waves-float"><span class="zmdi zmdi-trending-up"></span></a>
-                <a id="channel_<%= @fandom.id %>" onclick="followBtn('<%= @follow_control[:follow_cmd] %>', <%= @follow_control[:myfandom_id] %>, <%= @follow_control[:channel_id] %>, <%= @follow_control[:user_id] %>, 'no-text')" class="btn btn-default waves-effect waves-circle waves-float">
-                    <span class="zmdi zmdi-favorite<%= '-outline' unless is_my_fandom?(fandom: @fandom, user: current_user) %> <%= 'c-pink' if is_my_fandom?(fandom: @fandom, user: current_user) %>"></span>
+                <a href="" class="btn btn-default waves-effect waves-circle waves-float" style="display: none;"><span class="zmdi zmdi-trending-up"></span></a>
+                <a id="channel_<%= @fandom.id %>" onclick="followBtn('<%= @follow_control[:follow_cmd] %>', <%= @follow_control[:myfandom_id] %>, <%= @follow_control[:channel_id] %>, <%= @follow_control[:user_id] %>, 'no-text')" class="channel_followBtn">
+                    <!--<span class="zmdi zmdi-favorite<%#= '-outline' unless is_my_fandom?(fandom: @fandom, user: current_user) %> <%#= 'c-pink' if is_my_fandom?(fandom: @fandom, user: current_user) %>"></span>-->
+                    <span class="<%= 'active' unless is_my_fandom?(fandom: @fandom, user: current_user) %> <%= 'c-pink' if is_my_fandom?(fandom: @fandom, user: current_user) %>">follow</span>
                 </a>
-                <a href="" id="Pshare-dd" data-toggle="dropdown" aria-expanded="false" class="btn btn-default waves-effect waves-circle waves-float dropdown-toggle"><span class="zmdi zmdi-share"></span></a>
+                <a href="" id="Pshare-dd" data-toggle="dropdown" aria-expanded="false" class="channel_followBtn dropdown-toggle" style="right: -42%;"><span class="zmdi zmdi-share">share</span></a>
                 <ul id="Pshare-dd-menu" class="dropdown-menu no-vl go-social" role="menu" aria-labelledby="Pshare-dd">
                     <li class="sns_share card-body clearfix">
                         <a class="col-xs-4" href="http://www.facebook.com/sharer/sharer.php?u=<%= request.url %>" onclick="window.open(this.href); return false"><img src="/template/img/social/facebook-128.png" class="img-responsive" alt=""></a>

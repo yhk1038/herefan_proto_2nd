@@ -6,7 +6,7 @@ module FandomsHelper
         if user
             if user.fandom_lists.include?(resource)
                 myfandom = Myfandom.where(user: user, fandom: resource).take
-                btn = "<a id='channel_#{resource.id}' onclick='followBtn(\"cancel\", #{myfandom.id}, #{resource.id}, #{user.id}, \"\")' class='pv-follow-btn bgm-red' style='cursor: pointer'>Followed</a>"
+                btn = "<a id='channel_#{resource.id}' onclick='followBtn(\"cancel\", #{myfandom.id}, #{resource.id}, #{user.id}, \"\")' class='pv-follow-btn followed' style='cursor: pointer'><span class='zmdi zmdi-star' style='font-size: 20px; position: relative; top: 2px;'></span> Followed</a>"
             else
                 btn = "<a id='channel_#{resource.id}' onclick='followBtn(\"follow\", 0, #{resource.id}, #{user.id}, \"\")' class='pv-follow-btn' style='cursor: pointer'>Follow</a>"
             end

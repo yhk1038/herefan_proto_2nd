@@ -1,0 +1,436 @@
+html,
+body{
+    font-family: 'Nunito', sans-serif !important;
+}
+
+/********************************/
+/*        Navigation Bar        */
+/********************************/
+
+#header{
+    z-index: 11;
+    min-height: 60px; // Add for design
+    
+    // Opt-In :design:
+    //background: none;     // design Before
+    background: #ffde55;    // design After
+    
+    box-shadow: none !important;
+    -webkit-transition: all 300ms ease;
+    -moz-transition: all 300ms ease;
+    -ms-transition: all 300ms ease;
+    -o-transition: all 300ms ease;
+    transition: all 300ms ease;
+    
+    &.init_header {
+        //background-color: #2196f3 !important;
+        //box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3) !important;
+    }
+    
+    .main_menu{
+        margin-left: 29px;
+        
+        a{
+            padding: 7px 20px;
+            color: #efefef;
+            font-size: 16px;
+            font-weight: 700;
+            
+            &:hover{
+                color: #FFFFFF;
+            }
+        }
+        
+        .active a{
+            color: #1bacaa !important;
+        }
+    }
+    
+    .top-menu{
+        & > li{
+            &:before{
+                display: none; // 이거 하나로 상단 좌측 li 의 hover 효과를 무력화 시켰음.
+            }
+            
+            a{
+                color: #EFEFEF;
+            }
+        }
+        
+        #top-fandoms{
+            a{
+                font-size: 16px;
+                font-weight: 700;
+                padding: 7px 0;
+                text-transform: capitalize;
+                
+                &.active{
+                    color: #1bacaa;
+                }
+            }
+        }
+    
+        .new_nav_profile{
+        
+            .nav_profile2 {
+                margin: 0 30px;
+                
+                & > .bg_img_cover{
+                    width: 40px;
+                    height: 40px;
+                    position: absolute;
+                    top: -3px;
+                    left: 0;
+                    right: 0;
+                    margin: auto;
+                    border: 1px solid #ccc;
+                }
+            }
+        
+            .nav_profile2-name {
+                display: none !important;
+            }
+        }
+        
+        .dropdown-menu{
+            
+            .listview{
+                
+                .lv-body{
+                    padding: 0 10px;
+                    
+                    .lv-item{
+                        padding: 10px 0;
+                        border-bottom: 1px solid #ccc;
+                        &:hover{
+                            background: #ccc !important;
+                        }
+                        
+                        .media{
+                            .media-body{
+                                .lv-title{
+                                    text-align: center;
+                                    text-transform: capitalize;
+                                    font-weight: 400;
+                                    font-size: 18px;
+                                    
+                                    &.signout{
+                                        font-weight: 600;
+                                        color: #1bacaa;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+}
+
+.header-inner{
+    padding: 11px 0; // Add for design
+}
+
+.main_menu{
+    a{
+        color: #fff;
+        text-transform: uppercase;
+        display: block;
+        font-size: 15px;
+    }
+}
+
+#header .logo{
+    position: absolute;
+    left: 30%;
+    right: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-weight: bold;
+    
+    top: 0;         // design
+    height: 100%;   // design
+    
+    a{ // design
+        padding: 0;
+        height: 100%;
+        
+        img{ // design
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+        }
+    }
+}
+
+#header .logo .hf-logo{
+    width: 45px;
+    height: 35px;
+}
+
+.dropdown-menu:before{
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: -10px;
+    right: 15px;
+    border-bottom: 10px solid #fff;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+}
+
+
+
+
+/********************************/
+/*        Carousel Style        */
+/********************************/
+.channel {
+    .carousel-inner {
+        & > .item.active {
+            & > .carousel-img{
+                height: 260px !important;
+                background-size: auto 260px !important;
+                background-image: none !important;
+            }
+        }
+    }
+    
+    &.carousel{
+        .carousel-caption{
+            .channel_name{
+                font-weight: 700 !important;
+                right: -30% !important;
+                bottom: 125px !important;
+            }
+            .channel_follow_count{
+                right: -29% !important;
+                bottom: 100px !important;
+                color: #ddd !important;
+                font-weight: 400 !important;
+            }
+            
+            .channel_followBtn{
+                width: 80px !important;
+                height: 30px !important;
+                position: absolute;
+                left: 0;
+                right: -29%;
+                bottom: 60px;
+                margin: auto;
+                background: #07174b;
+                border: 1px solid #b3b3b3;
+                font-size: 16px;
+                font-weight: 600;
+                color: #b3b3b3;
+                padding: 3px 12px;
+                text-transform: capitalize;
+                cursor: pointer;
+                
+                span:before{
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+#Pshare-dd-menu {
+    position: absolute !important;
+    width: 250px !important;
+    top: 100px !important;
+    left: 0 !important;
+    right: -66% !important;
+    margin: 0 auto !important;
+}
+
+.carousel {
+    .carousel-caption{
+        background: url(/svg/plante_bg.svg) !important;
+        background-size: cover !important;
+        background-position: 15px 0 !important;
+        background-repeat: no-repeat;
+        
+        &:before{
+            width: 260px !important;
+            height: 260px !important;
+            top: 27px !important;
+            left: -53px !important;
+            border: none !important;
+        }
+    }
+}
+
+
+/********************************/
+/*         Sub Nav Style        */
+/********************************/
+
+#sub-nav {
+    width: 100%;
+    background: #ffffff;
+    //border-bottom: 1px solid #b3b3b3;
+    box-shadow: 0 1px 1px rgba(204, 204, 204, 0.9);
+
+    .tab-group{
+        text-align: center;
+        list-style: none;
+        margin-bottom: 0;
+
+        & > .tab{
+            position: relative;
+            display: inline-flex;
+            margin: 0;
+
+            & > .tab_link {
+                padding: 14px 15px;
+                font-size: 22px;
+            }
+        }
+    }
+}
+
+
+.tab {
+    & > .tab_link {
+        color: #999999;
+        font-weight: 600;
+        font-size: 15px;
+        text-transform: capitalize;
+
+        &:hover{
+            color: #1bacaa;
+        }
+        &.active{
+            /* #2196f3 #1d84d6 */
+            //border-bottom: 3px solid #2196f3;
+            color: #1bacaa;
+            font-weight: 700;
+        }
+    }
+}
+
+
+@media (max-width: 430px) {
+    .tab-group > .tab {
+        margin: 0 3px !important;
+    }
+    .tab-group > .tab > .tab_link {
+        padding: 10px 5px !important;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#channels{
+    .hf-e-body{
+        padding-bottom: 1px;
+        
+        h2.text{
+            font-size: 18px;
+            font-weight: 700;
+            color: #0b1742;
+            margin-bottom: 0;
+        }
+        .pv-follow{
+            margin: 0;
+            background: none;
+            border: none;
+            padding: 0;
+            font-weight: 400;
+            font-size: 16px;
+            color: #b3b3b3;
+        }
+        .pv-follow-btn{
+            background: none;
+            color: #b3b3b3;
+            font-size: 16px;
+            font-weight: 600;
+            border: 1px solid #ccc;
+            margin: 15px auto 19px;
+            max-width: 80px;
+            padding: 3px;
+            
+            &.followed{
+                border: none;
+                max-width: 200px;
+                color: #343e9d;
+                font-weight: 600;
+                
+                &:before{
+                    display: inline-block;
+                    font: normal normal normal 14px/1 'Material-Design-Iconic-Font';
+                    font-size: 20px;
+                    text-rendering: auto;
+                    -webkit-font-smoothing: antialiased;
+                    -moz-osx-font-smoothing: grayscale;
+                    //content: '\f27d';
+                    position: absolute;
+                    width: 15px;
+                    height: 15px;
+                }
+            }
+        }
+    }
+    
+    .unpublished_channels{
+        margin-top: 72px;
+        
+        h2{
+            color: #343e9d;
+            font-size: 35px;
+            font-weight: 700;
+            padding-left: 10px;
+            
+            small{
+                margin-top: 30px;
+                color: #1bacaa;
+                font-size: 16px;
+                font-weight: 400;
+            }
+        }
+        
+        .inactive{
+            &:before {
+                content: '' !important;
+                height: 180px !important;
+                background: rgba(7, 23, 75, 0.61) !important;
+            }
+            
+            .pv-follow{
+                max-height: 0;
+                
+                li{
+                    font-family: 'Nunito', sans-serif !important;
+                    &:after{
+                        content: '10 more followers to go!' !important;
+                        opacity: 1 !important;
+                        font-weight: 600;
+                        font-size: 16px;
+                        color: #FFFFFF;
+                        position: absolute;
+                        bottom: -80px;
+                        left: 0;
+                        right: 0;
+                    }
+                }
+            }
+        }
+    }
+}
