@@ -3,38 +3,46 @@ require 'open-uri'
 require 'open_uri_redirections'
 
 class HomeController < ApplicationController
-    before_action :filling_tab_group, only: [:index]
+    before_action :filling_tab_group, only: [:index, :new_content]
     before_action :my_published_fandoms
-    
+
     def go_for
         if user_signed_in?
             if current_user.fandoms.published.count.zero?
                 redirect_to fandoms_path
             else
-                redirect_to '/home/index'
+                redirect_to home_my_path
             end
         else
-            redirect_to fandoms_path
+            redirect_to home_new_path
         end
     end
-    
+
+    def new_content
+        @tabs[0][:active] = 'active'
+        @links = []
+        @links = Link.order(created_at: :desc)
+        @fandoms = current_user.fandoms.published if user_signed_in?
+    end
+
     def index
+        @tabs[1][:active] = 'active'
         @links = []
         @links = current_user.links if user_signed_in?
         @fandoms = current_user.fandoms.published if user_signed_in?
     end
-    
+
     # POST '/utils/user_watched_this_link' :: params[:user_id], params[:link_id], as: visited_link_counter
     def visited_link_counter
         VisitedLink.find_or_create2(params[:user_id], params[:link_id])
         render json: nil, status: :ok
     end
-    
+
     # POST '/crawler/uri_spy :: params[:url]' as: crawling_uri_path(url)
     def uri_spy
-        
+
         uri = params[:url]
-        
+
         doc = Nokogiri::HTML(open(uri, :allow_redirections => :all))
         # puts doc.search('meta', 'title')
 
@@ -49,8 +57,8 @@ class HomeController < ApplicationController
             end
         end
         # puts title
-        
-        
+
+
         description = doc.at("meta[property='og:description']")
         if description.nil?
             description   = doc.search('description').text.strip
@@ -80,7 +88,7 @@ class HomeController < ApplicationController
             image   = image['content']
         end
         # puts image
-        
+
 
         url         = doc.at("meta[property='og:url']")
         if url.nil?
@@ -89,8 +97,8 @@ class HomeController < ApplicationController
             url     = url['content']
         end
         # puts url
-        
-        
+
+
         return @target = {
             title: title,
             description: description.gsub(/\n/,' ').gsub(/\r/,' '),
@@ -98,13 +106,14 @@ class HomeController < ApplicationController
             url: url
         }
     end
-    
+
     def filling_tab_group
         @tabs = []
-        @tabs << { name: 'my', path: '', active: 'active' }
+        @tabs << { name: 'new', path: home_new_url, active: '' }
+        @tabs << { name: 'my', path: home_my_url, active: '' }
     end
-    
-    
+
+
     # GET /letter_count
     def letter_count
         render layout: false
