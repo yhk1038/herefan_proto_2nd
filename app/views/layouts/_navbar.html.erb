@@ -31,11 +31,13 @@
                     <a href=""><i class="tm-icon zmdi zmdi-search"></i></a>
                 </li>
 
-                <li id="top-fandoms">
-                    <a href="#" onclick="return false;" class="active">
-                        following <i class="zmdi zmdi-caret-down"></i>
-                    </a>
-                </li>
+                <% if user_signed_in? %>
+                    <li id="top-fandoms">
+                        <a href="#" onclick="return false;" class="active">
+                            my planets <i class="zmdi zmdi-caret-down"></i>
+                        </a>
+                    </li>
+                <% end %>
 
                 <li class="dropdown hidden-xs" style="padding: 2px 0; width: 110px;">
                     <% if user_signed_in? %>
