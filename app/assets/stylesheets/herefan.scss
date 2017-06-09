@@ -890,9 +890,14 @@ section#toolbar{
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     box-shadow: 0 0 2px rgba(0,0,0,0.2);
+    -webkit-transition: all 250ms ease;
+    -moz-transition: all 250ms ease;
+    -ms-transition: all 250ms ease;
+    -o-transition: all 250ms ease;
+    transition: all 100ms ease;
     
     &:hover{
-        box-shadow: 0 0 5px rgba(0,0,0,0.7);
+        box-shadow: 0 0 9px rgba(0,0,0,0.5);
     }
     
     .bp-header{
@@ -917,9 +922,9 @@ section#toolbar{
             p.link-url{
                 text-align: right;
                 margin: 20px 0 0;
-                color: #DDDDDD;
+                color: #ccc;
                 font-weight: 300;
-                font-size: 12px;
+                font-size: 14px;
             }
         }
         
@@ -946,19 +951,16 @@ section#toolbar{
     .user_profile{
         padding: 10px 0 0 15px;
         background: #FFFFFF;
-        border-top: 3px solid #E0E0E0;
+        border-top: 3px solid #f5f5f5;
         
         .media .pull-left .lv-img-sm{
-            width: 30px;
-            height: 30px;
-            border: 1px solid #b3b3b3;
+            border: 1px solid #ccc;
         }
         
         .lv-title{
             color: #999;
             font-size: 14px;
             font-weight: 600;
-            line-height: 1;
         }
         .lv-small{
             color: #999;
@@ -975,12 +977,12 @@ section#toolbar{
         
         .action{
             margin-top: -30px;
+            padding-right: 15px;
             
             &.viewcount{
                 text-align: left;
                 
                 span{
-                    font-size: 11px !important;
                     color: #bbb;
                     font-weight: 300;
                 }
@@ -989,7 +991,8 @@ section#toolbar{
                 .zmdi-favorite-outline{
                     color: #B3B3B3 !important;
                 }
-                &:hover .zmdi-favorite-outline{
+                &:hover .zmdi-favorite-outline,
+                &:hover .zmdi-favorite{
                     -webkit-transform: rotate(-20deg);
                     -moz-transform: rotate(-20deg);
                     -ms-transform: rotate(-20deg);
@@ -1009,6 +1012,19 @@ section#toolbar{
             & > a{
                 margin: 5px -15px;
                 font-size: 15px;
+                color: #B3B3B3;
+                
+                &:hover i{
+                    -webkit-transform: rotate(-20deg);
+                    -moz-transform: rotate(-20deg);
+                    -ms-transform: rotate(-20deg);
+                    -o-transform: rotate(-20deg);
+                    transform: rotate(-20deg);
+                }
+                &:focus i,
+                &:active{
+                    color: #343e9d;
+                }
             }
         }
     }
@@ -1024,7 +1040,7 @@ section#toolbar{
         .msg{
             font-size: 15px;
             color: #aaa;
-            font-weight: 300;
+            font-weight: 400;
         }
     }
     
@@ -1032,19 +1048,21 @@ section#toolbar{
         display: none;
     }
     &.visited{
-        .user_profile{ background: #f3f3f3 }
+        .user_profile{
+            background: #f3f3f3;
+            border-top: 3px solid #e0e0e0;
+        }
         .msg-box{ background: #f3f3f3 }
         .bp-title{
             background: #f3f3f3;
             
             h2.linkcard-title{
-                color: #999;
+                color: #666;
                 font-weight: 400;
             }
     
             small.linkcard-description{
-                font-weight: 300;
-                color: #B3B3B3;
+                color: #666;
             }
         }
     }
@@ -1056,5 +1074,52 @@ section#toolbar{
         .clip{
             color: #00c9c6;
         }
+    }
+}
+
+
+
+
+
+/********************************/
+/*    Layout Other Elements     */
+/********************************/
+
+// go top scroll button
+#goTopBtn_renewal{
+    bottom: 115px;
+    right: 3%;
+    position: fixed !important;
+    z-index: 3;
+    padding: 7px 12px;
+    transition: all 100ms ease !important;
+    
+    i{
+        color: #00c9c6 !important;
+        transform: rotate(-90deg);
+        font-weight: 900;
+        font-size: 25px;
+        position: relative;
+        left: -0.5px;
+    }
+    
+    &:hover{
+        padding-top: 3px;
+    }
+}
+
+#addLinkBtn_renewal{
+    bottom: 50px;
+    right: 3%;
+    position: fixed !important;
+    z-index: 3;
+    
+    i{
+        color: #00c9c6 !important;
+        transition-duration: 100ms;
+    }
+    
+    &:hover i{
+        transform: rotate(20deg);
     }
 }

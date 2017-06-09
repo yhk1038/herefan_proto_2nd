@@ -341,3 +341,10 @@ function ajax_follow_cancel(channel_id, user_id, myfandom_id, option) {
         counter.text(count);
     })
 }
+
+
+// UTILITY Group
+// goTopScroll
+function goTopScroll() {
+    $('html, body').animate({scrollTop: 0 }, 'slow');
+}

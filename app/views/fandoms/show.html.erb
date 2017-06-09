@@ -6,9 +6,13 @@
 
 <%= render partial: '/layouts/link_section' %>
 
+<button id="goTopBtn_renewal" class="btn bgm-white btn-float" onclick="goTopScroll(); return false;">
+    <i class="zmdi zmdi-arrow-right"></i>
+</button>
+
 <% if user_signed_in? && is_my_fandom?(fandom: @fandom, user: current_user) %>
-    <button class="btn btn-danger btn-float wave-effect" style="bottom: 50px; right: 3%; position: fixed !important; z-index: 3;"  data-toggle="modal" data-target="#add_link_modal">
-        <i class="zmdi zmdi-plus"></i>
+    <button id="addLinkBtn_renewal" class="btn bgm-white btn-float" data-toggle="modal" data-target="#add_link_modal">
+        <i class="zmdi zmdi-edit"></i>
     </button>
 
     <!-- Modal -->
