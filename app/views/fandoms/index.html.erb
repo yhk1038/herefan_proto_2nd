@@ -6,38 +6,45 @@
     </button>
 <% end %>
 
-<section id="sorting_methods" class="container">
-    <div class="row">
-        <div class="col-sm-6"></div>
-        <div class="col-sm-6">
-            <div class="col-md-4"></div>
-            <div class="col-md-8">
-                <ul class="methods-wrapper">
-                    <label class="radio radio-inline">
-                        <input type="radio" name="sort_option" value="popular" checked>
-                        <i class="input-helper"></i>
-                        <span class="label_text">popular</span>
-                    </label>
-                    <label class="radio radio-inline">
-                        <input type="radio" name="sort_option" value="recent">
-                        <i class="input-helper"></i>
-                        <span class="label_text">recent</span>
-                    </label>
-                    <label class="radio radio-inline">
-                        <input type="radio" name="sort_option" value="abc">
-                        <i class="input-helper"></i>
-                        <span class="label_text">abc</span>
-                    </label>
-                </ul>
+<section id="channels" class="container card" style="padding-bottom: 50px;">
+    <div id="sorting_methods">
+        <div class="row">
+            <div class="col-sm-6"></div>
+            <div class="col-sm-6" style="padding: 0;">
+                <div class="col-md-4"></div>
+                <div class="col-md-8" style="padding: 0;">
+                    <!--
+                    <ul class="methods-wrapper">
+                        <label class="radio radio-inline">
+                            <input type="radio" name="sort_option" value="popular" checked>
+                            <i class="input-helper"></i>
+                            <span class="label_text">popular</span>
+                        </label>
+                        <label class="radio radio-inline">
+                            <input type="radio" name="sort_option" value="recent">
+                            <i class="input-helper"></i>
+                            <span class="label_text">recent</span>
+                        </label>
+                        <label class="radio radio-inline">
+                            <input type="radio" name="sort_option" value="abc">
+                            <i class="input-helper"></i>
+                            <span class="label_text">abc</span>
+                        </label>
+                    </ul>
+                    -->
+                    <ul class="methods-wrapper">
+                        <li class="method <%= 'active' if params[:method] == 'abc' %>"><a href="?method=abc" class="methodBtn">abc</a></li>
+                        <li class="method <%= 'active' if params[:method] == 'recent' %>"><a href="?method=recent" class="methodBtn">recent</a></li>
+                        <li class="method <%= 'active' if params[:method] == 'popular' || params[:method].nil? %>"><a href="?method=popular" class="methodBtn">popular</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-</section>
-
-<section id="channels" class="container">
     <div class="row" style="text-align: left; max-width: 960px; margin: auto; padding: 0 60px;">
         <% @fandoms.each do |fandom| %>
             <div class="" style="width: 250px; margin: 30px 10px 10px; height: 300px; display: inline-table;">
+
                 <%= link_to fandom_path(fandom) do %>
                     <div class="card profile-view" style="margin: 0;">
                         <div class="pv-header hf-e-header"  style="background-image: url('<%= fandom.background_img %>'); height: 125px;">
@@ -110,31 +117,31 @@
 <div class="modal fade" id="suggest_channel_modal" tabindex="-1" role="dialog" aria-labelledby="addLinkModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
-            <div class="modal-header bgm-teal" style="border-top-left-radius: 3px; border-top-right-radius: 3px;">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="color: #fff">&times;</span></button>
-                <h2 class="modal-title" style="color: #ffffff;">Suggest a new Channel</h2>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title">Fandom Suggestions</h2>
             </div>
             <form action="<%= fandoms_path %>" method="post">
                 <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
                 <div class="modal-body">
-                    <p class="c-black f-500 m-b-0 f-20">Step 1. Name</p>
-                    <div class="input-group fg-float m-t-15 w-100">
+                    <p class="m-b-0 f-16">step 1. Name of the Fandom</p>
+                    <div class="input-group fg-float m-t-10 w-100">
                         <div class="fg-line">
                             <input type="text" class="form-control fg-input" name="fandom[name]" id="link_url">
                             <label class="fg-label">Artist's Official Name (Eng)</label>
                         </div>
                     </div>
 
-                    <p class="c-black f-500 m-b-0 m-t-25 f-20">Step 2. Logo</p>
-                    <div class="input-group fg-float m-t-15 w-100">
+                    <p class="m-b-0 m-t-30 f-16">step 2. Logo of the Fandom</p>
+                    <div class="input-group fg-float m-t-10 w-100">
                         <div class="fg-line">
                             <input type="text" class="form-control fg-input" name="fandom[profile_img]" id="link_url">
                             <label class="fg-label">Artist's Official Logo image (Only URL)</label>
                         </div>
                     </div>
 
-                    <p class="c-black f-500 m-b-0 m-t-25 f-20">Step 3. Background</p>
-                    <div class="input-group fg-float m-t-15 w-100">
+                    <p class="m-b-0 m-t-30 f-16">step 3. Background image</p>
+                    <div class="input-group fg-float m-t-10 w-100">
                         <div class="fg-line">
                             <input type="text" class="form-control fg-input" name="fandom[background_img]" id="link_url">
                             <label class="fg-label">Artist's Official Background image (Only URL)</label>
@@ -143,7 +150,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="submit" id="saveBtn" class="btn bgm-blue" style="text-transform: uppercase;">save</button>
+                    <button type="submit" id="saveBtn" class="btn">next</button>
                 </div>
             </form>
         </div>
@@ -183,3 +190,9 @@
 
     <%= link_to 'New Fandom', new_fandom_path %>
 </div>
+
+<style>
+    section#page_header{
+        margin-bottom: 0;
+    }
+</style>
