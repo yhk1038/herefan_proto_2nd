@@ -733,6 +733,7 @@ section#toolbar{
     }
     
     .left_group{
+        
         & > li{
             a{
                 padding: 4px 12px;
@@ -756,6 +757,18 @@ section#toolbar{
     }
     
     .right_group{
+        a{
+            font-size: 16px;
+        }
+        
+        .dropdown-menu{
+            border: 1px solid #ccc;
+            
+            &:before{
+                display: none;
+            }
+        }
+        
         .dropdown-toggle{
             border: 1px solid #b3b3b3;
             color: #b3b3b3;
@@ -1031,6 +1044,14 @@ section#toolbar{
     .share_box{
         margin-top: -29px;
         cursor: pointer;
+        
+        .dropdown-menu{
+            border: 1px solid #ccc !important;
+            
+            &:before{
+                display: none;
+            }
+        }
     }
     
     .msg-box{
