@@ -961,6 +961,9 @@ section#toolbar{
                 color: #ccc;
                 font-weight: 300;
                 font-size: 14px;
+                white-space: pre;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
         }
         
