@@ -1,4 +1,4 @@
-<div id="sub-nav">
+<div id="sub-nav" data-loc="<%= params[:controller] %>">
     <ul class="tab-group container">
         <% tabs.each do |tab| %>
             <li class="tab"><a href="<%= tab[:path] %>" class="tab_link <%= tab[:active] %>"><%= tab[:name] %></a></li>
