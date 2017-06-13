@@ -1,0 +1,102 @@
+<%= render partial: '/fandoms/partials/planet_header' %>
+
+<%= render partial: '/layouts/sub_nav', locals: {tabs: @tabs} %>
+
+<section id="wiki-ground" data-page="posts">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-md-push-9 m-t-30">
+                <div id="language_control-box" class="card">
+                    <div class="card-body">
+                        <ul>
+                            <li class="active">english</li>
+                            <li>spanish</li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="contents_widget-box" class="card">
+                    <div class="card-header">
+                        <h2>contents</h2>
+                    </div>
+                    <div class="card-body card-padding">
+                        <ul><%= @wiki.name %>
+                            <ol>official sites</ol>
+                            <ol>members</ol>
+                            <% @sections.each do |section| %>
+                                <% post = section.wiki_posts.last %>
+                                <ol><a href="#main-section-<%= section.id %>"><%= post.title %></a></ol>
+                            <% end %>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9 col-md-pull-3">
+                <div id="main_contents-box" class="card">
+                    <p class="m-t-30 m-b-0 p-b-20"><%= @fandom.name %></p>
+                    <p class="m-t-20 m-b-0 p-b-20"><%= "#{@wiki_pointer.sort_num}. #{@wiki_posts.last.title}" %> <span>view records</span></p>
+
+                    <div class="m-t-20">
+                        <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Version</th>
+                            <th>Description</th>
+                            <th>Order Change</th>
+                            <th>edited by</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <% @wiki_posts.each do |wiki_post| %>
+
+                            <tr>
+                                <td>
+                                    <%= link_to fandom_wiki_post_path(@fandom, wiki_post, wiki_pointer_id: @wiki_pointer.id) do %>
+                                        <%= wiki_post.created_at.to_time.strftime('%R, %d %B %Y') %>
+                                    <% end %>
+                                </td>
+                                <td>
+                                    <%= link_to fandom_wiki_post_path(@fandom, wiki_post, wiki_pointer_id: @wiki_pointer.id) do %>
+                                        <%= wiki_post.id %>
+                                    <% end %>
+                                </td>
+                                <td>
+                                    <%= link_to fandom_wiki_post_path(@fandom, wiki_post, wiki_pointer_id: @wiki_pointer.id) do %>
+                                        <%= wiki_post.commit_msg %>
+                                    <% end %>
+                                </td>
+                                <td>
+                                    <%= link_to fandom_wiki_post_path(@fandom, wiki_post, wiki_pointer_id: @wiki_pointer.id) do %>
+                                        <%= wiki_post.row_count %>
+                                    <% end %>
+                                </td>
+                                <td>
+                                    <%= link_to fandom_wiki_post_path(@fandom, wiki_post, wiki_pointer_id: @wiki_pointer.id) do %>
+                                        <%= wiki_post.user.nickname %>
+                                    <% end %>
+                                </td>
+                            </tr>
+
+                        <% end %>
+                        </tbody>
+                    </table>
+                    </div>
+
+                    <br>
+
+                    <!--<#%= link_to 'New Wiki Post', new_fandom_wiki_post_path(@fandom) %>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .border{
+        border: 1px solid #000000;
+    }
+    .table-bordered {
+        border: 2px solid #e0e0e0;
+    }
+</style>

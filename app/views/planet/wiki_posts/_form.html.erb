@@ -1,0 +1,47 @@
+<%= form_for(wiki_post, url: "/fandoms/#{@fandom.id}/wiki_posts") do |f| %>
+    <% if wiki_post.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(wiki_post.errors.count, "error") %> prohibited this wiki_post from being saved:</h2>
+
+            <ul>
+                <% wiki_post.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+
+    <%= f.hidden_field :user_id, value: $current_user_id %>
+
+    <div id="wiki_post_title-edit_box" class="field hidden_field">
+        <%= f.label :wiki_pointer_id %>
+        <%= f.number_field :wiki_pointer_id %>
+
+        <%= f.label :title %>
+        <%= f.text_field :title %>
+    </div>
+
+    <div class="field">
+        <%#= f.label :content %>
+        <%= f.text_area :content %>
+    </div>
+
+    <div class="field m-t-15">
+        <label for="wiki_post_commit_msg">description</label>
+        <%= f.text_field :commit_msg %>
+    </div>
+
+    <div class="field hidden_field">
+        <%= f.label :row_count %>
+        <%= f.number_field :row_count %>
+    </div>
+
+    <div class="field hidden_field">
+        <%= f.label :url %>
+        <%= f.text_field :url %>
+    </div>
+
+    <div class="actions">
+        <%= f.submit %>
+    </div>
+<% end %>

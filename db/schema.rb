@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170523011203) do
+ActiveRecord::Schema.define(version: 20170612144049) do
 
   create_table "clips", force: :cascade do |t|
     t.integer  "user_id"
@@ -128,6 +128,30 @@ ActiveRecord::Schema.define(version: 20170523011203) do
     t.datetime "updated_at", null: false
     t.index ["link_id"], name: "index_visited_links_on_link_id"
     t.index ["user_id"], name: "index_visited_links_on_user_id"
+  end
+
+  create_table "wiki_pointers", force: :cascade do |t|
+    t.integer  "wiki_id"
+    t.integer  "sort_num"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["wiki_id"], name: "index_wiki_pointers_on_wiki_id"
+  end
+
+  create_table "wiki_posts", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "wiki_id"
+    t.string   "title"
+    t.text     "content"
+    t.string   "commit_msg"
+    t.integer  "row_count"
+    t.string   "url"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "wiki_pointer_id"
+    t.index ["user_id"], name: "index_wiki_posts_on_user_id"
+    t.index ["wiki_id"], name: "index_wiki_posts_on_wiki_id"
+    t.index ["wiki_pointer_id"], name: "index_wiki_posts_on_wiki_pointer_id"
   end
 
   create_table "wikis", force: :cascade do |t|

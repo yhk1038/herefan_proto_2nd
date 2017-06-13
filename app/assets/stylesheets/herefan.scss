@@ -1172,3 +1172,113 @@ section#toolbar{
         transform: rotate(20deg);
     }
 }
+
+
+
+
+/********************************/
+/*          Wiki Style          */
+/********************************/
+
+#wiki-ground{
+    & > .container{
+        & > .row{
+            margin-top: 1px;
+        }
+    }
+    
+    #contents_widget-box{
+        width: 230px;
+    }
+    
+    &[data-page='posts'],
+    &[data-page='edit']{
+        
+        // Index Page
+        #main_contents-box{
+            padding: 25px;
+            padding-bottom: 125px;
+            
+            & > p{
+                font-weight: 600;
+                
+                &:nth-child(1){
+                    font-size: 20px;
+                }
+                &:nth-child(2){
+                    font-size: 25px;
+                    text-transform: capitalize;
+                    
+                    span:not(.edge){
+                        text-transform: initial;
+                        color: #1bacaa;
+                        margin-left: 20px;
+                    }
+                    span.edge{
+                        cursor: pointer;
+                    }
+                }
+            }
+            
+            & > div{
+                padding: 0 20px;
+                
+                .table{
+                    &.table-bordered{
+                        thead, tbody, tfoot{
+                            tr{
+                                td, th{
+                                    border: 2px solid #e0e0e0 !important;
+                                    border-bottom: none !important;
+                                }
+                            }
+                        }
+                    }
+                    
+                    th{
+                        text-align: center;
+                        text-transform: lowercase;
+                        color: #B3B3B3;
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
+        
+        
+        // Edit Page
+        .hidden_field {
+            display: none;
+        }
+        textarea{
+            width: 100%;
+            height: 300px;
+            border: 1.5px solid #e0e0e0;
+            background-color: #F0F0F0;
+            color: #5e5e5e;
+            padding: 20px;
+            font-size: 15px;
+            font-weight: 600;
+            line-height: 1.8;
+        }
+        label{
+            text-transform: capitalize;
+            font-size: 16px;
+            font-weight: 600;
+            width: 15%;
+            padding: 6px;
+            text-align: center;
+            float: left;
+        }
+        input[type='text']{
+            position: relative;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            width: 85%;
+            padding: 6px 12px;
+            font-size: 16px;
+            color: #777;
+        }
+    }
+}

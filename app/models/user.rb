@@ -16,6 +16,7 @@ class User < ApplicationRecord
     has_many :fandoms, through: :myfandoms
     has_many :histories
     has_many :links
+    has_many :wiki_posts
     has_many :visited_links, dependent: :destroy
     has_many :likes, dependent: :destroy
     has_many :clips, dependent: :destroy

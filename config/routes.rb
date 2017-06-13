@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  
     ## User
     devise_for :users, :controllers => {
             sessions: 'users/sessions',
@@ -17,6 +18,8 @@ Rails.application.routes.draw do
             resources :wikis
             resources :histories
             resources :schedules
+
+            resources :wiki_posts
         end
     end
 

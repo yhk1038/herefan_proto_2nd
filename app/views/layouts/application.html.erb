@@ -36,7 +36,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800" rel="stylesheet">
 </head>
 
-<body style="background: #fff !important">
+<body style="<%= 'background: #fff !important' if params[:controller].in?(%w(home)) %>">
 <!-- Navbar -->
 <%= render partial: '/layouts/navbar' %>
 

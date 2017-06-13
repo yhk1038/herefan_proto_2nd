@@ -13,6 +13,7 @@ class Planet::WikisController < ApplicationController
         dummy_wiki_append if @wikis.count.zero?
         @wiki   = @wikis.find_by(wiki: nil)
         @sub_wikis = @wiki.wikis
+        @sections = @wiki.wiki_pointers
     end
     
     # GET /fandoms/:fandom_id/wikis/1
