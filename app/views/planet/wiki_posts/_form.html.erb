@@ -12,23 +12,28 @@
     <% end %>
 
     <%= f.hidden_field :user_id, value: $current_user_id %>
+    <%= f.hidden_field :wiki_id, value: @wiki.id %>
+
+    <div class="field hidden_field">
+        <%= f.number_field :wiki_pointer_id %>
+    </div>
 
     <div id="wiki_post_title-edit_box" class="field hidden_field">
-        <%= f.label :wiki_pointer_id %>
-        <%= f.number_field :wiki_pointer_id %>
-
-        <%= f.label :title %>
         <%= f.text_field :title %>
     </div>
 
     <div class="field">
-        <%#= f.label :content %>
-        <%= f.text_area :content %>
+        <div data-provider="editor"></div>
+        <% if wiki_post.content %>
+            <%= f.text_area :content, as: :summernote, class: 'edit-mode' %>
+        <% else %>
+            <%= f.text_area :content, as: :summernote, class: 'create-mode' %>
+        <% end %>
     </div>
 
     <div class="field m-t-15">
         <label for="wiki_post_commit_msg">description</label>
-        <%= f.text_field :commit_msg %>
+        <input placeholder="Tell us about the change you made :)" type="text" name="wiki_post[commit_msg]" id="wiki_post_commit_msg" required>
     </div>
 
     <div class="field hidden_field">
@@ -42,6 +47,6 @@
     </div>
 
     <div class="actions">
-        <%= f.submit %>
+        <%= f.submit 'save' %>
     </div>
 <% end %>

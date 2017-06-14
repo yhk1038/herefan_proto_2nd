@@ -235,6 +235,16 @@ $(document).ready(function () {
     });
 });
 
+function hey_login() {
+    swal({
+        title: 'Oops! Please Login First!',
+        type: 'info',
+        showCloseButton: true,
+        showCancelButton: false,
+        confirmButtonText: 'Ok HereFan :D'
+    });
+}
+
 function gogo_crawler() {
     var value = $('#link_url').val();
     console.log(value);
