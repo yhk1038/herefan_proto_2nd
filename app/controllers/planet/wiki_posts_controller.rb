@@ -43,6 +43,7 @@ class Planet::WikiPostsController < ApplicationController
         respond_to do |format|
             if @wiki_post.save
                 insert_post_to_correct_pointer if create_method == 'new'
+                update_pointer_sorting_label
                 format.html { redirect_to fandom_wikis_path(@fandom), notice: 'Wiki post was successfully created.' }
                 format.json { render :show, status: :created, location: @wiki_post }
             else
@@ -132,12 +133,25 @@ class Planet::WikiPostsController < ApplicationController
     
     def complete_new_wiki_pointer(wiki_id)
         @wiki_pointer.wiki_id = wiki_id
-        @wiki_pointer.sort_num = Wiki.find(wiki_id).wiki_pointers.last_sort_num
+        @wiki_pointer.sort_num = params[:wiki_post][:row_count]
         @wiki_pointer.save
     end
     
     def insert_post_to_correct_pointer
         @wiki_pointer.wiki_posts << @wiki_post
+    end
+    
+    def update_pointer_sorting_label
+        @wiki_pointer.update(sort_num: @wiki_post.row_count)
+        
+        pointers = @wiki_pointer.wiki.wiki_pointers.order(sort_num: :asc).all
+        
+        arr = pointers.to_a
+        arr.delete_at(arr.index(@wiki_pointer))
+        arr.insert(@wiki_pointer.sort_num - 1, @wiki_pointer)
+        arr.each do |wp|
+            wp.update(sort_num: arr.index(wp) + 1)
+        end
     end
     
     def check_login
