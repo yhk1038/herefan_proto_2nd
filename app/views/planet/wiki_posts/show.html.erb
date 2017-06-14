@@ -2,59 +2,37 @@
 
 <%= render partial: '/layouts/sub_nav', locals: {tabs: @tabs} %>
 
-<section id="wiki-ground" data-page="posts">
+<section id="wiki-ground" data-page="post">
     <div class="container">
         <div class="row">
-            <div class="col-md-3 col-md-push-9 m-t-30">
-                <div id="language_control-box" class="card">
-                    <div class="card-body">
-                        <ul>
-                            <li class="active">english</li>
-                            <li>spanish</li>
-                        </ul>
-                    </div>
-                </div>
-                <div id="contents_widget-box" class="card">
-                    <div class="card-header">
-                        <h2>contents</h2>
-                    </div>
-                    <div class="card-body card-padding">
-                        <ul><%= @wiki.name %>
-                            <ol>official sites</ol>
-                            <ol>members</ol>
-                            <% @sections.each do |section| %>
-                                <% post = section.wiki_posts.last %>
-                                <ol><a href="#main-section-<%= section.id %>"><%= post.title %></a></ol>
-                            <% end %>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-9 col-md-pull-3">
+            <div class="col-md-12">
                 <div id="main_contents-box" class="card">
-                    <p class="m-t-30 m-b-0 p-b-20"><%= @fandom.name %></p>
-                    <p class="m-t-20 m-b-0 p-b-20"><%= "#{@wiki_pointer.sort_num}. #{@wiki_posts.last.title}" %>
-                        <a href="<%= edit_fandom_wiki_post_path(@fandom, @wiki_post, wiki_pointer_id: @wiki_pointer.id) %>"><span>edit</span></a>
-                    </p>
+                    <p><%= link_to '< record list', fandom_wiki_posts_path(@fandom, wiki_pointer_id: @wiki_pointer.id) %></p>
+                    <p><%= "#{@wiki_pointer.sort_num}. #{@wiki_posts.last.title}" %></p>
 
-                    <div class="m-t-20">
-                        <p>
-                            <strong>Content:</strong>
-                            <%== @wiki_post.content %>
-                        </p>
-
-                        <p>
-                            <strong>Commit msg:</strong>
-                            <%= @wiki_post.commit_msg %>
-                        </p>
-
-                        <p>
-                            <strong>Row count:</strong>
-                            <%= @wiki_post.row_count %>
-                        </p>
+                    <div class="author">
+                        <p>edited by :</p>
+                        <p><img src="<%= @wiki_post.user.img %>"><span><%= @wiki_post.user.nickname %></span></p>
+                        <p>Description :</p>
+                        <p><%= @wiki_post.commit_msg %></p>
                     </div>
 
-                    <br>
+                    <div>
+                        <p><%== @wiki_post.content %></p>
+                    </div>
+
+                    <div class="pagenation">
+                        <ul>
+                            <li>
+                                <% bp = before_wiki_post %>
+                                <a href="<%= bp[:end] ? '#' : bp[:url] %>" onclick="<%= 'return false;' if bp[:end] %>"><span>prev</span> <span><%= bp[:end] ? 'End of list (start with current post)' : bp[:msg].truncate(70) %></span></a>
+                            </li>
+                            <li>
+                                <% np = next_wiki_post %>
+                                <a href="<%= np[:end] ? '#' : np[:url] %>" onclick="<%= 'return false;' if np[:end] %>"><span>next</span> <span><%= np[:end] ? 'End of list (end with currrent post)' : np[:msg].truncate(70) %></span></a>
+                            </li>
+                        </ul>
+                    </div>
 
                     <!--<#%= link_to 'New Wiki Post', new_fandom_wiki_post_path(@fandom) %>-->
                 </div>

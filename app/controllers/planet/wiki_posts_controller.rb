@@ -3,9 +3,10 @@ class Planet::WikiPostsController < ApplicationController
     include WikisHelper
     before_action :set_fandom
     before_action :set_wiki_post, only: [:show, :edit, :update, :destroy]
-    before_action :inheritance_for_front_view
+    before_action :inheritance_for_front_view, except: [:create]
     before_action :my_published_fandoms
-    before_action :set_wiki_pointer_and_ready_layout
+    before_action :set_wiki_pointer_and_ready_layout, except: [:create, :new]
+    before_action :check_login
     
     # GET /fandoms/:fandom_id/wiki_posts
     # GET /fandoms/:fandom_id/wiki_posts.json
@@ -19,6 +20,12 @@ class Planet::WikiPostsController < ApplicationController
     
     # GET /fandoms/:fandom_id/wiki_posts/new
     def new
+        @wiki_pointer = WikiPointer.new(wiki_id: params[:wiki_id], sort_num: params[:sort_num])
+        return redirect_to fandom_wikis_path(@fandom) if @wiki_pointer.nil?
+    
+        @wiki = @wiki_pointer.wiki
+        @wiki_posts = @wiki_pointer.wiki_posts
+        @sections = @wiki.wiki_pointers
         @wiki_post = WikiPost.new
     end
     
@@ -29,14 +36,17 @@ class Planet::WikiPostsController < ApplicationController
     # POST /fandoms/:fandom_id/wiki_posts
     # POST /fandoms/:fandom_id/wiki_posts.json
     def create
+        create_method = set_wiki_pointer_and_ready_create
+        
         @wiki_post = WikiPost.new(wiki_post_params)
         
         respond_to do |format|
             if @wiki_post.save
-                format.html { redirect_to @wiki_post, notice: 'Wiki post was successfully created.' }
+                insert_post_to_correct_pointer if create_method == 'new'
+                format.html { redirect_to fandom_wikis_path(@fandom), notice: 'Wiki post was successfully created.' }
                 format.json { render :show, status: :created, location: @wiki_post }
             else
-                format.html { render :new }
+                format.html { redirect_to :back }
                 format.json { render json: @wiki_post.errors, status: :unprocessable_entity }
             end
         end
@@ -96,5 +106,41 @@ class Planet::WikiPostsController < ApplicationController
         @wiki = @wiki_pointer.wiki
         @wiki_posts = @wiki_pointer.wiki_posts
         @sections = @wiki.wiki_pointers
+    end
+
+    def set_wiki_pointer_and_ready_create
+        @wiki_pointer = WikiPointer.find_or_create_by(id: params[:wiki_post][:wiki_pointer_id])
+        
+        if @wiki_pointer.wiki_id.nil?
+            continuable = complete_new_wiki_pointer(params[:wiki_post][:wiki_id])
+            create_method = 'new'
+        else
+            continuable = true
+            create_method = 'edit'
+        end
+    
+        if continuable
+            @wiki = @wiki_pointer.wiki
+            @wiki_posts = @wiki_pointer.wiki_posts
+            @sections = @wiki.wiki_pointers
+            
+            return create_method
+        else
+            return redirect_to :back
+        end
+    end
+    
+    def complete_new_wiki_pointer(wiki_id)
+        @wiki_pointer.wiki_id = wiki_id
+        @wiki_pointer.sort_num = Wiki.find(wiki_id).wiki_pointers.last_sort_num
+        @wiki_pointer.save
+    end
+    
+    def insert_post_to_correct_pointer
+        @wiki_pointer.wiki_posts << @wiki_post
+    end
+    
+    def check_login
+        redirect_to fandom_wikis_path(@fandom) unless user_signed_in?
     end
 end

@@ -48,6 +48,9 @@ Rails.application.routes.draw do
     get 'mypage/watched', as: 'mypage_watched'
 
     # Utility
+    # > wiki post Img uploader
+    post '/summernote_imageUpload', to: 'hf_util#wiki_image_uploader'
+    
     # > url crawler
     post '/crawler/uri_spy', to: 'home#uri_spy', as: 'crawling_uri'
 
