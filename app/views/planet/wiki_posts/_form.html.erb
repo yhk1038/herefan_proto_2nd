@@ -18,8 +18,13 @@
         <%= f.number_field :wiki_pointer_id %>
     </div>
 
-    <div id="wiki_post_title-edit_box" class="field hidden_field">
-        <%= f.text_field :title %>
+    <div id="wiki_post_row_count-edit_box" class="field hidden_field hidden_toggle">
+        <%= f.number_field :row_count, value: @wiki_pointer.sort_num, require: true %>
+    </div>
+
+    <div id="wiki_post_title-edit_box" class="field hidden_field hidden_toggle">
+        <%= f.text_field :title, require: true %>
+        <span id="hidden_closer"><i class="zmdi zmdi-close"></i></span>
     </div>
 
     <div class="field">
@@ -34,11 +39,6 @@
     <div class="field m-t-15">
         <label for="wiki_post_commit_msg">description</label>
         <input placeholder="Tell us about the change you made :)" type="text" name="wiki_post[commit_msg]" id="wiki_post_commit_msg" required>
-    </div>
-
-    <div class="field hidden_field">
-        <%= f.label :row_count %>
-        <%= f.number_field :row_count %>
     </div>
 
     <div class="field hidden_field">
