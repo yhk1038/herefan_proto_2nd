@@ -21,14 +21,14 @@ class HomeController < ApplicationController
     def new_content
         @tabs[0][:active] = 'active'
         @links = []
-        @links = Link.order(created_at: :desc)
+        @links = Link.at_home_display
         @fandoms = current_user.fandoms.published if user_signed_in?
     end
 
     def index
         @tabs[1][:active] = 'active'
         @links = []
-        @links = current_user.links if user_signed_in?
+        @links = current_user.fandoms.links_all_at_homeMy if user_signed_in?
         @fandoms = current_user.fandoms.published if user_signed_in?
     end
 
