@@ -5,6 +5,6 @@ class Link < ApplicationRecord
     belongs_to :user
     belongs_to :fandom
     
-    scope :at_home_display, -> { order(created_at: :desc).last(30) }
+    scope :at_home_display, -> { order(created_at: :desc).first(30) }
     
 end
