@@ -6,5 +6,7 @@ module WikisHelper
         
         wikis = 6.times{|i| Wiki.create(fandom: @fandom, wiki: wiki, name: "member #{i+1}") }
         @fandom.wikis << wikis
+        
+        return true
     end
 end

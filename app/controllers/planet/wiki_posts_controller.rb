@@ -35,8 +35,20 @@ class Planet::WikiPostsController < ApplicationController
     
     # POST /fandoms/:fandom_id/wiki_posts
     # POST /fandoms/:fandom_id/wiki_posts.json
+    # already have [
+    #   @fandom                     (:set_fandom),
+    #   @my_published_fandoms       (:my_published_fandoms)
+    # ]
     def create
         create_method = set_wiki_pointer_and_ready_create
+        # already have [
+        #   @fandom                     assoc   'current fandom instance'                                       (:set_fandom),
+        #   @my_published_fandoms       assoc   'my followed fandoms instances'                                 (:my_published_fandoms),
+        #   @wiki_pointer               inst    'find_or_create_by(id: params[:wiki_post][:wiki_pointer_id])'   (:set_wiki_pointer_and_ready_create, saved(:complete_new_wiki_pointer) or find(this)),
+        #   @wiki                       inst    '@wiki_pointer.wiki'                                            (:set_wiki_pointer_and_ready_create),
+        #   @wiki_posts                 assoc   '@wiki_pointer.wiki_posts'                                      (:set_wiki_pointer_and_ready_create),
+        #   @sections                   assoc   '@wiki.wiki_pointers'                                           (:set_wiki_pointer_and_ready_create)
+        # ]
         
         @wiki_post = WikiPost.new(wiki_post_params)
         
@@ -79,6 +91,10 @@ class Planet::WikiPostsController < ApplicationController
     end
     
     private
+    def check_login
+        redirect_to fandom_wikis_path(@fandom) unless user_signed_in?
+    end
+    
     # Use callbacks to share common setup or constraints between actions.
     def set_wiki_post
         @wiki_post = WikiPost.find(params[:id])
@@ -109,7 +125,23 @@ class Planet::WikiPostsController < ApplicationController
         @wiki_posts = @wiki_pointer.wiki_posts
         @sections = @wiki.wiki_pointers
     end
-
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    ###
+    #   [1]
+    #
+    # Call at :create
+    # already have [
+    #   @fandom                     (:set_fandom),
+    #   @my_published_fandoms       (:my_published_fandoms)
+    # ]
     def set_wiki_pointer_and_ready_create
         @wiki_pointer = WikiPointer.find_or_create_by(id: params[:wiki_post][:wiki_pointer_id])
         
@@ -120,6 +152,11 @@ class Planet::WikiPostsController < ApplicationController
             continuable = true
             create_method = 'edit'
         end
+        # already have [
+        #   @fandom                     (:set_fandom),
+        #   @my_published_fandoms       (:my_published_fandoms)
+        #   @wiki_pointer               ( saved(:complete_new_wiki_pointer) or find(this) )
+        # ]
     
         if continuable
             @wiki = @wiki_pointer.wiki
@@ -132,6 +169,9 @@ class Planet::WikiPostsController < ApplicationController
         end
     end
     
+    ###
+    #   [2]
+    #
     def complete_new_wiki_pointer(wiki_id)
         @wiki_pointer.wiki_id = wiki_id
         @wiki_pointer.sort_num = params[:wiki_post][:row_count]
@@ -154,9 +194,5 @@ class Planet::WikiPostsController < ApplicationController
             num = arr.index(wp) + 1
             wp.update(sort_num: num)
         end
-    end
-    
-    def check_login
-        redirect_to fandom_wikis_path(@fandom) unless user_signed_in?
     end
 end

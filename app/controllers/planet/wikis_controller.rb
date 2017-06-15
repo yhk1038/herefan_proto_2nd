@@ -10,10 +10,12 @@ class Planet::WikisController < ApplicationController
     # GET /fandoms/:fandom_id/wikis.json
     def index
         @wikis = Wiki.where(fandom_id: params[:fandom_id])
-        dummy_wiki_append if @wikis.count.zero?
+        need_to_reload = @wikis.count.zero? ? dummy_wiki_append : false
         @wiki   = @wikis.find_by(wiki: nil)
         @sub_wikis = @wiki.wikis
         @sections = @wiki.wiki_pointers.order(sort_num: :asc)
+        
+        redirect_to fandom_wikis_path(@fandom) if need_to_reload
     end
     
     # GET /fandoms/:fandom_id/wikis/1
