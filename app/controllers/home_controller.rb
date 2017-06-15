@@ -44,9 +44,16 @@ class HomeController < ApplicationController
         uri = params[:url]
 
         doc = Nokogiri::HTML(open(uri, :allow_redirections => :all))
+        begin
+            puts doc.at("meta[property='og:title']")
+        rescue ArgumentError => e
+            puts "\n\n\n:::::::: ArgumentError ^^\n\n\n\n"
+            doc = Nokogiri::HTML(open(uri, 'r:binary', :allow_redirections => :all).read.encode('utf-8','euc-kr'))
+        end
         # puts doc.search('meta', 'title')
 
         title       = doc.at("meta[property='og:title']")
+        puts title
         if title.nil?
             title   = doc.search('title').text.strip
         else
@@ -56,7 +63,7 @@ class HomeController < ApplicationController
                 title   = title['content']
             end
         end
-        # puts title
+        puts title
 
 
         description = doc.at("meta[property='og:description']")
@@ -77,7 +84,12 @@ class HomeController < ApplicationController
             if image.nil?
                 image   = doc.at("meta[name='weibo:webpage:image']")
                 if image.nil?
-                    image = '/svg/main_logo.svg'
+                    # image   = doc.at("meta[name='naverblog:profile_image']")
+                    # if image.nil?
+                        image = '/svg/main_logo.svg'
+                    # else
+                    #     image = image['content']
+                    # end
                 else
                     image = image['content']
                 end
@@ -99,12 +111,53 @@ class HomeController < ApplicationController
         # puts url
 
 
+        description = descriptionate(description)
+        image       = imaginate(image, url)
         return @target = {
             title: title,
-            description: description.gsub(/\n/,' ').gsub(/\r/,' '),
+            description: description,
             image: image,
             url: url
         }
+    end
+    
+    def descriptionate(description)
+        puts ''
+        puts ''
+        puts description
+        puts ''
+        puts ''
+        if description.class.name == 'String'
+            puts 'string'
+            puts ''
+            
+            begin
+                description.gsub(/(\n)/,' ')
+            rescue ArgumentError => e
+                # ec = Encoding::Converter.new('euc-kr', 'utf-8')
+                # puts ec.convert(description)
+                # puts ec.finish
+                description = ''
+                return description
+            end
+            
+            d = description&.gsub(/(\n)/,' ')
+            d = d&.gsub(/(\r)/,' ')
+            return d
+        else
+            puts 'no string'
+            puts ''
+            return description
+        end
+    end
+    
+    def imaginate(image, url)
+        split = url.split('://')
+        protocol    = split[0]
+        domain      = split[1].split('/').first
+        return image if image == '/svg/main_logo.svg'
+        image = image.first == '/' ? ( protocol + '://' + domain + image ) : image
+        image
     end
 
     def filling_tab_group

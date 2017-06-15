@@ -908,9 +908,9 @@ div.super.row .url{
 div.super.row:before{
     content: 'PREVIEW';
     position: absolute;
-    top: 140px;
+    top: 170px;
     font-size: 20px;
-    left: 172px;
+    left: 197px;
     margin-left: auto;
     margin-right: auto;
     padding: 2px 5px;

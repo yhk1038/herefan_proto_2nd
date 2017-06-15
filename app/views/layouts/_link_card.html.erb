@@ -1,35 +1,86 @@
-<% info = target %>
+<% puts "\n rendered in! \n\n" %>
 <div class="super row">
     <div class="col-md-12 task">
-        <div class="card blog-post">
+        <div id="link_0"
+             class="card blog-post link_wrapping_anchor no-mute <%= 'usi' if user_signed_in? %>"
+             data-content_id="0"
+             data-content_time="0"
+             data-hf_like_count="0"
+             data-hf_visit_count="0"
+             data-hf_clip_count="0"
+             noiser="<%= current_user.id %>">
             <div class="bp-header">
-                <a href="<%= info[:url] %>" target="_blank">
-                    <img style="width: 100%;background: #000;" src="<%= info[:image] %>" height="171" alt="">
-                    <div class="user_profile">
-                        <div class="lv-item">
-                            <div class="media">
-                                <div class="pull-left">
-                                    <div class="lv-img-sm bg_img_cover" style="background: url('<%= current_user.img.nil? ? image_with_sns(current_user.image.to_s) : current_user.img %>'); width: 40px; height: 40px; border: 1px solid #fff;" data-pin-nopin="true"></div>
+                <a href="#" onclick="return false;">
+                    <a class="clip_btn" action_status="post" action_target="0" action_noiser="<%= current_user.id %>">
+                        <span id="cliped_0" class="clip zmdi zmdi-bookmark-outline"></span>
+                    </a>
+                    <a href="#" onclick="return false;">
+                        <img class="link_main_image" src="<%= link[:image] %>" alt="">
+                    </a>
+                    <!--<ul class="actions actions-alt moreBtn">-->
+                        <!--<li class="dropdown">-->
+                            <!--<a href="" data-toggle="dropdown" aria-expanded="false"><i class="zmdi zmdi-more-vert"></i></a>-->
+                            <!--<ul class="dropdown-menu dropdown-menu-right">-->
+                                <!--<li><%#= link_to 'edit', '#' %></li>-->
+                                <!--<li><%#= button_to 'Destroy', '#', class: 'likes_link_to' %></li>-->
+                            <!--</ul>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                </a>
+                <a href="#" onclick="return false;" class="bp-title">
+                    <h2 class="linkcard-title"><%== link[:title] %></h2>
+                    <small class="linkcard-description"><%= link[:description].truncate(100) %></small>
+                    <p class="link-url"><%= link[:url] %></p>
+                </a>
+                <ul id="actions_0" class="actions_box design row">
+                    <a class="col-xs-6 action viewcount" href="#" onclick="return false;">
+                        <span class="zmdi zmdi-eye"></span> <span class="counter">0</span>
+                    </a>
+                    <a class="col-xs-5 action maum" action_status="post" action_target="0" action_noiser="<%= current_user.id %>">
+                        <span class="zmdi zmdi-favorite-outline"></span> <span class="counter">0</span>
+                    </a>
+                    <div class="dropdown share_box col-xs-1">
+                        <a data-toggle="dropdown" aria-expanded="false" class="no-vl"><i class="zmdi zmdi-share"></i></a>
+                        <ul class="dropdown-menu pull-right no-vl go-social" style="width: 250px;">
+                            <li role="presentation" class="dropdown-header">share this contents!</li>
+                            <li class="sns_share card-body clearfix">
+                                <a class="col-xs-4" href="#" onclick="return false"><img src="/template/img/social/facebook-128.png" class="img-responsive" alt=""></a>
+                                <a class="col-xs-4" href="#" onclick="return false"><img src="/template/img/social/twitter-128.png" class="img-responsive" alt=""></a>
+                                <a class="col-xs-4" href="#" onclick="return false"><img src="/template/img/social/googleplus-128.png" class="img-responsive" alt=""></a>
+                            </li>
+                            <li class="divider"></li>
+                            <li class="clipboarding">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="zmdi zmdi-globe"></i></span>
+                                    <div id="text_url_0" type="text" class="form-control fc-alt" aria-label="Amount (to the nearest dollar)"><%= link[:url] %></div>
+                                    <span target="0" data-clipboard-target="#text_url_0" class="input-group-addon url_copy"><i class="zmdi zmdi-copy"></i></span>
                                 </div>
-                                <div class="media-body">
-                                    <div class="lv-title"><%= current_user.nickname %></div>
-                                    <small class="lv-small"><%= distance_of_time_in_words(Time.now, Time.now) %></small>
-                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </ul>
+            </div>
+
+            <a href="#" onclick="return false;">
+                <div class="user_profile">
+                    <div class="lv-item">
+                        <div class="media">
+
+                            <div class="pull-left">
+                                <div class="lv-img-sm bg_img_cover" style="background: url('<%= current_user.img %>');" data-pin-nopin="true"></div>
+                            </div>
+                            <div class="media-body">
+                                <div class="lv-title"><%= current_user.nickname %></div>
+                                <small class="lv-small"><%= distance_of_time_in_words(Time.now, Time.now) %> before</small>
                             </div>
                         </div>
                     </div>
-                </a>
-                <a href="<%= info[:url] %>" target="_blank" class="bp-title">
-                    <h2><%== info[:title] %></h2>
-                    <small><%== info[:description] %></small>
-                </a>
-                <button class="btn bgm-green btn-float waves-effect" style="right: 20px; bottom: -23px;"><i class="zmdi zmdi-share"></i></button>
-            </div>
+                </div>
+            </a>
 
-            <a href="<%= info[:url] %>" target="_blank">
-                <div class="p-20">
+            <a href="#" onclick="return false;">
+                <div class="p-20 msg-box">
                     <p class="msg" id="editable_msg">put your sth message...</p>
-                    <p class="url m-b-0"><%= info[:url] %></p>
                 </div>
             </a>
         </div>
