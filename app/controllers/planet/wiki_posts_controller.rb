@@ -149,7 +149,7 @@ class Planet::WikiPostsController < ApplicationController
         arr = pointers.to_a
         arr.delete_at(arr.index(@wiki_pointer))
         arr.insert(@wiki_pointer.sort_num - 1, @wiki_pointer)
-        arr.compact.each do |wp|
+        arr.each do |wp|
             num = arr.index(wp) + 1
             wp.update(sort_num: num)
         end
