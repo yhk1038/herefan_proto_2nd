@@ -2,7 +2,7 @@ RailsAdmin.config do |config|
     config.main_app_name = ['BackOffice - HereFan :: DB']
 
     # Model Config
-    config.included_models = %w(Fandom Schedule Link User Myfandom VisitedLink)
+    config.included_models = %w(Fandom Schedule Link User Myfandom VisitedLink Wiki WikiPointer WikiPost)
     # config.config.excluded_models = %w()
     
     config.model 'Fandom' do
@@ -25,19 +25,38 @@ RailsAdmin.config do |config|
 
     config.model 'User' do
         label 'ㄹ. 사용자'
-        label_plural 'ㄷ. 사용자'
+        label_plural 'ㄹ. 사용자'
         navigation_icon 'icon-user'
     end
 
     config.model 'Myfandom' do
         label 'ㅁ. 채널 팔로우'
-        label_plural 'ㄹ. 채널 팔로우'
+        label_plural 'ㅁ. 채널 팔로우'
         navigation_icon 'icon-heart'
     end
 
     config.model 'VisitedLink' do
         label 'ㅂ. 조회된 컨텐츠'
-        label_plural 'ㅁ. 조회된 컨텐츠'
+        label_plural 'ㅂ. 조회된 컨텐츠'
+        navigation_icon 'icon-glass'
+    end
+
+    #
+    config.model 'Wiki' do
+        label 'ㅅ. 위키 문서'
+        label_plural 'ㅅ. 위키 문서'
+        navigation_icon 'icon-glass'
+    end
+
+    config.model 'WikiPointer' do
+        label 'ㅇ. 위키 섹션 컨데이너'
+        label_plural 'ㅇ. 위키 섹션 컨데이너'
+        navigation_icon 'icon-glass'
+    end
+
+    config.model 'WikiPost' do
+        label 'ㅈ. 위키 포스트'
+        label_plural 'ㅈ. 위키 포스트'
         navigation_icon 'icon-glass'
     end
 
