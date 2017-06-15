@@ -1,28 +1,43 @@
-<section id="toolbar" class="container">
-    <div class="row">
-        <div class="col-sm-6">
-            <ul class="left_group pull-left">
-                <li class="active"><a href="#" value="0" onclick="return false" class="filter-type btn btn-link no-waves">all</a></li>
-                <li><a href="#" value="1" onclick="return false" class="filter-type btn btn-link no-waves">image</a></li>
-                <li><a href="#" value="2" onclick="return false" class="filter-type btn btn-link no-waves">video</a></li>
-                <li><a href="#" value="3" onclick="return false" class="filter-type btn btn-link no-waves">others</a></li>
-            </ul>
-        </div>
-        <div class="col-sm-6">
-            <ul class="right_group pull-right">
-                <li>
-                    <div class="dropdown">
-                        <a class="dropdown-toggle btn btn-link no-waves" data-toggle="dropdown" aria-expanded="false">Sort by : <span id="sort-method">Latest</span> <i class="caret"></i></a>
+<% if params[:controller] != 'mypage' %>
+    <section id="toolbar" class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <ul class="left_group pull-left">
+                    <li class="active"><a href="#" value="0" onclick="return false" class="filter-type btn btn-link no-waves">all</a></li>
+                    <li><a href="#" value="1" onclick="return false" class="filter-type btn btn-link no-waves">image</a></li>
+                    <li><a href="#" value="2" onclick="return false" class="filter-type btn btn-link no-waves">video</a></li>
+                    <li><a href="#" value="3" onclick="return false" class="filter-type btn btn-link no-waves">others</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-6">
+                <ul class="right_group pull-right">
+                    <li>
+                        <div class="dropdown">
+                            <a class="dropdown-toggle btn btn-link no-waves" data-toggle="dropdown" aria-expanded="false">Sort by : <span id="sort-method">Latest</span> <i class="caret"></i></a>
 
-                        <ul class="dropdown-menu pull-right" style="z-index: 3;">
-                            <li><a class="sorting-method" href="#" onclick="return false">Latest</a></li>
-                            <li><a class="sorting-method" href="#" onclick="return false">Popular</a></li>
-                            <li><a class="sorting-method" href="#" onclick="return false">Unwatched</a></li>
-                            <li><a class="sorting-method" href="#" onclick="return false">Clipped</a></li>
-                        </ul>
-                    </div>
-                </li>
-            </ul>
+                            <ul class="dropdown-menu pull-right" style="z-index: 3;">
+                                <li><a class="sorting-method" href="#" onclick="return false">Latest</a></li>
+                                <li><a class="sorting-method" href="#" onclick="return false">Popular</a></li>
+                                <li><a class="sorting-method" href="#" onclick="return false">Unwatched</a></li>
+                                <li><a class="sorting-method" href="#" onclick="return false">Clipped</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+<% elsif params[:controller] == 'mypage' %>
+    <section id="toolbar" class="container" data-page="cards">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-6">
+                <ul class="left_group pull-right">
+                    <li id="sortList-watched" class="sortList active"><a href="#" onclick="getMyCards('watched'); return false" id="sortBtn-watched" class="filter-type btn btn-link no-waves">watched</a></li>
+                    <li id="sortList-clip" class="sortList"><a href="#" onclick="getMyCards('clip'); return false" id="sortBtn-clip" class="filter-type btn btn-link no-waves">clip</a></li>
+                    <li id="sortList-maum" class="sortList"><a href="#" onclick="getMyCards('maum'); return false" id="sortBtn-maum" class="filter-type btn btn-link no-waves">maum</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-6 col-sm-pull-6"></div>
+        </div>
+    </section>
+<% end %>

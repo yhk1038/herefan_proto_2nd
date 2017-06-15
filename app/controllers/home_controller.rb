@@ -31,6 +31,27 @@ class HomeController < ApplicationController
         @links = current_user.fandoms.links_all_at_homeMy if user_signed_in?
         @fandoms = current_user.fandoms.published if user_signed_in?
     end
+    
+    
+    
+    # GET '/sort_by/:req' :: params[:req] == 'watched' or 'clip' or 'maum'
+    def sort_by
+        @req = params[:req] || 'watched'
+        bridge = []
+        
+        case @req
+        when 'watched'
+            bridge = current_user.visited_links
+        when 'clip'
+            bridge = current_user.clips
+        when 'maum'
+            bridge = current_user.likes
+        end
+
+        @links = bridge.map{|a| a.link}.sort{|a, b| b.created_at <=> a.created_at }
+    end
+    
+    
 
     # POST '/utils/user_watched_this_link' :: params[:user_id], params[:link_id], as: visited_link_counter
     def visited_link_counter

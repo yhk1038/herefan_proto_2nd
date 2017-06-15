@@ -18,7 +18,7 @@ class MypageController < ApplicationController
     end
     
     def watched
-        @tabs[2][:active] = 'active'
+        @tabs[0][:active] = 'active'
         ids = current_user.visited_links.pluck(:link_id)
         fandom_ids = current_user.fandoms.published.ids
         @links = Link.where(id: ids, fandom_id: fandom_ids)
@@ -26,8 +26,8 @@ class MypageController < ApplicationController
     
     def filling_tab_group
         @tabs = []
-        @tabs << { name: 'my channels', path: mypage_my_channels_path, active: '' }
-        @tabs << { name: 'contributed', path: mypage_contributed_path, active: '' }
-        @tabs << { name: 'watched', path: mypage_watched_path, active: '' }
+        # @tabs << { name: 'my channels', path: mypage_my_channels_path, active: '' }
+        @tabs << { name: 'cards', path: mypage_watched_path, active: '' }
+        @tabs << { name: 'contribution', path: mypage_contributed_path, active: '' }
     end
 end

@@ -85,3 +85,21 @@ function fadeInByFilteringType(type) {
 // function sortDefault() {
 //
 // }
+function getMyCards(_req) {
+    $('.sortList').removeClass('active');
+    $('#sortList-'+_req).addClass('active');
+    $('#library').attr('style', 'min-height: 1000px');
+
+    var query = $.ajax({
+        url: '/sort_by/'+_req
+    });
+
+    query.done(function(){
+        console.log('done!');
+        $('#libraries_wrapper').gridalicious({
+            selector: '.task',
+            width: 300
+        });
+        $('#library').attr('style', '');
+    });
+}
