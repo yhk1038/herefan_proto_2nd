@@ -85,7 +85,7 @@ class Planet::WikiPostsController < ApplicationController
     
     # Never trust parameters from the scary internet, only allow the white list through.
     def wiki_post_params
-        params.require(:wiki_post).permit(:user_id, :wiki_pointer_id, :title, :content, :commit_msg, :row_count, :url)
+        params.require(:wiki_post).permit(:user_id, :wiki_pointer_id, :title, :content, :commit_msg, :row_count, :url, :wiki_id)
     end
 
     def inheritance_for_front_view
@@ -149,8 +149,9 @@ class Planet::WikiPostsController < ApplicationController
         arr = pointers.to_a
         arr.delete_at(arr.index(@wiki_pointer))
         arr.insert(@wiki_pointer.sort_num - 1, @wiki_pointer)
-        arr.each do |wp|
-            wp.update(sort_num: arr.index(wp) + 1)
+        arr.compact.each do |wp|
+            num = arr.index(wp) + 1
+            wp.update(sort_num: num)
         end
     end
     
