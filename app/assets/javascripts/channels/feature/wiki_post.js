@@ -31,5 +31,8 @@ $(document).ready(function () {
     $('.note-editable.panel-body').mouseup(function () {
         $('#wiki_post_content').text($(this).html());
     });
+
+    // Only for Bug Fix on production server
+    $('#wiki-ground[data-page="new"] #wiki_post_wiki_pointer_id').removeAttr('value');
 });
 
