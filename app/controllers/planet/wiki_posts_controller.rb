@@ -41,8 +41,9 @@ class Planet::WikiPostsController < ApplicationController
         @wiki_post = WikiPost.new(wiki_post_params)
         
         respond_to do |format|
+            insert_post_to_correct_pointer if create_method == 'new'
+            
             if @wiki_post.save
-                insert_post_to_correct_pointer if create_method == 'new'
                 update_pointer_sorting_label
                 format.html { redirect_to fandom_wikis_path(@fandom), notice: 'Wiki post was successfully created.' }
                 format.json { render :show, status: :created, location: @wiki_post }
