@@ -1,12 +1,16 @@
 var point = $('#card_preview_point');
-point.empty().append(
-    "<%= escape_javascript(render '/layouts/link_card', target: @target) %>"
-);
 
-$('#link_urls').attr('value','<%== @target[:url] %>');
+var dom = '<%= escape_javascript(render '/layouts/link_card', link: @target) %>';
+console.log(dom);
 
-$('#link_title').attr('value','<%== @target[:title] %>');
+point.empty().append(dom);
 
-$('#link_description').attr('value','<%== @target[:description] %>');
+var url     = '<%== @target[:url].to_s %>';
+var title   = '<%= @target[:title].to_s %>';
+var desc    = '<%= @target[:description].to_s %>';
+var img     = '<%== @target[:image].to_s %>';
 
-$('#link_image').attr('value','<%== @target[:image] %>');
+$('#link_urls').attr('value', url);
+$('#link_title').attr('value', title);
+$('#link_description').attr('value', desc);
+$('#link_image').attr('value', img);

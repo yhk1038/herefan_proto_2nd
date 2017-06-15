@@ -160,34 +160,6 @@
 <div style="display: none;">
     <p id="notice"><%= notice %></p>
 
-    <h1>Fandoms</h1>
-
-    <table>
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Profile img</th>
-            <th>Background img</th>
-            <th colspan="3"></th>
-        </tr>
-        </thead>
-
-        <tbody>
-        <% @fandoms.each do |fandom| %>
-            <tr>
-                <td><%= fandom.name %></td>
-                <td><%= fandom.profile_img %></td>
-                <td><%= fandom.background_img %></td>
-                <td><%= link_to 'Show', fandom %></td>
-                <td><%= link_to 'Edit', edit_fandom_path(fandom) %></td>
-                <td><%= link_to 'Destroy', fandom, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-            </tr>
-        <% end %>
-        </tbody>
-    </table>
-
-    <br>
-
     <%= link_to 'New Fandom', new_fandom_path %>
 </div>
 

@@ -250,6 +250,7 @@ function gogo_crawler() {
     console.log(value);
 
     var preloader = $('#linkModalPreLoader');
+    $('#card_preview_point .super').remove();
     preloader.show();
 
     var ajax =  $.ajax({
@@ -261,7 +262,8 @@ function gogo_crawler() {
         }
     });
     ajax.done(function (result) {
-        console.log(result);
+        console.log('success');
+        // console.log(result);
         preloader.hide();
         $("#saveBtn").show();
         $('#msg-wrap').show();
@@ -269,9 +271,18 @@ function gogo_crawler() {
 
     ajax.fail(function (result) {
         console.log('fail');
+        console.log(result);
+        swal({
+            title: 'Oops...!',
+            text: 'I\'m still young, but studying hard! Plz expect the next update :)!',
+            imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxkPS1qLw-tFrTIJA7b_rsmOi0q5QrzdJkfGfNCY5jTx-bVKEb_A',
+            imageWidth: 400,
+            imageHeight: 400,
+            animation: false
+        });
         console.log(result.responseText);
-        var txt = result.responseText;
-        eval(txt);
+        // var txt = result.responseText;
+        // eval(txt);
         preloader.hide();
         $("#saveBtn").hide();
         $('#msg-wrap').hide();
