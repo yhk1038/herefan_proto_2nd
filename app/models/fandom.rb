@@ -13,6 +13,7 @@ class Fandom < ApplicationRecord
     # default_scope { where(published: true) }
     scope :published,   -> { where(published: true) }
     scope :unpublished, -> { where(published: false) }
+    scope :links_all, -> { order(created_at: :desc).all.map{|fandom| fandom.links}.flatten.sort{|a, b| b.created_at <=> a.created_at } }
     scope :links_all_at_homeMy, -> { order(created_at: :desc).all.map{|fandom| fandom.links}.flatten.sort{|a, b| b.created_at <=> a.created_at }.last(30) }
     
     def user_lists

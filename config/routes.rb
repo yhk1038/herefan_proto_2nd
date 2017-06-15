@@ -29,6 +29,11 @@ Rails.application.routes.draw do
     end
 
     root 'home#go_for'
+    
+    # query
+    # > sort by : watched, clip, maum
+    get '/sort_by/:req', to: 'home#sort_by'
+    
 
     # home
     # > my

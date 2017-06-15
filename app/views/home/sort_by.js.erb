@@ -1,0 +1,3 @@
+var dom = '<%= escape_javascript(render partial: '/links/partials/link_card', collection: @links, as: :link) %>';
+
+$('#libraries_wrapper').empty().append(dom);
