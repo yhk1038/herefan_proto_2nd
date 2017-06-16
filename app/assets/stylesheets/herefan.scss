@@ -1556,3 +1556,67 @@ section#toolbar{
         }
     }
 }
+
+
+
+
+
+
+
+#libraries_wrapper[data-page="home-new_content"]{
+    
+    .card.blog-post{
+        .bp-header{
+            .bp-title{
+                padding: 20px 15px 42px;
+                
+                h2.linkcard-title{
+                    font-weight: 700;
+                    font-size: 13px;
+                }
+                small.linkcard-description{
+                    font-size: 12px;
+                }
+                p.link-url{
+                    display: none;
+                }
+            }
+        }
+    
+        .actions_box{
+            &.design{
+                .action{
+                    span{
+                        font-size: 14px !important;
+                    }
+                }
+            }
+        }
+    
+        .user_profile{
+            .media{
+                .pull-left{
+                    .lv-img-sm{
+                        width: 36px;
+                        height: 36px;
+                    }
+                }
+                
+                .media-body{
+                    .lv-title{
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+    
+        .msg-box{
+            padding-top: 15px !important;
+            
+            .msg{
+                margin-bottom: 5px;
+                font-size: 12px;
+            }
+        }
+    }
+}

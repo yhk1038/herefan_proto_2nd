@@ -98,7 +98,7 @@ function getMyCards(_req) {
         console.log('done!');
         $('#libraries_wrapper').gridalicious({
             selector: '.task',
-            width: 300
+            width: 250
         });
         $('#library').attr('style', '');
     });
