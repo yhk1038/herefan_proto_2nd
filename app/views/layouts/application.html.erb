@@ -84,6 +84,11 @@
 <script type="text/javascript" charset="utf-8">
     var grid_size = 250;
     if ($('#libraries_wrapper').data('page') === 'home-new_content'){
+        $('#libraries_wrapper').attr('data-grid','5');
+        grid_size = 200;
+    }
+    if ($('#libraries_wrapper').data('page') === 'home-index'){
+        $('#libraries_wrapper').attr('data-grid','5');
         grid_size = 200;
     }
 

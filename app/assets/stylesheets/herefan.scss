@@ -946,6 +946,7 @@ section#toolbar{
                 color: #000;
                 font-weight: 600;
                 padding-right: 15px;
+                line-height: 1.3;
             }
             
             small.linkcard-description{
@@ -1563,7 +1564,7 @@ section#toolbar{
 
 
 
-#libraries_wrapper[data-page="home-new_content"]{
+#libraries_wrapper[data-grid="5"]{
     
     .card.blog-post{
         .bp-header{
