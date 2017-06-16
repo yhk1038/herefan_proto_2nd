@@ -104,118 +104,9 @@ $(document).ready(function () {
         name_lenght_counter.text(str.length);
     });
 
-
     //
-    // 링크 카드 Like 기능
-    $('.actions_box .maum').click(function (event) {
-        var btn     = $(this);
-        var user_id = $(this).attr('action_noiser');
-        var target_id = $(this).attr('action_target');
-        var method  = $(this).attr('action_status');
-        var url     = '';
-
-        if (user_id !== '0'){
-            if (method === 'post'){
-                url += '/action/likes.json'
-            } else if (method === 'delete'){
-                url += '/action/likes/'+target_id+'.json'
-            }
-
-            var req = $.ajax({
-                url: url,
-                method: method,
-                data: {
-                    like: {
-                        user_id: user_id,
-                        link_id: target_id
-                    },
-                    authenticity_token: _hf_
-                }
-            });
-
-            req.done(function (result) {
-                console.log(result);
-                var icon = $('#actions_'+result.data.link_id+' .maum span.zmdi');
-                var counter = $('#actions_'+result.data.link_id+' .maum span.counter');
-
-                if (result.status === 'created'){
-                    icon.removeClass('zmdi-favorite-outline').addClass('zmdi-favorite');
-                    counter.text(result.count);
-                    btn
-                        .attr('action_status', 'delete')
-                        .attr('action_target', result.data.id);
-
-                } else if (result.status === 'deleted'){
-                    icon.removeClass('zmdi-favorite').addClass('zmdi-favorite-outline');
-                    counter.text(result.count);
-                    btn
-                        .attr('action_status', 'post')
-                        .attr('action_target', result.data.link_id);
-                }
-            });
-
-            req.fail(function (result) { console.log('failed'); alert(result.responseText) })
-
-        } else {
-            alert('you should login to use like button')
-        }
-
-        event.stopPropagation();
-    });
-
-
-    //
-    // 링크 카드 Clip 기능
-    $('.clip_btn').click(function (event) {
-        var btn = $(this);
-        var user_id = $(this).attr('action_noiser');
-        var target_id = $(this).attr('action_target');
-        var method  = $(this).attr('action_status');
-        var url     = '';
-
-        if (user_id !== '0'){
-            if (method === 'post'){
-                url += '/action/clips.json'
-            } else if (method === 'delete'){
-                url += '/action/clips/'+target_id+'.json'
-            }
-
-            var req = $.ajax({
-                url: url,
-                method: method,
-                data: {
-                    clip: {
-                        user_id: user_id,
-                        link_id: target_id
-                    },
-                    authenticity_token: _hf_
-                }
-            });
-
-            req.done(function (result) {
-                console.log(result);
-                var grand = $('#link_'+result.data.link_id);
-
-                if (result.status === 'created'){
-                    grand.addClass('clipped');
-                    btn
-                        .attr('action_status', 'delete')
-                        .attr('action_target', result.data.id);
-
-                } else if (result.status === 'deleted'){
-                    grand.removeClass('clipped');
-                    btn
-                        .attr('action_status', 'post')
-                        .attr('action_target', result.data.link_id);
-                }
-            });
-
-            req.fail(function (result) { console.log('failed'); alert(result.responseText) })
-
-        }
-
-        event.stopPropagation()
-    });
+    // 링크 카드의 마음/클립 액션 바인딩
+    bindingActions();
 
     //
     // 공유 주소 복사 했을 때, 툴팁 띄우기.
@@ -232,6 +123,20 @@ $(document).ready(function () {
         $('.link_wrapping_anchor').removeClass('no-mute');
     }, function () {
         $('.link_wrapping_anchor').addClass('no-mute');
+    });
+    $('.share_box').click(function (e) {
+        var btn = $(this).find('.no-vl:not(.dropdown-menu)');
+        var status = btn.attr('aria-expanded');
+        if (status === 'true'){
+            btn.attr('aria-expanded', 'false');
+            $(this).removeClass('open');
+
+        } else if (status === 'false'){
+            btn.attr('aria-expanded', 'true');
+            $(this).addClass('open');
+        }
+
+        e.stopPropagation();
     });
 });
 
