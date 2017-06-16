@@ -221,8 +221,9 @@ body{
         & > .item.active {
             & > .carousel-img{
                 height: 260px !important;
-                background-size: auto 260px !important;
-                background-image: none !important;
+                //background-size: auto 260px !important;
+                //background-image: none !important;
+                background-size: contain !important;
             }
         }
     }
@@ -279,7 +280,7 @@ body{
                 right: -29%;
                 bottom: 60px;
                 margin: auto;
-                background: #07174b;
+                background: transparent;
                 border: 1px solid #b3b3b3;
                 font-size: 16px;
                 font-weight: 600;

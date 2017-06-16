@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170612144049) do
+ActiveRecord::Schema.define(version: 20170616081725) do
 
   create_table "clips", force: :cascade do |t|
     t.integer  "user_id"
@@ -28,6 +28,20 @@ ActiveRecord::Schema.define(version: 20170612144049) do
     t.boolean  "published",      default: false, null: false
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
+  end
+
+  create_table "fd_confs", force: :cascade do |t|
+    t.integer  "fandom_id"
+    t.integer  "user_id"
+    t.string   "fd_logo"
+    t.string   "fd_bg_img"
+    t.string   "fd_bg_color"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.text     "userlist",    default: "[]", null: false
+    t.string   "fd_name"
+    t.index ["fandom_id"], name: "index_fd_confs_on_fandom_id"
+    t.index ["user_id"], name: "index_fd_confs_on_user_id"
   end
 
   create_table "histories", force: :cascade do |t|
@@ -116,7 +130,9 @@ ActiveRecord::Schema.define(version: 20170612144049) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                                   null: false
     t.datetime "updated_at",                                   null: false
+    t.integer  "fd_conf_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["fd_conf_id"], name: "index_users_on_fd_conf_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 

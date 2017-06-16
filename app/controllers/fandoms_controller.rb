@@ -14,6 +14,7 @@ class FandomsController < ApplicationController
     # GET /fandoms/1
     # GET /fandoms/1.json
     def show
+        @config = @fandom.config
         set_for_fandom_show_template_data
         @tabs[2][:active] = 'active'
 
@@ -42,6 +43,10 @@ class FandomsController < ApplicationController
         respond_to do |format|
             if @fandom.save
                 Myfandom.create(fandom: @fandom, user: current_user)
+                init_config = FdConf.create(fd_logo: @fandom.profile_img, fd_bg_img: @fandom.background_img, fd_name: @fandom.name, userlist: [current_user.id].to_s)
+                @fandom.configs << init_config
+                current_user.fd_confs << init_config
+                
                 format.html { redirect_to :back, notice: 'Fandom was successfully created.' }
                 format.json { render :show, status: :created, location: @fandom }
             else

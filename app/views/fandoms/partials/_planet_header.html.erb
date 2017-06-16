@@ -1,5 +1,6 @@
 <%
-    bgcolor = '#07174b'
+    @config ||= @fandom.config
+    bgcolor = @config.fd_bg_color || '#07174b'
 %>
 <style>
     #header{
@@ -7,10 +8,10 @@
     }
     #header.init_header {
         background-color: #2196f3 !important;
-        box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3) !important;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3) !important;
     }
     .carousel-caption:before{
-        background-image: url('<%= @fandom.profile_img.include?('round') ? @fandom.profile_img.split('round').first + 'round126_126' : @fandom.profile_img %>')
+        background-image: url('<%= @config.fd_logo.include?('round') ? @config.fd_logo.split('round').first + 'round126_126' : @config.fd_logo %>')
     }
     #footer{ position: initial }
 </style>
@@ -18,12 +19,12 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
         <div class="item active">
-            <div class="carousel-img" style="background-image: url('<%= @fandom.background_img %>'); background-attachment: fixed; background-color: <%= bgcolor %> !important;"></div>
+            <div class="carousel-img" style="background-image: url('<%= @config.fd_bg_img %>'); background-attachment: fixed; background-color: <%= bgcolor %> !important;"></div>
             <div class="carousel-caption">
                 <a href="" class="btn btn-default waves-effect waves-circle waves-float" style="display: none;"><span class="zmdi zmdi-trending-up"></span></a>
 
                 <span class="channel_info dropdown">
-                    <p class="channel_name"><%= @fandom.name %></p>
+                    <p class="channel_name"><%= @config.fd_name %></p>
                     <p class="channel_follow_count">followers <span id="follower_count_<%= @fandom.id %>" class="count"><%= @fandom.user_lists.count %></span></p>
                     <a id="channel_<%= @fandom.id %>" onclick="followBtn('<%= @follow_control[:follow_cmd] %>', <%= @follow_control[:myfandom_id] %>, <%= @follow_control[:channel_id] %>, <%= @follow_control[:user_id] %>, 'no-text')" class="channel_followBtn">
                     <!--<span class="zmdi zmdi-favorite<%#= '-outline' unless is_my_fandom?(fandom: @fandom, user: current_user) %> <%#= 'c-pink' if is_my_fandom?(fandom: @fandom, user: current_user) %>"></span>-->
@@ -31,20 +32,20 @@
                     </a>
                     <a href="" id="Pshare-dd" data-toggle="dropdown" aria-expanded="false" class="channel_followBtn dropdown-toggle" style="text-align: center; margin-left: 10px;"><span class="zmdi zmdi-share">share</span></a>
                     <ul id="Pshare-dd-menu" class="dropdown-menu no-vl go-social" role="menu" aria-labelledby="Pshare-dd">
-                    <li class="sns_share card-body clearfix">
-                        <a class="col-xs-4" href="http://www.facebook.com/sharer/sharer.php?u=<%= request.url %>" onclick="window.open(this.href); return false"><img src="/template/img/social/facebook-128.png" class="img-responsive" alt=""></a>
-                        <a class="col-xs-4" href="https://twitter.com/intent/tweet?text=<%= app_config[:description].gsub(' ','_') %>&url=<%= request.url %>" onclick="window.open(this.href); return false"><img src="/template/img/social/twitter-128.png" class="img-responsive" alt=""></a>
-                        <a class="col-xs-4" href="https://plus.google.com/share?url=<%= request.url %>" onclick="window.open(this.href); return false"><img src="/template/img/social/googleplus-128.png" class="img-responsive" alt=""></a>
-                    </li>
-                    <li class="divider"></li>
-                    <li class="clipboarding">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="zmdi zmdi-globe"></i></span>
-                            <div id="channel_url_<%= @fandom.id %>" type="text" class="form-control fc-alt" aria-label="Amount (to the nearest dollar)"><%= request.url %></div>
-                            <span target="<%= @fandom.id %>" data-clipboard-target="#channel_url_<%= @fandom.id %>" class="input-group-addon url_copy"><i class="zmdi zmdi-copy"></i></span>
-                        </div>
-                    </li>
-                </ul>
+                        <li class="sns_share card-body clearfix">
+                            <a class="col-xs-4" href="http://www.facebook.com/sharer/sharer.php?u=<%= request.url %>" onclick="window.open(this.href); return false"><img src="/template/img/social/facebook-128.png" class="img-responsive" alt=""></a>
+                            <a class="col-xs-4" href="https://twitter.com/intent/tweet?text=<%= app_config[:description].gsub(' ','_') %>&url=<%= request.url %>" onclick="window.open(this.href); return false"><img src="/template/img/social/twitter-128.png" class="img-responsive" alt=""></a>
+                            <a class="col-xs-4" href="https://plus.google.com/share?url=<%= request.url %>" onclick="window.open(this.href); return false"><img src="/template/img/social/googleplus-128.png" class="img-responsive" alt=""></a>
+                        </li>
+                        <li class="divider"></li>
+                        <li class="clipboarding">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="zmdi zmdi-globe"></i></span>
+                                <div id="channel_url_<%= @fandom.id %>" type="text" class="form-control fc-alt" aria-label="Amount (to the nearest dollar)"><%= request.url %></div>
+                                <span target="<%= @fandom.id %>" data-clipboard-target="#channel_url_<%= @fandom.id %>" class="input-group-addon url_copy"><i class="zmdi zmdi-copy"></i></span>
+                            </div>
+                        </li>
+                    </ul>
                 </span>
             </div>
         </div>

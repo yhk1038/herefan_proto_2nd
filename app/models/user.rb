@@ -12,6 +12,9 @@ class User < ApplicationRecord
            :omniauthable, :omniauth_providers => [:facebook, :twitter, :google_oauth2]
 
     # has_many :links
+    has_many :fd_confs
+    belongs_to :fd_conf
+    
     has_many :myfandoms, dependent: :destroy
     has_many :fandoms, through: :myfandoms
     has_many :histories

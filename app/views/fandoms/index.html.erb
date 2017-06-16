@@ -43,16 +43,17 @@
     </div>
     <div class="row" style="text-align: left; max-width: 960px; margin: auto; padding: 0 60px;">
         <% @fandoms.each do |fandom| %>
+            <% config = fandom.config %>
             <div class="" style="width: 250px; margin: 30px 10px 10px; height: 300px; display: inline-table;">
 
                 <%= link_to fandom_path(fandom) do %>
                     <div class="card profile-view" style="margin: 0;">
-                        <div class="pv-header hf-e-header"  style="background-image: url('<%= fandom.background_img %>'); height: 125px;">
-                            <img src="<%= fandom.profile_img %>" class="pv-main profile_img absolute_center" alt="" data-pin-nopin="true" style="width: 90px; height: 90px; margin-left: -45px; border: 2px solid #fff; box-shadow: 0 0 5px rgba(0, 0, 0, 0.75)">
+                        <div class="pv-header hf-e-header"  style="background-image: url('<%= config.fd_bg_img %>'); height: 125px;">
+                            <img src="<%= config.fd_logo %>" class="pv-main profile_img absolute_center" alt="" data-pin-nopin="true" style="width: 90px; height: 90px; margin-left: -45px; border: 2px solid #fff; box-shadow: 0 0 5px rgba(0, 0, 0, 0.75)">
                         </div>
 
                         <div class="pv-body hf-e-body">
-                            <h2 class="text"><%= fandom.name %></h2>
+                            <h2 class="text"><%= config.fd_name %></h2>
 
                             <ul class="pv-follow">
                                 <li class="text text-sm"><span id="follower_count_<%= fandom.id %>">Followers <%= fandom.user_lists.count %></span></li>
@@ -79,14 +80,15 @@
         <div class="row unpublished_channels" style="text-align: left; max-width: 960px; margin-left: auto; margin-right: auto; padding: 0 60px;">
             <h2 style="text-align: left">fandom waiting list <small>These channels are in preparation. <br>When the proposal reaches 50 people, it will be issued to the official channel.</small></h2>
             <% @fandoms_not_active.each do |un_fandom| %>
+                <% conf = un_fandom.config %>
                 <div class="" style="width: 250px; margin: 30px 10px 10px; height: 270px; display: inline-table;">
                     <%= link_to '#', style: 'background: #000' do %>
                         <div class="card profile-view inactive" style="margin: 0;">
-                            <div class="pv-header hf-e-header" style="background-image: url('<%= un_fandom.background_img %>'); height: 180px;">
-                                <img src="<%= un_fandom.profile_img %>" class="pv-main profile_img absolute_center" alt="" data-pin-nopin="true" style="width: 90px; height: 90px; margin-left: -45px; bottom: 50px; z-index: 2;">
+                            <div class="pv-header hf-e-header" style="background-image: url('<%= conf.fd_bg_img %>'); height: 180px;">
+                                <img src="<%= conf.fd_logo %>" class="pv-main profile_img absolute_center" alt="" data-pin-nopin="true" style="width: 90px; height: 90px; margin-left: -45px; bottom: 50px; z-index: 2;">
                             </div>
                             <div class="pv-body hf-e-body" style="margin-top: 0;">
-                                <h2 class="text" style="margin-top: 17px;"><%= un_fandom.name %></h2>
+                                <h2 class="text" style="margin-top: 17px;"><%= conf.fd_name %></h2>
 
                                 <ul class="pv-follow">
                                     <li class="text text-sm" style="font-size: 30px !important;"><span id="follower_count_<%= un_fandom.id %>"><%= un_fandom.users.count %></span></li>
