@@ -82,9 +82,14 @@
 
 <script src="/js/Grid-A-Licious-master/jquery.grid-a-licious.js"></script>
 <script type="text/javascript" charset="utf-8">
+    var grid_size = 250;
+    if ($('#libraries_wrapper').data('page') === 'home-new_content'){
+        grid_size = 200;
+    }
+
     $('#libraries_wrapper').gridalicious({
         selector: '.task',
-        width: 360
+        width: grid_size
     })
 </script>
 

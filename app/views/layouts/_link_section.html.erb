@@ -1,5 +1,5 @@
 <section id="library" class="container contents_box">
-    <div class="row" id="libraries_wrapper">
+    <div class="row" id="libraries_wrapper" data-page="<%= params[:controller] %>-<%= params[:action] %>">
         <%= render partial: '/links/partials/link_card', collection: @links, as: :link %>
     </div>
 </section>
