@@ -19,9 +19,7 @@ class MypageController < ApplicationController
     
     def watched
         @tabs[0][:active] = 'active'
-        ids = current_user.visited_links.pluck(:link_id)
-        fandom_ids = current_user.fandoms.published.ids
-        @links = Link.where(id: ids, fandom_id: fandom_ids)
+        @links = current_user.visited_links.map{|a| a.link}.sort{|a, b| b.created_at <=> a.created_at }
     end
     
     def filling_tab_group
