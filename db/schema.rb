@@ -93,29 +93,29 @@ ActiveRecord::Schema.define(version: 20170612144049) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "",          null: false
-    t.string   "encrypted_password",     default: "",          null: false
-    t.boolean  "admin",                  default: false,       null: false
-    t.boolean  "active",                 default: true,        null: false
-    t.integer  "role",                   default: 1,           null: false
-    t.integer  "point",                  default: 0,           null: false
-    t.string   "nickname",               default: "Anonymous", null: false
+    t.string   "email",                  default: "",                            null: false
+    t.string   "encrypted_password",     default: "",                            null: false
+    t.boolean  "admin",                  default: false,                         null: false
+    t.boolean  "active",                 default: true,                          null: false
+    t.integer  "role",                   default: 1,                             null: false
+    t.integer  "point",                  default: 0,                             null: false
+    t.string   "nickname",               default: "Anonymous",                   null: false
     t.datetime "birthday"
-    t.string   "name",                   default: "Anonymous", null: false
-    t.string   "image"
+    t.string   "name",                   default: "Anonymous",                   null: false
+    t.string   "image",                  default: "/img/default-user-image.png", null: false
     t.string   "img"
     t.string   "provider"
     t.string   "uid"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,           null: false
+    t.integer  "sign_in_count",          default: 0,                             null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
+    t.datetime "created_at",                                                     null: false
+    t.datetime "updated_at",                                                     null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -132,23 +132,23 @@ ActiveRecord::Schema.define(version: 20170612144049) do
 
   create_table "wiki_pointers", force: :cascade do |t|
     t.integer  "wiki_id"
-    t.integer  "sort_num"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "sort_num",   default: 999999, null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.index ["wiki_id"], name: "index_wiki_pointers_on_wiki_id"
   end
 
   create_table "wiki_posts", force: :cascade do |t|
-    t.integer  "user_id"
+    t.integer  "user_id",                          null: false
     t.integer  "wiki_id"
     t.string   "title"
     t.text     "content"
     t.string   "commit_msg"
-    t.integer  "row_count"
+    t.integer  "row_count",       default: 999999, null: false
     t.string   "url"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.integer  "wiki_pointer_id"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.integer  "wiki_pointer_id", default: 1,      null: false
     t.index ["user_id"], name: "index_wiki_posts_on_user_id"
     t.index ["wiki_id"], name: "index_wiki_posts_on_wiki_id"
     t.index ["wiki_pointer_id"], name: "index_wiki_posts_on_wiki_pointer_id"
