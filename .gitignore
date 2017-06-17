@@ -37,6 +37,6 @@
 /db/seeds.rb
 db/seeds.rb
 */seeds.rb
-
+/db/schema.rb
 
 /public/uploads/*
