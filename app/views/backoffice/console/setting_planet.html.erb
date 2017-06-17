@@ -1,2 +1,85 @@
-<h1>Console#setting_planet</h1>
-<p>Find me in app/views/console/setting_planet.html.erb</p>
+
+<section class="container-fluid">
+    <div class="row">
+        <div id="leftNav" class="col-sm-3 card">
+            <div class="card-header bgm-blue">
+                <h2>setting <b><%= @fandom.name %></b> planet</h2>
+            </div>
+            <div class="card-body card-padding-sm">
+                <ul>
+                    <li data-navtab="information" class="navtab active"><a onclick="consoleMove('information')">planet's information</a></li>
+                    <li data-navtab="wiki" class="navtab"><a onclick="consoleMove('wiki')">> wiki</a></li>
+                    <li data-navtab="history" class="navtab"><a onclick="consoleMove('history')">> history</a></li>
+                    <li data-navtab="schedule" class="navtab"><a onclick="consoleMove('schedule')">> schedule</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3" id="planet-config-box">
+
+            <div class="block-header" style="padding: 0">
+                <h2 style="text-align: right; text-transform: capitalize;">Hi <%= current_user.name %>, It's editor-only page!</h2>
+            </div>
+            <div class="card">
+                <div class="card-header bgm-red">
+                    <h2>List of Editors <small>updated at <%= @config.updated_at.strftime('%F') %></small></h2>
+                </div>
+                <div class="card-body card-padding">
+                    <% list = @config.userlist.gsub('[','').gsub(']','').split(',') %>
+                    <% colors = %w(danger info success warning default primary) %>
+                    <% list.each do |editor_id| %>
+                        <span class="label label-<%= colors.sample %>"><%= User.find(editor_id.to_i).nickname %></span>
+                    <% end %>
+                </div>
+            </div>
+
+            <section id="information">
+                <div class="card">
+                    <div class="card-header bgm-orange">
+                        <h2>planet's main information</h2>
+                    </div>
+                    <div class="card-body card-padding" style="padding-bottom: 80px;">
+                        <form action="/console/save_planet_information" method="post" enctype="multipart/form-data">
+                            <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+                            <input type="hidden" name="fd_conf[id]" value="<%= @config.id %>">
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-addon"><i class="zmdi zmdi-face"></i> name</span>
+                                <div class="fg-line">
+                                    <input type="text" name="fd_conf[fd_name]" value="<%= @config.fd_name %>" class="form-control input-lg" placeholder="What is the name of this planet's Celeb?">
+                                </div>
+                            </div>
+                            <div class="cp-container">
+                                <div class="input-group form-group">
+                                    <span class="input-group-addon" style="padding: 13px 20px;"><i class="zmdi zmdi-invert-colors"></i> main color</span>
+                                    <div class="fg-line dropdown" style="top: 3px;">
+                                        <input type="text" name="fd_conf[fd_bg_color]" class="form-control cp-value" value="#03A9F4" data-toggle="dropdown" style="background-color: rgb(3, 169, 244); color: rgb(255, 255, 255);">
+
+                                        <div class="dropdown-menu">
+                                            <div class="color-picker" data-cp-default="#03A9F4"><div class="farbtastic"><div class="color" style="background-color: rgb(0, 176, 255);"></div><div class="wheel"></div><div class="overlay"></div><div class="h-marker marker" style="left: 70px; top: 177px;"></div><div class="sl-marker marker" style="left: 49px; top: 99px;"></div></div></div>
+                                        </div>
+
+                                        <i class="cp-value" style="background-color: rgb(3, 169, 244); color: rgb(255, 255, 255);"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-addon"><i class="zmdi zmdi-wallpaper"></i> logo image url</span>
+                                <div class="fg-line">
+                                    <input type="text" name="fd_conf[fd_logo]" value="<%= @config.fd_logo %>" class="form-control input-lg" placeholder="Put your (fandom)planet's logo address">
+                                </div>
+                            </div>
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-addon"><i class="zmdi zmdi-image-alt"></i> background image url</span>
+                                <div class="fg-line">
+                                    <input type="text" name="fd_conf[fd_bg_img]" value="<%= @config.fd_bg_img %>" class="form-control input-lg" placeholder="Put your (fandom)planet's awesome or official image for using background!">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-success pull-right">save</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <section style="height: 2000px;"></section>
+        </div>
+    </div>
+</section>

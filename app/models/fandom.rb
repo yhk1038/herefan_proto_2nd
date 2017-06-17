@@ -34,4 +34,8 @@ class Fandom < ApplicationRecord
     def get_myfandom(user)
         self.myfandoms.where(user: user).take
     end
+    
+    def user_ids
+        self.config.userlist.gsub('[','').gsub(']','').split(',').map{|s| s.to_i}
+    end
 end

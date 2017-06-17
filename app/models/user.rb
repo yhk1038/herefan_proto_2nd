@@ -28,6 +28,10 @@ class User < ApplicationRecord
         self.myfandoms.all&.map{|mf| mf.fandom}
     end
     
+    def is_planet_editor?(fandom)
+        fandom.user_ids.include? self.id
+    end
+    
     # after_create :set_default_role, if: Proc.new { User.count > 1 }
 
     TEMP_EMAIL_PREFIX = 'change@me'
