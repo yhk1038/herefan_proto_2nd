@@ -1,6 +1,15 @@
 Rails.application.routes.draw do
+    
+    scope module: :backoffice do
+        get 'console/setting_planet(/:fandom_id)', to: 'console#setting_planet'
+    
+        get 'console/admin'
+    
+        get 'console/site_config'
+    
+        get 'console/debug'
+    end
 
-  
     ## User
     devise_for :users, :controllers => {
             sessions: 'users/sessions',

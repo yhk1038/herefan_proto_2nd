@@ -13,3 +13,4 @@ Rails.application.config.exceptions_app = Rails.application.routes
 # Rails.application.config.assets.precompile += %w( search.js )
 
 Rails.application.config.assets.precompile += %w( channels/herefan.js )
+Rails.application.config.assets.precompile += %w( channels/console.js )

@@ -14,7 +14,6 @@ class FandomsController < ApplicationController
     # GET /fandoms/1
     # GET /fandoms/1.json
     def show
-        @config = @fandom.config
         set_for_fandom_show_template_data
         @tabs[2][:active] = 'active'
 
@@ -84,6 +83,7 @@ class FandomsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_fandom
         @fandom = Fandom.find(params[:id])
+        @config = @fandom.configs.count.zero? ? make_fandom_config(@fandom) : @fandom.config
     end
     
     # Never trust parameters from the scary internet, only allow the white list through.

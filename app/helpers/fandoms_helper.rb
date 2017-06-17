@@ -29,5 +29,14 @@ module FandomsHelper
     private
     def set_fandom
         @fandom = Fandom.find(params[:fandom_id])
+        @config = @fandom.configs.count.zero? ? make_fandom_config(@fandom) : @fandom.config
+    end
+    
+    def make_fandom_config(fandom)
+        init_config = FdConf.create(fd_logo: fandom.profile_img, fd_bg_img: fandom.background_img, fd_name: fandom.name, userlist: [$current_user_id].to_s)
+        fandom.configs << init_config
+        User.find($current_user_id).fd_confs << init_config unless $current_user_id.zero?
+        
+        return init_config
     end
 end
