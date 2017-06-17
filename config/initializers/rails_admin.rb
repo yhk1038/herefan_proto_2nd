@@ -2,65 +2,83 @@ RailsAdmin.config do |config|
     config.main_app_name = ['BackOffice - HereFan :: DB']
 
     # Model Config
-    config.included_models = %w(Fandom Schedule Link User Myfandom VisitedLink Wiki WikiPointer WikiPost)
+    config.included_models = %w(
+                                Fandom
+                                Schedule
+                                Link
+                                User
+                                Myfandom
+                                VisitedLink
+                                Wiki
+                                WikiPointer
+                                WikiPost
+                                FdConf
+                            )
     # config.config.excluded_models = %w()
     
     config.model 'Fandom' do
-        label 'ㄱ. 채널'
-        label_plural 'ㄱ. 채널'
+        label 'ㄱ. 플래닛'
+        label_plural '플래닛'
         navigation_icon 'icon-flag'
     end
 
+    config.model 'FdConf' do
+        label 'ㄴ. 플래닛 세팅 정보'
+        label_plural '플래닛 세팅 정보'
+        navigation_icon 'icon-glass'
+    end
+
     config.model 'Link' do
-        label 'ㄴ. 라이브러리 컨텐츠'
-        label_plural 'ㄴ. 라이브러리 컨텐츠'
+        label 'ㄷ. 라이브러리 컨텐츠'
+        label_plural '라이브러리 컨텐츠'
         navigation_icon 'icon-th'
     end
     
     config.model 'Schedule' do
-        label 'ㄷ. 스케쥴 항목'
-        label_plural 'ㄷ. 스케쥴 항목'
+        label 'ㄹ. 스케쥴 항목'
+        label_plural '스케쥴 항목'
         navigation_icon 'icon-calendar'
     end
 
     config.model 'User' do
-        label 'ㄹ. 사용자'
-        label_plural 'ㄹ. 사용자'
+        label 'ㅁ. 사용자'
+        label_plural '사용자'
         navigation_icon 'icon-user'
     end
 
     config.model 'Myfandom' do
-        label 'ㅁ. 채널 팔로우'
-        label_plural 'ㅁ. 채널 팔로우'
+        label 'ㅂ. 채널 팔로우'
+        label_plural '채널 팔로우'
         navigation_icon 'icon-heart'
     end
 
     config.model 'VisitedLink' do
-        label 'ㅂ. 조회된 컨텐츠'
-        label_plural 'ㅂ. 조회된 컨텐츠'
+        label 'ㅅ. 조회된 컨텐츠'
+        label_plural '조회된 컨텐츠'
         navigation_icon 'icon-glass'
     end
 
     #
     config.model 'Wiki' do
-        label 'ㅅ. 위키 문서'
-        label_plural 'ㅅ. 위키 문서'
+        label 'ㅇ. 위키 문서'
+        label_plural '위키 문서'
         navigation_icon 'icon-glass'
     end
 
     config.model 'WikiPointer' do
-        label 'ㅇ. 위키 섹션 컨데이너'
-        label_plural 'ㅇ. 위키 섹션 컨데이너'
+        label 'ㅈ. 위키 섹션 컨데이너'
+        label_plural '위키 섹션 컨데이너'
         navigation_icon 'icon-glass'
     end
 
     config.model 'WikiPost' do
-        label 'ㅈ. 위키 포스트'
-        label_plural 'ㅈ. 위키 포스트'
+        label 'ㅊ. 위키 포스트'
+        label_plural '위키 포스트'
         navigation_icon 'icon-glass'
     end
 
     config.navigation_static_links = {
+            '관리자 전용 콘솔' => 'http://test.herefan.com/console/admin',
             Github: 'https://github.com/StarStreamOfficial/HereFan_renew',
             '레일즈 어드민 - 공식 문서' => 'https://github.com/sferik/rails_admin/wiki',
             '레일즈 어드민 - 한글 가이드' => 'https://say8425.github.io/setup-rails-admin-1/'
