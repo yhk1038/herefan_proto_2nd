@@ -2,6 +2,7 @@ Rails.application.routes.draw do
     
     scope module: :backoffice do
         get 'console/setting_planet(/:fandom_id)', to: 'console#setting_planet'
+        post 'console/save_planet_information', to: 'console#save_planet_information'
     
         get 'console/admin'
     

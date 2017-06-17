@@ -50,4 +50,9 @@
             </div>
         </div>
     </div>
+    <% if user_signed_in? && current_user.is_planet_editor?(@fandom) %>
+        <div id="editorPage_link-box">
+            <a href="/console/setting_planet/<%= @fandom.id %>" class="btn btn-default">Editor Dashboard</a>
+        </div>
+    <% end %>
 </div>
