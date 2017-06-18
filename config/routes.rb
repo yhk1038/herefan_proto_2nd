@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
     
     scope module: :backoffice do
-        get 'console/setting_planet(/:fandom_id)', to: 'console#setting_planet'
-        post 'console/save_planet_information', to: 'console#save_planet_information'
-    
+        get 'console/setting_planet(/:fandom_id)',  to: 'console#setting_planet'
+        post 'console/save_planet_information',     to: 'console#save_planet_information'
+        post 'console/save_planet_wiki',            to: 'console#save_planet_wiki'
+        post 'console/create_wiki_info',            to: 'console#create_wiki_info'
+        post 'console/update_wiki_info/:id',        to: 'console#update_wiki_info'
+        post 'console/delete_wiki_info/:id',        to: 'console#delete_wiki_info'
+        
         get 'console/admin'
     
         get 'console/site_config'
