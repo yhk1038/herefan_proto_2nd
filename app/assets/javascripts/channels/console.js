@@ -61,6 +61,6 @@ function deleteWikiInfo(id) {
         swal('Deleted', '', 'success');
         $('#info-'+data.id).fadeOut();
     }).fail(function (data) {
-        swal({data, type: 'error'})
+        swal(data, '', 'error')
     })
 }
