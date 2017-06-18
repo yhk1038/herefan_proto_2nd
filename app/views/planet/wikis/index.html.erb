@@ -20,19 +20,11 @@
                     </div>
                     <div class="card-body card-padding">
                         <ul><%= @wiki.name %>
-                            <% if @fandom.id == 2 %>
-                                <li>Members</li>
-                                <li>Preview</li>
-                                <li>Member</li>
-                                <li>Features</li>
-                                <li>Music Albums</li>
-                            <% else %>
-                                <ol>official sites</ol>
-                                <ol>members</ol>
-                                <% @sections.each do |section| %>
-                                    <% post = section.wiki_posts.last %>
-                                    <ol><a href="#main-section-<%= section.id %>"><%= post.title %></a></ol>
-                                <% end %>
+                            <ol>official sites</ol>
+                            <ol>members</ol>
+                            <% @sections.each do |section| %>
+                                <% post = section.wiki_posts.last %>
+                                <ol><a href="#main-section-<%= section.id %>"><%= post.title %></a></ol>
                             <% end %>
                         </ul>
                     </div>
@@ -52,7 +44,7 @@
                                 <% if @fandom.id == 2 %>
                                     <img id="main-img" src="/wiki_dummy/daemoon.jpg" alt="<%= @wiki.name %> 사진" style="width: 100%;">
                                 <% else %>
-                                    <img id="main-img" src="http://mimgnews1.naver.net/image/311/2016/01/24/1453595875396_99_20160124094104.png" alt="<%= @wiki.name %> 사진">
+                                    <img id="main-img" src="<%= @wiki.image %>" alt="<%= @wiki.name %> 사진">
                                 <% end %>
                             </div>
                             <div class="col-md-3"></div>
@@ -64,7 +56,7 @@
                             <div class="col-md-10 table-responsive">
                                 <table id="main-information" class="table table-bordered table-hover">
                                     <tbody>
-                                    <% if @fandom.id == 2 %>
+                                    <% if @fandom.id == 0 %>
                                         <tr>
                                             <td>agency</td>
                                             <td>JYP ENTERTAINMENT</td>
@@ -86,26 +78,13 @@
                                             <td>[Link]</td>
                                         </tr>
                                     <% else %>
-                                        <tr>
-                                            <td>agency</td>
-                                            <td>1-1</td>
-                                            <td>1-비고</td>
-                                        </tr>
-                                        <tr>
-                                            <td>distributor</td>
-                                            <td>2-1</td>
-                                            <td>2-비고</td>
-                                        </tr>
-                                        <tr>
-                                            <td>debut</td>
-                                            <td><%= Faker::Lorem.paragraphs(3).join(' ') %></td>
-                                            <td>3-비고</td>
-                                        </tr>
-                                        <tr>
-                                            <td>fandom</td>
-                                            <td>boddy</td>
-                                            <td>3-비고</td>
-                                        </tr>
+                                        <% @wiki.infos.each do |info| %>
+                                            <tr>
+                                                <td><%= info.title %></td>
+                                                <td><%= info.content&.html_safe %></td>
+                                                <td><%= info.url&.html_safe %></td>
+                                            </tr>
+                                        <% end %>
                                     <% end %>
                                     </tbody>
                                 </table>

@@ -13,6 +13,9 @@ class Fandom < ApplicationRecord
     has_many :users,        through: :myfandoms
     has_many :myfandoms,    dependent: :destroy
     
+    # Callback Functions
+    after_create :dummy_wiki_append, :registration_config
+    
     # default_scope { where(published: true) }
     scope :published,   -> { where(published: true) }
     scope :unpublished, -> { where(published: false) }
@@ -37,5 +40,42 @@ class Fandom < ApplicationRecord
     
     def user_ids
         self.config.userlist.gsub('[','').gsub(']','').split(',').map{|s| s.to_i}
+    end
+    
+    
+    private
+    ## Callback fandom create
+    # dummy wiki
+    def dummy_wiki_append
+        fandom = self
+        
+        # main wiki create
+        wiki = Wiki.create do |w|
+            w.fandom    = fandom
+            w.name      = fandom.name
+            w.image     = fandom.background_img
+        end
+        fandom.wikis << wiki
+        
+        # sub wiki create
+        6.times do |i|
+            fandom.wikis << Wiki.create do |w|
+                w.fandom    = fandom
+                w.wiki      = wiki
+                w.name      = "member #{i+1}"
+                w.image     = fandom.background_img
+            end
+        end
+    end
+    
+    def registration_config
+        fandom = self
+        
+        init_config = FdConf.create(fd_logo: fandom.profile_img, fd_bg_img: fandom.background_img, fd_name: fandom.name, userlist: [$current_user_id].to_s)
+        fandom.configs << init_config
+        
+        user = User.find_by(id: $current_user_id)
+        return init_config unless user
+        user.fd_confs << init_config
     end
 end

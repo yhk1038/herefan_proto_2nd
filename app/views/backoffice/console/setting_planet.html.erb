@@ -1,9 +1,10 @@
 
 <section class="container-fluid">
     <div class="row">
-        <div id="leftNav" class="col-sm-3 card">
+        <div id="leftNav" class="col-sm-3 card active">
             <div class="card-header bgm-blue">
                 <h2>setting <b><%= @fandom.name %></b> planet</h2>
+                <a href="#" onclick="leftNevToggle(); return false;" id="leftNav-toggleBtn" class="btn btn-default btn-float btn-circle"><span class="zmdi zmdi-minus"></span></a>
             </div>
             <div class="card-body card-padding-sm">
                 <ul>
@@ -32,6 +33,7 @@
                 </div>
             </div>
 
+            <!-- Information -->
             <section id="information">
                 <div class="card">
                     <div class="card-header bgm-orange">
@@ -48,13 +50,22 @@
                                 </div>
                             </div>
                             <div class="cp-container">
+                                <input type="hidden" id="fd_conf-color" name="fd_conf[fd_bg_color]" class="form-control cp-value" value="#03A9F4" data-toggle="dropdown" style="display: none;">
                                 <div class="input-group form-group">
                                     <span class="input-group-addon" style="padding: 13px 20px;"><i class="zmdi zmdi-invert-colors"></i> main color</span>
                                     <div class="fg-line dropdown" style="top: 3px;">
-                                        <input type="text" name="fd_conf[fd_bg_color]" class="form-control cp-value" value="#03A9F4" data-toggle="dropdown" style="background-color: rgb(3, 169, 244); color: rgb(255, 255, 255);">
+                                        <input type="text" class="form-control cp-value" value="#03A9F4" data-toggle="dropdown" style="background-color: rgb(3, 169, 244); color: rgb(255, 255, 255);">
 
                                         <div class="dropdown-menu">
-                                            <div class="color-picker" data-cp-default="#03A9F4"><div class="farbtastic"><div class="color" style="background-color: rgb(0, 176, 255);"></div><div class="wheel"></div><div class="overlay"></div><div class="h-marker marker" style="left: 70px; top: 177px;"></div><div class="sl-marker marker" style="left: 49px; top: 99px;"></div></div></div>
+                                            <div class="color-picker" data-cp-default="#03A9F4">
+                                                <div class="farbtastic">
+                                                    <div class="color" style="background-color: rgb(0, 176, 255);"></div>
+                                                    <div class="wheel"></div>
+                                                    <div class="overlay"></div>
+                                                    <div class="h-marker marker" style="left: 70px; top: 177px;"></div>
+                                                    <div class="sl-marker marker" style="left: 49px; top: 99px;"></div>
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <i class="cp-value" style="background-color: rgb(3, 169, 244); color: rgb(255, 255, 255);"></i>
@@ -74,6 +85,43 @@
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-success pull-right">save</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Wiki -->
+            <section id="wiki">
+                <div class="card">
+                    <div class="card-header bgm-deeporange">
+                        <h2>Wiki <small>Official Common Information</small></h2>
+                    </div>
+                    <div class="card-body card-padding" style="padding-bottom: 80px;">
+                        <form action="/console/save_planet_wiki" method="post" enctype="multipart/form-data">
+                            <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+
+                            <input type="hidden" name="wiki[id]" value="<%= @wiki.id %>">
+                            <input type="hidden" name="wiki[fandom_id]" value="<%= @wiki.fandom_id %>">
+                            <input type="hidden" name="wiki[wiki_id]" value="<%= @wiki.wiki_id %>">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="zmdi zmdi-face"></i> name</span>
+                                <div class="fg-line">
+                                    <input type="text" name="wiki[name]" value="<%= @wiki.name %>" class="form-control input-lg" placeholder="What is the name of this planet's Celeb?">
+                                </div>
+                            </div>
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-addon"><i class="zmdi zmdi-wallpaper"></i> main image</span>
+                                <div class="fg-line">
+                                    <input type="text" name="wiki[image]" value="<%= @wiki.image %>" class="form-control input-lg" placeholder="Put your (fandom)planet's logo address">
+                                </div>
+                            </div>
+                            <div class="row wiki-saveBtn">
+                                <button type="submit" class="btn btn-success btn-lg pull-right">save</button>
+                            </div>
+                            <%= render partial: '/backoffice/partials/wiki_info_form_slot', collection: @wiki.infos, as: :info %>
+                            <div class="row wiki-addInfo">
+                                <a onclick="addWikiInfo('<%= @wiki.id %>'); return false;" class="btn btn-warning btn-lg">add row slot</a>
+                            </div>
                         </form>
                     </div>
                 </div>

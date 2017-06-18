@@ -12,6 +12,16 @@
             <a href="index.html">HereFan - console || <%= params[:action] %></a>
         </li>
 
+        <li class="pull-right">
+            <ul class="top-menu">
+                <li id="top-goback">
+                    <a href="<%= fandom_path(@fandom) %>">Back
+                        <i class="tm-icon zmdi zmdi-long-arrow-left"></i>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
         <li class="pull-right" style="display: none;">
             <ul class="top-menu">
                 <!--<li id="toggle-width">-->
