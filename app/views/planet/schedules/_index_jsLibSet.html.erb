@@ -8,6 +8,8 @@
 <script src="/template/vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.min.js"></script>
 <script src="/template/vendors/bower_components/moment/min/moment.min.js"></script>
 <script src="/template/vendors/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+<script src="/template/vendors/bower_components/autosize/dist/autosize.min.js"></script>
+
 
 <!-- Placeholder for IE9 -->
 <!--[if IE 9 ]>
@@ -95,6 +97,7 @@
         $('body').on('click', '#addEvent', function(){
             var eventName = $('#eventName').val();
             var eventContent = $('#eventContent').val();
+            var eventDescription = $('#eventDescription').val();
             var eventAllDay = true;
             var tagColor = $('.event-tag > span.selected').attr('data-tag');
             var interval = getIntervalStartToEnd($('#getStart').val(), $('#getEnd').val());
@@ -113,7 +116,7 @@
                     className: tagColor
 
                 },true ); //Stick the event
-                addEventRecord(<%= @fandom.id %>, eventName, $('#getStart').val(), $('#getEnd').val(), eventAllDay, tagColor, eventContent);
+                addEventRecord(<%= @fandom.id %>, eventName, $('#getStart').val(), $('#getEnd').val(), eventAllDay, tagColor, eventContent, eventDescription);
 
                 $('#addNew-event form')[0].reset();
                 $('#addNew-event').modal('hide');
@@ -136,5 +139,18 @@
 
         //Add PopOvers
         setPopOverIntoEachSchedule();
+    });
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        $('.fc-view-container').hover(function () {
+            // swal('dfja;fjals;fjak;dfjadfjaslfjdals;fjl');
+            $('.schedule').unbind().click(function () {
+//                console.log($(this));
+                modal_request($(this));
+            });
+        });
     });
 </script>

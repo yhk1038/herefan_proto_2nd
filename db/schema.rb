@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170618173653) do
+ActiveRecord::Schema.define(version: 20170619052248) do
 
   create_table "clips", force: :cascade do |t|
     t.integer  "user_id"
@@ -103,6 +103,7 @@ ActiveRecord::Schema.define(version: 20170618173653) do
     t.string   "class_name"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.text     "description"
     t.index ["fandom_id"], name: "index_schedules_on_fandom_id"
   end
 

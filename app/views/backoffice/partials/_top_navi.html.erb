@@ -15,9 +15,15 @@
         <li class="pull-right">
             <ul class="top-menu">
                 <li id="top-goback">
-                    <a href="<%= fandom_path(@fandom) %>">Back
-                        <i class="tm-icon zmdi zmdi-long-arrow-left"></i>
-                    </a>
+                    <% if params[:action] == 'setting_planet' %>
+                        <a href="<%= fandom_path(@fandom) %>">Back
+                            <i class="tm-icon zmdi zmdi-long-arrow-left"></i>
+                        </a>
+                    <% elsif params[:action] == 'admin' %>
+                        <a href="<%= home_new_path %>">Site
+                            <i class="tm-icon zmdi zmdi-long-arrow-left"></i>
+                        </a>
+                    <% end %>
                 </li>
             </ul>
         </li>
