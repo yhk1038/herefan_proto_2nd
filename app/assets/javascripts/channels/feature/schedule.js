@@ -190,7 +190,7 @@ function modal_open(data) {
 
     $('.no_image_message').remove();
     if (schedule.content.length !== 0){
-        $('#event_point-image').css('width', '100%');
+        //$('#event_point-image').css('width', '100%');
     } else {
         var no_image_message = '<p class="no_image_message">Unfortunately, There is no Event Images yet..</p>';
         $('#event_point-image').after(no_image_message);
