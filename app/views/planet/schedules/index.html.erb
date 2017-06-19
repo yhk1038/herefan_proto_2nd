@@ -43,6 +43,13 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="eventDescription">Event Description</label>
+                                    <div class="fg-line">
+                                        <textarea class="auto-size form-control" id="eventDescription" placeholder="Short descriptions about the schedule and what not"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
                                     <label for="eventName">Tag Color</label>
                                     <div class="event-tag">
                                         <span data-tag="bgm-teal" class="bgm-teal selected"></span>
@@ -75,8 +82,36 @@
     </div>
 </section>
 <div id="dataImgSet">
+    <span id="schedule_fandom" data-fandom="<%= @fandom.id %>"></span>
     <% @schedules.each do |schedule| %>
-        <span id="schedule_image-<%= schedule.id %>" fandom_id="<%= @fandom.id %>"><%= schedule.content %></span>
+        <span id="schedule_image-<%= schedule.id %>" class="spanImg" fandom_id="<%= @fandom.id %>"><%= schedule.content %></span>
     <% end %>
 </div>
 <!--</section>-->
+
+
+
+
+<!-- Add event -->
+<div class="modal fade" id="event-modal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="event_point-title"></h4>
+                <p id="event_point-date"></p>
+            </div>
+            <div class="modal-body">
+                <img id="event_point-image" src="" alt="">
+                <pre id="event_point-description"></pre>
+            </div>
+
+            <div id="event-modalFooter" class="modal-footer" data-confirmation="<%= user_signed_in? && current_user.is_planet_editor?(@fandom) ? 'admin' : 'visitor' %>">
+                <% if user_signed_in? && current_user.is_planet_editor?(@fandom) %>
+                    <a id="event_point-edit" href="" class="btn btn-default btn-info pull-left" target="_blank">Edit</a>
+                    <a id="event_point-delete" href="#" class="delete_schedule btn btn-default btn-danger pull-left" onclick="">Delete</a>
+                <% end %>
+                <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
