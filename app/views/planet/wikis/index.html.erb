@@ -41,11 +41,7 @@
                         <div class="row">
                             <div class="col-md-3"></div>
                             <div class="col-md-6">
-                                <% if @fandom.id == 2 %>
-                                    <img id="main-img" src="/wiki_dummy/daemoon.jpg" alt="<%= @wiki.name %> 사진" style="width: 100%;">
-                                <% else %>
-                                    <img id="main-img" src="<%= @wiki.image %>" alt="<%= @wiki.name %> 사진">
-                                <% end %>
+                                <img id="main-img" src="<%= @wiki.image %>" alt="<%= @wiki.name %> 사진">
                             </div>
                             <div class="col-md-3"></div>
                         </div>
@@ -56,54 +52,17 @@
                             <div class="col-md-10 table-responsive">
                                 <table id="main-information" class="table table-bordered table-hover">
                                     <tbody>
-                                    <% if @fandom.id == 0 %>
-                                        <tr>
-                                            <td>agency</td>
-                                            <td>JYP ENTERTAINMENT</td>
-                                            <td>[Link]</td>
-                                        </tr>
-                                        <tr>
-                                            <td>distributor</td>
-                                            <td>Ginie Music</td>
-                                            <td>[Link]</td>
-                                        </tr>
-                                        <tr>
-                                            <td>debut</td>
-                                            <td><%= 'Octover 20th , 2015 - Mini Album <THE STORY BEGINS>' %></td>
-                                            <td>[Link]</td>
-                                        </tr>
-                                        <tr>
-                                            <td>fandom</td>
-                                            <td>ONCE</td>
-                                            <td>[Link]</td>
-                                        </tr>
-                                    <% else %>
                                         <% @wiki.infos.each do |info| %>
                                             <tr>
                                                 <td><%= info.title %></td>
                                                 <td><%= info.content&.html_safe %></td>
-                                                <td><%= info.url&.html_safe %></td>
+                                                <td><%= auto_link(info.url, :html => { :target => '_blank', :alt => 'debut' }) %></td>
                                             </tr>
                                         <% end %>
-                                    <% end %>
                                     </tbody>
                                 </table>
                             </div>
                             <div class="col-md-1"></div>
-                        </div>
-
-                        <!-- Main official-site -->
-                        <div class="row" style="display: none;">
-                            <div id="main-official-sites" class="col-md-12 wrap-box">
-                                <h2 class="sub_title">official sites</h2>
-                                <ul class="site-info">
-                                    <% %w(hompage youtube twitter instagram vlive).each do |site| %>
-                                        <li>
-                                            <a class="member-link" href="#" onclick="return false;"><%= site %></a>
-                                        </li>
-                                    <% end %>
-                                </ul>
-                            </div>
                         </div>
 
                         <!-- Main members-info -->
@@ -114,14 +73,10 @@
                                     <div class="col-sm-2 col-xs-3">
                                         <ul class="member-thumbnail">
                                             <li>
-                                                <% if @fandom.id == 2 %>
-                                                    <img src="/wiki_dummy/<%= member_wiki.name %>.jpg" alt="<%= member_wiki.name %> image">
-                                                <% else %>
-                                                    <img src="https://cdn.namuwikiusercontent.com/4f/4f829d37d93e3e91b3bc57dc69ae33854708a0b22acc7b0297929bedf1f403c3.jpg?e=1498567954&k=tj6niBbw_0AmXEEbJlc7WQ" alt="<%= member_wiki.name %> image">
-                                                <% end %>
+                                                <a href="<%= fandom_wikis_path(@fandom, w: member_wiki.id) %>" class="member-link"><img src="<%= member_wiki.image %>" alt="<%= member_wiki.name %> image"></a>
                                             </li>
                                             <li>
-                                                <a class="member-link" href="#" onclick="return false;"><%= member_wiki.name %></a>
+                                                <a class="member-link" href="<%= fandom_wikis_path(@fandom, w: member_wiki.id) %>"><%= member_wiki.name %></a>
                                             </li>
                                         </ul>
                                     </div>

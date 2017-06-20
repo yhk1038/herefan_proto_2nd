@@ -1,4 +1,14 @@
 
+$(document).ready(function () {
+    $('.add-new_wiki').click(function () {
+        $('#add-new_wiki-modal').modal({
+            backdrop: true,
+            keyboard: true
+        })
+    })
+});
+
+
 function consoleMove(seq) {
     $('.navtab').removeClass('active');
     $('li[data-navtab="'+seq+'"]').addClass('active');
@@ -8,6 +18,10 @@ function consoleMove(seq) {
 
 function leftNevToggle() {
     $('#leftNav').toggleClass('active');
+}
+
+function sectionSlideToggle(section_id) {
+    $('#'+section_id).slideToggle();
 }
 
 
@@ -59,8 +73,24 @@ function deleteWikiInfo(id) {
         }
     }).done(function (data) {
         swal('Deleted', '', 'success');
-        $('#info-'+data.id).fadeOut();
+        $('#info-'+data.id).slideUp();
     }).fail(function (data) {
         swal(data, '', 'error')
+    })
+}
+
+
+function addWikiOfficialSite(wiki_id) {
+    $.ajax({
+        url: '',
+        method: 'post',
+        data: {
+            authenticity_token: _hf_,
+            wiki_info: {
+                wiki_id: wiki_id
+            }
+        }
+    }).fail(function (data) {
+        swal(data,'Oops, Sth Wrong;;', 'error')
     })
 }
