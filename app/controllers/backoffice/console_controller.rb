@@ -79,6 +79,28 @@ class Backoffice::ConsoleController < ApplicationController
         end
     end
     
+    def add_subwiki
+        pa = params[:wiki]
+        subwiki = Wiki.create do |sw|
+            sw.wiki_id      = pa[:wiki_id]
+            sw.fandom_id    = pa[:fandom_id]
+            sw.name         = pa[:name]
+            sw.image        = pa[:image]
+        end
+        
+        redirect_to :back
+    end
+    
+    def delete_subwiki
+        wiki = Wiki.find(params[:id])
+        
+        if user_signed_in? && current_user.is_planet_editor?(wiki.fandom)
+            wiki.delete
+        end
+        
+        redirect_to :back
+    end
+    
     
     
     

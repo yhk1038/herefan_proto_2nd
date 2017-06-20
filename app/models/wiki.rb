@@ -19,7 +19,7 @@ class Wiki < ApplicationRecord
     def set_default_infos
         wiki = self
         
-        labels = %w(agency distributor debut fandom)
+        labels = %w(agency distributor debut fandom site)
         labels.each do |label|
             wiki_info = WikiInfo.create do |info|
                 info.wiki = wiki

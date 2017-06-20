@@ -1,3 +1,3 @@
-
+var wiki_id = '<%= @wiki.id %>';
 var dom = '<%= escape_javascript(render partial: '/backoffice/partials/wiki_info_form_slot', locals: { info: @info }) %>'
-$('.wiki-addInfo').before(dom);
+$('.wiki-addInfo.wiki-'+wiki_id).before(dom);

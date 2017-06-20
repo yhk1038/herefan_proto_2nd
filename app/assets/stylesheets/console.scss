@@ -9,6 +9,29 @@
                 h2{
                     text-transform: capitalize;
                 }
+                
+                .add-new_wiki,
+                .wiki-slideToggle{
+                    border-radius: 3px;
+                    bottom: 0;
+                    top: 0;
+                    margin: auto;
+                    width: initial;
+                    
+                    .zmdi{
+                        font-size: 20px;
+                    }
+                    span:not(.zmdi){
+                        font-size: 16px;
+                        position: relative;
+                        top: -3px;
+                        padding: 0 5px;
+                        text-transform: capitalize;
+                    }
+                }
+                .wiki-slideToggle{
+                    height: 40px;
+                }
             }
             
             .card-body{

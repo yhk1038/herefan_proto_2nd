@@ -13,6 +13,8 @@ class Planet::WikisController < ApplicationController
         need_to_reload = @wikis.count.zero? ? dummy_wiki_append : false
         @wiki   = @wikis.find_by(wiki: nil)
         @sub_wikis = @wiki.wikis
+        
+        @wiki = Wiki.find(params[:w]) if params[:w]
         @sections = @wiki.wiki_pointers.order(sort_num: :asc)
         
         redirect_to fandom_wikis_path(@fandom) if need_to_reload

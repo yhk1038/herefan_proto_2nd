@@ -9,6 +9,7 @@ RailsAdmin.config do |config|
                                 User
                                 Myfandom
                                 VisitedLink
+                                History
                                 Wiki
                                 WikiPointer
                                 WikiPost
@@ -59,20 +60,26 @@ RailsAdmin.config do |config|
     end
 
     #
+    config.model 'History' do
+        label 'ㅇ. 히스토리'
+        label_plural '히스토리'
+        navigation_icon 'icon-glass'
+    end
+    
     config.model 'Wiki' do
-        label 'ㅇ. 위키 문서'
+        label 'ㅈ. 위키 문서'
         label_plural '위키 문서'
         navigation_icon 'icon-glass'
     end
 
     config.model 'WikiPointer' do
-        label 'ㅈ. 위키 섹션 컨데이너'
+        label 'ㅊ. 위키 섹션 컨데이너'
         label_plural '위키 섹션 컨데이너'
         navigation_icon 'icon-glass'
     end
 
     config.model 'WikiPost' do
-        label 'ㅊ. 위키 포스트'
+        label 'ㅋ. 위키 포스트'
         label_plural '위키 포스트'
         navigation_icon 'icon-glass'
     end

@@ -4,6 +4,8 @@ Rails.application.routes.draw do
         get 'console/setting_planet(/:fandom_id)',  to: 'console#setting_planet'
         post 'console/save_planet_information',     to: 'console#save_planet_information'
         post 'console/save_planet_wiki',            to: 'console#save_planet_wiki'
+        post 'console/add_subwiki',                 to: 'console#add_subwiki'
+        get 'console/delete_subwiki/:id',           to: 'console#delete_subwiki'
         post 'console/create_wiki_info',            to: 'console#create_wiki_info'
         post 'console/update_wiki_info/:id',        to: 'console#update_wiki_info'
         post 'console/delete_wiki_info/:id',        to: 'console#delete_wiki_info'
