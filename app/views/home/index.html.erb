@@ -5,6 +5,9 @@
     }
     #footer{ position: initial }
 
+    .carousel .carousel-caption{
+        background: none !important;
+    }
 </style>
 <div id="carousel-example-generic" class="carousel slide carousel-fade" data-ride="carousel">
     <!-- Indicators -->
@@ -64,7 +67,7 @@
 
 <%= render partial: '/layouts/sub_nav', locals: {tabs: @tabs} %>
 
-<%= render partial: '/layouts/toolbar' %>
+<%#= render partial: '/layouts/toolbar' %>
 
 <% if user_signed_in? %>
     <% if @fandoms.count.zero? %>

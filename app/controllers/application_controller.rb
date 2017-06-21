@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
     before_action :set_locale
     
     def config_update_publish_limit
-        3
+        2
     end
 
     def set_locale

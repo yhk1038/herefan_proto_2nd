@@ -178,7 +178,7 @@
         .sub_title{
             border-top: 2px solid #DDDDDD;
             border-bottom: 2px solid #DDDDDD;
-            padding: 12px 0 15px;
+            padding: 12px 0 15px 20px;
             
             .feature{
                 padding: 6px 20px;
@@ -186,6 +186,7 @@
                 box-shadow: none;
                 font-weight: bold;
                 font-size: 16px;
+                text-transform: capitalize;
                 
                 &.feature-edit{
                 

@@ -103,7 +103,7 @@ section#channels {
     .carousel-inner .carousel-img {
         background-color: rgb(113, 94, 62);
         background-size: auto 350px !important;
-        background-position-y: 0 !important;
+        background-position-y: -100px !important;
         
         &:before {
             content: '';
@@ -115,6 +115,7 @@ section#channels {
     
     .planet-gradient{
         width: 12.5%;
+        cursor: default;
         
         &.left{
             left: 12.5%;

@@ -1,6 +1,7 @@
 module ApplicationHelper
     include NavbarHelper    # 메인 네비게이션
     include UiToolkitHelper # Ui Toolkit
+    include UsersHelper
     
     # 어플리케이션 메타정보
     # ==============================================================================================================================
