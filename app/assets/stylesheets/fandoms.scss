@@ -113,6 +113,19 @@ section#channels {
         }
     }
     
+    .planet-gradient{
+        width: 12.5%;
+        
+        &.left{
+            left: 12.5%;
+            background-image: linear-gradient(to right, rgba(255, 222, 85, 1) 0%, rgba(255, 222, 85, 0.2) 50%, rgba(255, 222, 85, 0.0001) 100%);
+        }
+        &.right{
+            right: 12.5%;
+            background-image: linear-gradient(to left, rgba(255, 222, 85, 1) 0%, rgba(255, 222, 85, 0.2) 50%, rgba(255, 222, 85, 0.0001) 100%);
+        }
+    }
+    
     &.carousel .carousel-caption {
         //background: rgba(251, 173, 62, 0.75);
         height: 100%;
