@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  message_login_please: MyString
+  message_global_error: MyString
+  fandom_publish_count: 1
+
+two:
+  message_login_please: MyString
+  message_global_error: MyString
+  fandom_publish_count: 1

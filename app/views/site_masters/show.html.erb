@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Message login please:</strong>
+  <%= @site_master.message_login_please %>
+</p>
+
+<p>
+  <strong>Message global error:</strong>
+  <%= @site_master.message_global_error %>
+</p>
+
+<p>
+  <strong>Fandom publish count:</strong>
+  <%= @site_master.fandom_publish_count %>
+</p>
+
+<%= link_to 'Edit', edit_site_master_path(@site_master) %> |
+<%= link_to 'Back', site_masters_path %>
