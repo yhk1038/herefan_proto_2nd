@@ -1,0 +1,39 @@
+<% config = fandom.config %>
+<%
+    user = nil
+    if user_signed_in?
+        user = current_user
+    end
+
+    is_my_fandom = is_my_fandom?(user: user, fandom: fandom)
+%>
+<div class="" style="width: 250px; margin: 30px 10px 10px; height: 300px; display: inline-table;">
+
+    <%= link_to fandom_path(fandom) do %>
+        <div class="card follow_card follow_card-<%= fandom.id %> profile-view <%= is_my_fandom ? 'followed' : '' %>" style="margin: 0;">
+            <div class="pv-header hf-e-header"  style="background-image: url('<%= config.fd_bg_img %>'); height: 125px;">
+                <img src="<%= config.fd_logo %>" class="pv-main profile_img absolute_center" alt="" data-pin-nopin="true" style="width: 90px; height: 90px; margin-left: -45px; border: 2px solid #fff; box-shadow: 0 0 5px rgba(0, 0, 0, 0.75)">
+            </div>
+
+            <div class="pv-body hf-e-body">
+                <h2 class="text"><%= config.fd_name %></h2>
+
+                <ul class="pv-follow">
+                    <li class="text text-sm">Followers <span id="follower_count_<%= fandom.id %>"><%= fandom.user_lists.count %></span></li>
+                </ul>
+
+                <% if user_signed_in? %>
+                    <a id="channel_<%= fandom.id %>" href="#" onclick="followBtn('cancel', <%= is_my_fandom ? is_my_fandom.id : 0 %>, <%= fandom.id %>, <%= user.id %>, ''); return false;" class='pv-follow-btn followed' style='cursor: pointer'>
+                        <span class='zmdi zmdi-star' style='font-size: 20px; position: relative; top: 2px;'></span>
+                        following
+                    </a>
+                    <a id="channel_<%= fandom.id %>" href="#" onclick="followBtn('follow', <%= 0 %>, <%= fandom.id %>, <%= user.id %>, ''); return false;" class='pv-follow-btn' style='cursor: pointer'>
+                        follow
+                    </a>
+                <% else %>
+                    <a class="pv-follow-btn" style="cursor: pointer;" data-toggle="modal" data-target="#login_modal">Follow</a>
+                <% end %>
+            </div>
+        </div>
+    <% end %>
+</div>

@@ -28,6 +28,16 @@ $(document).ready(function () {
 
     });
 
+    $(window).scroll(function () {
+        var scroll = $(this).scrollTop();
+
+        if (scroll > 320) {
+            $('#contents_widget-box').attr('style', 'position: fixed !important; top: 150px;');
+        } else {
+            $('#contents_widget-box').attr('style', 'position: initial !important');
+        }
+    });
+
 
     //
     // 링크 카드 미리보기 상태에서 메세지 입력
@@ -217,9 +227,9 @@ function ajax_follow_add(channel_id, user_id, option) {
         var target = $('#channel_' + channel_id);
 
         if (result.id) {
-            target;
 
             if (option === 'no-text') {
+                // 플래닛 개별 페이지에서..
                 target
                     .attr('onclick', 'followBtn("cancel", ' + result.id + ', ' + channel_id + ', ' + user_id + ', "no-text")');
                 target.children('span')
@@ -227,15 +237,28 @@ function ajax_follow_add(channel_id, user_id, option) {
                     .addClass('zmdi-favorite')
                     .addClass('c-pink');
             } else {
-                target
-                    .attr('onclick', 'followBtn("cancel", ' + result.id + ', ' + channel_id + ', ' + user_id + ', "")')
-                    .addClass('bgm-red')
-                    .text('FOLLOWED');
+                // 플래닛 팔로우 페이지에서..
+                var card = $('.follow_card-'+channel_id);
+                var cancelBtn = $('#channel_' + channel_id + '.followed');
+                var followBtn = $('#channel_' + channel_id + ':not(.followed)');
+
+                card.addClass('followed');
+                cancelBtn.show();
+                followBtn.hide();
+                cancelBtn
+                    .attr('onclick', 'followBtn("cancel", ' + result.id + ', ' + channel_id + ', ' + user_id + ', ""); return false;')
+                    .html('<span class=\'zmdi zmdi-star\' style=\'font-size: 20px; position: relative; top: 2px;\'></span> following');
             }
 
             var counter = $('#follower_count_' + channel_id);
             var count = parseInt(counter.text()) + 1;
             counter.text(count);
+
+            if(option === 'unfandom'){
+
+                var how_many_counter = '';
+
+            }
         }
     });
 }
@@ -256,15 +279,24 @@ function ajax_follow_cancel(channel_id, user_id, myfandom_id, option) {
                 .addClass('zmdi-favorite-outline')
                 .removeClass('c-pink');
         } else {
-            target
-                .attr('onclick', 'followBtn("follow", 0, '+ channel_id +', '+ user_id +', "")')
-                .removeClass('bgm-red')
-                .text('FOLLOW');
+            var card = $('.follow_card-'+channel_id);
+            var cancelBtn = $('#channel_' + channel_id + '.followed');
+            var followBtn = $('#channel_' + channel_id + ':not(.followed)');
+
+            card.removeClass('followed');
+            cancelBtn.hide();
+            followBtn.show();
         }
 
         var counter = $('#follower_count_' + channel_id);
         var count = parseInt(counter.text()) - 1;
         counter.text(count);
+
+        if(option === 'unfandom'){
+
+            var how_many_counter = '';
+
+        }
     })
 }
 

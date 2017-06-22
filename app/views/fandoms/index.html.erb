@@ -1,4 +1,4 @@
-<%= render partial: '/layouts/plane_header', locals: { color_class: '', message: 'Follow your favorite K-pop STAR!', style: 'background-color: #00c9c6 !important;', msg_style: '' } %>
+<%= render partial: '/layouts/plane_header', locals: { color_class: '', message: '<span style="font-size: 35px; font-weight: 700;">PLANETS</span><br>Follow your favorite K-pop star\'s planet<br>and enjoy EVERYTHING about the star!', style: 'background-color: #00c9c6 !important; margin-top: 60px;', msg_style: 'padding-top: 50px !important; ' } %>
 
 <% if user_signed_in? %>
     <button id="suggest_btn" class="btn btn-default bgm-lightgreen wave-effect" data-toggle="modal" data-target="#suggest_channel_modal">
@@ -42,33 +42,7 @@
         </div>
     </div>
     <div class="row" style="text-align: left; max-width: 960px; margin: auto; padding: 0 60px;">
-        <% @fandoms.each do |fandom| %>
-            <% config = fandom.config %>
-            <div class="" style="width: 250px; margin: 30px 10px 10px; height: 300px; display: inline-table;">
-
-                <%= link_to fandom_path(fandom) do %>
-                    <div class="card profile-view" style="margin: 0;">
-                        <div class="pv-header hf-e-header"  style="background-image: url('<%= config.fd_bg_img %>'); height: 125px;">
-                            <img src="<%= config.fd_logo %>" class="pv-main profile_img absolute_center" alt="" data-pin-nopin="true" style="width: 90px; height: 90px; margin-left: -45px; border: 2px solid #fff; box-shadow: 0 0 5px rgba(0, 0, 0, 0.75)">
-                        </div>
-
-                        <div class="pv-body hf-e-body">
-                            <h2 class="text"><%= config.fd_name %></h2>
-
-                            <ul class="pv-follow">
-                                <li class="text text-sm"><span id="follower_count_<%= fandom.id %>">Followers <%= fandom.user_lists.count %></span></li>
-                            </ul>
-
-                            <% if user_signed_in? %>
-                                <%= follow_btn(fandom, current_user).html_safe %>
-                            <% else %>
-                                <%= follow_btn(fandom, nil).html_safe %>
-                            <% end %>
-                        </div>
-                    </div>
-                <% end %>
-            </div>
-        <% end %>
+        <%= render partial: '/fandoms/partials/planet_card_onSelect_published', collection: @fandoms, as: :fandom %>
     </div>
 
     <% unless @fandoms_not_active.count.zero? %>
@@ -79,39 +53,7 @@
 
         <div class="row unpublished_channels" style="text-align: left; max-width: 960px; margin-left: auto; margin-right: auto; padding: 0 60px;">
             <h2 style="text-align: left">fandom waiting list <small>These channels are in preparation. <br>When the proposal reaches 50 people, it will be issued to the official channel.</small></h2>
-            <% @fandoms_not_active.each do |un_fandom| %>
-                <% conf = un_fandom.config %>
-                <div class="" style="width: 250px; margin: 30px 10px 10px; height: 270px; display: inline-table;">
-                    <%= link_to '#', style: 'background: #000' do %>
-                        <div class="card profile-view inactive" style="margin: 0;">
-                            <div class="pv-header hf-e-header" style="background-image: url('<%= conf.fd_bg_img %>'); height: 180px;">
-                                <img src="<%= conf.fd_logo %>" class="pv-main profile_img absolute_center" alt="" data-pin-nopin="true" style="width: 90px; height: 90px; margin-left: -45px; bottom: 50px; z-index: 2;">
-                            </div>
-                            <div class="pv-body hf-e-body" style="margin-top: 0;">
-                                <h2 class="text" style="margin-top: 17px;"><%= conf.fd_name %></h2>
-
-                                <ul class="pv-follow">
-                                    <li class="text text-sm" style="font-size: 30px !important;"><span id="follower_count_<%= un_fandom.id %>"><%= un_fandom.users.count %></span></li>
-                                </ul>
-                                <% if user_signed_in? %>
-                                    <% if is_my_fandom?(user: current_user, fandom: un_fandom) %>
-                                        <a id="channel_<%= un_fandom.id %>" onclick="followBtn('cancel', <%= un_fandom.get_myfandom(current_user).id %>, <%= un_fandom.id %>, <%= current_user.id %>, 'no-text')" class="pv-follow-btn followed" style="margin: 13px auto; cursor: pointer;">
-                                            <!--<span class="zmdi zmdi-favorite c-pink"></span>-->
-                                            Following
-                                        </a>
-                                    <% else %>
-                                        <a id="channel_<%= un_fandom.id %>" onclick="followBtn('follow', 0, <%= un_fandom.id %>, <%= current_user.id %>, 'no-text')" class="pv-follow-btn" style="margin: 13px auto; cursor: pointer;">
-                                            <!--<span class="zmdi zmdi-favorite-outline"></span>-->
-                                            Follow
-                                        </a>
-                                    <% end %>
-                                <% end %>
-                                <!--<a id="channeel_<%#= un_fandom.id %>" onclick="" class="pv-follow-btn" style="cursor: pointer">Follow</a>-->
-                            </div>
-                        </div>
-                    <% end %>
-                </div>
-            <% end %>
+            <%= render partial: '/fandoms/partials/planet_card_onSelect_unpublished', collection: @fandoms_not_active, as: :un_fandom %>
         </div>
     <% end %>
 </section>

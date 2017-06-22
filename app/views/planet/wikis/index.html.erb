@@ -16,15 +16,16 @@
                 </div>
                 <div id="contents_widget-box" class="card">
                     <div class="card-header">
-                        <h2>contents</h2>
+                        <h2>index</h2>
                     </div>
                     <div class="card-body card-padding">
-                        <ul><%= @wiki.name %>
-                            <ol>official sites</ol>
-                            <ol>members</ol>
+                        <ul>
+                            <ol><a onclick="fnMove_wiki(0); return false;" href="#"><%= @wiki.name %></a></ol>
+                            <% i = 1 %>
                             <% @sections.each do |section| %>
                                 <% post = section.wiki_posts.last %>
-                                <ol><a href="#main-section-<%= section.id %>"><%= post.title %></a></ol>
+                                <ol><a onclick="fnMove_wiki(<%= section.id %>); return false;" href="#"><%= i %>. <%= post.title %></a></ol>
+                                <% i += 1 %>
                             <% end %>
                         </ul>
                     </div>
@@ -32,7 +33,7 @@
             </div>
             <div class="col-md-9 col-md-pull-3">
                 <div id="main_contents-box" class="card">
-                    <div class="card-body card-padding">
+                    <div id="main-section-0" class="card-body card-padding">
 
                         <!-- Main title -->
                         <h1 id="main-title" style="font-weight: 700;"><%= @wiki.name %></h1>

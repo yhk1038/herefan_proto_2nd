@@ -548,10 +548,20 @@ body{
 
 #wiki-ground #contents_widget-box ul,
 #wiki-ground #contents_widget-box ol,
+#wiki-ground #contents_widget-box ol a,
 #wiki-ground #contents_widget-box li{
     font-size: 16px;
-    line-height: 40px;
+    line-height: 1.2;
     list-style-type: lower-roman;
+    text-transform: capitalize;
+    padding: 10px 0;
+    color: #000;
+    font-weight: 400;
+    cursor: pointer;
+    
+    &:hover{
+        font-weight: 600;
+    }
 }
 
 #language_control-box {
@@ -1637,6 +1647,37 @@ section#toolbar{
                 margin-bottom: 5px;
                 font-size: 12px;
             }
+        }
+    }
+}
+
+
+
+
+
+
+
+/********************************/
+/*         Select Style         */
+/********************************/
+
+#channels .card.follow_card{
+    .pv-follow-btn{
+        text-transform: capitalize !important;
+    }
+    .pv-follow-btn.followed{
+        display: none;
+    }
+    .pv-follow-btn:not(.followed){
+        display: block;
+    }
+    
+    &.followed{
+        .pv-follow-btn.followed{
+            display: block !important;
+        }
+        .pv-follow-btn:not(.followed){
+            display: none !important;
         }
     }
 }
