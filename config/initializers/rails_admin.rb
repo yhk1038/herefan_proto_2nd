@@ -14,6 +14,7 @@ RailsAdmin.config do |config|
                                 WikiPointer
                                 WikiPost
                                 FdConf
+                                SiteMaster
                             )
     # config.config.excluded_models = %w()
     
@@ -81,6 +82,12 @@ RailsAdmin.config do |config|
     config.model 'WikiPost' do
         label 'ㅋ. 위키 포스트'
         label_plural '위키 포스트'
+        navigation_icon 'icon-glass'
+    end
+
+    config.model 'SiteMaster' do
+        label 'ㅍ. 사이트 종합관리'
+        label_plural '사이트 종합관리'
         navigation_icon 'icon-glass'
     end
 

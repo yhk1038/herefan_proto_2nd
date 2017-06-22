@@ -6,7 +6,7 @@
         <% @my_published_fandoms.each do |fandom| %>
             <div class="follow_list">
                 <%= link_to fandom_path(fandom) do %>
-                    <div class="follow_artists" style="background: url('<%= fandom.profile_img %>');">
+                    <div class="follow_artists" style="background: url('<%= fandom.config.fd_logo %>');">
                         <span><%= fandom.name %></span>
                     </div>
                 <% end %>

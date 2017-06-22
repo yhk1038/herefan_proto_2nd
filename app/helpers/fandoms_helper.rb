@@ -23,7 +23,7 @@ module FandomsHelper
         #     users_fandom_lists.count.zero? ? false : true
         # end
         
-        fandom.get_myfandom(user)
+        fandom&.get_myfandom(user)
     end
     
     private

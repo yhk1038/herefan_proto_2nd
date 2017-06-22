@@ -18,7 +18,16 @@
         <li class="main_menu hidden-xs">
             <ul class="top-menu">
                 <% nav_menu_lists.each do |menu| %>
-                    <li class="<%= 'active' if params[:controller] == menu[:controller] %>">
+                    <%
+                        is_active = false
+                        if params[:controller] == menu[:controller]
+                            is_active = true
+                            if params[:controller] == 'fandoms' && params[:action] != 'index'
+                                is_active = false
+                            end
+                        end
+                    %>
+                    <li class="<%= 'active' if is_active %>">
                         <%= link_to menu[:name], menu[:path] %>
                     </li>
                 <% end %>

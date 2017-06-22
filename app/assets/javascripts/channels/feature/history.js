@@ -283,4 +283,12 @@ function fnMove(seq) {
         400
     )
 }
-
+function fnMove_wiki(seq) {
+    var offset = $('#main-section-'+seq).offset();
+    $('html, body').animate(
+        {
+            scrollTop : offset.top - 50
+        },
+        400
+    )
+}

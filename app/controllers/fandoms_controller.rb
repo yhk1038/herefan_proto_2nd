@@ -6,8 +6,23 @@ class FandomsController < ApplicationController
     # GET /fandoms
     # GET /fandoms.json
     def index
-        @fandoms = Fandom.published.all.sort_by { |fandom| 0 - fandom.myfandoms.count }
-        @fandoms_not_active = Fandom.unpublished.all.sort_by { |fandom| 0 - fandom.myfandoms.count }
+        method = params[:method] ? params[:method] : 'popular'
+        
+        case method
+        when 'popular'
+            @fandoms = Fandom.published.all.sort_by { |fandom| 0 - fandom.myfandoms.count }
+            @fandoms_not_active = Fandom.unpublished.all.sort_by { |fandom| 0 - fandom.myfandoms.count }
+            
+        when 'recent'
+            @fandoms = Fandom.published.order(created_at: :desc).to_a
+            @fandoms_not_active = Fandom.unpublished.order(created_at: :desc).to_a
+            
+        when 'abc'
+            @fandoms = Fandom.published.all.sort { |a, b| a.config.fd_name <=> b.config.fd_name }
+            @fandoms_not_active = Fandom.unpublished.all.sort { |a, b| a.config.fd_name <=> b.config.fd_name }
+        end
+        
+        
         @my_fandoms = current_user.fandoms.published.ids if user_signed_in?
     end
     

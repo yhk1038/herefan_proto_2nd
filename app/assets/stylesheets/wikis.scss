@@ -53,12 +53,15 @@
 //
 #contents_widget-box{
     .card-header{
+        padding: 15px;
+        
         h2{
             text-align: center;
             border-bottom: 1px solid #B3B3B3;
             padding: 0 0 15px;
             color: #666;
-            font-weight: bold;
+            font-weight: 600;
+            font-size: 18px;
         }
     }
 }
@@ -178,14 +181,14 @@
         .sub_title{
             border-top: 2px solid #DDDDDD;
             border-bottom: 2px solid #DDDDDD;
-            padding: 12px 0 15px 20px;
+            padding: 12px 0 15px 40px;
             
             .feature{
                 padding: 6px 20px;
                 background-image: none;
                 box-shadow: none;
                 font-weight: bold;
-                font-size: 16px;
+                font-size: 18px;
                 text-transform: capitalize;
                 
                 &.feature-edit{
@@ -216,6 +219,7 @@
     h2.sub_title{
         text-transform: capitalize;
         margin-bottom: 15px;
+        padding-left: 40px;
     }
     
     #main-clearfix{
@@ -230,7 +234,7 @@
     
     #contents_widget-box{
         ul,ol,li{
-            padding-left: 20px;
+            padding-left: 0;
         }
     }
 }
