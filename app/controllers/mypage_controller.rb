@@ -25,7 +25,7 @@ class MypageController < ApplicationController
     def filling_tab_group
         @tabs = []
         # @tabs << { name: 'my channels', path: mypage_my_channels_path, active: '' }
-        @tabs << { name: 'cards', path: mypage_watched_path, active: '' }
-        @tabs << { name: 'contribution', path: mypage_contributed_path, active: '' }
+        @tabs << { name: 'my links', path: mypage_watched_path, active: '' }
+        # @tabs << { name: 'contribution', path: mypage_contributed_path, active: '' }
     end
 end

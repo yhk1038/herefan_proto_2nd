@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Site Masters</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Message login please</th>
+      <th>Message global error</th>
+      <th>Fandom publish count</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @site_masters.each do |site_master| %>
+      <tr>
+        <td><%= site_master.message_login_please %></td>
+        <td><%= site_master.message_global_error %></td>
+        <td><%= site_master.fandom_publish_count %></td>
+        <td><%= link_to 'Show', site_master %></td>
+        <td><%= link_to 'Edit', edit_site_master_path(site_master) %></td>
+        <td><%= link_to 'Destroy', site_master, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Site Master', new_site_master_path %>

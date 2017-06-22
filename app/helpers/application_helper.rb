@@ -1,30 +1,28 @@
 module ApplicationHelper
     include NavbarHelper    # 메인 네비게이션
     include UiToolkitHelper # Ui Toolkit
+    include UsersHelper
     
     # 어플리케이션 메타정보
     # ==============================================================================================================================
     def app_title
-        'HereFan'
+        site_master.title
     end
     
     def app_description
-        'The fastest way to k-dol stars, HereFan'
+        site_master.description
     end
     
     def app_domain
-        'http://test.herefan.com'
+        site_master.url
     end
     
     def app_home
-        'home'
+        site_master.home_name
     end
     
     def app_fandom
-        'planet'
-        # 'Cloud'
-        # 'Stream'
-        # 'Wave'
+        site_master.fandom_name
     end
     
     def app_config
@@ -39,7 +37,7 @@ module ApplicationHelper
         app_config_info[:title]         ||= app_title
         app_config_info[:description]   ||= app_description
         app_config_info[:url]           ||= app_domain
-        app_config_info[:image]         ||= app_domain + '/svg/facebook_send.png'
+        app_config_info[:image]         ||= app_domain + site_master.default_dummy_image
         
         return app_config_info
     end
@@ -68,7 +66,7 @@ module ApplicationHelper
     end
     
     def default_profile_img
-        '/img/default-user-image.png'
+        site_master.default_profile_image
     end
     
     def sns_asset_domains

@@ -1,11 +1,10 @@
 class ApplicationController < ActionController::Base
+    include SiteMastersHelper
+    include UsersHelper
+    
     protect_from_forgery with: :exception
     before_action :set_locale
     
-    def config_update_publish_limit
-        3
-    end
-
     def set_locale
         I18n.locale = params[:locale] || :en
     end
@@ -17,7 +16,7 @@ class ApplicationController < ActionController::Base
     def set_for_fandom_show_template_data
         redirect_to root_path unless @fandom.published
     
-        @links = @fandom.links.order(id: :desc)
+        @links = @fandom.links.order(id: :desc).last(30)
         @my_fandom = user_signed_in? ? current_user.myfandoms.where(fandom_id: @fandom.id) : []
     
         # 팔로우 버튼 토글 전용 키값 해시 데이터

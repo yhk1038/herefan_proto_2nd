@@ -1,7 +1,7 @@
 <%
     user = link.user
     user ||= User.first
-    current_user_id = $current_user_id
+    current_user_id = get_current_user_id
 
     myclips = Clip.where(link: link, user_id: current_user_id)
     myclips_already = myclips.count.zero? ? false : true

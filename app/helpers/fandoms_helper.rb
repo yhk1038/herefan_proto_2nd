@@ -35,7 +35,7 @@ module FandomsHelper
     def make_fandom_config(fandom)
         init_config = FdConf.create(fd_logo: fandom.profile_img, fd_bg_img: fandom.background_img, fd_name: fandom.name, userlist: [$current_user_id].to_s)
         fandom.configs << init_config
-        User.find($current_user_id).fd_confs << init_config unless $current_user_id.zero?
+        User.find(get_current_user_id).fd_confs << init_config unless get_current_user_id.zero?
         
         return init_config
     end

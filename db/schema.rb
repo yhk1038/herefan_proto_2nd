@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170619052248) do
+ActiveRecord::Schema.define(version: 20170621195053) do
 
   create_table "clips", force: :cascade do |t|
     t.integer  "user_id"
@@ -105,6 +105,29 @@ ActiveRecord::Schema.define(version: 20170619052248) do
     t.datetime "updated_at",  null: false
     t.text     "description"
     t.index ["fandom_id"], name: "index_schedules_on_fandom_id"
+  end
+
+  create_table "site_masaters", force: :cascade do |t|
+    t.string   "message_login_please"
+    t.string   "message_global_error"
+    t.integer  "fandom_publish_count"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  create_table "site_masters", force: :cascade do |t|
+    t.string   "message_login_please"
+    t.string   "message_global_error"
+    t.integer  "fandom_publish_count"
+    t.datetime "created_at",                                                                null: false
+    t.datetime "updated_at",                                                                null: false
+    t.string   "title",                 default: "HereFan",                                 null: false
+    t.string   "description",           default: "The fastest way to k-dol stars, HereFan", null: false
+    t.string   "url",                   default: "http://test.herefan.com",                 null: false
+    t.string   "home_name",             default: "home",                                    null: false
+    t.string   "fandom_name",           default: "planet",                                  null: false
+    t.string   "default_profile_image", default: "/img/default-user-image.png",             null: false
+    t.string   "default_dummy_image",   default: "/svg/facebook_send.png",                  null: false
   end
 
   create_table "users", force: :cascade do |t|

@@ -91,7 +91,7 @@
                                 <div id="main-section-<%= section.id %>" class="col-md-12 wrap-box wiki-section" data-post="<%= post.id %>">
                                     <h2 class="sub_title"><%= "#{section.sort_num}. #{post.title}" %>
                                         <a href="<%= edit_fandom_wiki_post_path(@fandom, post, wiki_pointer_id: section.id) %>" class="btn btn-default feature feature-edit c-cyan">edit</a>
-                                        <a href="<%= fandom_wiki_posts_path(@fandom, wiki_pointer_id: section.id) %>" class="btn btn-default feature feature-logs c-cyan">logs</a>
+                                        <a href="<%= fandom_wiki_posts_path(@fandom, wiki_pointer_id: section.id) %>" class="btn btn-default feature feature-logs c-cyan">view records</a>
                                     </h2>
                                     <div class="section-contents">
                                         <%== post.content %>

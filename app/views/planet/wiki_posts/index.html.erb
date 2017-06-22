@@ -24,6 +24,7 @@
                         </thead>
 
                         <tbody>
+                        <% post_num = @wiki_posts.count %>
                         <% @wiki_posts.order(created_at: :desc).each do |wiki_post| %>
 
                             <tr>
@@ -34,7 +35,7 @@
                                 </td>
                                 <td>
                                     <%= link_to fandom_wiki_post_path(@fandom, wiki_post, wiki_pointer_id: @wiki_pointer.id) do %>
-                                        <%= wiki_post.id %>
+                                        <%= post_num %>
                                     <% end %>
                                 </td>
                                 <td>
@@ -54,7 +55,7 @@
                                     <% end %>
                                 </td>
                             </tr>
-
+                        <% post_num -= 1 %>
                         <% end %>
                         </tbody>
                     </table>
