@@ -1,4 +1,9 @@
 $(document).ready(function () {
+    // follow remote-controller
+    $('#top-fandoms a').click(function () {
+        $('#follow_list_box').toggleClass('hi_de');
+        $(this).toggleClass('active');
+    });
 
     //
     // Location : '/fandoms/:id'
