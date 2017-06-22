@@ -231,11 +231,10 @@ function ajax_follow_add(channel_id, user_id, option) {
             if (option === 'no-text') {
                 // 플래닛 개별 페이지에서..
                 target
-                    .attr('onclick', 'followBtn("cancel", ' + result.id + ', ' + channel_id + ', ' + user_id + ', "no-text")');
-                target.children('span')
-                    .removeClass('zmdi-favorite-outline')
-                    .addClass('zmdi-favorite')
-                    .addClass('c-pink');
+                    .attr('onclick', 'followBtn("cancel", ' + result.id + ', ' + channel_id + ', ' + user_id + ', "no-text")')
+                    .addClass('active');
+                target.find('span.zmdi').addClass('zmdi-star');
+                target.find('span:not(.zmdi)').addClass('active').text('following');
             } else {
                 // 플래닛 팔로우 페이지에서..
                 var card = $('.follow_card-'+channel_id);
@@ -273,11 +272,10 @@ function ajax_follow_cancel(channel_id, user_id, myfandom_id, option) {
 
         if (option === 'no-text') {
             target
-                .attr('onclick', 'followBtn("follow", 0, '+ channel_id +', '+ user_id +', "no-text")');
-            target.children('span')
-                .removeClass('zmdi-favorite')
-                .addClass('zmdi-favorite-outline')
-                .removeClass('c-pink');
+                .attr('onclick', 'followBtn("follow", 0, '+ channel_id +', '+ user_id +', "no-text")')
+                .removeClass('active');
+            target.find('span.zmdi').removeClass('zmdi-star');
+            target.find('span:not(.zmdi)').removeClass('active').text('follow');
         } else {
             var card = $('.follow_card-'+channel_id);
             var cancelBtn = $('#channel_' + channel_id + '.followed');

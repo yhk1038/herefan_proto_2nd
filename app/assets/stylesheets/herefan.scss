@@ -7,8 +7,17 @@ body{
 /*        Navigation Bar        */
 /********************************/
 
+#top-fandoms a:not(.active){
+    .zmdi-caret-up:before{
+        content: '\f2f2';
+    }
+}
 #follow_list_box{
     top: 62px !important;
+    
+    &.hi_de{
+        top: -15px !important;
+    }
 }
 
 #header{
@@ -233,14 +242,14 @@ body{
         .carousel-caption{
             .channel_info{
                 box-sizing: border-box;
-                width: 200px;
+                width: 210px;
                 height: 100px;
                 position: absolute;
                 top: 100px;
                 right: 0;
                 left: 0;
                 margin: 40px auto;
-                padding: 10px;
+                padding: 10px 0;
                 
                 .channel_followBtn{
                     position: relative;
@@ -286,7 +295,7 @@ body{
             }
             
             .channel_followBtn{
-                width: 80px !important;
+                min-width: 80px !important;
                 height: 30px !important;
                 position: absolute;
                 left: 0;
@@ -294,13 +303,46 @@ body{
                 bottom: 60px;
                 margin: auto;
                 background: transparent;
-                border: 1px solid #b3b3b3;
+                border: 1px solid #eee;
                 font-size: 16px;
-                font-weight: 600;
-                color: #b3b3b3;
+                font-weight: 300;
                 padding: 3px 12px;
                 text-transform: capitalize;
                 cursor: pointer;
+                text-shadow: 0 0 1px rgba(0, 0, 0, 0.4);
+                
+                &.following{
+                    border: 1px solid #fff;
+                    
+                    &:not(.active){
+                        margin-left: 20px;
+                    }
+                    
+                    span{
+                        color: #fff !important;
+                        font-weight: 700;
+                        
+                        &.zmdi{
+                            &.zmdi-star{
+                                &:before{
+                                    content: '\f27d';
+                                    display: block !important;
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                span{
+                    color: #eee;
+                }
+                &:hover{
+                    font-weight: 700;
+                    
+                    span{
+                        color: #ffffff;
+                    }
+                }
                 
                 span:before{
                     display: none;
