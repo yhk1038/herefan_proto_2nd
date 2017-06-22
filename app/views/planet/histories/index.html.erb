@@ -5,40 +5,6 @@
 <section id="content" class="m-t-30">
 
     <div class="container">
-        <!--<div class="block-header">-->
-            <!--<h2>Photo Gallery <small>JQuery lightGallery is a lightweight jQuery lightbox gallery for displaying image and video gallery</small></h2>-->
-
-            <!--<ul class="actions">-->
-                <!--<li>-->
-                    <!--<a href="">-->
-                        <!--<i class="zmdi zmdi-trending-up"></i>-->
-                    <!--</a>-->
-                <!--</li>-->
-                <!--<li>-->
-                    <!--<a href="">-->
-                        <!--<i class="zmdi zmdi-check-all"></i>-->
-                    <!--</a>-->
-                <!--</li>-->
-                <!--<li class="dropdown">-->
-                    <!--<a href="" data-toggle="dropdown">-->
-                        <!--<i class="zmdi zmdi-more-vert"></i>-->
-                    <!--</a>-->
-
-                    <!--<ul class="dropdown-menu dropdown-menu-right">-->
-                        <!--<li>-->
-                            <!--<a href="">Refresh</a>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                            <!--<a href="">Manage Widgets</a>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                            <!--<a href="">Widgets Settings</a>-->
-                        <!--</li>-->
-                    <!--</ul>-->
-                <!--</li>-->
-            <!--</ul>-->
-
-        <!--</div>-->
 
         <div class="row">
             <div class="col-md-12">
@@ -55,72 +21,6 @@
                     </div>
                 </div>
                 <div class="card" id="historyGround">
-                    <!--
-                    <div class="lv-header-alt clearfix">
-                        <h2 class="lvh-label hidden-xs">Some text here</h2>
-
-                        <div class="lvh-search">
-                            <input type="text" placeholder="Start typing..." class="lvhs-input">
-
-                            <i class="lvh-search-close">&times;</i>
-                        </div>
-
-                        <ul class="lv-actions actions">
-                            <li>
-                                <a href="">
-                                    <i class="zmdi zmdi-time"></i>
-                                </a>
-                            </li>
-                            <li class="dropdown">
-                                <a href="" data-toggle="dropdown" aria-expanded="true">
-                                    <i class="zmdi zmdi-sort"></i>
-                                </a>
-
-                                <ul class="dropdown-menu dropdown-menu-right">
-                                    <li>
-                                        <a href="">Last Modified</a>
-                                    </li>
-                                    <li>
-                                        <a href="">Last Edited</a>
-                                    </li>
-                                    <li>
-                                        <a href="">Name</a>
-                                    </li>
-                                    <li>
-                                        <a href="">Date</a>
-                                    </li>
-                                </ul>
-                            </li>
-
-                            <li>
-                                <a href="">
-                                    <i class="zmdi zmdi-info"></i>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="" class="lvh-search-trigger">
-                                    <i class="zmdi zmdi-search"></i>
-                                </a>
-                            </li>
-
-                            <li class="dropdown">
-                                <a href="" data-toggle="dropdown" aria-expanded="true">
-                                    <i class="zmdi zmdi-more-vert"></i>
-                                </a>
-
-                                <ul class="dropdown-menu dropdown-menu-right">
-                                    <li>
-                                        <a href="">Refresh</a>
-                                    </li>
-                                    <li>
-                                        <a href="">Listview Settings</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                    -->
                     <div class="card-header">
                         <h2 class="c-indigo"><%= @fandom.name %>'s history</h2>
                     </div>
@@ -128,7 +28,7 @@
                     <div class="card-body card-padding content-ground">
 
                         <!-- Add History line -->
-                        <div class="p-timeline adding">
+                        <div class="p-timeline adding event-edd">
                             <div class="pt-line c-gray text-right">
                                 <span class="d-block">Year</span> :d/ :m
                             </div>
@@ -139,27 +39,27 @@
                                     <a id="history_add_line-edit" href="#" class="btn btn-default feature feature-edit c-cyan" onclick="return false;">add</a>
                                 </h2>
 
-                                <div id="timeline-add-title-edit" class="input-group form-group" style="display: none;">
-                                    <div class="fg-line">
-                                        <input id="new-history-title" type="text" class="form-control" placeholder="Add a new Line whenever you want :D" autofocus required>
-                                    </div>
-                                    <div class="input-group form-group" style="width: 50%; float: right;">
-                                        <span class="input-group-addon"><i class="zmdi zmdi-calendar"></i></span>
-                                        <div class="dtp-container fg-line">
-                                            <input type="text" class="form-control date-picker" id="history-event_date" placeholder="When was the event? ...">
-                                        </div>
-                                    </div>
+                                <!--<div id="timeline-add-title-edit" class="input-group form-group" style="display: none;">-->
+                                    <!--<div class="fg-line">-->
+                                        <!--<input id="new-history-title" type="text" class="form-control" placeholder="Add a new Line whenever you want :D" autofocus required>-->
+                                    <!--</div>-->
+                                    <!--<div class="input-group form-group" style="width: 50%; float: right;">-->
+                                        <!--<span class="input-group-addon"><i class="zmdi zmdi-calendar"></i></span>-->
+                                        <!--<div class="dtp-container fg-line">-->
+                                            <!--<input type="text" class="form-control date-picker" id="history-event_date" placeholder="When was the event? ...">-->
+                                        <!--</div>-->
+                                    <!--</div>-->
 
-                                    <span class="input-group-addon last">
-                                        <a id="history_add_line-save" data-fandom="<%= @fandom.id %>" data-author="<%= $current_user_id %>" href="#" class="btn btn-default feature feature-edit c-cyan" onclick="return false;">save</a>
-                                    </span>
-                                </div>
+                                    <!--<span class="input-group-addon last">-->
+                                        <!--<a id="history_add_line-save" data-fandom="<%#= @fandom.id %>" data-author="<%#= get_current_user_id %>" href="#" class="btn btn-default feature feature-edit c-cyan" onclick="return false;">save</a>-->
+                                    <!--</span>-->
+                                <!--</div>-->
 
-                                <div class="pull-right" addkey="">
-                                    <div class="lightbox-item2 item-plus-box">
-                                        <a href="#" class="item-plus" data-title="Add a new Line whenever you want :D" data-history="0" data-toggle="modal" style="opacity: 0.25;" onclick="swal('History Event-Date First!');return false;"><span class="zmdi zmdi-plus-circle"></span></a>
-                                    </div>
-                                </div>
+                                <!--<div class="pull-right" addkey="">-->
+                                    <!--<div class="lightbox-item2 item-plus-box">-->
+                                        <!--<a href="#" class="item-plus" data-title="Add a new Line whenever you want :D" data-history="0" data-toggle="modal" style="opacity: 0.25;" onclick="swal('History Event-Date First!');return false;"><span class="zmdi zmdi-plus-circle"></span></a>-->
+                                    <!--</div>-->
+                                <!--</div>-->
                             </div>
                         </div>
 
@@ -203,351 +103,9 @@
                                     </div>
                                 </div>
                             <% end %>
-                        <% else %>                              <!-- Real history parse powered by partial template -->
+                        <% else %>        <!-- Real history parse powered by partial template -->
                             <%= render partial: '/planet/histories/partials/event', collection: @histories, as: :history, locals: { new_history: false } %>
                         <% end %>
-
-                        <!--
-                        <div style="display: none;">
-                            <div class="p-timeline">
-                                <div class="pt-line c-gray text-right">
-                                    <span class="d-block">2015</span>
-                                    10/07
-                                </div>
-
-                                <div class="pt-body">
-                                    <h2 class="ptb-title">Trip to Orbit</h2>
-
-                                    <div class="lightbox clearfix">
-                                        <div data-src="/template/media/gallery/10.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/10.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/11.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/11.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/12.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/12.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/13.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/13.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/14.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/14.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/15.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/15.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/16.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/16.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/17.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/17.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="p-timeline">
-                                <div class="pt-line c-gray text-right">
-                                    <span class="d-block">2015</span>
-                                    12/06
-                                </div>
-
-                                <div class="pt-body">
-                                    <h2 class="ptb-title">Purchased for print</h2>
-
-                                    <div class="lightbox clearfix">
-
-                                        <div data-src="/template/media/gallery/4.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/4.jpg" alt="" />
-                                            </div>
-                                        </div>
-
-                                        <div data-src="/template/media/gallery/5.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/5.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/6.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/6.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/7.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/7.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/8.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/8.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/9.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/9.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/10.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/10.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/11.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/11.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/12.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/12.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/13.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/13.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/14.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/14.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/15.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/15.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="p-timeline">
-                                <div class="pt-line c-gray text-right">
-                                    <span class="d-block">2015</span>
-                                    01/06
-                                </div>
-
-                                <div class="pt-body">
-                                    <h2 class="ptb-title">For Website</h2>
-
-                                    <div class="lightbox clearfix">
-                                        <div data-src="/template/media/gallery/1.jpg">
-                                            <div class="lightbox-item">
-                                                <img src="/template/media/gallery/thumbs/1.jpg" alt="" />
-                                            </div>
-                                        </div>
-
-                                        <div data-src="/template/media/gallery/2.jpg">
-                                            <div class="lightbox-item">
-                                                <img src="/template/media/gallery/thumbs/2.jpg" alt="" />
-                                            </div>
-                                        </div>
-
-                                        <div data-src="/template/media/gallery/3.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/3.jpg" alt="" />
-                                            </div>
-                                        </div>
-
-                                        <div data-src="/template/media/gallery/4.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/4.jpg" alt="" />
-                                            </div>
-                                        </div>
-
-                                        <div data-src="/template/media/gallery/5.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/5.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/6.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/6.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/7.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/7.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/8.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/8.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/9.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/9.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/10.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/10.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/11.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/11.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/12.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/12.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/13.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/13.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/14.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/14.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/15.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/15.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/16.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/16.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/17.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/17.jpg" alt="" />
-                                            </div>
-                                        </div>
-
-                                        <div data-src="/template/media/gallery/4.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/4.jpg" alt="" />
-                                            </div>
-                                        </div>
-
-                                        <div data-src="/template/media/gallery/5.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/5.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/6.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/6.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/7.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/7.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/8.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/8.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/9.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/9.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/10.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/10.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/11.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/11.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/12.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/12.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/13.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/13.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/14.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/14.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div data-src="/template/media/gallery/15.jpg">
-                                            <div class="lightbox-item p-item">
-                                                <img src="/template/media/gallery/thumbs/15.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="p-timeline">
-                            <div class="pt-line c-gray text-right">
-                                <span class="d-block">2015</span>
-                                22/04
-                            </div>
-
-                            <div class="pt-body">
-                                <h2 class="ptb-title">To Print and Review</h2>
-
-                                <div class="lightbox clearfix">
-                                    <div data-src="/template/media/gallery/13.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/13.jpg" alt="" />
-                                        </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/10.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/10.jpg" alt="" />
-                                        </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/11.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/11.jpg" alt="" />
-                                        </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/12.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/12.jpg" alt="" />
-                                        </div>
-                                    </div>
-                                    <div data-src="/template/media/gallery/14.jpg">
-                                        <div class="lightbox-item p-item">
-                                            <img src="/template/media/gallery/thumbs/14.jpg" alt="" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        </div>
-                        -->
 
                     </div>
                 </div>
@@ -566,7 +124,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="imgUploadModalLabel">Modal title</h4>
+                <h4 class="modal-title" id="imgUploadModalLabel">Image Uploader</h4>
             </div>
             <form action="/fandoms/<%= @fandom.id %>/histories" method="post" enctype="multipart/form-data">
 
@@ -603,6 +161,107 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Save changes</button>
                 </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--Add Event Modal-->
+<div class="modal fade" id="eventUploadModal" tabindex="-1" role="dialog" aria-labelledby="eventUploadModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="imgUploadModalLabel">Add to History!</h4>
+            </div>
+            <form class="form-horizontal" action="<%= fandom_histories_path(@fandom) %>" method="post" enctype="multipart/form-data">
+
+                <input name="authenticity_token" id="inputHistory-authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+                <input type="hidden" name="history[fandom_id]" id="history-fandom_id" value="<%= @fandom.id %>">
+                <input type="hidden" name="history[user_id]" id="history-user_id" value="<%= get_current_user_id %>">
+
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+
+                            <div class="form-group">
+                                <label for="addHistoryEvent-event_date" class="col-sm-2 control-label">Date</label>
+                                <div class="col-sm-10">
+                                    <div class="fg-line">
+                                        <input type="date" class="form-control input-sm" id="addHistoryEvent-event_date" name="history[event_date]" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="addHistoryEvent-title" class="col-sm-2 control-label">Event</label>
+                                <div class="col-sm-10">
+                                    <div class="fg-line">
+                                        <input type="text" class="form-control input-sm" id="addHistoryEvent-title" name="history[title]" placeholder="What happened?" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--Edit Event Modal-->
+<div class="modal fade" id="editEventModal" tabindex="-1" role="dialog" aria-labelledby="editEventModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="imgUploadModalLabel">Edit History!</h4>
+            </div>
+            <form class="form-horizontal" action="<%= fandom_histories_path(@fandom) %>" method="post" enctype="multipart/form-data">
+
+                <input name="authenticity_token" id="inputHistory-authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+                <input type="hidden" name="history[fandom_id]" id="history-fandom_id" value="<%= @fandom.id %>">
+                <input type="hidden" name="history[user_id]" id="history-user_id" value="<%= get_current_user_id %>">
+
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+
+                            <div class="form-group">
+                                <label for="editHistoryEvent-event_date" class="col-sm-2 control-label">Date</label>
+                                <div class="col-sm-10">
+                                    <div class="fg-line">
+                                        <input type="date" class="form-control input-sm" id="editHistoryEvent-event_date" name="history[event_date]" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="editHistoryEvent-title" class="col-sm-2 control-label">Event</label>
+                                <div class="col-sm-10">
+                                    <div class="fg-line">
+                                        <input type="text" class="form-control input-sm" id="editHistoryEvent-title" name="history[title]" placeholder="What happened?" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+            <form id="removeHistoryBtn-form" action="" method = "post">
+                <input type="hidden" name="_method" value="delete"/>
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                <button id="removeHistoryBtn" type="submit" class="btn btn-danger" onclick = "if(! confirm('Are you sure?')){ return false; }">delete</button>
             </form>
         </div>
     </div>

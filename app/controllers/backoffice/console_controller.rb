@@ -60,7 +60,7 @@ class Backoffice::ConsoleController < ApplicationController
         result = config.update(fd_name: pa[:fd_name], fd_bg_color: pa[:fd_bg_color], fd_logo: pa[:fd_logo], fd_bg_img: pa[:fd_bg_img])
         
         if result
-            redirect_to fandom_path(config.fandom)
+            redirect_to :back # fandom_path(config.fandom)
         else
             redirect_to :back
         end
@@ -73,7 +73,7 @@ class Backoffice::ConsoleController < ApplicationController
         result = wiki.update(name: pa[:name], image: pa[:image])
     
         if result
-            redirect_to fandom_path(wiki.fandom)
+            redirect_to :back # fandom_path(wiki.fandom)
         else
             redirect_to :back
         end
