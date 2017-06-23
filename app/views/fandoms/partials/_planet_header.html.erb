@@ -1,6 +1,9 @@
 <%
     @config ||= @fandom.config
-    bgcolor = @config.fd_bg_color&.length.zero? ? '#07174b' : @config.fd_bg_color
+    bgcolor = @config.fd_bg_color&.length&.zero? ? '#07174b' : @config.fd_bg_color
+
+    onclick_follow_btn = "followBtn('#{@follow_control[:follow_cmd]}', #{@follow_control[:myfandom_id]}, #{@follow_control[:channel_id]}, #{@follow_control[:user_id]}, 'no-text')"
+    @onclick_display = valid_display_on_user_level(is_my_fandom?(user: @user, fandom: @fandom), script: onclick_follow_btn)
 %>
 <style>
     #header{
@@ -12,6 +15,9 @@
     }
     .channel.carousel .carousel-caption .channel_info:before{
         background-image: url('<%= @config.fd_logo.include?('round') ? @config.fd_logo.split('round').first + 'round126_126' : @config.fd_logo %>');
+    }
+    .channel .carousel-inner > .item.active > .carousel-img:after{
+        background: <%= hex_to_rgba(bgcolor, 0.2) %> !important;
     }
     <% if bgcolor %>
         .carousel-caption:before{
@@ -38,7 +44,7 @@
                 <span class="channel_info dropdown">
                     <p class="channel_name"><%= @config.fd_name %></p>
                     <p class="channel_follow_count">followers <span id="follower_count_<%= @fandom.id %>" class="count"><%= @fandom.user_lists.count %></span></p>
-                    <a id="channel_<%= @fandom.id %>" onclick="followBtn('<%= @follow_control[:follow_cmd] %>', <%= @follow_control[:myfandom_id] %>, <%= @follow_control[:channel_id] %>, <%= @follow_control[:user_id] %>, 'no-text')" class="channel_followBtn following <%= 'active' if is_my_fandom?(user: current_user, fandom: @fandom) %>">
+                    <a id="channel_<%= @fandom.id %>" onclick="<%= @onclick_display %>" class="channel_followBtn following <%= 'active' if is_my_fandom?(user: current_user, fandom: @fandom) %>">
                         <span class="zmdi <%= 'zmdi-star' if is_my_fandom?(fandom: @fandom, user: current_user) %>"></span>
                         <span class="<%= 'active' unless is_my_fandom?(user: current_user, fandom: @fandom) %>"><%= is_my_fandom?(user: current_user, fandom: @fandom) ? 'following' : 'follow' %></span>
                     </a>

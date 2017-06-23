@@ -1,10 +1,8 @@
 <%= render partial: '/layouts/plane_header', locals: { color_class: '', message: '<span style="font-size: 35px; font-weight: 700;">PLANETS</span><br>Follow your favorite K-pop star\'s planet<br>and enjoy EVERYTHING about the star!', style: 'background-color: #00c9c6 !important; margin-top: 60px;', msg_style: 'padding-top: 50px !important; ' } %>
 
-<% if user_signed_in? %>
-    <button id="suggest_btn" class="btn btn-default bgm-lightgreen wave-effect" data-toggle="modal" data-target="#suggest_channel_modal">
-        Do you want to suggest a new Channel?
-    </button>
-<% end %>
+<button id="suggest_btn" class="btn btn-default bgm-lightgreen wave-effect" data-toggle="modal" data-target="<%= user_signed_in? ? '#suggest_channel_modal' : '#login_modal' %>">
+    Do you want to suggest a new Channel?
+</button>
 
 <section id="channels" class="container card" style="padding-bottom: 50px;">
     <div id="sorting_methods">
@@ -42,7 +40,7 @@
         </div>
     </div>
     <div class="row" style="text-align: left; max-width: 960px; margin: auto; padding: 0 60px;">
-        <%= render partial: '/fandoms/partials/planet_card_onSelect_published', collection: @fandoms, as: :fandom %>
+        <%= render partial: '/fandoms/partials/planet_card_onSelect_published', collection: @fandoms, as: :fandom, locals: {user: @user} %>
     </div>
 
     <% unless @fandoms_not_active.count.zero? %>
@@ -53,7 +51,7 @@
 
         <div class="row unpublished_channels" style="text-align: left; max-width: 960px; margin-left: auto; margin-right: auto; padding: 0 60px;">
             <h2 style="text-align: left">fandom waiting list <small>These channels are in preparation. <br>When the proposal reaches 50 people, it will be issued to the official channel.</small></h2>
-            <%= render partial: '/fandoms/partials/planet_card_onSelect_unpublished', collection: @fandoms_not_active, as: :un_fandom %>
+            <%= render partial: '/fandoms/partials/planet_card_onSelect_unpublished', collection: @fandoms_not_active, as: :un_fandom, locals: {user: @user} %>
         </div>
     <% end %>
 </section>
