@@ -4,6 +4,14 @@ class ApplicationController < ActionController::Base
     
     protect_from_forgery with: :exception
     before_action :set_locale
+    around_filter :set_current_user
+    
+    def set_current_user
+        UsersHelper::Current.user = current_user
+        yield
+    ensure
+        UsersHelper::Current.user = nil
+    end
     
     def set_locale
         I18n.locale = params[:locale] || :en
@@ -11,6 +19,7 @@ class ApplicationController < ActionController::Base
 
     def my_published_fandoms
         @my_published_fandoms = current_user.fandoms.published if user_signed_in?
+        @user = UsersHelper::Current.user
     end
     
     def set_for_fandom_show_template_data

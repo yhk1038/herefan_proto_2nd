@@ -1,5 +1,6 @@
 class FandomsController < ApplicationController
     include FandomsHelper
+    include UsersHelper
     before_action :set_fandom, only: [:show, :edit, :update, :destroy]
     before_action :my_published_fandoms
     
@@ -21,7 +22,6 @@ class FandomsController < ApplicationController
             @fandoms = Fandom.published.all.sort { |a, b| a.config.fd_name <=> b.config.fd_name }
             @fandoms_not_active = Fandom.unpublished.all.sort { |a, b| a.config.fd_name <=> b.config.fd_name }
         end
-        
         
         @my_fandoms = current_user.fandoms.published.ids if user_signed_in?
     end

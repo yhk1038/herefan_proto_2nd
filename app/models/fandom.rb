@@ -71,11 +71,13 @@ class Fandom < ApplicationRecord
     
     def registration_config
         fandom = self
+        current_user = UsersHelper::Current.user
+        current_user_id = current_user ? current_user.id : 0
         
-        init_config = FdConf.create(fd_logo: fandom.profile_img, fd_bg_img: fandom.background_img, fd_name: fandom.name, userlist: [get_current_user_id].to_s)
+        init_config = FdConf.create(fd_logo: fandom.profile_img, fd_bg_img: fandom.background_img, fd_name: fandom.name, userlist: [current_user_id].to_s)
         fandom.configs << init_config
         
-        user = User.find_by(id: get_current_user_id)
+        user = User.find_by(id: current_user_id)
         return init_config unless user
         user.fd_confs << init_config
     end

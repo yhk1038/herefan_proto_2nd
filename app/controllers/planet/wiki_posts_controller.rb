@@ -6,7 +6,7 @@ class Planet::WikiPostsController < ApplicationController
     before_action :inheritance_for_front_view, except: [:create]
     before_action :my_published_fandoms
     before_action :set_wiki_pointer_and_ready_layout, except: [:create, :new]
-    before_action :check_login
+    before_action :check_login, except: [:index, :show]
     
     # GET /fandoms/:fandom_id/wiki_posts
     # GET /fandoms/:fandom_id/wiki_posts.json
@@ -55,8 +55,8 @@ class Planet::WikiPostsController < ApplicationController
         respond_to do |format|
             insert_post_to_correct_pointer if create_method == 'new'
             if @wiki_post.save
-                redirect_path = fandom_wikis_url(@fandom)
-                redirect_path += '?w=' + @wiki_post.wiki_id.to_s if @wiki_post.wiki_id
+                redirect_path = fandom_wiki_posts_url(@fandom)
+                redirect_path += '?wiki_pointer_id=' + @wiki_post.wiki_pointer_id.to_s if @wiki_post.wiki_pointer_id
                 update_pointer_sorting_label
                 format.html { redirect_to redirect_path, notice: 'Wiki post was successfully created.' }
                 format.json { render :show, status: :created, location: @wiki_post }

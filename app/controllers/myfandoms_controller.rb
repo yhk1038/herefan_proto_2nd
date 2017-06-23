@@ -30,7 +30,7 @@ class MyfandomsController < ApplicationController
             if @myfandom.save
                 fandom = @myfandom.fandom
                 if fandom.myfandoms.count >= config_update_publish_limit
-                    fandom.update(published: true)
+                    fandom.update(published: true, published_updated_at: DateTime.now)
                 end
                 format.html { redirect_to @myfandom, notice: 'Myfandom was successfully created.' }
                 format.json { render json: @myfandom } # :show, status: :created, location: @myfandom
@@ -61,7 +61,7 @@ class MyfandomsController < ApplicationController
         @myfandom.destroy
         fandom = @myfandom.fandom
         if fandom.myfandoms.count < config_update_publish_limit
-            fandom.update(published: false)
+            fandom.update(published: false, published_updated_at: DateTime.now)
         end
         respond_to do |format|
             format.html { redirect_to myfandoms_url, notice: 'Myfandom was successfully destroyed.' }

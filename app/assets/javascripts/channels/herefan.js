@@ -304,3 +304,9 @@ function ajax_follow_cancel(channel_id, user_id, myfandom_id, option) {
 function goTopScroll() {
     $('html, body').animate({scrollTop: 0 }, 'slow');
 }
+
+// display
+// hey_follow
+function hey_follow() {
+    swal('Plz follow this Planet first!','','info');
+}

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170621195053) do
+ActiveRecord::Schema.define(version: 20170622091654) do
 
   create_table "clips", force: :cascade do |t|
     t.integer  "user_id"
@@ -25,9 +25,10 @@ ActiveRecord::Schema.define(version: 20170621195053) do
     t.string   "name"
     t.string   "profile_img"
     t.string   "background_img"
-    t.boolean  "published",      default: false, null: false
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.boolean  "published",            default: false, null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.datetime "published_updated_at"
   end
 
   create_table "fd_confs", force: :cascade do |t|

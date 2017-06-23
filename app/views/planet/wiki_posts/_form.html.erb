@@ -10,8 +10,7 @@
             </ul>
         </div>
     <% end %>
-
-    <%= f.hidden_field :user_id, value: $current_user_id %>
+    <%= f.hidden_field :user_id, value: @user.id %>
     <%= f.hidden_field :wiki_id, value: @wiki.id %>
 
     <div class="field hidden_field">
