@@ -38,6 +38,21 @@ $(document).ready(function () {
         }
     });
 
+    // (무한 스크롤) 화면이 최하단에 닿았을 때
+    $(window).scroll(function () {
+        if ($(window).scrollTop() === ($(document).height() - $(window).height())) {
+
+            var wrapper = $('#libraries_wrapper');
+            var load_count  = wrapper.attr('data-load');
+            var req         = wrapper.data('req');
+            var method      = '&method=' + wrapper.data('method');
+
+            if (wrapper !== undefined && load_count !== 'end'){
+                var url = '/load_card/'+load_count+'?req='+req + method;
+                call_card_append(url);
+            }
+        }
+    });
 
     //
     // 링크 카드 미리보기 상태에서 메세지 입력
@@ -149,6 +164,26 @@ $(document).ready(function () {
         e.stopPropagation();
     });
 });
+
+function call_card_append(url) {
+    var preloader = $('#call_card_preloader');
+    preloader.show();
+
+    var req = $.ajax({
+        url: url,
+        method: 'get'
+    });
+
+    req.success(function (data) {
+        preloader.hide();
+    });
+
+    req.fail(function (data) {
+        preloader.hide();
+        swal('Request fail :(', 'something went wrong! check your internet', 'error');
+    });
+}
+
 
 function hey_login() {
     swal({

@@ -51,6 +51,8 @@ Rails.application.routes.draw do
     # > sort by : watched, clip, maum
     get '/sort_by/:req', to: 'home#sort_by'
     
+    # > load card(무한 스크롤)
+    get '/load_card/:page_num', to: 'home#load_card'
 
     # home
     # > my

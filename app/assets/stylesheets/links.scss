@@ -379,3 +379,7 @@
     //content: '\f28c';
     //color: #24e5f3;
 }
+
+#library #libraries_wrapper[data-grid="5"] .moreBtn {
+    display: none;
+}

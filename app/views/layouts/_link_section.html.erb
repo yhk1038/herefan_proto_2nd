@@ -1,5 +1,20 @@
+<%
+    add_req = ''
+    add_req = '&fandom_id='+@fandom.id.to_s if @fandom
+
+    method = 'default'
+    method = @sorting_method if @sorting_method
+%>
 <section id="library" class="container contents_box">
-    <div class="row" id="libraries_wrapper" data-page="<%= params[:controller] %>-<%= params[:action] %>">
+    <div class="row" id="libraries_wrapper" data-load="2"
+         data-page="<%= params[:controller] %>-<%= params[:action] %>"
+         data-req="<%= params[:controller] %>-<%= params[:action] %><%= add_req %>"
+         data-method="<%= method %>">
         <%= render partial: '/links/partials/link_card', collection: @links, as: :link %>
+    </div>
+    <div class="preloader pl-xl">
+        <svg id="call_card_preloader" class="pl-circular" viewBox="25 25 50 50" style="display: none;">
+            <circle class="plc-path" cx="50" cy="50" r="20"></circle>
+        </svg>
     </div>
 </section>
