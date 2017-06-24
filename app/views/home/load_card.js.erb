@@ -1,18 +1,3 @@
-var grid_size = 250;
-var section_row = $('#libraries_wrapper');
-
-if (section_row.data('page') === 'home-new_content'){
-    section_row.attr('data-grid','5');
-    grid_size = 200;
-
-} else if (section_row.data('page') === 'home-index'){
-    section_row.attr('data-grid','5');
-    grid_size = 200;
-
-} else {
-    section_row.attr('data-page', '4');
-    grid_size = 250;
-}
 
 ////////// Start Solution
 
@@ -32,15 +17,17 @@ var links = [];
 // Call prepend function in Grid-a-licious
 
 // console.log('links array size: ', links.length);
-if (links.length === 0){
-    swal('End','','info');
-    $('#libraries_wrapper').attr('data-load', 'end');
+if (links.length < 30 && links.length > 0){
+    $("#libraries_wrapper").gridalicious('append', links);
+    $load_count = 'end';
+
+} else if (links.length === 0) {
+    swal('Finished!', '', 'info');
+    $load_count = 'end';
 
 } else {
     $("#libraries_wrapper").gridalicious('append', links);
-
-    var load_count = parseInt($('#libraries_wrapper').data('load')) + 1;
-    $('#libraries_wrapper').attr('data-load', load_count);
+    $load_count = $load_count + 1;
 }
 
 ////////// End Solution

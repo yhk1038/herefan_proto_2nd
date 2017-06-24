@@ -236,6 +236,7 @@ class HomeController < ApplicationController
         
         if req
             puts "req: #{req.gsub('-','/')}"
+            puts "method: #{params[:method]}\n\n"
             case req.gsub('-','/')
             when 'home/new_content'     # Home > New
                 cards = Link.order(created_at: :desc).limit(limit).offset(limit * (page - 1))
@@ -247,7 +248,6 @@ class HomeController < ApplicationController
                 cards = Fandom.find(params[:fandom_id]).links.order(created_at: :desc).limit(limit).offset(limit * (page - 1))
                 
             when 'mypage/watched'       # Mypage > My Links
-                puts "Method: #{params[:method]}\n\n"
                 
                 case params[:method]
                 when 'watched'

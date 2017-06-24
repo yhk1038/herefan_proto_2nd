@@ -12,9 +12,11 @@
          data-method="<%= method %>">
         <%= render partial: '/links/partials/link_card', collection: @links, as: :link %>
     </div>
-    <div class="preloader pl-xl">
-        <svg id="call_card_preloader" class="pl-circular" viewBox="25 25 50 50" style="display: none;">
-            <circle class="plc-path" cx="50" cy="50" r="20"></circle>
-        </svg>
+    <div class="row" style="text-align: center;">
+        <div class="preloader pl-xl">
+            <svg id="call_card_preloader" class="pl-circular" viewBox="25 25 50 50" style="display: none;">
+                <circle class="plc-path" cx="50" cy="50" r="20"></circle>
+            </svg>
+        </div>
     </div>
 </section>

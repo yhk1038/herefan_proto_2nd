@@ -43,13 +43,19 @@ $(document).ready(function () {
         if ($(window).scrollTop() === ($(document).height() - $(window).height())) {
 
             var wrapper = $('#libraries_wrapper');
-            var load_count  = wrapper.attr('data-load');
+            var load_count  = $load_count;
             var req         = wrapper.data('req');
-            var method      = '&method=' + wrapper.data('method');
+            var method      = '&method=' + $method;
+            // console.log('load count: ', load_count);
+            // console.log('method: ', method);
 
             if (wrapper !== undefined && load_count !== 'end'){
                 var url = '/load_card/'+load_count+'?req='+req + method;
                 call_card_append(url);
+            }
+
+            if (load_count === 'end'){
+                // swal('End', load_count, 'info');
             }
         }
     });
