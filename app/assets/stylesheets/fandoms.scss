@@ -119,10 +119,12 @@ section#channels {
         
         &.left{
             left: 12.5%;
+            //left: 0;
             background-image: linear-gradient(to right, rgba(255, 222, 85, 1) 0%, rgba(255, 222, 85, 0.2) 50%, rgba(255, 222, 85, 0.0001) 100%);
         }
         &.right{
             right: 12.5%;
+            //right: 0;
             background-image: linear-gradient(to left, rgba(255, 222, 85, 1) 0%, rgba(255, 222, 85, 0.2) 50%, rgba(255, 222, 85, 0.0001) 100%);
         }
     }

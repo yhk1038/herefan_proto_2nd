@@ -36,19 +36,44 @@ class HomeController < ApplicationController
     
     # GET '/sort_by/:req' :: params[:req] == 'watched' or 'clip' or 'maum'
     def sort_by
-        @req = params[:req] || 'watched'
-        bridge = []
+        @req    = params[:req] || 'watched'
+        
+        limit   = 30
+        limit   = params[:cards_limit]    if params[:cards_limit]
+        
+        page    = 1
+        page    = params[:page]           if params[:page]
+        
+        bridge  = []
+
+        puts "\n\n\n"
+        puts "limit: #{limit}"
+        puts "page: #{page}"
+        puts "\n\n\n\n"
         
         case @req
         when 'watched'
-            bridge = current_user.visited_links
+            bridge = current_user.visited_links.order(updated_at: :desc).limit(limit).offset(limit * (page - 1))
+            puts "\n\n\ncount: #{bridge.count}\n\n\n\n"
+            bridge = bridge.map{|a| a.link}
+            @sorting_method = 'watched'
+            #.sort{|a, b| b.visited_links.where(user: current_user).last.updated_at <=> a.visited_links.where(user: current_user).last.updated_at }
+            
         when 'clip'
-            bridge = current_user.clips
+            bridge = current_user.clips.order(created_at: :desc).limit(limit).offset(limit * (page - 1))
+            bridge = bridge.map{|a| a.link}
+            @sorting_method = 'clip'
+            #.sort{|a, b| b.clips.where(user: current_user).last.created_at <=> a.clips.where(user: current_user).last.created_at }
+        
         when 'maum'
-            bridge = current_user.likes
+            bridge = current_user.likes.order(created_at: :desc).limit(limit).offset(limit * (page - 1))
+            bridge = bridge.map{|a| a.link}
+            @sorting_method = 'maum'
+            #.sort{|a, b| b.likes.where(user: current_user).last.created_at <=> a.likes.where(user: current_user).last.created_at }
+            
         end
 
-        @links = bridge.map{|a| a.link}.sort{|a, b| b.created_at <=> a.created_at }
+        @links = bridge
     end
     
     
@@ -192,4 +217,53 @@ class HomeController < ApplicationController
     def letter_count
         render layout: false
     end
+    
+    
+    ###
+    ### 무한 스크롤 그룹
+    
+    # GET /load_card/:page_num
+    def load_card
+        req     = params[:req]
+        page    = params[:page_num].to_i || 1
+        limit   = 30
+        puts "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+        puts "req: #{req}"
+        puts "page: #{page}"
+        puts "limit: #{limit}"
+        puts "\n\n"
+        cards = Link.where(id: 0)
+        
+        if req
+            puts "req: #{req.gsub('-','/')}"
+            case req.gsub('-','/')
+            when 'home/new_content'     # Home > New
+                cards = Link.order(created_at: :desc).limit(limit).offset(limit * (page - 1))
+                
+            when 'home/index'           # Home > My
+                cards = current_user.links.where(fandom_id: current_user.fandoms.published.ids).order(created_at: :desc).limit(limit).offset(limit * (page - 1))
+            
+            when 'fandoms/show'         # Planet > Library
+                cards = Fandom.find(params[:fandom_id]).links.order(created_at: :desc).limit(limit).offset(limit * (page - 1))
+                
+            when 'mypage/watched'       # Mypage > My Links
+                puts "Method: #{params[:method]}\n\n"
+                
+                case params[:method]
+                when 'watched'
+                    cards = current_user.visited_links.order(updated_at: :desc).limit(limit).offset(limit * (page - 1)).map{|a| a.link}
+                    
+                when 'clip'
+                    cards = current_user.clips.order(created_at: :desc).limit(limit).offset(limit * (page - 1)).map{|a| a.link}
+                    
+                when 'maum'
+                    cards = current_user.likes.order(created_at: :desc).limit(limit).offset(limit * (page - 1)).map{|a| a.link}
+                    
+                end
+            end
+        end
+        
+        @links = cards
+    end
+    
 end

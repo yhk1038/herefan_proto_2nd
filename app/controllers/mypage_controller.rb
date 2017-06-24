@@ -19,7 +19,14 @@ class MypageController < ApplicationController
     
     def watched
         @tabs[0][:active] = 'active'
-        @links = current_user.visited_links.map{|a| a.link}.sort{|a, b| b.created_at <=> a.created_at }
+        limit   = 30
+        page    = 1
+
+        bridge = current_user.visited_links.order(updated_at: :desc)
+        bridge = bridge.limit(limit).offset(limit * (page - 1)).map{|a| a.link}
+        @links = bridge
+        
+        @sorting_method = 'watched'
     end
     
     def filling_tab_group

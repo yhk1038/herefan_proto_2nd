@@ -233,6 +233,7 @@ body{
                 //background-size: auto 260px !important;
                 //background-image: none !important;
                 background-size: 75% !important;
+                //background-size: 960px auto !important;
                 background-color: #ffde55 !important;
             }
         }
@@ -359,6 +360,16 @@ body{
     top: 0;
     left: 0;
     //background: #000;
+}
+.gradient-wrapper{
+    width: 960px;
+    position: absolute;
+    height: 260px;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #Pshare-dd-menu {

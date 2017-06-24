@@ -85,18 +85,31 @@
 <script src="/js/Grid-A-Licious-master/jquery.grid-a-licious.js"></script>
 <script type="text/javascript" charset="utf-8">
     var grid_size = 250;
-    if ($('#libraries_wrapper').data('page') === 'home-new_content'){
-        $('#libraries_wrapper').attr('data-grid','5');
+    var section_row = $('#libraries_wrapper');
+
+    if (section_row.data('page') === 'home-new_content'){
+        section_row.attr('data-grid','5');
         grid_size = 200;
-    }
-    if ($('#libraries_wrapper').data('page') === 'home-index'){
-        $('#libraries_wrapper').attr('data-grid','5');
+
+    } else if (section_row.data('page') === 'home-index'){
+        section_row.attr('data-grid','5');
         grid_size = 200;
+
+    } else {
+        section_row.attr('data-page', '4');
+        grid_size = 250;
     }
 
     $('#libraries_wrapper').gridalicious({
         selector: '.task',
-        width: grid_size
+        width: grid_size,
+        animate: true,
+        animationOptions: {
+            speed: 200,
+            duration: 300 //,
+//            complete:
+//            onComplete
+        }
     })
 </script>
 

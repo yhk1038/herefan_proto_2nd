@@ -1,0 +1,46 @@
+var grid_size = 250;
+var section_row = $('#libraries_wrapper');
+
+if (section_row.data('page') === 'home-new_content'){
+    section_row.attr('data-grid','5');
+    grid_size = 200;
+
+} else if (section_row.data('page') === 'home-index'){
+    section_row.attr('data-grid','5');
+    grid_size = 200;
+
+} else {
+    section_row.attr('data-page', '4');
+    grid_size = 250;
+}
+
+////////// Start Solution
+
+var links = [];
+
+<% @links.each do |link| %>
+
+    var link_dom = $("<%= escape_javascript(render '/links/partials/link_card', link: link) %>")[0];
+
+    links.push(link_dom);
+
+<% end %>
+
+// console.log('links array: ', links);
+// console.log('grid size: ', grid_size);
+
+// Call prepend function in Grid-a-licious
+
+// console.log('links array size: ', links.length);
+if (links.length === 0){
+    swal('End','','info');
+    $('#libraries_wrapper').attr('data-load', 'end');
+
+} else {
+    $("#libraries_wrapper").gridalicious('append', links);
+
+    var load_count = parseInt($('#libraries_wrapper').data('load')) + 1;
+    $('#libraries_wrapper').attr('data-load', load_count);
+}
+
+////////// End Solution
