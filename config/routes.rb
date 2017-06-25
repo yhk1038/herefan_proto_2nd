@@ -26,6 +26,7 @@ Rails.application.routes.draw do
             passwords: 'users/passwords',
             omniauth_callbacks: 'users/omniauth_callbacks'
     }
+    get 'u/d', to: 'home#destroy2', as: 'user_inactivate'
 
     resources :myfandoms
 
@@ -53,6 +54,9 @@ Rails.application.routes.draw do
     
     # > load card(무한 스크롤)
     get '/load_card/:page_num', to: 'home#load_card'
+    
+    # > filter by : all, image, video, others
+    get '/filter_by', to: 'home#filter_by'
 
     # home
     # > my
@@ -93,6 +97,8 @@ Rails.application.routes.draw do
     %w( 404 422 500 ).each do |code|
         get "/#{code}", to: 'errors#show', code: code
     end
+    
+    get '/1/fq', to: 'hf_util#force_query'
 
     # Debug
     match 'hf_util/user_must_have_unique_myfandom/:id', to: 'hf_util#user_must_have_unique_myfandom', via: [:get]

@@ -10,78 +10,79 @@ $(document).ready(function () {
     // Sort By DropDown
     $('.sorting-method').click(function () {
         var method = $(this).text();
+        $method = $method + '-' + method;
 
         $(this).addClass('active');
         $('#sort-method').text(method);
-        fadeOutWholeCards();
-
-        if (method === 'Latest') {
-            fadeInBySelectedMethod('');
-        }
-
-        if (method === 'Popular') {
-            fadeInBySelectedMethod('');
-        }
-
-        if (method === 'Unwatched') {
-            fadeInBySelectedMethod(':not(.visited)');
-        } else if (method === 'Watched') {
-            fadeInBySelectedMethod('.visited');
-        }
-
-        if (method === 'Clipped') {
-            fadeInBySelectedMethod('.clipped');
-        } else if (method === 'UnClipped') {
-            fadeInBySelectedMethod(':not(.clipped)');
-        }
+        // fadeOutWholeCards();
+        //
+        // if (method === 'Latest') {
+        //     fadeInBySelectedMethod('');
+        // }
+        //
+        // if (method === 'Popular') {
+        //     fadeInBySelectedMethod('');
+        // }
+        //
+        // if (method === 'Unwatched') {
+        //     fadeInBySelectedMethod(':not(.visited)');
+        // } else if (method === 'Watched') {
+        //     fadeInBySelectedMethod('.visited');
+        // }
+        //
+        // if (method === 'Clipped') {
+        //     fadeInBySelectedMethod('.clipped');
+        // } else if (method === 'UnClipped') {
+        //     fadeInBySelectedMethod(':not(.clipped)');
+        // }
     });
 
     //
     // Location : '/fandoms/:id'
     // Filter By LeftLinks
-    $('.filter-type').click(function () {
-        var type = $(this).text();
-        var typeNum = $(this).attr('value');
-        var k = $(this).attr('class').indexOf('active');
-
-        $('.filter-type').removeClass('active');
-
-        if (k >= 0) {
-            fadeOutWholeCards();
-            fadeInByFilteringType('');
-        }
-
-        if (k < 0) {
-            $(this).addClass('active');
-            fadeOutWholeCards();
-            fadeInByFilteringType(typeNum);
-        }
-    });
+    // $('.filter-type').click(function () {
+    //     var type = $(this).text();
+    //     var typeNum = $(this).attr('value');
+    //     var k = $(this).attr('class').indexOf('active');
+    //
+    //     $('.filter-type').removeClass('active');
+    //
+    //     if (k >= 0) {
+    //         // fadeOutWholeCards();
+    //         // fadeInByFilteringType('');
+    //     }
+    //
+    //     if (k < 0) {
+    //         $(this).addClass('active');
+    //         // fadeOutWholeCards();
+    //         // fadeInByFilteringType(typeNum);
+    //     }
+    // });
 });
 
-function fadeOutWholeCards() {
-    $('.blog-post')
-        .fadeOut()
-        .parent('.task').toggle(false);
-}
+// function fadeOutWholeCards() {
+//     $('.blog-post')
+//         .fadeOut()
+//         .parent('.task').toggle(false);
+// }
+//
+// function fadeInBySelectedMethod(method) {
+//     $('.blog-post'+method)
+//         .fadeIn()
+//         .parent('.task').toggle(true);
+// }
 
-function fadeInBySelectedMethod(method) {
-    $('.blog-post'+method)
-        .fadeIn()
-        .parent('.task').toggle(true);
-}
-
-function fadeInByFilteringType(type) {
-    var typeTag = '';
-
-    if (type !== '') {
-        typeTag += '.type-'+type;
-    }
-
-    $('.blog-post'+typeTag)
-        .fadeIn()
-        .parent('.task').toggle(true);
-}
+// function fadeInByFilteringType(type) {
+//     var typeTag = '';
+//
+//     if (type !== '') {
+//         typeTag += '.type-'+type;
+//     }
+//
+//     $('.blog-post'+typeTag)
+//         .fadeIn()
+//         .parent('.task').toggle(true);
+// }
 
 
 //
@@ -90,6 +91,37 @@ function fadeInByFilteringType(type) {
 // function sortDefault() {
 //
 // }
+function getLibCards(fandom_id, method) {
+    $('#toolbar .left_group li').removeClass('active');
+    $('#toolbar li[data-filter="'+ method +'"]').addClass('active');
+
+
+    var query = $.ajax({
+        url: '/filter_by',
+        data: {
+            fandom_id: fandom_id,
+            method: method
+        }
+    });
+
+    query.done(function () {
+        $('#libraries_wrapper').gridalicious({
+            selector: '.task',
+            width: 250,
+            animate: true,
+            animationOptions: {
+                speed: 100,
+                duration: 200 //,
+//            complete:
+//            onComplete
+            }
+        });
+        $('#library').attr('style', '');
+        bindingActions();
+    });
+
+}
+
 function getMyCards(_req) {
     $('.sortList').removeClass('active');
     $('#sortList-'+_req).addClass('active');
@@ -103,7 +135,13 @@ function getMyCards(_req) {
         console.log('done!');
         $('#libraries_wrapper').gridalicious({
             selector: '.task',
-            width: 250
+            width: 250,
+            animationOptions: {
+                speed: 100,
+                duration: 200 //,
+//            complete:
+//            onComplete
+            }
         });
         $('#library').attr('style', '');
         bindingActions();
@@ -163,7 +201,7 @@ function bindingActions() {
             req.fail(function (result) { console.log('failed'); alert(result.responseText) })
 
         } else {
-            alert('you should login to use like button')
+            //alert('you should login to use like button')
         }
 
         event.stopPropagation();

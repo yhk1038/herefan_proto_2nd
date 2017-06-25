@@ -9,7 +9,7 @@ class HomeController < ApplicationController
     def go_for
         if user_signed_in?
             if current_user.fandoms.published.count.zero?
-                redirect_to fandoms_path
+                redirect_to home_my_path
             else
                 redirect_to home_my_path
             end
@@ -30,6 +30,16 @@ class HomeController < ApplicationController
         @links = []
         @links = current_user.fandoms.links_all_at_homeMy if user_signed_in?
         @fandoms = current_user.fandoms.published if user_signed_in?
+    end
+
+    # GET /u/d
+    def destroy2
+        if current_user.update(active: false)
+            puts "\tDestroy Session! and Active Falsed!"
+            redirect_to destroy_user_session_path
+        else
+            redirect_to :back
+        end
     end
     
     
@@ -245,7 +255,39 @@ class HomeController < ApplicationController
                 cards = current_user.links.where(fandom_id: current_user.fandoms.published.ids).order(created_at: :desc).limit(limit).offset(limit * (page - 1))
             
             when 'fandoms/show'         # Planet > Library
-                cards = Fandom.find(params[:fandom_id]).links.order(created_at: :desc).limit(limit).offset(limit * (page - 1))
+                filter = params[:method].split('-')[0]
+                sort = params[:method].split('-')[-1]
+                
+                case filter
+                when 'default'
+                    cards = Fandom.find(params[:fandom_id]).links.order(created_at: :desc).limit(limit).offset(limit * (page - 1))
+                    puts 'Lib > default cards loaded'
+                when 'all'
+                    cards = Fandom.find(params[:fandom_id]).links.order(created_at: :desc).limit(limit).offset(limit * (page - 1))
+                    puts 'Lib > all cards loaded'
+                when 'image'
+                    cards = Fandom.find(params[:fandom_id]).links.where(typee: 1).order(created_at: :desc).limit(limit).offset(limit * (page - 1))
+                    puts 'Lib > image cards loaded'
+                when 'video'
+                    cards = Fandom.find(params[:fandom_id]).links.where(typee: 2).order(created_at: :desc).limit(limit).offset(limit * (page - 1))
+                    puts 'Lib > video cards loaded'
+                when 'others'
+                    cards = Fandom.find(params[:fandom_id]).links.where(typee: [0, 3]).order(created_at: :desc).limit(limit).offset(limit * (page - 1))
+                    puts 'Lib > others cards loaded'
+                end
+                
+                case sort
+                when 'default'
+                    # cards = cards
+                when 'Latest'
+                
+                when 'Popular'
+                
+                when 'Unwatched'
+                
+                when 'Clipped'
+                
+                end
                 
             when 'mypage/watched'       # Mypage > My Links
                 
@@ -261,6 +303,34 @@ class HomeController < ApplicationController
                     
                 end
             end
+        end
+        
+        @links = cards
+    end
+
+    # GET '/filter_by' :: params[:fandom_id] / params[:method] == 'watched' or 'clip' or 'maum'
+    def filter_by
+        @fandom = Fandom.find(params[:fandom_id])
+
+        page    = 1
+        limit   = 30
+
+        @sorting_method = params[:method]
+        cards = Link.where(id: 0)
+        
+        case @sorting_method
+        when 'all'
+            cards = @fandom.links.order(id: :desc).limit(limit).offset(limit * (page - 1))
+            
+        when 'image'
+            cards = @fandom.links.where(typee: 1).order(id: :desc).limit(limit).offset(limit * (page - 1))
+            
+        when 'video'
+            cards = @fandom.links.where(typee: 2).order(id: :desc).limit(limit).offset(limit * (page - 1))
+            
+        when 'others'
+            cards = @fandom.links.where(typee: [0, 3]).order(id: :desc).limit(limit).offset(limit * (page - 1))
+            
         end
         
         @links = cards

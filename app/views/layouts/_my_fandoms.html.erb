@@ -7,7 +7,7 @@
             <div class="follow_list">
                 <%= link_to fandom_path(fandom) do %>
                     <div class="follow_artists" style="background: url('<%= fandom.config.fd_logo %>');">
-                        <span><%= fandom.name %></span>
+                        <span><%= fandom.config.fd_name %></span>
                     </div>
                 <% end %>
             </div>
