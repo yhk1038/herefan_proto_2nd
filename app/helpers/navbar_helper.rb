@@ -14,7 +14,7 @@ module NavbarHelper
     
     def nav_menu_lists_desktop
         lists = []
-        lists << { name: app_home, path: home_my_path, controller: 'home' }
+        lists << { name: app_home, path: root_path, controller: 'home' }
         lists << { name: app_fandom, path: fandoms_path, controller: 'fandoms' }
         lists
     end

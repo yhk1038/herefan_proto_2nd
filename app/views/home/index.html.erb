@@ -72,13 +72,16 @@
 <% if user_signed_in? %>
     <% if @fandoms.count.zero? %>
         <section style="text-align: center">
-            <h1 style="margin: 40px 0;">There is no content to display .. :(<br>Please check your follow list.</h1>
-            <a class="btn btn-default bgm-green btn-lg waves-effect" href="<%= fandoms_path %>">Select Channel</a>
+            <h1 class="lead_message">
+                You aren't following any Planet.<br><br>
+                Follow your favorite Planets and get EVERYTHING about them!
+            </h1>
+            <a class="btn btn-default bgm-green btn-lg waves-effect loginFirstBtn" href="<%= fandoms_path %>">Add Following</a>
         </section>
     <% else %>
         <% if current_user.links.count.zero? %>
             <section style="text-align: center">
-                <h1 style="margin: 40px 0;">Save the link you want to keep<br>and Join your Channel!</h1>
+                <h1 class="lead_message">Save the link you want to keep<br>and Join your Channel!</h1>
             </section>
         <% else %>
             <%= render partial: '/layouts/link_section' %>
@@ -86,7 +89,33 @@
     <% end %>
 <% else %>
     <section style="text-align: center">
-        <h1 style="margin: 40px 0;">Oh, have not you joined yet?</h1>
-        <a class="btn btn-default bgm-blue btn-lg waves-effect" data-toggle="modal" data-target="#login_modal" style="" href="">Login</a>
+        <h1 class="lead_message">
+            Log in to HEREFAN and get the most<br>
+            recent information from your followed Planets.
+        </h1>
+        <a class="btn btn-default bgm-blue btn-lg waves-effect loginFirstBtn" data-toggle="modal" data-target="#login_modal" style="" href="">Login</a>
     </section>
 <% end %>
+<style>
+    .lead_message{
+        margin: 70px 0 50px;
+        font-size: 22px;
+        font-weight: 400;
+        color: #343e9d;
+    }
+    .loginFirstBtn{
+        min-width: 100px;
+        height: 45px;
+        background-color: #00c9c6 !important;
+        font-weight: 600;
+        font-size: 18px;
+        color: #eee !important;
+        box-shadow: none !important;
+        text-transform: capitalize !important;
+    }
+    .loginFirstBtn:hover{
+        font-weight: 700;
+        color: #fff;
+        border: 1px solid #CCCCCC !important;
+    }
+</style>

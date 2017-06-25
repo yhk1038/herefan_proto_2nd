@@ -118,15 +118,15 @@
                             </div>
 
                             <div class="col-sm-12" data-contain="submit">
-                                <%= link_to "Go Back", :back, class: 'hf-btn btn-info w-100 submiter', style: 'box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15); margin-top: 50px !important;' %>
-                                <button type="submit" class="card hf-btn btn-primary w-100 m-t-15 m-b-30 submiter" style="box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);">Update</button>
+                                <%= link_to "Go Back", mypage_watched_path, class: 'hf-btn btn-info w-100 submiter', style: 'box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15); margin-top: 50px !important;' %>
+                                <button type="submit" onclick="return account_validation();" class="card hf-btn btn-primary w-100 m-t-15 m-b-30 submiter" style="box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);">Update</button>
                             </div>
 
                             <div class="col-sm-12">
                                 <div style="margin-top: 60px; padding-left: 20px;">
                                     <p style="font-size: 18px;color: #f5146c;font-weight: 600;">Delete Account?</p>
                                     <p class="m-b-30" style="font-size: 16px;color: #b3b3b3;font-weight: 400;">To protect your information, your account will be retained for two months even if you delete it.</p>
-                                    <%= link_to "delete my account", registration_path(resource_name), class: 'hf-btn btn-sm', style: 'box-shadow: none;color: #f5146c;text-transform: capitalize;padding: 0; font-size: 16px;', data: { confirm: "Are you sure?" }, method: :delete %>
+                                    <%= link_to "delete my account", user_inactivate_path, class: 'hf-btn btn-sm', style: 'box-shadow: none;color: #f5146c;text-transform: capitalize;padding: 0; font-size: 16px; background: none;', onclick: "return confirm('Are you sure?')" %>
                                 </div>
                             </div>
 

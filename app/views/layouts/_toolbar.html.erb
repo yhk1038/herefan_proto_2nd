@@ -3,14 +3,14 @@
         <div class="row">
             <div class="col-sm-6">
                 <ul class="left_group pull-left">
-                    <li class="active"><a href="#" value="0" onclick="return false" class="filter-type btn btn-link no-waves">all</a></li>
-                    <li><a href="#" value="1" onclick="return false" class="filter-type btn btn-link no-waves">image</a></li>
-                    <li><a href="#" value="2" onclick="return false" class="filter-type btn btn-link no-waves">video</a></li>
-                    <li><a href="#" value="3" onclick="return false" class="filter-type btn btn-link no-waves">others</a></li>
+                    <li class="active" data-filter="all"><a href="#" onclick="getLibCards('<%= @fandom.id %>', 'all'); return false" class="filter-type btn btn-link no-waves">all</a></li>
+                    <li data-filter="image"><a href="#" onclick="getLibCards('<%= @fandom.id %>', 'image'); return false" class="filter-type btn btn-link no-waves">image</a></li>
+                    <li data-filter="video"><a href="#" onclick="getLibCards('<%= @fandom.id %>', 'video'); return false" class="filter-type btn btn-link no-waves">video</a></li>
+                    <li data-filter="others"><a href="#" onclick="getLibCards('<%= @fandom.id %>', 'others'); return false" class="filter-type btn btn-link no-waves">others</a></li>
                 </ul>
             </div>
             <div class="col-sm-6">
-                <ul class="right_group pull-right">
+                <ul class="right_group pull-right" data-fandom="<%= @fandom.id %>">
                     <li>
                         <div class="dropdown">
                             <a class="dropdown-toggle btn btn-link no-waves" data-toggle="dropdown" aria-expanded="false">Sort by : <span id="sort-method">Latest</span> <i class="caret"></i></a>

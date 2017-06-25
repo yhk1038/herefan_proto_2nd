@@ -13,6 +13,11 @@
     myvisites_already = myvisites.count.zero? ? false : true
 
     visited_count = link.visited_links.pluck(:viewcount).inject(:+)
+
+    open_edit_fandom_modal = "open_edit_modal(#{link.id})"
+    my_fandom = is_my_fandom?(user: @user, fandom: link.fandom)
+    @edit_display       = valid_display_on_user_level(my_fandom, script: open_edit_fandom_modal)
+    @onclick_display    = valid_display_on_user_level(my_fandom)
 %>
 <div class="task">
     <div id="link_<%= link.id %>"
@@ -25,7 +30,7 @@
          noiser="<%= current_user_id %>">
         <div class="bp-header">
             <a href="<%= link.url %>" target="_blank">
-                <a class="clip_btn" action_status="<%= myclips_already ? 'delete' : 'post' %>" action_target="<%= myclips_already ? myclips.take.id : link.id %>" action_noiser="<%= current_user_id %>">
+                <a class="clip_btn" onclick="<%= @onclick_display %>" action_status="<%= myclips_already ? 'delete' : 'post' %>" action_target="<%= myclips_already ? myclips.take.id : link.id %>" action_noiser="<%= current_user_id %>">
                     <span id="cliped_<%= link.id %>" class="clip zmdi zmdi-bookmark-outline"></span>
                 </a>
                 <a href="<%= link.url %>" target="_blank">
@@ -33,13 +38,13 @@
                 </a>
                 <ul class="actions actions-alt moreBtn">
                     <li class="dropdown">
-                        <a href="" data-toggle="dropdown" aria-expanded="false"><i class="zmdi zmdi-more-vert"></i></a>
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <% if link.user == current_user %>
-                                <li><%= link_to 'edit', edit_link_path(link) %></li>
-                                <li><%= button_to 'Destroy', link, method: :delete, onclick: "return confirm('Are you sure you want to delete this link?')", class: 'likes_link_to' %></li>
+                        <a href="#" class="no-vl" data-toggle="dropdown" aria-expanded="false"><i class="zmdi zmdi-more-vert"></i></a>
+                        <ul class="dropdown-menu no-vl dropdown-menu-right">
+                            <% if link.user == current_user || @user&.is_planet_editor?(link.fandom) || @user&.admin %>
+                                <li><%= link_to 'edit', '#', onclick: @edit_display %></li>
+                                <li><%= button_to 'Destroy', link, method: :delete, onclick: "return confirm('Are you sure?')", class: 'likes_link_to' %></li>
                             <% else %>
-                                <li><%= link_to 'report', '#' %></li>
+                                <li><%= link_to 'report', '#', onclick: @onclick_display %></li>
                             <% end %>
                         </ul>
                     </li>
@@ -54,7 +59,7 @@
                 <a class="col-xs-6 action viewcount" href="<%= link.url %>" target="_blank">
                     <span class="zmdi zmdi-eye"></span> <span class="counter"><%= visited_count ? visited_count : 0 %></span>
                 </a>
-                <a class="col-xs-5 action maum" action_status="<%= mylikes_already ? 'delete' : 'post' %>" action_target="<%= mylikes_already ? mylikes.take.id : link.id %>" action_noiser="<%= current_user_id %>">
+                <a class="col-xs-5 action maum" onclick="<%= @onclick_display %>" action_status="<%= mylikes_already ? 'delete' : 'post' %>" action_target="<%= mylikes_already ? mylikes.take.id : link.id %>" action_noiser="<%= current_user_id %>">
                     <span class="zmdi zmdi-favorite<%= '-outline' unless mylikes_already %>"></span> <span class="counter"><%= link.likes.count %></span>
                 </a>
                 <div class="dropdown share_box col-xs-1">
@@ -71,7 +76,7 @@
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="zmdi zmdi-globe"></i></span>
                                 <div id="text_url_<%= link.id %>" type="text" class="form-control fc-alt" aria-label="Amount (to the nearest dollar)"><%= link.url %></div>
-                                <span target="<%= link.id %>" data-clipboard-target="#text_url_<%= link.id %>" class="input-group-addon url_copy"><i class="zmdi zmdi-copy"></i></span>
+                                <span target="<%= link.id %>" onclick="copyToClipboard('#text_url_<%= link.id %>')" class="input-group-addon url_copy"><i class="zmdi zmdi-copy"></i></span>
                             </div>
                         </li>
                     </ul>

@@ -73,13 +73,14 @@
     <%= render '/layouts/js_librarySet' %>
     <%= javascript_include_tag 'channels/herefan' %>
 <% end %>
-<script src="https://cdn.jsdelivr.net/clipboard.js/1.5.3/clipboard.min.js"></script>
 <script type="text/javascript" charset="utf-8">
-    window.onload = function(){
-        $(document).ready(function(){
-            var clipboard = new Clipboard('.url_copy');
-        });
-    };
+function copyToClipboard(element) {
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($(element).text()).select();
+    document.execCommand("copy");
+    $temp.remove();
+}
 </script>
 
 <script src="/js/Grid-A-Licious-master/jquery.grid-a-licious.js"></script>
@@ -105,8 +106,8 @@
         width: grid_size,
         animate: true,
         animationOptions: {
-            speed: 200,
-            duration: 100 //,
+            speed: 100,
+            duration: 200 //,
 //            complete:
 //            onComplete
         }

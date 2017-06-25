@@ -49,7 +49,7 @@ $(document).ready(function () {
             // console.log('load count: ', load_count);
             // console.log('method: ', method);
 
-            if (wrapper !== undefined && load_count !== 'end'){
+            if (wrapper !== undefined && req !== undefined && load_count !== 'end'){
                 var url = '/load_card/'+load_count+'?req='+req + method;
                 call_card_append(url);
             }
@@ -155,10 +155,27 @@ $(document).ready(function () {
     }, function () {
         $('.link_wrapping_anchor').addClass('no-mute');
     });
+    // 드롭다운 박스 클릭시 드롭다운 활성제거 방지
+    $('.no-vl.dropdown-menu').hover(function () {
+        $(this).attr('data-prevent','true');
+        $(this).click(function (e) {
+            e.stopPropagation();
+        })
+    }, function () {
+        $(this).attr('data-prevent','false');
+    });
+    // 공유박스 드롭다운
     $('.share_box').click(function (e) {
         var btn = $(this).find('.no-vl:not(.dropdown-menu)');
+        var dropdown_menu = $(this).find('.no-vl.dropdown-menu');
+        var hovered_dropdown = dropdown_menu.data('prevent');
         var status = btn.attr('aria-expanded');
-        if (status === 'true'){
+
+        $('.no-vl:not(.dropdown-menu)').attr('aria-expanded', 'false');
+        $('.dropdown').removeClass('open');
+
+        if (status === 'true' && hovered_dropdown !== true){
+            console.log(hovered_dropdown);
             btn.attr('aria-expanded', 'false');
             $(this).removeClass('open');
 
@@ -168,6 +185,25 @@ $(document).ready(function () {
         }
 
         e.stopPropagation();
+    });
+    // more 버튼 드롭다운
+    $('.moreBtn li.dropdown').click(function (e) {
+        var btn = $(this).find('.no-vl:not(.dropdown-menu)');
+        var status = btn.attr('aria-expanded');
+
+        $('.no-vl:not(.dropdown-menu)').attr('aria-expanded', 'false');
+        $('.dropdown').removeClass('open');
+
+        if (status === 'true'){
+            btn.attr('aria-expanded', 'false');
+            $(this).removeClass('open');
+        } else if (status === 'false'){
+            btn.attr('aria-expanded', 'true');
+            $(this).addClass('open');
+        }
+
+        e.stopPropagation();
+        return false;
     });
 });
 

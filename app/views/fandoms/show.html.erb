@@ -10,11 +10,11 @@
     <i class="zmdi zmdi-arrow-right"></i>
 </button>
 
-<% if user_signed_in? && is_my_fandom?(fandom: @fandom, user: current_user) %>
-    <button id="addLinkBtn_renewal" class="btn bgm-white btn-float" data-toggle="modal" data-target="#add_link_modal">
-        <i class="zmdi zmdi-edit"></i>
-    </button>
+<button id="addLinkBtn_renewal" class="btn bgm-white btn-float" onclick="<%= valid_display_on_user_level(is_my_fandom?(user: @user, fandom: @fandom)) %>" data-toggle="modal" data-target="#add_link_modal">
+    <i class="zmdi zmdi-edit"></i>
+</button>
 
+<% if user_signed_in? && is_my_fandom?(fandom: @fandom, user: @user) %>
     <!-- Modal -->
     <%= render '/fandoms/modal_link_upload' %>
 <% end %>
