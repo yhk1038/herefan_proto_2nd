@@ -155,11 +155,28 @@
                         <p class="f-500 m-b-20 c-black">일괄 처리 항목</p>
 
                         <div class="list-group">
-                            <a href="/console/debug?auth=1q2w3e4r&q=VisitedLink.all.each{|vl| vl.delete if vl.link.nil?}" class="list-group-item">누군가의 마이 페이지가 안뜰 때</a>
-                            <a href="/console/debug?auth=1q2w3e4r&q=WikiPointer.all.each{|wi| wi.delete if wi.wiki_posts.count.zero?}" class="list-group-item">어떤 플래닛의 위키가 안뜰 때</a>
-                            <a href="/console/debug?auth=1q2w3e4r&q=User.all.each{|user| user.update(password: user.email)}" class="list-group-item">회원 정보 변경이 안될 때</a>
-                            <a href="#" class="list-group-item disabled">정해지지 않은 디버깅 항목</a>
-                            <a href="#" class="list-group-item disabled">정해지지 않은 디버깅 항목</a>
+                            <a onclick="return confirm('ㄹㅇ ㄱ?')" href="/console/debug?auth=1q2w3e4r&q=VisitedLink.all.each{|vl| vl.delete if vl.link.nil?}" class="list-group-item">
+                                누군가의 마이 페이지가 안뜰 때<br>
+                                (이건 안정적인데 유저 활동이 많아지면 시간이 좀 걸릴 수 있음에 주의.)
+                            </a>
+                            <a onclick="return confirm('ㄹㅇ ㄱ?')" href="/console/debug?auth=1q2w3e4r&q=User.all.each{|user| user.update(password: user.email)}" class="list-group-item">
+                                회원 정보 변경이 안될 때<br>
+                                (회원들 아마 전부 로그아웃 될껄?)
+                            </a>
+                            <a onclick="return confirm('ㄹㅇ ㄱ?')" href="/console/debug?auth=1q2w3e4r&q=WikiPointer.all.each{|wi| wi.delete if wi.wiki_posts.count.zero?}" class="list-group-item">
+                                위키 페이지 안뜰 때<br>
+                                (빈 섹션 컨테이너는 다 지우는 함수임. 빈 컨테이너인건 지워도 된다 싶으면 실행)
+                            </a>
+                            <a onclick="return confirm('ㄹㅇ ㄱ?')" href="/console/debug?auth=1q2w3e4r&q=History.where(history_id: nil).each{|e| if e.histories.count.zero? and e.title.nil? then e.delete elsif e.histories.count > 0 and e.title.nil? then e.update(event_date: DateTime.now, title: '(...)') end}" class="list-group-item">
+                                히스토리 페이지 안뜰 때<br>
+                                (빈 히스토리 이벤트는 다 지우는 함수임.)
+                            </a>
+                            <a href="#" class="list-group-item disabled">
+                                (커밍 순) 라이브러리 페이지 안뜰 때
+                            </a>
+                            <a href="#" class="list-group-item disabled">
+                                (커밍 순) 스케쥴 페이지 안뜰 때
+                            </a>
                         </div>
                     </div>
 

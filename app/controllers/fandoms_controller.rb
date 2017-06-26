@@ -15,7 +15,7 @@ class FandomsController < ApplicationController
             @fandoms_not_active = Fandom.unpublished.all.sort_by { |fandom| 0 - fandom.myfandoms.count }
             
         when 'recent'
-            @fandoms = Fandom.published.order(created_at: :desc).to_a
+            @fandoms = Fandom.published.all.sort { |a, b| a.published_updated_at <=> b.published_updated_at }
             @fandoms_not_active = Fandom.unpublished.order(created_at: :desc).to_a
             
         when 'abc'

@@ -4,7 +4,7 @@
 
     is_newbie = ''
     if fandom.published_updated_at
-        is_newbie = (Time.now.day - fandom.published_updated_at.day) <= 14 ? 'newplanet' : ''
+        is_newbie = (Time.now.strftime('%U').to_i - fandom.published_updated_at.strftime('%U').to_i) <= 2 ? 'newplanet' : ''
     end
 %>
 <div class="" style="width: 250px; margin: 30px 10px 10px; height: 300px; display: inline-table;">

@@ -62,22 +62,26 @@ function adminPopOverActions(fandom_id, id) {
  * 팝 오버 액션 Ajax request : Delete
  */
 function delete_schedule(fandom_id, schedule_id) {
-    if (fandom_id && schedule_id) {
-        $.ajax({
-            url: '/fandoms/'+ fandom_id +'/schedules/'+schedule_id+'.json',
-            method: 'delete',
-            data: {
-                authenticity_token: _hf_
-            }
-        }).done(function (result) {
-            console.log('delete request called');
-            if (result.status === 'deleted'){
-                console.log('result status: deleted');
-                swal('Nyaaaah', 'The Schedule is successfully Deleted :)', 'success');
-                $('.schedule-hf-'+result.data.id).hide();
-            }
-        })
+    if (confirm('Are you Sure?')){
+        if (fandom_id && schedule_id) {
+            $.ajax({
+                url: '/fandoms/'+ fandom_id +'/schedules/'+schedule_id+'.json',
+                method: 'delete',
+                data: {
+                    authenticity_token: _hf_
+                }
+            }).done(function (result) {
+                console.log('delete request called');
+                if (result.status === 'deleted'){
+                    console.log('result status: deleted');
+                    swal('Nyaaaah', 'The Schedule is successfully Deleted :)', 'success');
+                    $('.schedule-hf-'+result.data.id).hide();
+                    $('#event-modal').modal('hide');
+                }
+            })
+        }
     }
+    return false
 }
 
 /*
@@ -177,7 +181,12 @@ function modal_open(data) {
 
     var dateformat = year + ' - ' + month + ' - ' + day;
 
-
+    $('#event-modal input[name="schedule[id]"]')
+        .val('').val(schedule.id);
+    $('#event-modal input[name="schedule[fandom_id]"]')
+        .val('').val(fandom.id);
+    $('#event-modal input[name="schedule[class_name]"]')
+        .val('').val(schedule.class_name);
     $('#event_point-title')
         .empty().append(schedule.title);
     $('#event_point-date')
@@ -197,7 +206,7 @@ function modal_open(data) {
     }
 
     if ($('#event-modalFooter').data('confirmation') === 'admin'){
-        $('#event_point-edit').attr('href', '/admin/schedule/'+schedule.id+'/edit');
+        $('#event_point-edit').attr('onclick', 'open_edit_schedule_modal(); return false;');
         $('#event_point-delete').attr('onclick', 'delete_schedule('+ $('#schedule_fandom').data('fandom') +', '+ schedule.id +'); return false;')
     }
 

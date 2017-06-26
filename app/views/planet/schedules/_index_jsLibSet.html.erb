@@ -7,6 +7,8 @@
 <script src="/template/vendors/bootstrap-growl/bootstrap-growl.min.js"></script>
 <script src="/template/vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.min.js"></script>
 <script src="/template/vendors/bower_components/moment/min/moment.min.js"></script>
+<script src="/template/vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
 <script src="/template/vendors/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
 <script src="/template/vendors/bower_components/autosize/dist/autosize.min.js"></script>
 
@@ -54,7 +56,7 @@
         console.log(<%== @schedules_for_js.to_json %>);
 
         //Create and ddd Action button with dropdown in Calendar header.
-        <% if user_signed_in? && current_user.admin %>
+        <% if user_signed_in? && (current_user.admin || current_user.is_planet_editor?(@fandom)) %>
         var actionMenu = ''+
             '<ul class="actions actions-alt" id="fc-actions">' +
             '<li class="dropdown">' +
@@ -144,13 +146,81 @@
 
 
 <script>
-    $(document).ready(function () {
-        $('.fc-view-container').hover(function () {
-            // swal('dfja;fjals;fjak;dfjadfjaslfjdals;fjl');
-            $('.schedule').unbind().click(function () {
-//                console.log($(this));
-                modal_request($(this));
-            });
+$(document).ready(function () {
+    $('.fc-view-container').hover(function () {
+        // swal('dfja;fjals;fjak;dfjadfjaslfjdals;fjl');
+        $('.schedule').unbind().click(function () {
+//            console.log($(this));
+            modal_request($(this));
         });
     });
+
+    $('#event-modal-edit .event-tag span').click(function () {
+        var tag = $(this).data('tag');
+        $('#event-modal-edit input[name="schedule[class_name]"]').val(tag + ' allDay');
+    });
+
+    $('#event_point-date-edit').blur(function () {
+        var date = $(this).val();
+        var split = date.split('/');
+        var year = split[2]; var month = split[1]; var day = split[0];
+        $('#event-modal-edit input[name="schedule[event_start]"]').val(date);
+        $('#event-modal-edit input[name="schedule[event_end]"]').val((parseInt(day)+1) + '/' + month + '/' + year);
+    });
+});
+
+function open_edit_schedule_modal() {
+    var event = $('#event-modal');
+    var editModal = $('#event-modal-edit');
+
+    // title
+    var title = $('#event_point-title').text();
+    $('#event_point-title-edit').val(title);
+
+    // (temp date)
+    var date = $('#event_point-date').text();
+    var split = date.split(' - ');
+    var year = 0; var month = 0; var day = 0;
+    if (split.length === 3){
+        year = split[0]; month = split[1]; day = split[2];
+        date = day+'/'+month+'/'+year;
+    } else {
+        date = '';
+    }
+    $('#event_point-date-edit').val(date);
+
+    // event start
+    var e_start = new Date(year, parseInt(month) - 1, day);
+    var e_end = new Date(e_start.setDate(e_start.getDate() + 1));
+    editModal.find('input[name="schedule[event_start]"]').val(date);
+    editModal.find('input[name="schedule[event_end]"]').val(e_end.getDate()+'/'+(e_end.getMonth()+1)+'/'+e_end.getFullYear());
+    // event end
+
+    // content (img url)
+    var src = $('#event_point-image').attr('src');
+    $('#event_point-image-edit').val(src);
+
+    // description
+    var description = $('#event_point-description').text();
+    $('#event_point-description-edit').text(description);
+
+    // id
+    var id  = event.find('input[name="schedule[id]"]').val();
+    var fandom_id = event.find('input[name="schedule[fandom_id]"]').val();
+    var path = editModal.find('.event_point-image-box-edit').attr('action');
+    path = path.replace('{fandom_id}', fandom_id).replace('{id}', id);
+    editModal.find('.event_point-image-box-edit').attr('action', path);
+
+    // color
+    var class_name  = event.find('input[name="schedule[class_name]"]').val();
+    var color       = class_name.split(' ')[0];
+    editModal.find('input[name="schedule[class_name]"]').val(class_name);
+    editModal.find('.event-tag span.'+color).addClass('selected');
+
+    event.modal('hide');
+    editModal.modal({
+        backdrop: true,
+        keyboard: true
+    });
+}
 </script>
