@@ -153,8 +153,13 @@ ActiveRecord::Schema.define(version: 20170622091654) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+<<<<<<< HEAD
+    t.datetime "created_at",                                                     null: false
+    t.datetime "updated_at",                                                     null: false
+=======
     t.datetime "created_at",                                   null: false
     t.datetime "updated_at",                                   null: false
+>>>>>>> 6158ce6ea5732d44b2955e7f6e74d5d4560aed1d
     t.integer  "fd_conf_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["fd_conf_id"], name: "index_users_on_fd_conf_id"
