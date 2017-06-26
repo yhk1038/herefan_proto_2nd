@@ -97,8 +97,6 @@ Rails.application.routes.draw do
     %w( 404 422 500 ).each do |code|
         get "/#{code}", to: 'errors#show', code: code
     end
-    
-    get '/1/fq', to: 'hf_util#force_query'
 
     # Debug
     match 'hf_util/user_must_have_unique_myfandom/:id', to: 'hf_util#user_must_have_unique_myfandom', via: [:get]

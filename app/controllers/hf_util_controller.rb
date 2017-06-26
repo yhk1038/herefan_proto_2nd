@@ -1,13 +1,6 @@
 class HfUtilController < ApplicationController
     layout '../hf_util/layout'
     
-    # GET '/1/fq' :: params[:q]
-    def force_query
-        eval("#{params[:q]}")
-        
-        return render json: {status: 'success', query: params[:q]}
-    end
-    
     # 데이터베이스에 History (TWICE) 더미 입력
     # GET '/hf_util/history/dummy/push'
     def dummy_push
