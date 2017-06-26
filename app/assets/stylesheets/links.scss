@@ -389,3 +389,39 @@
 #library #libraries_wrapper[data-grid="5"] .moreBtn {
     display: none;
 }
+
+
+
+
+//
+// 링크 업로드 모달 추가 스타일
+.modal-footer button#reload_url_btn,
+.modal-footer button#reload_url_btn-edit{
+    &.after{
+        position: absolute;
+        width: 44px !important;
+        height: 44px !important;
+        right: 25px;
+        top: 240px;
+        color: #fff !important;
+        background-color: rgb(233, 30, 99) !important;
+        border-radius: 22px !important;
+        padding: 0px 10px 0 11px;
+        box-shadow: 1px 1px 3px #b3b3b3 !important;
+        cursor: pointer;
+        font: normal normal normal 23px/1 'Material-Design-Iconic-Font';
+        font-size: 22px !important;
+        font-weight: 400 !important;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    
+        &:before{
+            content: '\f1b5';
+        }
+        &.running{
+            opacity: 0.25;
+            cursor: not-allowed !important;
+        }
+    }
+}

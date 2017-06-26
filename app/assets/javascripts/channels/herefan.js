@@ -72,6 +72,16 @@ $(document).ready(function () {
         $('#link_message').attr('value', value);
         $('#editable_msg').text(value);
     });
+    $('#msg-content-edit').keyup(function () {
+        var value = $(this).val();
+        $('#link_message-edit').attr('value', value);
+        $('#editable_msg').text(value);
+    });
+    $('#msg-content-edit').blur(function () {
+        var value = $(this).val();
+        $('#link_message-edit').attr('value', value);
+        $('#editable_msg').text(value);
+    });
 
 
     //
@@ -104,6 +114,11 @@ $(document).ready(function () {
         var value = $(this).attr('vc');
         console.log(value);
         $('#link_typee').attr('value',value);
+    });
+    $('.radio-link_typee-edit').click(function () {
+        var value = $(this).attr('vc');
+        console.log(value);
+        $('#link_typee-edit').val(value);
     });
 
 
@@ -205,6 +220,10 @@ $(document).ready(function () {
         e.stopPropagation();
         return false;
     });
+
+    $('#card_preview_point .super:after').hover(function () {
+        swal('in','','info');
+    })
 });
 
 function call_card_append(url) {
@@ -244,6 +263,7 @@ function gogo_crawler() {
     var preloader = $('#linkModalPreLoader');
     $('#card_preview_point .super').remove();
     preloader.show();
+    $('#reload_url_btn.after').addClass('running');
 
     var ajax =  $.ajax({
         url: '/crawler/uri_spy',
@@ -254,9 +274,10 @@ function gogo_crawler() {
         }
     });
     ajax.done(function (result) {
-        console.log('success');
+        // console.log('success');
         // console.log(result);
         preloader.hide();
+        $('#reload_url_btn.after').removeClass('running');
         $("#saveBtn").show();
         $('#msg-wrap').show();
     });
@@ -272,13 +293,87 @@ function gogo_crawler() {
             imageHeight: 400,
             animation: false
         });
-        console.log(result.responseText);
+        // console.log(result.responseText);
         // var txt = result.responseText;
         // eval(txt);
         preloader.hide();
+        $('#reload_url_btn.after').removeClass('running');
         $("#saveBtn").hide();
         $('#msg-wrap').hide();
     });
+}
+
+function gogo_crawler_edit() {
+    var value = $('#link_url-edit').val();
+    console.log(value);
+
+    var preloader = $('#linkModalPreLoader-edit');
+    $('#card_preview_point-edit .super').remove();
+    preloader.show();
+    $('#reload_url_btn-edit.after').addClass('running');
+
+    var ajax =  $.ajax({
+        url: '/crawler/uri_spy?edit=true',
+        method: 'post',
+        data: {
+            url: value,
+            authenticity_token: _hf_
+        }
+    });
+    ajax.done(function (result) {
+        // console.log('success');
+        // console.log(result);
+        preloader.hide();
+        $('#reload_url_btn-edit.after').removeClass('running');
+        $("#saveBtn-edit").show();
+        $('#msg-wrap-edit').show();
+    });
+
+    ajax.fail(function (result) {
+        console.log('fail');
+        console.log(result);
+        swal({
+            title: 'Oops...!',
+            text: 'I\'m still young, but studying hard! Plz expect the next update :)!',
+            imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxkPS1qLw-tFrTIJA7b_rsmOi0q5QrzdJkfGfNCY5jTx-bVKEb_A',
+            imageWidth: 400,
+            imageHeight: 400,
+            animation: false
+        });
+        // console.log(result.responseText);
+        // var txt = result.responseText;
+        // eval(txt);
+        preloader.hide();
+        $('#reload_url_btn-edit.after').removeClass('running');
+        $("#saveBtn-edit").hide();
+        $('#msg-wrap-edit').hide();
+    });
+}
+
+function open_edit_modal(link_id) {
+    var link_url = $('#link_'+link_id).find('.link-url').text();
+    $('#link_url-edit').val(link_url);
+    gogo_crawler_edit();
+
+    var form_path = '/links/'+link_id;
+    $('#edit_link_form').attr('action',form_path);
+
+    var typee = $('#link_'+link_id).data('typee');
+    $('.radio-link_typee-edit').find('input[checked="checked"]').removeAttr('checked');
+    $('.radio-link_typee-edit[vc="'+typee+'"]').find('input').attr('checked','checked');
+
+    var description = $('#link_'+link_id).find('.msg').text();
+    $('#msg-content-edit').val(description);
+    $('#editable_msg').text(description);
+    $('#link_message-edit').val(description);
+    console.log(description);
+
+
+    $('#edit_link_modal').modal({
+        backdrop: true,
+        keyboard: true
+    });
+    return false
 }
 
 function followBtn(command, myfandom_id, channel_id, user_id, option) {

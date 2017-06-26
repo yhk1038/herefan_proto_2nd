@@ -895,7 +895,8 @@ section#toolbar{
 /*    Library Upload Modal      */
 /********************************/
 
-#add_link_modal{
+#add_link_modal,
+#edit_link_modal{
     .modal-dialog{
         .modal-content{
             border-radius: 0;
@@ -913,7 +914,8 @@ section#toolbar{
     }
 }
 
-#add_link_modal{
+#add_link_modal,
+#edit_link_modal{
     @media (min-width: 768px){
         .modal-md{
             width: 500px;

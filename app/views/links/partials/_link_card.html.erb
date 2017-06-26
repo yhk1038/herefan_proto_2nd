@@ -23,6 +23,7 @@
     <div id="link_<%= link.id %>"
          class="card blog-post link_wrapping_anchor no-mute <%= 'usi' if user_signed_in? %> <%= 'clipped' if myclips_already %> <%= 'visited' if myvisites_already %> <%= link.typee && link.typee >= 1 && link.typee <= 3 ? "type-#{link.typee}" : '' %>"
          data-content_id="<%= link.id %>"
+         data-typee="<%= link.typee %>"
          data-content_time="<%= link.created_at.to_s %>"
          data-hf_like_count="<%= link.likes.count %>"
          data-hf_visit_count="<%= visited_count %>"
@@ -41,7 +42,7 @@
                         <a href="#" class="no-vl" data-toggle="dropdown" aria-expanded="false"><i class="zmdi zmdi-more-vert"></i></a>
                         <ul class="dropdown-menu no-vl dropdown-menu-right">
                             <% if link.user == current_user || @user&.is_planet_editor?(link.fandom) || @user&.admin %>
-                                <li><%= link_to 'edit', '#', onclick: @edit_display %></li>
+                                <li><%= link_to 'edit', 'javascript:;', onclick: @edit_display %></li>
                                 <li><%= button_to 'Destroy', link, method: :delete, onclick: "return confirm('Are you sure?')", class: 'likes_link_to' %></li>
                             <% else %>
                                 <li><%= link_to 'report', '#', onclick: @onclick_display %></li>

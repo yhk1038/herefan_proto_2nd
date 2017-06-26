@@ -98,6 +98,8 @@ class HomeController < ApplicationController
     def uri_spy
 
         uri = params[:url]
+        @edit = false
+        @edit = true if params[:edit] == 'true'
 
         doc = Nokogiri::HTML(open(uri, :allow_redirections => :all))
         begin

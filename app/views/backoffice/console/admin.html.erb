@@ -171,8 +171,9 @@
                                 히스토리 페이지 안뜰 때<br>
                                 (빈 히스토리 이벤트는 다 지우는 함수임.)
                             </a>
-                            <a href="#" class="list-group-item disabled">
-                                (커밍 순) 라이브러리 페이지 안뜰 때
+                            <a onclick="return confirm('ㄹㅇ ㄱ?')" href="/console/debug?auth=1q2w3e4r&q=User.all.each{|user| user.myfandoms.all.each{|mf| mf.delete if Myfandom.where(user: user, fandom: mf.fandom).count > 1}}" class="list-group-item">
+                                플래닛 리모콘에 같은 플래닛이 여러개 뜰 때<br>
+                                (유저 팔로우 중첩 제거)
                             </a>
                             <a href="#" class="list-group-item disabled">
                                 (커밍 순) 스케쥴 페이지 안뜰 때

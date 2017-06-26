@@ -16,7 +16,8 @@
 
 <% if user_signed_in? && is_my_fandom?(fandom: @fandom, user: @user) %>
     <!-- Modal -->
-    <%= render '/fandoms/modal_link_upload' %>
+    <%= render partial: '/fandoms/modal_link_upload', locals: { modal_type: 'add' } %>
+    <%= render partial: '/fandoms/modal_link_upload', locals: { modal_type: 'edit' } %>
 <% end %>
 
 <div style="display: none;">

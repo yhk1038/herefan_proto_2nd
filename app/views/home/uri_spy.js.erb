@@ -1,4 +1,8 @@
+<% if @edit %>
+var point = $('#card_preview_point-edit');
+<% else %>
 var point = $('#card_preview_point');
+<% end %>
 
 var dom = '<%= escape_javascript(render '/layouts/link_card', link: @target) %>';
 console.log(dom);
@@ -10,8 +14,16 @@ var title   = '<%= @target[:title].to_s %>';
 var desc    = '<%= @target[:description].to_s %>';
 var img     = '<%== @target[:image].to_s %>';
 
+<% if @edit %>
+$('#link_urls-edit').attr('value', url);
+$('#link_title-edit').attr('value', title);
+$('#link_description-edit').attr('value', desc);
+$('#link_image-edit').attr('value', img);
+$('#reload_url_btn-edit').empty().addClass('after');
+<% else %>
 $('#link_urls').attr('value', url);
 $('#link_title').attr('value', title);
 $('#link_description').attr('value', desc);
 $('#link_image').attr('value', img);
-$('button[onclick="gogo_crawler()"]').empty().text('reload');
+$('#reload_url_btn').empty().addClass('after');
+<% end %>

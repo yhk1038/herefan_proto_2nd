@@ -1,75 +1,154 @@
-<div class="modal fade" id="add_link_modal" tabindex="-1" role="dialog" aria-labelledby="addLinkModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-md">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h2 class="modal-title">Upload</h2>
-            </div>
-            <div class="modal-body">
-                <div class="input-group">
+<% if modal_type == 'edit' %>
+    <div class="modal fade" id="edit_link_modal" tabindex="-1" role="dialog" aria-labelledby="addLinkModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h2 class="modal-title">Upload</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group">
                     <span class="input-group-addon" style="position: relative; top: -2px;">
                         <i class="zmdi zmdi-label" style="top: 3px; font-size: 22px;"></i> TYPE
                     </span>
-                    <div class="fg-line" style="top: 5px; text-align: center; font-size: 15px; width: 110%; margin-left: -4%;">
-                        <label vc="1" class="radio radio-inline m-r-5 radio-link_typee">
-                            <input type="radio" name="link[typee]" value="1" checked="">
-                            <i class="input-helper"></i>
-                            <span class="label_text">PHOTOs or GIFs</span>
-                        </label>
-                        <label vc="2" class="radio radio-inline m-r-5 m-l-5 radio-link_typee">
-                            <input type="radio" name="link[typee]" value="2">
-                            <i class="input-helper"></i>
-                            <span class="label_text">VIDEO or CAST</span>
-                        </label>
-                        <label vc="3" class="radio radio-inline m-l-5 radio-link_typee">
-                            <input type="radio" name="link[typee]" value="3">
-                            <i class="input-helper"></i>
-                            <span class="label_text">ARTICLE or PAGE</span>
-                        </label>
+                        <div class="fg-line" style="top: 5px; text-align: center; font-size: 15px; width: 110%; margin-left: -4%;">
+                            <label vc="1" class="radio radio-inline m-r-5 radio-link_typee-edit">
+                                <input type="radio" name="link[typee]" value="1" checked="">
+                                <i class="input-helper"></i>
+                                <span class="label_text">PHOTOs or GIFs</span>
+                            </label>
+                            <label vc="2" class="radio radio-inline m-r-5 m-l-5 radio-link_typee-edit">
+                                <input type="radio" name="link[typee]" value="2">
+                                <i class="input-helper"></i>
+                                <span class="label_text">VIDEO or CAST</span>
+                            </label>
+                            <label vc="3" class="radio radio-inline m-l-5 radio-link_typee-edit">
+                                <input type="radio" name="link[typee]" value="3">
+                                <i class="input-helper"></i>
+                                <span class="label_text">ARTICLE or PAGE</span>
+                            </label>
+                        </div>
                     </div>
-                </div>
 
-                <div class="input-group fg-float" style="margin-top: 35px;">
+                    <div class="input-group fg-float" style="margin-top: 35px;">
                     <span class="input-group-addon" style="position: relative; top: 0;">
                         <i class="zmdi zmdi-link" style="top: 4px; font-size: 25px; transform: rotate(-45deg);"></i> URL
                     </span>
-                    <div class="fg-line">
-                        <input type="text" class="form-control fg-input" name="link[url]" id="link_url">
-                        <label class="fg-label">EX.( http://... OR https://... )</label>
+                        <div class="fg-line">
+                            <input type="text" class="form-control fg-input" name="link[url]" id="link_url-edit">
+                            <label class="fg-label"></label>
+                        </div>
+                    </div>
+
+                    <div id="linkModalPreLoader-edit" class="input-group" style="width: 100%; text-align: center; margin: 90px 0 50px; display: none;">
+                        <div class="preloader pls-red">
+                            <svg class="pl-circular" viewBox="25 25 50 50">
+                                <circle class="plc-path" cx="50" cy="50" r="20"></circle>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div id="card_preview_point-edit"></div>
+
+                    <div class="form-group" id="msg-wrap-edit" style="margin-top: 20px; display: none;">
+                        <div class="fg-line">
+                            <input type="text" id="msg-content-edit" class="form-control input-sm" placeholder="put your sth message...">
+                        </div>
                     </div>
                 </div>
-
-                <div id="linkModalPreLoader" class="input-group" style="width: 100%; text-align: center; margin: 90px 0 50px; display: none;">
-                    <div class="preloader pls-red">
-                        <svg class="pl-circular" viewBox="25 25 50 50">
-                            <circle class="plc-path" cx="50" cy="50" r="20"></circle>
-                        </svg>
+                <form id="edit_link_form" action="" method="post">
+                    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+                    <input type="hidden" name="_method" value="put" />
+                    <div class="modal-footer">
+                        <input type="hidden" id="link_user_id" name="link[user_id]" value="<%= current_user.id %>">
+                        <input type="hidden" id="link_fandom_id" name="link[fandom_id]" value="<%= @fandom.id %>">
+                        <input type="hidden" id="link_typee-edit" name="link[typee]" value="1">
+                        <input type="hidden" id="link_urls-edit" name="link[url]">
+                        <input type="hidden" id="link_title-edit" name="link[title]">
+                        <input type="hidden" id="link_description-edit" name="link[description]">
+                        <input type="hidden" id="link_message-edit" name="link[message]">
+                        <input type="hidden" id="link_image-edit" name="link[image]">
+                        <button type="button" onclick="gogo_crawler_edit()" id="reload_url_btn-edit" class="btn btn-primary">next</button>
+                        <button type="submit" id="saveBtn-edit" class="btn bgm-green" style="display: none">save</button>
                     </div>
-                </div>
-
-                <div id="card_preview_point"></div>
-
-                <div class="form-group" id="msg-wrap" style="margin-top: 20px; display: none;">
-                    <div class="fg-line">
-                        <input type="text" id="msg-content" class="form-control input-sm" placeholder="put your sth message...">
-                    </div>
-                </div>
+                </form>
             </div>
-            <form action="<%= links_path %>" method="post">
-                <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-                <div class="modal-footer">
-                    <input type="hidden" id="link_user_id" name="link[user_id]" value="<%= current_user.id %>">
-                    <input type="hidden" id="link_fandom_id" name="link[fandom_id]" value="<%= @fandom.id %>">
-                    <input type="hidden" id="link_typee" name="link[typee]" value="1">
-                    <input type="hidden" id="link_urls" name="link[url]">
-                    <input type="hidden" id="link_title" name="link[title]">
-                    <input type="hidden" id="link_description" name="link[description]">
-                    <input type="hidden" id="link_message" name="link[message]">
-                    <input type="hidden" id="link_image" name="link[image]">
-                    <button type="button" onclick="gogo_crawler()" class="btn btn-primary">next</button>
-                    <button type="submit" id="saveBtn" class="btn bgm-green" style="display: none">save</button>
-                </div>
-            </form>
         </div>
     </div>
-</div>
+<% else %>
+    <div class="modal fade" id="add_link_modal" tabindex="-1" role="dialog" aria-labelledby="addLinkModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h2 class="modal-title">Upload</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group">
+                        <span class="input-group-addon" style="position: relative; top: -2px;">
+                            <i class="zmdi zmdi-label" style="top: 3px; font-size: 22px;"></i> TYPE
+                        </span>
+                        <div class="fg-line" style="top: 5px; text-align: center; font-size: 15px; width: 110%; margin-left: -4%;">
+                            <label vc="1" class="radio radio-inline m-r-5 radio-link_typee">
+                                <input type="radio" name="link[typee]" value="1" checked="">
+                                <i class="input-helper"></i>
+                                <span class="label_text">PHOTOs or GIFs</span>
+                            </label>
+                            <label vc="2" class="radio radio-inline m-r-5 m-l-5 radio-link_typee">
+                                <input type="radio" name="link[typee]" value="2">
+                                <i class="input-helper"></i>
+                                <span class="label_text">VIDEO or CAST</span>
+                            </label>
+                            <label vc="3" class="radio radio-inline m-l-5 radio-link_typee">
+                                <input type="radio" name="link[typee]" value="3">
+                                <i class="input-helper"></i>
+                                <span class="label_text">ARTICLE or PAGE</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="input-group fg-float" style="margin-top: 35px;">
+                        <span class="input-group-addon" style="position: relative; top: 0;">
+                            <i class="zmdi zmdi-link" style="top: 4px; font-size: 25px; transform: rotate(-45deg);"></i> URL
+                        </span>
+                        <div class="fg-line">
+                            <input type="text" class="form-control fg-input" name="link[url]" id="link_url">
+                            <label class="fg-label">EX.( http://... OR https://... )</label>
+                        </div>
+                    </div>
+
+                    <div id="linkModalPreLoader" class="input-group" style="width: 100%; text-align: center; margin: 90px 0 50px; display: none;">
+                        <div class="preloader pls-red">
+                            <svg class="pl-circular" viewBox="25 25 50 50">
+                                <circle class="plc-path" cx="50" cy="50" r="20"></circle>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div id="card_preview_point"></div>
+
+                    <div class="form-group" id="msg-wrap" style="margin-top: 20px; display: none;">
+                        <div class="fg-line">
+                            <input type="text" id="msg-content" class="form-control input-sm" placeholder="put your sth message...">
+                        </div>
+                    </div>
+                </div>
+                <form action="<%= links_path %>" method="post">
+                    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+                    <div class="modal-footer">
+                        <input type="hidden" id="link_user_id" name="link[user_id]" value="<%= current_user.id %>">
+                        <input type="hidden" id="link_fandom_id" name="link[fandom_id]" value="<%= @fandom.id %>">
+                        <input type="hidden" id="link_typee" name="link[typee]" value="1">
+                        <input type="hidden" id="link_urls" name="link[url]">
+                        <input type="hidden" id="link_title" name="link[title]">
+                        <input type="hidden" id="link_description" name="link[description]">
+                        <input type="hidden" id="link_message" name="link[message]">
+                        <input type="hidden" id="link_image" name="link[image]">
+                        <button type="button" onclick="gogo_crawler()" id="reload_url_btn" class="btn btn-primary">next</button>
+                        <button type="submit" id="saveBtn" class="btn bgm-green" style="display: none">save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<% end %>
