@@ -2,8 +2,11 @@
     @config ||= @fandom.config
     bgcolor = @config.fd_bg_color&.length&.zero? ? '#07174b' : @config.fd_bg_color
 
-    onclick_follow_btn = "followBtn('#{@follow_control[:follow_cmd]}', #{@follow_control[:myfandom_id]}, #{@follow_control[:channel_id]}, #{@follow_control[:user_id]}, 'no-text')"
-    @onclick_display = valid_display_on_user_level(is_my_fandom?(user: @user, fandom: @fandom), script: onclick_follow_btn)
+    my_fandom = is_my_fandom?(user: @user, fandom: @fandom)
+
+    onclick_follow_btn = "followBtn('#{@follow_control[:follow_cmd]}', #{@follow_control[:myfandom_id]}, #{@follow_control[:channel_id]}, #{@follow_control[:user_id]}, 'no-text');"
+    @onclick_follow = valid_display_on_user_level(my_fandom, script: onclick_follow_btn, mute_level: 'follower')
+    @onclick_display = valid_display_on_user_level(my_fandom, script: onclick_follow_btn)
 %>
 <style>
     #header{
@@ -44,9 +47,9 @@
                 <span class="channel_info dropdown">
                     <p class="channel_name"><%= @config.fd_name %></p>
                     <p class="channel_follow_count">followers <span id="follower_count_<%= @fandom.id %>" class="count"><%= @fandom.user_lists.count %></span></p>
-                    <a id="channel_<%= @fandom.id %>" onclick="<%= @onclick_display %>" class="channel_followBtn following <%= 'active' if is_my_fandom?(user: current_user, fandom: @fandom) %>">
-                        <span class="zmdi <%= 'zmdi-star' if is_my_fandom?(fandom: @fandom, user: current_user) %>"></span>
-                        <span class="<%= 'active' unless is_my_fandom?(user: current_user, fandom: @fandom) %>"><%= is_my_fandom?(user: current_user, fandom: @fandom) ? 'following' : 'follow' %></span>
+                    <a id="channel_<%= @fandom.id %>" onclick="<%= @onclick_follow %>" class="channel_followBtn following <%= 'active' if my_fandom %>">
+                        <span class="zmdi <%= 'zmdi-star' if my_fandom %>"></span>
+                        <span class="<%= 'active' unless my_fandom %>"><%= my_fandom ? 'following' : 'follow' %></span>
                     </a>
                     <a href="" id="Pshare-dd" data-toggle="dropdown" aria-expanded="false" class="channel_followBtn dropdown-toggle" style="text-align: center; margin-left: 10px;"><span class="zmdi zmdi-share">share</span></a>
                     <ul id="Pshare-dd-menu" class="dropdown-menu no-vl go-social" role="menu" aria-labelledby="Pshare-dd">
@@ -68,7 +71,7 @@
             </div>
         </div>
     </div>
-    <% if user_signed_in? && current_user.is_planet_editor?(@fandom) %>
+    <% if user_signed_in? && (current_user.is_planet_editor?(@fandom) || current_user.admin) %>
         <div id="editorPage_link-box">
             <a href="/console/setting_planet/<%= @fandom.id %>" class="btn btn-default">Editor Dashboard</a>
         </div>
