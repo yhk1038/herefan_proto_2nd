@@ -10,7 +10,7 @@
             <div class="col-md-12">
                 <div class="card" id="history-index-wrap">
                     <div class="card-body card-padding">
-                        <% if user_signed_in? && (current_user.admin || current_user.is_my_fandom?(user: current_user, fandom: @fandom)) %>
+                        <% if user_signed_in? && (current_user.admin || is_my_fandom?(user: current_user, fandom: @fandom)) %>
                             <p id="edit_toggleBtn" data-mode="inactive">Edit Mode</p>
                         <% end %>
                         <ul>
