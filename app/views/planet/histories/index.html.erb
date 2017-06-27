@@ -10,7 +10,9 @@
             <div class="col-md-12">
                 <div class="card" id="history-index-wrap">
                     <div class="card-body card-padding">
-                        <p id="edit_toggleBtn" data-mode="inactive">Edit Mode</p>
+                        <% if user_signed_in? && (current_user.admin || current_user.is_my_fandom?(user: current_user, fandom: @fandom)) %>
+                            <p id="edit_toggleBtn" data-mode="inactive">Edit Mode</p>
+                        <% end %>
                         <ul>
                             <% i=0; @years_hash.each do |year, date| %>
                                 <li class="index_list <%= 'active' if i.zero? %>">
@@ -28,7 +30,7 @@
                     <div class="card-body card-padding content-ground">
 
                         <!-- Add History line -->
-                        <div class="p-timeline adding event-edd">
+                        <div class="p-timeline adding event-edd history-edit_toggle" style="display: none;">
                             <div class="pt-line c-gray text-right">
                                 <span class="d-block">Year</span> :d/ :m
                             </div>
@@ -64,7 +66,7 @@
                         </div>
 
                         <!-- 바로 아래에 새로운 히스토리를 붙이는 위치 -->
-                        <div id="target-zone"></div>
+                        <div id="target-zone" class="history-edit_toggle" style="display: none;"></div>
 
 
                         <% if @histories.count.zero? %>         <!-- Dummy for Nothing to show -->

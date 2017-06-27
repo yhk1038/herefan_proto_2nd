@@ -1,9 +1,31 @@
+function myPlanetGroup() {
+    return localStorage.getItem('remote_status');
+}
+
 $(document).ready(function () {
+
+    if (!myPlanetGroup()){
+        localStorage.setItem('remote_status','show');
+    }
+
     // follow remote-controller
     $('#top-fandoms a').click(function () {
         $('#follow_list_box').toggleClass('hi_de');
         $(this).toggleClass('active');
+        if (myPlanetGroup() === 'show'){
+            localStorage.setItem('remote_status','hide');
+        } else {
+            localStorage.setItem('remote_status','show');
+        }
     });
+
+    if (myPlanetGroup() === 'hide'){
+        $('#top-fandoms a').removeClass('active');
+        $('#follow_list_box').addClass('hi_de');
+    } else {
+        $('#top-fandoms a').addClass('active');
+        $('#follow_list_box').removeClass('hi_de');
+    }
 
     //
     // Location : '/fandoms/:id'

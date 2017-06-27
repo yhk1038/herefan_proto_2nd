@@ -8,7 +8,7 @@
 
         <!-- history title -->
         <h2 class="ptb-title" id="timeline-<%= history.id %>-title"><%= history.title %>
-            <a href="#" class="btn btn-default feature feature-edit c-cyan history-edit" data-fandom="<%= @fandom.id %>" data-history="<%= history.id %>" data-date="<%= history.event_date.strftime('%F') %>" data-title="<%= history.title %>" onclick="return false;">Edit</a>
+            <a href="#" class="btn btn-default feature feature-edit c-cyan history-edit history-edit_toggle" style="display: none;" data-fandom="<%= @fandom.id %>" data-history="<%= history.id %>" data-date="<%= history.event_date.strftime('%F') %>" data-title="<%= history.title %>" onclick="return false;">Edit</a>
         </h2>
 
         <!-- edit history form -->
@@ -46,7 +46,7 @@
         </div>
 
         <div class="pull-right" addkey="">
-            <div class="lightbox-item2 item-plus-box">
+            <div class="lightbox-item2 item-plus-box history-edit_toggle" style="display: none;">
                 <a href="#" class="item-plus" data-title="<%= history.title %>" data-history="<%= history.id %>" data-toggle="modal" data-target="#imgUploadModal"><span class="zmdi zmdi-plus-circle"></span></a>
             </div>
         </div>

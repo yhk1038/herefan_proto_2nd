@@ -1,5 +1,10 @@
 $(document).ready(function () {
 
+    $('#edit_toggleBtn').click(function () {
+        swal('MODE CHANGED','','success');
+        $('.history-edit_toggle').toggle();
+    });
+
     /*
      * ========================================
      *      툴바 인덱스
