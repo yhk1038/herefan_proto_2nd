@@ -5,6 +5,11 @@ $(document).ready(function () {
             backdrop: true,
             keyboard: true
         })
+    });
+
+    $('#query-input').keyup(function () {
+        var query = '/console/debug?auth=1q2w3e4r&q=' + $(this).val();
+        $('#query-requestBtn').attr('href', query);
     })
 });
 
