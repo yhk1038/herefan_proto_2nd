@@ -90,8 +90,9 @@ class HomeController < ApplicationController
 
     # POST '/utils/user_watched_this_link' :: params[:user_id], params[:link_id], as: visited_link_counter
     def visited_link_counter
-        VisitedLink.find_or_create2(params[:user_id], params[:link_id])
-        render json: nil, status: :ok
+        vl = 'no_user' if params[:user_id] == '0'
+        vl = VisitedLink.find_or_create2(params[:user_id], params[:link_id]) if params[:user_id] != '0'
+        render json: vl, status: :ok
     end
 
     # POST '/crawler/uri_spy :: params[:url]' as: crawling_uri_path(url)

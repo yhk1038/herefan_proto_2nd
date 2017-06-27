@@ -87,8 +87,6 @@ $(document).ready(function () {
     //
     // 링크 방문시 나의 방문 링크 기록으로 카운팅
     $('.link_wrapping_anchor.no-mute').click(function () {
-        console.log('.link_wrapping_anchor clicked!!');
-        // alert('.link_wrapping_anchor clicked!!');
         var id = $(this).attr('id');
         var user_id = $(this).attr('noiser');
         id = id.replace('link_','');
@@ -102,7 +100,12 @@ $(document).ready(function () {
                 authenticity_token: _hf_
             }
         }).done(function (result) {
-            console.log(result);
+            if (result !== 'no_user'){
+                $('#link_'+id).addClass('visited');
+                var counter = $('#link_'+id).find('.viewcount .counter');
+                var count = parseInt(counter.text()) + 1;
+                counter.text(count);
+            }
         });
     });
 

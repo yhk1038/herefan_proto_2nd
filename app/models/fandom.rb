@@ -21,7 +21,7 @@ class Fandom < ApplicationRecord
     scope :published,   -> { where(published: true) }
     scope :unpublished, -> { where(published: false) }
     scope :links_all, -> { order(created_at: :desc).all.map{|fandom| fandom.links}.flatten.sort{|a, b| b.created_at <=> a.created_at } }
-    scope :links_all_at_homeMy, -> { order(created_at: :desc).all.map{|fandom| fandom.links}.flatten.sort{|a, b| b.created_at <=> a.created_at }.last(30) }
+    scope :links_all_at_homeMy, -> { order(created_at: :desc).all.map{|fandom| fandom.links}.flatten.sort{|a, b| b.created_at <=> a.created_at }.first(30) }
 
     def config
         self.fd_confs.last
