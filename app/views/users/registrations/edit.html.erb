@@ -5,6 +5,7 @@
 <div class="container" style="margin-top: -125px;">
     <div class="col-md-3 col-xs-1"></div>
     <div class="col-md-6 col-xs-10">
+        <a href="<%= mypage_watched_path %>" id="goBackBtn"><span class="zmdi zmdi-chevron-left"></span>&nbsp; go back</a>
         <div class="row">
             <!--<div class="block-header">-->
                 <!--<h2>Edit <%#= resource_name.to_s.humanize %></h2>-->
@@ -48,7 +49,7 @@
                 <!--<div class="block-header">-->
                     <!--<h2><b>Public Info</b></h2>-->
                 <!--</div>-->
-                <div class="card">
+                <div class="card" style="margin-bottom: 0;">
                     <div class="card-body card-padding" style="padding-top: 0; padding-bottom: 150px;">
 
                         <div class="row input-feilds">
@@ -124,9 +125,9 @@
 
                             <div class="col-sm-12">
                                 <div style="margin-top: 60px; padding-left: 20px;">
-                                    <p style="font-size: 18px;color: #f5146c;font-weight: 600;">Delete Account?</p>
-                                    <p class="m-b-30" style="font-size: 16px;color: #b3b3b3;font-weight: 400;">To protect your information, your account will be retained for two months even if you delete it.</p>
-                                    <%= link_to "delete my account", user_inactivate_path, class: 'hf-btn btn-sm', style: 'box-shadow: none;color: #f5146c;text-transform: capitalize;padding: 0; font-size: 16px; background: none;', onclick: "return confirm('Are you sure?')" %>
+                                    <p style="font-size: 18px; color: #999; font-weight: 600;">Delete Account?</p>
+                                    <p class="m-b-30" style="font-size: 16px; color: #b3b3b3; font-weight: 400;">To protect your information, your account will be retained for two months even if you delete it.</p>
+                                    <%= link_to "delete my account", user_inactivate_path, class: 'hf-btn btn-sm', id: 'deleteAccountBtn', onclick: "return confirm('Are you sure?')" %>
                                 </div>
                             </div>
 

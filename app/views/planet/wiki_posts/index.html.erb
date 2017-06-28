@@ -50,7 +50,7 @@
                                 </td>-->
                                 <td>
                                     <%= link_to fandom_wiki_post_path(@fandom, wiki_post, wiki_pointer_id: @wiki_pointer.id) do %>
-                                        <img src="<%= wiki_post.user.img %>" alt="<%= wiki_post.user.nickname %>">
+                                        <img src="<%= wiki_post.user.img ? wiki_post.user.img : wiki_post.user.image.to_s %>" alt="<%= wiki_post.user.nickname %>">
                                         <%= wiki_post.user.nickname %>
                                     <% end %>
                                 </td>

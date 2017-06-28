@@ -86,7 +86,7 @@
 .event_point-image-box,
 .event_point-image-box-edit{
     width: 100%;
-    height: 400px;
+    max-height: 400px;
     text-align: center;
 }
 #event_point-image,
@@ -120,4 +120,28 @@
 
 #event_point-edit{
 
+}
+
+#event-modalFooter{
+    button{
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: #ccc;
+        padding: 6px 15px;
+        font-size: 30px;
+        cursor: default;
+        
+        .zmdi{
+            cursor: pointer;
+            
+            &:hover{
+                color: #999999;
+            }
+        }
+        
+        &:hover{
+            background: transparent;
+        }
+    }
 }

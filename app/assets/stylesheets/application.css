@@ -214,15 +214,31 @@ body .bg_img_cover{
     height: 110px;
     width: auto;
 }
+.modal .title > div.hf-logo{
+    height: 220px;
+    margin: 15px 0;
+}
+#login_modal .modal-header button.login-close{
+    color: #999 !important;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 25px;
+    font-weight: 700;
+}
+#login_modal .login-close span{
+    position: relative;
+    top: 0;
+}
 
 .modal .modal-body {
-    padding: 20px 30px;
+    padding: 20px 50px;
 }
 .modal-body .sns-login,
 .modal-body .sns-login:focus,
 .modal-body .sns-login:hover {
     width: 100%;
-    margin: 10px 0;
+    margin: 15px 0;
     padding: 10px 0;
     border-radius: 3px;
     font-size: 17px;
@@ -244,6 +260,26 @@ body .bg_img_cover{
     position: absolute;
     left: 20%;
     font-size: 25px;
+    display: none;
+}
+
+#login_modal .modal-footer{
+    text-align: center;
+    font-weight: 300;
+    font-size: 16px;
+    color: #999;
+    padding-bottom: 60px;
+}
+#login_modal .modal-footer p{
+    margin: 0;
+}
+#login_modal .special_link{
+    text-transform: capitalize;
+    color: #1bacaa;
+    font-weight: 400;
+}
+#login_modal .special_link:hover{
+    font-weight: 700;
 }
 
 
@@ -830,7 +866,7 @@ hr.hf-hr{
 
 
 .hf-logo {
-    background-image: url('/svg/main_logo.svg');
+    background-image: url('/svg/login.svg');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;

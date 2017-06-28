@@ -19,6 +19,7 @@ var links = [];
 // console.log('links array size: ', links.length);
 if (links.length < 30 && links.length > 0){
     $("#libraries_wrapper").gridalicious('append', links);
+    bindingActions();
     $load_count = 'end';
 
 } else if (links.length === 0) {
@@ -27,6 +28,7 @@ if (links.length < 30 && links.length > 0){
 
 } else {
     $("#libraries_wrapper").gridalicious('append', links);
+    bindingActions();
     $load_count = $load_count + 1;
 }
 
