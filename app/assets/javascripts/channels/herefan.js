@@ -1,6 +1,19 @@
 //= require ./lib/smoothwheel.js
 //= require_tree ./feature/.
 
+function window_path() {
+    var baseUri = document.baseURI;
+    var domain = document.domain;
+    if ( domain === 'localhost'){
+        domain = 'localhost:3000'
+    }
+    var path = baseUri.replace(domain, '*split*').split('*split*')[1];
+    if (path.charAt(path.length-1) === '#'){
+        path = path.slice(0, -1)
+    }
+    return path
+}
+
 $(document).ready(function () {
 
     //
@@ -10,23 +23,6 @@ $(document).ready(function () {
 
     // 2. 부드러운 스크롤
     // $('body:not(.modal-open)').smoothWheel();
-
-    //
-    // 상단 네비게이션 전환
-    var header = $('#header');
-    var myfandoms = $('#follow_list_box');
-    $(window).scroll(function () {
-        var scroll = $(this).scrollTop();
-
-        if (scroll > 190) {
-            header.addClass('init_header');
-            myfandoms.addClass('scrolled');
-        } else {
-            header.removeClass('init_header');
-            myfandoms.removeClass('scrolled');
-        }
-
-    });
 
     $(window).scroll(function () {
         var scroll = $(this).scrollTop();
@@ -159,12 +155,12 @@ $(document).ready(function () {
 
     //
     // 공유 주소 복사 했을 때, 툴팁 띄우기.
-    $('.url_copy').click(function () {
-        $(this).addClass('hf-tooltip');
-        $(this).hover(function () {
-            $(this).removeClass('hf-tooltip');
-        });
-    });
+    // $('.url_copy').click(function () {
+    //     $(this).addClass('hf-tooltip');
+    //     $(this).hover(function () {
+    //         $(this).removeClass('hf-tooltip');
+    //     });
+    // });
 
     //
     // 의도치 않은 방문기록 방지
@@ -223,11 +219,25 @@ $(document).ready(function () {
         e.stopPropagation();
         return false;
     });
-
-    $('#card_preview_point .super:after').hover(function () {
-        swal('in','','info');
-    })
 });
+
+// 클립보드에 공유 주소 복사
+// 복사 되었음을 툴팁으로 알림.
+function copyToClipboard(element) {
+    // 클립보드 복사
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($(element).text()).select();
+    document.execCommand("copy");
+    $temp.remove();
+
+    // 툴팁 출현
+    var copyBtn = $('.url_copy[onclick="copyToClipboard(\''+element+'\')"]');
+    copyBtn.addClass('hf-tooltip');
+    copyBtn.hover(function () {
+        copyBtn.removeClass('hf-tooltip');
+    });
+}
 
 function call_card_append(url) {
     var preloader = $('#call_card_preloader');
@@ -261,7 +271,7 @@ function hey_login() {
 
 function gogo_crawler() {
     var value = $('#link_url').val();
-    console.log(value);
+    //console.log(value);
 
     var preloader = $('#linkModalPreLoader');
     $('#card_preview_point .super').remove();
@@ -287,7 +297,7 @@ function gogo_crawler() {
 
     ajax.fail(function (result) {
         console.log('fail');
-        console.log(result);
+        //console.log(result);
         swal({
             title: 'Oops...!',
             text: 'I\'m still young, but studying hard! Plz expect the next update :)!',
@@ -369,7 +379,7 @@ function open_edit_modal(link_id) {
     $('#msg-content-edit').val(description);
     $('#editable_msg').text(description);
     $('#link_message-edit').val(description);
-    console.log(description);
+    //console.log(description);
 
 
     $('#edit_link_modal').modal({

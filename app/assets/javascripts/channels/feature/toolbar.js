@@ -1,31 +1,4 @@
-function myPlanetGroup() {
-    return localStorage.getItem('remote_status');
-}
-
 $(document).ready(function () {
-
-    if (!myPlanetGroup()){
-        localStorage.setItem('remote_status','show');
-    }
-
-    // follow remote-controller
-    $('#top-fandoms a').click(function () {
-        $('#follow_list_box').toggleClass('hi_de');
-        $(this).toggleClass('active');
-        if (myPlanetGroup() === 'show'){
-            localStorage.setItem('remote_status','hide');
-        } else {
-            localStorage.setItem('remote_status','show');
-        }
-    });
-
-    if (myPlanetGroup() === 'hide'){
-        $('#top-fandoms a').removeClass('active');
-        $('#follow_list_box').addClass('hi_de');
-    } else {
-        $('#top-fandoms a').addClass('active');
-        $('#follow_list_box').removeClass('hi_de');
-    }
 
     //
     // Location : '/fandoms/:id'
@@ -200,7 +173,7 @@ function bindingActions() {
             });
 
             req.done(function (result) {
-                console.log(result);
+                //console.log(result);
                 var icon = $('#actions_'+result.data.link_id+' .maum span.zmdi');
                 var counter = $('#actions_'+result.data.link_id+' .maum span.counter');
 
@@ -220,7 +193,7 @@ function bindingActions() {
                 }
             });
 
-            req.fail(function (result) { console.log('failed'); alert(result.responseText) })
+            //req.fail(function (result) { console.log('failed'); alert(result.responseText) })
 
         } else {
             //alert('you should login to use like button')
@@ -228,6 +201,7 @@ function bindingActions() {
 
         event.stopPropagation();
     });
+
     // 링크 카드 Clip 기능
     $('.clip_btn').unbind('click').click(function (event) {
         var btn = $(this);
@@ -256,7 +230,7 @@ function bindingActions() {
             });
 
             req.done(function (result) {
-                console.log(result);
+                //console.log(result);
                 var grand = $('#link_'+result.data.link_id);
 
                 if (result.status === 'created'){
@@ -273,10 +247,10 @@ function bindingActions() {
                 }
             });
 
-            req.fail(function (result) { console.log('failed'); hey_login() })
+            //req.fail(function (result) { console.log('failed'); hey_login() })
 
         }
 
-        event.stopPropagation()
+        event.stopPropagation();
     });
 }

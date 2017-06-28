@@ -12,10 +12,6 @@
     #header{
         background: <%= bgcolor %> !important;
     }
-    #header.init_header {
-        background-color: #2196f3 !important;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3) !important;
-    }
     .channel.carousel .carousel-caption .channel_info:before{
         background-image: url('<%= @config.fd_logo.include?('round') ? @config.fd_logo.split('round').first + 'round126_126' : @config.fd_logo %>');
     }

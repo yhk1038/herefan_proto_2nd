@@ -18,6 +18,7 @@
     my_fandom = is_my_fandom?(user: @user, fandom: link.fandom)
     @edit_display       = valid_display_on_user_level(my_fandom, script: open_edit_fandom_modal)
     @onclick_display    = valid_display_on_user_level(my_fandom)
+    @noNeedFollow_display = valid_display_on_user_level(my_fandom, mute_level: 'follower')
 %>
 <div class="task">
     <div id="link_<%= link.id %>"
@@ -31,7 +32,7 @@
          noiser="<%= current_user_id %>">
         <div class="bp-header">
             <a href="<%= link.url %>" target="_blank">
-                <a class="clip_btn" onclick="<%= @onclick_display %>" action_status="<%= myclips_already ? 'delete' : 'post' %>" action_target="<%= myclips_already ? myclips.take.id : link.id %>" action_noiser="<%= current_user_id %>">
+                <a class="clip_btn" onclick="<%= @noNeedFollow_display %>" action_status="<%= myclips_already ? 'delete' : 'post' %>" action_target="<%= myclips_already ? myclips.take.id : link.id %>" action_noiser="<%= current_user_id %>">
                     <span id="cliped_<%= link.id %>" class="clip zmdi zmdi-bookmark-outline"></span>
                 </a>
                 <a href="<%= link.url %>" target="_blank">
@@ -60,7 +61,7 @@
                 <a class="col-xs-6 action viewcount" href="<%= link.url %>" target="_blank">
                     <span class="zmdi zmdi-eye"></span> <span class="counter"><%= visited_count ? visited_count : 0 %></span>
                 </a>
-                <a class="col-xs-5 action maum" onclick="<%= @onclick_display %>" action_status="<%= mylikes_already ? 'delete' : 'post' %>" action_target="<%= mylikes_already ? mylikes.take.id : link.id %>" action_noiser="<%= current_user_id %>">
+                <a class="col-xs-5 action maum" onclick="<%= @noNeedFollow_display %>" action_status="<%= mylikes_already ? 'delete' : 'post' %>" action_target="<%= mylikes_already ? mylikes.take.id : link.id %>" action_noiser="<%= current_user_id %>">
                     <span class="zmdi zmdi-favorite<%= '-outline' unless mylikes_already %>"></span> <span class="counter"><%= link.likes.count %></span>
                 </a>
                 <div class="dropdown share_box col-xs-1">
@@ -76,7 +77,7 @@
                         <li class="clipboarding">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="zmdi zmdi-globe"></i></span>
-                                <div id="text_url_<%= link.id %>" type="text" class="form-control fc-alt" aria-label="Amount (to the nearest dollar)"><%= link.url %></div>
+                                <div id="text_url_<%= link.id %>" class="form-control fc-alt" aria-label="Amount (to the nearest dollar)"><%= link.url %></div>
                                 <span target="<%= link.id %>" onclick="copyToClipboard('#text_url_<%= link.id %>')" class="input-group-addon url_copy"><i class="zmdi zmdi-copy"></i></span>
                             </div>
                         </li>
