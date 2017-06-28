@@ -1,8 +1,4 @@
 <style>
-    #header {
-        /*background-color: #2196f3 !important;*/
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3) !important;
-    }
     #footer{ position: initial }
 
     .carousel .carousel-caption{
@@ -19,7 +15,7 @@
     <% if @fandoms.count.zero? %>
         <section style="text-align: center">
             <h1 class="lead_message">
-                You aren't following any Planet.<br><br>
+                <span style="font-size: 25px; font-weight: 600;">You aren't following any Planet.</span><br>
                 Follow your favorite Planets and get EVERYTHING about them!
             </h1>
             <a class="btn btn-default bgm-green btn-lg waves-effect loginFirstBtn" href="<%= fandoms_path %>">Add Following</a>
@@ -48,6 +44,7 @@
         font-size: 22px;
         font-weight: 400;
         color: #343e9d;
+        line-height: 1.8;
     }
     .loginFirstBtn{
         min-width: 100px;

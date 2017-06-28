@@ -11,7 +11,7 @@
         <li class="logo">
             <%#= link_to app_title, root_path, class: '' %>
             <a href="<%= root_path %>">
-                <img src="/img/main_logo.png" alt="">
+                <img src="/svg/main_logo2.svg" alt="">
             </a>
         </li>
 
@@ -87,7 +87,7 @@
                             </div>
                         </div>
                     <% else %>
-                        <%= link_to 'Login', '', class: 'btn btn-default', method: :delete, data: {toggle: 'modal', target: '#login_modal'}, style: 'color: #333333' %>
+                        <%= link_to 'Login', '', id: 'login_button', class: 'btn btn-default no-waves', method: :delete, data: {toggle: 'modal', target: '#login_modal'} %>
                     <% end %>
                 </li>
             </ul>

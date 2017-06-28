@@ -18,7 +18,9 @@
 
 
 
-
+#footer{
+    padding-top: 150px !important;
+}
 
 /*#header .nav_profile{*/
     /*width: 36px;*/
@@ -42,7 +44,6 @@
     /*position: absolute;*/
     /*top: -2px;*/
     /*right: -15px;*/
-
 /* } */
 
 .new_nav_profile .nav_profile2 > .bg_img_cover {
@@ -77,7 +78,7 @@
 }
 
 body .bg_img_cover{
-    background-color: #B3B3B3 !important;
+    background-color: #FFFFFF !important;
     background-repeat: no-repeat !important;
     background-size: cover !important;
     background-position: center !important;
@@ -447,42 +448,45 @@ body .bg_img_cover{
 .follow_artists{
     width: 42px;
     height: 42px;
-    border: 1px solid rgba(239, 239, 239, 1);
+    border: 2px solid #efefef;
     border-radius: 100px;
     position: relative;
     display: inline-flex;
     margin: 2px 5px 0;
     cursor: pointer;
+    box-shadow: 0 2px 1px rgba(0, 0, 0, 0.5);
     background-repeat: no-repeat !important;
     background-size: cover !important;
     background-position: center !important;
+    background-color: #FFFFFF !important;
 }
 .follow_artists > span{
-    width: 52px;
-    font-size: 12px;
-    font-weight: bold;
+    display: none;
+
     position: absolute;
+    width: 100px;
     height: 34px;
+
     bottom: -40px;
-    line-height: 1;
-    -webkit-transition: all 200ms ease;
-    -moz-transition: all 200ms ease;
-    -ms-transition: all 200ms ease;
-    -o-transition: all 200ms ease;
-    transition: all 200ms ease;
-    text-align: center;
-    left: -6px;
+    left: -30px;
     right: 0;
     margin-left: auto;
     margin-right: auto;
+
     color: #FFFFFF;
-    opacity: 0.5;
+    font-size: 15px;
+    font-weight: 600;
+    text-shadow: 0 2px 1px rgba(0, 0, 0, 0.5);
+    line-height: 1;
+    text-align: center;
+
+    transition: all 200ms ease;
 }
 .follow_artists:hover{
-    border: 1px solid #D3D3D3;
+    border: 1px solid #00c9c6;
 }
 .follow_artists:hover > span{
-    /*opacity: 1;*/
+    display: block;
 }
 #add_follow_btn.follow_artists {
     background: #777
@@ -818,7 +822,7 @@ hr.hf-hr{
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    border: 3px solid #4caf50;
+    border: 3px solid #CCCCCC;
 }
 
 
