@@ -152,4 +152,55 @@ class Backoffice::ConsoleController < ApplicationController
     def set_info
         @info = WikiInfo.find(params[:id])
     end
+    
+    def user_activity_info
+        @result = []
+        
+        User.where('created_at > ?', Date.parse('2017-06-20')).each{ |user|
+            users_link = user.links
+            visited_links = user.visited_links
+            self_links_view_count = visited_links.all.map{|visited_link| visited_link.link.user.id}.count{|id| id == user.id}
+            user_total_view_count = visited_links.count
+            self_view_rate = ((self_links_view_count.to_f / user_total_view_count.to_f) * 100).round(2)
+            self_view_rate = 0 if self_view_rate.to_s == 'NaN'
+            
+            # SET user data container
+            semi_result = {}
+            
+            # GET user's major info
+            semi_result[:user_info] = {
+                    id: user.id,
+                    nickname: user.nickname,
+                    name: user.name
+            }
+            
+            # SET users activity insight container
+            semi_result[:insight] = {}
+            
+            # Optional
+            ## GET activity about ~~> 'Link Create'
+            semi_result[:insight][:create_links] = {
+                    create_links_count: users_link.count,
+                    created_planets_at: users_link.all.map{|link| link.fandom.config.fd_name}
+            }
+
+            ## GET activity about ~~> 'Link View'
+            semi_result[:insight][:view_links] = {
+                    view_count_self_links:      self_links_view_count,
+                    view_count_total_links:     user_total_view_count,
+                    self_view_rate:             (self_view_rate.to_s + '%'),
+                    view_links_author:          visited_links.all.map{|visited_link|
+                        {
+                                author:     visited_link.link.user.nickname,
+                                link_title: visited_link.link.title
+                        }
+                    }
+            }
+            
+            # PUSH a user's activity insight to Final Result
+            @result << semi_result
+        }
+        
+        @result
+    end
 end
