@@ -17,7 +17,7 @@
     open_edit_fandom_modal = "open_edit_modal(#{link.id})"
     my_fandom = is_my_fandom?(user: @user, fandom: link.fandom)
     @edit_display       = valid_display_on_user_level(my_fandom, script: open_edit_fandom_modal)
-    @report_display    = valid_display_on_user_level(my_fandom, script: "report_alert(#{link.id}, #{@user.id});")
+    @report_display    = valid_display_on_user_level(my_fandom, script: "report_alert(#{link.id}, #{@user&.id ? @user.id : 0});")
     @noNeedFollow_display = valid_display_on_user_level(my_fandom, mute_level: 'follower')
 %>
 <div class="task">
