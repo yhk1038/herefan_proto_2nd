@@ -138,7 +138,7 @@ function call_query_for_show() {
 
     req.fail(function (data) {
         console.log(data);
-        swal('error','check in browser console','error');
+        swal('error','It\s '+data.code+'! check in browser console','error');
     })
 }
 
