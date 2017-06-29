@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
     
+    resources :reports
     resources :site_masters
     scope module: :backoffice do
         get 'console/setting_planet(/:fandom_id)',  to: 'console#setting_planet'

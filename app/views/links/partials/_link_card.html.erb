@@ -17,7 +17,7 @@
     open_edit_fandom_modal = "open_edit_modal(#{link.id})"
     my_fandom = is_my_fandom?(user: @user, fandom: link.fandom)
     @edit_display       = valid_display_on_user_level(my_fandom, script: open_edit_fandom_modal)
-    @onclick_display    = valid_display_on_user_level(my_fandom)
+    @report_display    = valid_display_on_user_level(my_fandom, script: "report_alert(#{link.id}, #{@user.id});")
     @noNeedFollow_display = valid_display_on_user_level(my_fandom, mute_level: 'follower')
 %>
 <div class="task">
@@ -46,7 +46,7 @@
                                 <li><%= link_to 'edit', 'javascript:;', onclick: @edit_display %></li>
                                 <li><%= button_to 'Destroy', link, method: :delete, onclick: "return confirm('Are you sure?')", class: 'likes_link_to' %></li>
                             <% else %>
-                                <li><%= link_to 'report', '#', onclick: @onclick_display %></li>
+                                <li><%= link_to 'report', 'javascript:;', onclick: @report_display %></li>
                             <% end %>
                         </ul>
                     </li>

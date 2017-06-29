@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  link: one
+  wiki_post: one
+  history: one
+  schedule: one
+  fandom: one
+  content: MyText
+
+two:
+  user: two
+  link: two
+  wiki_post: two
+  history: two
+  schedule: two
+  fandom: two
+  content: MyText

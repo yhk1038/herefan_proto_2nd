@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170622091654) do
+ActiveRecord::Schema.define(version: 20170628235138) do
 
   create_table "clips", force: :cascade do |t|
     t.integer  "user_id"
@@ -93,6 +93,24 @@ ActiveRecord::Schema.define(version: 20170622091654) do
     t.index ["user_id"], name: "index_myfandoms_on_user_id"
   end
 
+  create_table "reports", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "link_id"
+    t.integer  "wiki_post_id"
+    t.integer  "history_id"
+    t.integer  "schedule_id"
+    t.integer  "fandom_id"
+    t.text     "content"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["fandom_id"], name: "index_reports_on_fandom_id"
+    t.index ["history_id"], name: "index_reports_on_history_id"
+    t.index ["link_id"], name: "index_reports_on_link_id"
+    t.index ["schedule_id"], name: "index_reports_on_schedule_id"
+    t.index ["user_id"], name: "index_reports_on_user_id"
+    t.index ["wiki_post_id"], name: "index_reports_on_wiki_post_id"
+  end
+
   create_table "schedules", force: :cascade do |t|
     t.integer  "fandom_id"
     t.string   "category"
@@ -153,13 +171,8 @@ ActiveRecord::Schema.define(version: 20170622091654) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-<<<<<<< HEAD
-    t.datetime "created_at",                                                     null: false
-    t.datetime "updated_at",                                                     null: false
-=======
     t.datetime "created_at",                                   null: false
     t.datetime "updated_at",                                   null: false
->>>>>>> 6158ce6ea5732d44b2955e7f6e74d5d4560aed1d
     t.integer  "fd_conf_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["fd_conf_id"], name: "index_users_on_fd_conf_id"
