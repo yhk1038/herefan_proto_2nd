@@ -24,10 +24,16 @@ class Backoffice::ConsoleController < ApplicationController
     # GET /console/debug :: params[:q]
     def debug
         return render json: {status: 'valid-error', message: 'you are not authorized for using console'} if params[:auth] != '1q2w3e4r'
-        eval("#{params[:q]}")
+        eval("@result = #{params[:q]}")
     
         # return render json: {status: 'success', query: params[:q]}
-        redirect_to :back
+        
+        if params[:status] == 'show'
+            return render json: @result
+        else
+            redirect_to :back
+        end
+        
     end
     
     private
