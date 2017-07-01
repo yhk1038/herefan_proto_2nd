@@ -4,7 +4,7 @@ var point = $('#card_preview_point-edit');
 var point = $('#card_preview_point');
 <% end %>
 
-var dom = '<%= escape_javascript(render '/layouts/link_card', link: @target) %>';
+var dom = '<%= escape_javascript(render '/links/partials/link_card_preview', link: @target) %>';
 console.log(dom);
 
 point.empty().append(dom);

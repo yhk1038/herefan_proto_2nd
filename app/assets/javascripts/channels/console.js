@@ -5,24 +5,6 @@ $(document).ready(function () {
             keyboard: true
         })
     });
-
-    $('#query-input').keyup(function () {
-        var query = '/console/debug?auth=1q2w3e4r&q=' + $(this).val();
-        $('#query-requestBtn').attr('href', query);
-    });
-
-    // 실행 결과가 보이는 쿼리
-    // 버튼 클릭으로 쿼리 실행
-    $('#query-showBtn').click(function () {
-        call_query_for_show();
-    });
-    // 실행 결과가 보이는 쿼리
-    // 엔터 키를 통해 쿼리 실행
-    $('#query-input').keypress(function (e) {
-        if (e.keyCode === 13){
-            call_query_for_show();
-        }
-    })
 });
 
 
@@ -113,16 +95,49 @@ function addWikiOfficialSite(wiki_id) {
 }
 
 
-//
-// Console/admin 페이지 관련 함수
-// ******************************************************
 
+
+
+/*
+ * Console/admin 페이지
+ * ===========================
+ */
+
+// 실행 Admin Key
+function execAdminKey() {
+    return '1q2w3e4r'
+}
+
+
+//
+// Transaction 용 실행 쿼리
+
+// // 버튼 href 속성에 쿼리를 완성
+$('#query-input').on('keyup', function () {
+    var query = '/console/debug?auth='+ execAdminKey + '&q=' + $(this).val();
+    $('#query-requestBtn').attr('href', query);
+});
+
+//
 // 실행 결과가 보이는 쿼리
-// 쿼리를 전송하고, 반환된 결과를 가공하여 출력한다.
+
+// // 버튼 클릭으로 쿼리 실행
+$('#query-showBtn').on('click', function () {
+    call_query_for_show();
+});
+
+// // 엔터 키를 통해 쿼리 실행
+$('#query-input').on('keypress', function (e) {
+    if (e.keyCode === 13){
+        call_query_for_show();
+    }
+});
+
+// // 쿼리를 전송하고, 반환된 결과를 가공하여 출력한다.
 function call_query_for_show() {
     var appendPoint = $('#query-result');
     var query_str = $('#query-input').val();
-    var url = '/console/debug?status=show&auth=1q2w3e4r&q='+query_str;
+    var url = '/console/debug?status=show&auth='+ execAdminKey + '&q='+query_str;
 
     var req = $.ajax({
         url: url,
@@ -142,8 +157,7 @@ function call_query_for_show() {
     })
 }
 
-// 실행 결과가 보이는 쿼리
-// 결과를 반환 받았을 때, 반환받은 json 데이터를 시각화하는 Beautifier
+// // JSON Beautifier
 function syntaxHighlight(json) {
     if (typeof json != 'string') {
         json = JSON.stringify(json, null, 2);

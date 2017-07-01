@@ -155,10 +155,11 @@ class Backoffice::ConsoleController < ApplicationController
     
     def user_activity_info
         @result = []
+        target_user = User.where('created_at > ?', Date.parse('2017-06-20'))
         
-        User.where('created_at > ?', Date.parse('2017-06-20')).each{ |user|
-            users_link = user.links
-            visited_links = user.visited_links
+        target_user.each do |user|
+            users_link      = user.links
+            visited_links   = user.visited_links
             self_links_view_count = visited_links.all.map{|visited_link| visited_link.link.user.id}.count{|id| id == user.id}
             user_total_view_count = visited_links.count
             self_view_rate = ((self_links_view_count.to_f / user_total_view_count.to_f) * 100).round(2)
@@ -199,7 +200,7 @@ class Backoffice::ConsoleController < ApplicationController
             
             # PUSH a user's activity insight to Final Result
             @result << semi_result
-        }
+        end
         
         @result
     end

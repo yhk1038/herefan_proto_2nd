@@ -1,12 +1,12 @@
 <%= render partial: '/fandoms/partials/planet_header' %>
 
-<%= render partial: '/layouts/sub_nav', locals: {tabs: @tabs} %>
+<%= render partial: '/layouts/partials/sub_nav', locals: {tabs: @tabs} %>
 
-<%= render partial: '/layouts/toolbar' %>
+<%= render partial: '/layouts/partials/toolbar' %>
 
-<%= render partial: '/layouts/link_section' %>
+<%= render partial: '/links/partials/link_section' %>
 
-<button id="goTopBtn_renewal" class="btn bgm-white btn-float" onclick="goTopScroll(); return false;">
+<button id="goTopBtn_renewal" class="btn bgm-white btn-float" onclick="goTopScroll()">
     <i class="zmdi zmdi-arrow-right"></i>
 </button>
 

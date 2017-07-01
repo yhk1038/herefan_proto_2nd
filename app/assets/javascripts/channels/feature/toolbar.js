@@ -1,3 +1,46 @@
+/*
+ *  카드 필터
+ */
+
+// 1. 라이브러리에서의 카드 필터
+function getLibCards(fandom_id, method) {
+    $('#toolbar .left_group li').removeClass('active');
+    $('#toolbar li[data-filter="'+ method +'"]').addClass('active');
+
+
+    var query = $.ajax({
+        url: '/filter_by',
+        data: {
+            fandom_id: fandom_id,
+            method: method
+        }
+    });
+
+    query.done(function () {
+        after_getCards();
+    });
+}
+
+// 2. 마이페이지에서의 카드 필터
+function getMyCards(_req) {
+    $('.sortList').removeClass('active');
+    $('#sortList-'+_req).addClass('active');
+    $('#library').attr('style', 'min-height: 1000px');
+
+    var query = $.ajax({
+        url: '/sort_by/'+_req
+    });
+
+    query.done(function(){
+        after_getCards();
+    });
+}
+
+
+
+/*
+ * 아직 쓰이지 않음(쓰다가 쓰이지 않음)
+ */
 $(document).ready(function () {
 
     //
@@ -86,171 +129,3 @@ $(document).ready(function () {
 // function sortDefault() {
 //
 // }
-function getLibCards(fandom_id, method) {
-    $('#toolbar .left_group li').removeClass('active');
-    $('#toolbar li[data-filter="'+ method +'"]').addClass('active');
-
-
-    var query = $.ajax({
-        url: '/filter_by',
-        data: {
-            fandom_id: fandom_id,
-            method: method
-        }
-    });
-
-    query.done(function () {
-        $('#libraries_wrapper').gridalicious({
-            selector: '.task',
-            width: 250,
-            animate: true,
-            animationOptions: {
-                speed: 100,
-                duration: 200 //,
-//            complete:
-//            onComplete
-            }
-        });
-        $('#library').attr('style', '');
-        bindingActions();
-    });
-
-}
-
-function getMyCards(_req) {
-    $('.sortList').removeClass('active');
-    $('#sortList-'+_req).addClass('active');
-    $('#library').attr('style', 'min-height: 1000px');
-
-    var query = $.ajax({
-        url: '/sort_by/'+_req
-    });
-
-    query.done(function(){
-        console.log('done!');
-        $('#libraries_wrapper').gridalicious({
-            selector: '.task',
-            width: 250,
-            animationOptions: {
-                speed: 100,
-                duration: 200 //,
-//            complete:
-//            onComplete
-            }
-        });
-        $('#library').attr('style', '');
-        bindingActions();
-    });
-}
-
-
-function bindingActions() {
-    // 링크 카드 Like 기능
-    $('.actions_box .maum').unbind('click').click(function (event) {
-        var btn     = $(this);
-        var user_id = $(this).attr('action_noiser');
-        var target_id = $(this).attr('action_target');
-        var method  = $(this).attr('action_status');
-        var url     = '';
-
-        if (user_id !== '0'){
-            if (method === 'post'){
-                url += '/action/likes.json'
-            } else if (method === 'delete'){
-                url += '/action/likes/'+target_id+'.json'
-            }
-
-            var req = $.ajax({
-                url: url,
-                method: method,
-                data: {
-                    like: {
-                        user_id: user_id,
-                        link_id: target_id
-                    },
-                    authenticity_token: _hf_
-                }
-            });
-
-            req.done(function (result) {
-                //console.log(result);
-                var icon = $('#actions_'+result.data.link_id+' .maum span.zmdi');
-                var counter = $('#actions_'+result.data.link_id+' .maum span.counter');
-
-                if (result.status === 'created'){
-                    icon.removeClass('zmdi-favorite-outline').addClass('zmdi-favorite');
-                    counter.text(result.count);
-                    btn
-                        .attr('action_status', 'delete')
-                        .attr('action_target', result.data.id);
-
-                } else if (result.status === 'deleted'){
-                    icon.removeClass('zmdi-favorite').addClass('zmdi-favorite-outline');
-                    counter.text(result.count);
-                    btn
-                        .attr('action_status', 'post')
-                        .attr('action_target', result.data.link_id);
-                }
-            });
-
-            //req.fail(function (result) { console.log('failed'); alert(result.responseText) })
-
-        } else {
-            //alert('you should login to use like button')
-        }
-
-        event.stopPropagation();
-    });
-
-    // 링크 카드 Clip 기능
-    $('.clip_btn').unbind('click').click(function (event) {
-        var btn = $(this);
-        var user_id = $(this).attr('action_noiser');
-        var target_id = $(this).attr('action_target');
-        var method  = $(this).attr('action_status');
-        var url     = '';
-
-        if (user_id !== '0'){
-            if (method === 'post'){
-                url += '/action/clips.json'
-            } else if (method === 'delete'){
-                url += '/action/clips/'+target_id+'.json'
-            }
-
-            var req = $.ajax({
-                url: url,
-                method: method,
-                data: {
-                    clip: {
-                        user_id: user_id,
-                        link_id: target_id
-                    },
-                    authenticity_token: _hf_
-                }
-            });
-
-            req.done(function (result) {
-                //console.log(result);
-                var grand = $('#link_'+result.data.link_id);
-
-                if (result.status === 'created'){
-                    grand.addClass('clipped');
-                    btn
-                        .attr('action_status', 'delete')
-                        .attr('action_target', result.data.id);
-
-                } else if (result.status === 'deleted'){
-                    grand.removeClass('clipped');
-                    btn
-                        .attr('action_status', 'post')
-                        .attr('action_target', result.data.link_id);
-                }
-            });
-
-            //req.fail(function (result) { console.log('failed'); hey_login() })
-
-        }
-
-        event.stopPropagation();
-    });
-}

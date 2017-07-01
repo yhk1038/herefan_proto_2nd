@@ -7,9 +7,9 @@
 </style>
 <%= render partial: '/home/partials/carousel' %>
 
-<%= render partial: '/layouts/sub_nav', locals: {tabs: @tabs} %>
+<%= render partial: '/layouts/partials/sub_nav', locals: {tabs: @tabs} %>
 
-<%#= render partial: '/layouts/toolbar' %>
+<%#= render partial: '/layouts/partials/toolbar' %>
 
 <% if user_signed_in? %>
     <% if @fandoms.count.zero? %>
@@ -26,7 +26,7 @@
                 <h1 class="lead_message">Save the link you want to keep<br>and Join your Channel!</h1>
             </section>
         <% else %>
-            <%= render partial: '/layouts/link_section' %>
+            <%= render partial: '/links/partials/link_section' %>
         <% end %>
     <% end %>
 <% else %>

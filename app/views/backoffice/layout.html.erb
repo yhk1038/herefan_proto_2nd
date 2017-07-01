@@ -28,8 +28,6 @@
 
     <%= javascript_tag "_hf_ = '#{form_authenticity_token}';" %>
 
-    <!-- Google Web Fonts -->
-    <!--<link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800" rel="stylesheet">-->
 </head>
 
 <body class="toggled sw-toggled">
@@ -291,13 +289,13 @@
 <%#= render '/layouts/footer' %>
 
 <!-- Page Loader -->
-<%= render '/layouts/page_loader' %>
+<%= render '/layouts/components/page_loader' %>
 
 <!-- Older IE warning message -->
-<%= render '/layouts/ie_warning' %>
+<%= render '/layouts/IE/ie_warning' %>
 
 <!-- Javascript Libraries -->
-<%= render '/layouts/js_librarySet' %>
+<%= render '/layouts/components/js_guide' %>
 <%= javascript_include_tag 'channels/console' %>
 </body>
 </html>

@@ -1,7 +1,36 @@
-// $(document).ready(function () {
-//
-// });
+/*
+ * 회원 정보 수정 페이지 글자수 트래킹
+ * ===========================
+ */
 
+// 1. 닉네임 필드
+var nickname_input          = $('#checkNickNameLength_from');
+nickname_input.on({
+    blur: function () {
+        account_append_length($('#checkNickNameLength_from'), $('#checkNickNameLength_to'))
+    },
+    keyup: function () {
+        account_append_length($('#checkNickNameLength_from'), $('#checkNickNameLength_to'))
+    }
+});
+
+// 2. 네임 필드
+var name_input          = $('#checkNameLength_from');
+name_input.on({
+    blur: function () {
+        account_append_length($('#checkNameLength_from'), $('#checkNameLength_to'))
+    },
+    keyup: function () {
+        account_append_length($('#checkNameLength_from'), $('#checkNameLength_to'))
+    }
+});
+
+
+
+/*
+ *  Validation
+ *  ===========================
+ */
 function account_validation() {
     var updatable = true;
     var message = '';
@@ -68,6 +97,14 @@ function account_validation() {
     return updatable;
 }
 
+/*
+ * 부수기재
+ * ===========================
+ */
+
+function account_append_length(checkFrom, appendTo) {
+    appendTo.text(checkFrom.val().length);
+}
 
 function isEmail(email) {
     var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
