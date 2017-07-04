@@ -165,4 +165,8 @@ class User < ApplicationRecord
     
         return is_contain ? protocol + path : img_path
     end
+
+    def sns_asset_domains
+        %w(graph.facebook.com pbs.twimg.com lh3.googleusercontent.com)
+    end
 end
