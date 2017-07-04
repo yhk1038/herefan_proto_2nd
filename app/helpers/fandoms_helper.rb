@@ -6,7 +6,7 @@ module FandomsHelper
         if user
             if user.fandom_lists.include?(resource)
                 myfandom = Myfandom.where(user: user, fandom: resource).take
-                btn = "<a id='channel_#{resource.id}' onclick='followBtn(\"cancel\", #{myfandom.id}, #{resource.id}, #{user.id}, \"\")' class='pv-follow-btn bgm-red' style='cursor: pointer'>Followed</a>"
+                btn = "<a id='channel_#{resource.id}' onclick='followBtn(\"cancel\", #{myfandom.id}, #{resource.id}, #{user.id}, \"\")' class='pv-follow-btn followed' style='cursor: pointer'><span class='zmdi zmdi-star' style='font-size: 20px; position: relative; top: 2px;'></span> Followed</a>"
             else
                 btn = "<a id='channel_#{resource.id}' onclick='followBtn(\"follow\", 0, #{resource.id}, #{user.id}, \"\")' class='pv-follow-btn' style='cursor: pointer'>Follow</a>"
             end
@@ -23,11 +23,20 @@ module FandomsHelper
         #     users_fandom_lists.count.zero? ? false : true
         # end
         
-        fandom.get_myfandom(user)
+        fandom&.get_myfandom(user)
     end
     
     private
     def set_fandom
         @fandom = Fandom.find(params[:fandom_id])
+        @config = @fandom.configs.count.zero? ? make_fandom_config(@fandom) : @fandom.config
+    end
+    
+    def make_fandom_config(fandom)
+        init_config = FdConf.create(fd_logo: fandom.profile_img, fd_bg_img: fandom.background_img, fd_name: fandom.name, userlist: [$current_user_id].to_s)
+        fandom.configs << init_config
+        User.find(get_current_user_id).fd_confs << init_config unless get_current_user_id.zero?
+        
+        return init_config
     end
 end

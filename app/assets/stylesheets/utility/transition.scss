@@ -1,0 +1,181 @@
+$hf-transition_default: all 300ms ease;
+
+$hf-transition_150: all 150ms ease;
+$hf-transition_200: all 200ms ease;
+$hf-transition_250: all 250ms ease;
+$hf-transition_300: all 300ms ease;
+$hf-transition_350: all 350ms ease;
+$hf-transition_500: all 500ms ease;
+$hf-transition_600: all 600ms ease;
+$hf-transition_700: all 700ms ease;
+$hf-transition_800: all 800ms ease;
+
+$hf-transition_1000: all 1000ms ease;
+$hf-transition_1100: all 1100ms ease;
+$hf-transition_1200: all 1200ms ease;
+$hf-transition_1300: all 1300ms ease;
+$hf-transition_1400: all 1400ms ease;
+$hf-transition_1500: all 1500ms ease;
+$hf-transition_1600: all 1600ms ease;
+$hf-transition_1700: all 1700ms ease;
+$hf-transition_1800: all 1800ms ease;
+
+
+
+.hf-transition {
+    -webkit-transition: $hf-transition_default;
+    -moz-transition: $hf-transition_default;
+    -ms-transition: $hf-transition_default;
+    -o-transition: $hf-transition_default;
+    transition: $hf-transition_default;
+}
+
+.hf-transition-150 {
+    -webkit-transition: $hf-transition_150;
+    -moz-transition: $hf-transition_150;
+    -ms-transition: $hf-transition_150;
+    -o-transition: $hf-transition_150;
+    transition: $hf-transition_150;
+}
+
+.hf-transition-200 {
+    -webkit-transition: $hf-transition_200;
+    -moz-transition: $hf-transition_200;
+    -ms-transition: $hf-transition_200;
+    -o-transition: $hf-transition_200;
+    transition: $hf-transition_200;
+}
+
+.hf-transition-250 {
+    -webkit-transition: $hf-transition_250;
+    -moz-transition: $hf-transition_250;
+    -ms-transition: $hf-transition_250;
+    -o-transition: $hf-transition_250;
+    transition: $hf-transition_250;
+}
+
+.hf-transition-300 {
+    -webkit-transition: $hf-transition_300;
+    -moz-transition: $hf-transition_300;
+    -ms-transition: $hf-transition_300;
+    -o-transition: $hf-transition_300;
+    transition: $hf-transition_300;
+}
+
+.hf-transition-350 {
+    -webkit-transition: $hf-transition_350;
+    -moz-transition: $hf-transition_350;
+    -ms-transition: $hf-transition_350;
+    -o-transition: $hf-transition_350;
+    transition: $hf-transition_350;
+}
+
+.hf-transition-500 {
+     -webkit-transition: $hf-transition_500;
+     -moz-transition: $hf-transition_500;
+     -ms-transition: $hf-transition_500;
+     -o-transition: $hf-transition_500;
+     transition: $hf-transition_500;
+ }
+
+.hf-transition-600 {
+    -webkit-transition: $hf-transition_600;
+    -moz-transition: $hf-transition_600;
+    -ms-transition: $hf-transition_600;
+    -o-transition: $hf-transition_600;
+    transition: $hf-transition_600;
+}
+
+.hf-transition-700 {
+    -webkit-transition: $hf-transition_700;
+    -moz-transition: $hf-transition_700;
+    -ms-transition: $hf-transition_700;
+    -o-transition: $hf-transition_700;
+    transition: $hf-transition_700;
+}
+
+.hf-transition-800 {
+    -webkit-transition: $hf-transition_800;
+    -moz-transition: $hf-transition_800;
+    -ms-transition: $hf-transition_800;
+    -o-transition: $hf-transition_800;
+    transition: $hf-transition_800;
+}
+
+
+
+
+
+
+
+.hf-transition-1000 {
+    -webkit-transition: $hf-transition_1000;
+    -moz-transition: $hf-transition_1000;
+    -ms-transition: $hf-transition_1000;
+    -o-transition: $hf-transition_1000;
+    transition: $hf-transition_1000;
+}
+
+.hf-transition-1100 {
+    -webkit-transition: $hf-transition_1100;
+    -moz-transition: $hf-transition_1100;
+    -ms-transition: $hf-transition_1100;
+    -o-transition: $hf-transition_1100;
+    transition: $hf-transition_1100;
+}
+
+.hf-transition-1200 {
+    -webkit-transition: $hf-transition_1200;
+    -moz-transition: $hf-transition_1200;
+    -ms-transition: $hf-transition_1200;
+    -o-transition: $hf-transition_1200;
+    transition: $hf-transition_1200;
+}
+
+.hf-transition-1300 {
+    -webkit-transition: $hf-transition_1300;
+    -moz-transition: $hf-transition_1300;
+    -ms-transition: $hf-transition_1300;
+    -o-transition: $hf-transition_1300;
+    transition: $hf-transition_1300;
+}
+
+.hf-transition-1400 {
+    -webkit-transition: $hf-transition_1400;
+    -moz-transition: $hf-transition_1400;
+    -ms-transition: $hf-transition_1400;
+    -o-transition: $hf-transition_1400;
+    transition: $hf-transition_1400;
+}
+
+.hf-transition-1500 {
+    -webkit-transition: $hf-transition_1500;
+    -moz-transition: $hf-transition_1500;
+    -ms-transition: $hf-transition_1500;
+    -o-transition: $hf-transition_1500;
+    transition: $hf-transition_1500;
+}
+
+.hf-transition-1600 {
+    -webkit-transition: $hf-transition_1600;
+    -moz-transition: $hf-transition_1600;
+    -ms-transition: $hf-transition_1600;
+    -o-transition: $hf-transition_1600;
+    transition: $hf-transition_1600;
+}
+
+.hf-transition-1700 {
+    -webkit-transition: $hf-transition_1700;
+    -moz-transition: $hf-transition_1700;
+    -ms-transition: $hf-transition_1700;
+    -o-transition: $hf-transition_1700;
+    transition: $hf-transition_1700;
+}
+
+.hf-transition-1800 {
+    -webkit-transition: $hf-transition_1800;
+    -moz-transition: $hf-transition_1800;
+    -ms-transition: $hf-transition_1800;
+    -o-transition: $hf-transition_1800;
+    transition: $hf-transition_1800;
+}

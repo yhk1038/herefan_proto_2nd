@@ -1,42 +1,80 @@
+<%
+    @config ||= @fandom.config
+    bgcolor = @config.fd_bg_color&.length&.zero? ? '#07174b' : @config.fd_bg_color
+
+    my_fandom = is_my_fandom?(user: @user, fandom: @fandom)
+
+    onclick_follow_btn = "followBtn('#{@follow_control[:follow_cmd]}', #{@follow_control[:myfandom_id]}, #{@follow_control[:channel_id]}, #{@follow_control[:user_id]}, 'no-text');"
+    @onclick_follow = valid_display_on_user_level(my_fandom, script: onclick_follow_btn, mute_level: 'follower')
+    @onclick_display = valid_display_on_user_level(my_fandom, script: onclick_follow_btn)
+%>
 <style>
-    #header.init_header {
-        background-color: #2196f3 !important;
-        box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3) !important;
+    #header{
+        background: <%= bgcolor %> !important;
     }
-    .carousel-caption:before{
-        background-image: url('<%= @fandom.profile_img.include?('round') ? @fandom.profile_img.split('round').first + 'round126_126' : @fandom.profile_img %>')
+    .channel.carousel .carousel-caption .channel_info:before{
+        background-image: url('<%= @config.fd_logo.include?('round') ? @config.fd_logo.split('round').first + 'round126_126' : @config.fd_logo %>');
     }
+    .channel .carousel-inner > .item.active > .carousel-img:after{
+        background: <%= hex_to_rgba(bgcolor, 0.2) %> !important;
+    }
+    <% if bgcolor %>
+        .carousel-caption:before{
+            background-color: <%= hex_to_rgba(bgcolor, 0.8) %> !important;
+        }
+        .planet-gradient.left{
+            background-image: linear-gradient(to right, <%= hex_to_rgba(bgcolor, 1.0) %> 0%, <%= hex_to_rgba(bgcolor, 0.2) %> 70%, <%= hex_to_rgba(bgcolor, 0.0001) %> 100%) !important;
+        }
+        .planet-gradient.right{
+            background-image: linear-gradient(to left, <%= hex_to_rgba(bgcolor, 1.0) %> 0%, <%= hex_to_rgba(bgcolor, 0.2) %> 70%, <%= hex_to_rgba(bgcolor, 0.0001) %> 100%) !important;
+        }
+    <% end %>
+
     #footer{ position: initial }
 </style>
 <div id="carousel-example-generic" class="channel carousel slide carousel-fade" data-ride="carousel">
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
         <div class="item active">
-            <div class="carousel-img" style="background-image: url('<%= @fandom.background_img %>'); background-attachment: fixed;"></div>
-            <div class="carousel-caption dropdown">
-                <a href="" class="btn btn-default waves-effect waves-circle waves-float"><span class="zmdi zmdi-trending-up"></span></a>
-                <a id="channel_<%= @fandom.id %>" onclick="followBtn('<%= @follow_control[:follow_cmd] %>', <%= @follow_control[:myfandom_id] %>, <%= @follow_control[:channel_id] %>, <%= @follow_control[:user_id] %>, 'no-text')" class="btn btn-default waves-effect waves-circle waves-float">
-                    <span class="zmdi zmdi-favorite<%= '-outline' unless is_my_fandom?(fandom: @fandom, user: current_user) %> <%= 'c-pink' if is_my_fandom?(fandom: @fandom, user: current_user) %>"></span>
-                </a>
-                <a href="" id="Pshare-dd" data-toggle="dropdown" aria-expanded="false" class="btn btn-default waves-effect waves-circle waves-float dropdown-toggle"><span class="zmdi zmdi-share"></span></a>
-                <ul id="Pshare-dd-menu" class="dropdown-menu no-vl go-social" role="menu" aria-labelledby="Pshare-dd">
-                    <li class="sns_share card-body clearfix">
-                        <a class="col-xs-4" href="http://www.facebook.com/sharer/sharer.php?u=<%= request.url %>" onclick="window.open(this.href); return false"><img src="/template/img/social/facebook-128.png" class="img-responsive" alt=""></a>
-                        <a class="col-xs-4" href="https://twitter.com/intent/tweet?text=<%= app_config[:description].gsub(' ','_') %>&url=<%= request.url %>" onclick="window.open(this.href); return false"><img src="/template/img/social/twitter-128.png" class="img-responsive" alt=""></a>
-                        <a class="col-xs-4" href="https://plus.google.com/share?url=<%= request.url %>" onclick="window.open(this.href); return false"><img src="/template/img/social/googleplus-128.png" class="img-responsive" alt=""></a>
-                    </li>
-                    <li class="divider"></li>
-                    <li class="clipboarding">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="zmdi zmdi-globe"></i></span>
-                            <div id="channel_url_<%= @fandom.id %>" type="text" class="form-control fc-alt" aria-label="Amount (to the nearest dollar)"><%= request.url %></div>
-                            <span target="<%= @fandom.id %>" data-clipboard-target="#channel_url_<%= @fandom.id %>" class="input-group-addon url_copy"><i class="zmdi zmdi-copy"></i></span>
-                        </div>
-                    </li>
-                </ul>
-                <p class="channel_name"><%= @fandom.name %></p>
-                <p class="channel_follow_count">followers <span id="follower_count_<%= @fandom.id %>" class="count"><%= @fandom.user_lists.count %></span></p>
+            <div class="carousel-img" style="background-image: url('<%= @config.fd_bg_img %>'); background-attachment: fixed; background-color: <%= bgcolor %> !important;"></div>
+            <div class="carousel-caption">
+                <a href="" class="btn btn-default waves-effect waves-circle waves-float" style="display: none;"><span class="zmdi zmdi-trending-up"></span></a>
+
+                <span class="channel_info dropdown">
+                    <p class="channel_name text_shadow"><%= @config.fd_name %></p>
+                    <p class="channel_follow_count text_shadow">followers <span id="follower_count_<%= @fandom.id %>" class="count text_shadow"><%= @fandom.user_lists.count %></span></p>
+                    <a id="channel_<%= @fandom.id %>" onclick="<%= @onclick_follow %>" class="channel_followBtn following <%= 'active' if my_fandom %>">
+                        <span class="zmdi <%= 'zmdi-star' if my_fandom %>"></span>
+                        <span class="text_shadow <%= 'active' unless my_fandom %>"><%= my_fandom ? 'following' : 'follow' %></span>
+                    </a>
+                    <a href="" id="Pshare-dd" data-toggle="dropdown" aria-expanded="false" class="channel_followBtn dropdown-toggle" style="text-align: center; margin-left: 10px;"><span class="text_shadow">share</span></a>
+                    <ul id="Pshare-dd-menu" class="dropdown-menu no-vl go-social" role="menu" aria-labelledby="Pshare-dd">
+                        <li class="sns_share card-body clearfix">
+                            <a class="col-xs-4" href="http://www.facebook.com/sharer/sharer.php?u=<%= request.url %>" onclick="window.open(this.href); return false"><img src="/template/img/social/facebook-128.png" class="img-responsive" alt=""></a>
+                            <a class="col-xs-4" href="https://twitter.com/intent/tweet?text=<%= app_config[:description].gsub(' ','_') %>&url=<%= request.url %>" onclick="window.open(this.href); return false"><img src="/template/img/social/twitter-128.png" class="img-responsive" alt=""></a>
+                            <a class="col-xs-4" href="https://plus.google.com/share?url=<%= request.url %>" onclick="window.open(this.href); return false"><img src="/template/img/social/googleplus-128.png" class="img-responsive" alt=""></a>
+                        </li>
+                        <li class="divider"></li>
+                        <li class="clipboarding">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="zmdi zmdi-globe"></i></span>
+                                <div id="channel_url_<%= @fandom.id %>" type="text" class="form-control fc-alt" aria-label="Amount (to the nearest dollar)"><%= request.url %></div>
+                                <span target="<%= @fandom.id %>" onclick="copyToClipboard('#channel_url_<%= @fandom.id %>')" class="input-group-addon url_copy"><i class="zmdi zmdi-copy"></i></span>
+                            </div>
+                        </li>
+                    </ul>
+                </span>
             </div>
         </div>
     </div>
+    <% if user_signed_in? && (current_user.is_planet_editor?(@fandom) || current_user.admin) %>
+        <div id="editorPage_link-box">
+            <a href="/console/setting_planet/<%= @fandom.id %>" class="btn btn-default text_shadow">Editor Dashboard</a>
+        </div>
+    <% end %>
+    <!-- Controls -->
+    <!--<div class="gradient-wrapper">-->
+        <a class="left carousel-control planet-gradient" href="#" role="button" data-slide="prev"></a>
+        <a class="right carousel-control planet-gradient" href="#" role="button" data-slide="next"></a>
+    <!--</div>-->
 </div>

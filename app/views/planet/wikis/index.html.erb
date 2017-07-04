@@ -1,10 +1,9 @@
 <%= render partial: '/fandoms/partials/planet_header' %>
 
-<%= render partial: '/layouts/sub_nav', locals: {tabs: @tabs} %>
+<%= render partial: '/layouts/partials/sub_nav', locals: {tabs: @tabs} %>
+<% @onclick_display = valid_display_on_user_level(is_my_fandom?(user: @user, fandom: @fandom)) %>
 
-<% sections = %w(summary member member) %>
-
-<section id="wiki-ground">
+<section id="wiki-ground" data-page="main">
     <div class="container">
         <div class="row">
             <div class="col-md-3 col-md-push-9 m-t-30">
@@ -18,22 +17,16 @@
                 </div>
                 <div id="contents_widget-box" class="card">
                     <div class="card-header">
-                        <h2>contents</h2>
+                        <h2>index</h2>
                     </div>
                     <div class="card-body card-padding">
-                        <ul><%= @wiki.name %>
-                            <% if @fandom.id == 2 %>
-                                <ol>Members</ol>
-                                <ol>Preview</ol>
-                                <ol>Member</ol>
-                                <ol>Features</ol>
-                                <ol>Music Albums</ol>
-                            <% else %>
-                                <ol>official sites</ol>
-                                <ol>members</ol>
-                                <% i=1; sections.each do |section| %>
-                                    <ol><a href="#main-section-<%= i %>"><%= section %></a></ol>
-                                <% i+=1; end %>
+                        <ul>
+                            <ol><a onclick="fnMove_wiki(0); return false;" href="#"><%= @wiki.name %></a></ol>
+                            <% i = 1 %>
+                            <% @sections.each do |section| %>
+                                <% post = section.wiki_posts.last %>
+                                <ol><a onclick="fnMove_wiki(<%= section.id %>); return false;" href="#"><%= i %>. <%= post.title %></a></ol>
+                                <% i += 1 %>
                             <% end %>
                         </ul>
                     </div>
@@ -41,20 +34,16 @@
             </div>
             <div class="col-md-9 col-md-pull-3">
                 <div id="main_contents-box" class="card">
-                    <div class="card-body card-padding">
+                    <div id="main-section-0" class="card-body card-padding">
 
                         <!-- Main title -->
-                        <h1 id="main-title"><%= @wiki.name %></h1>
+                        <h1 id="main-title" style="font-weight: 700;"><%= @wiki.name %></h1>
 
                         <!-- Main image -->
                         <div class="row">
                             <div class="col-md-3"></div>
                             <div class="col-md-6">
-                                <% if @fandom.id == 2 %>
-                                    <img id="main-img" src="/wiki_dummy/daemoon.jpg" alt="<%= @wiki.name %> 사진" style="width: 100%;">
-                                <% else %>
-                                    <img id="main-img" src="http://mimgnews1.naver.net/image/311/2016/01/24/1453595875396_99_20160124094104.png" alt="<%= @wiki.name %> 사진">
-                                <% end %>
+                                <img id="main-img" src="<%= @wiki.image %>" alt="<%= @wiki.name %> 사진">
                             </div>
                             <div class="col-md-3"></div>
                         </div>
@@ -63,69 +52,19 @@
                         <div class="row">
                             <div class="col-md-1"></div>
                             <div class="col-md-10 table-responsive">
-                                <table id="main-information" class="table table-bordered table-hover">
+                                <table id="main-information" class="table table-bordered">
                                     <tbody>
-                                    <% if @fandom.id == 2 %>
-                                        <tr>
-                                            <td>agency</td>
-                                            <td>JYP ENTERTAINMENT</td>
-                                            <td>[Link]</td>
-                                        </tr>
-                                        <tr>
-                                            <td>distributor</td>
-                                            <td>Ginie Music</td>
-                                            <td>[Link]</td>
-                                        </tr>
-                                        <tr>
-                                            <td>debut</td>
-                                            <td><%= 'Octover 20th , 2015 - Mini Album <THE STORY BEGINS>' %></td>
-                                            <td>[Link]</td>
-                                        </tr>
-                                        <tr>
-                                            <td>fandom</td>
-                                            <td>ONCE</td>
-                                            <td>[Link]</td>
-                                        </tr>
-                                    <% else %>
-                                        <tr>
-                                            <td>agency</td>
-                                            <td>1-1</td>
-                                            <td>1-비고</td>
-                                        </tr>
-                                        <tr>
-                                            <td>distributor</td>
-                                            <td>2-1</td>
-                                            <td>2-비고</td>
-                                        </tr>
-                                        <tr>
-                                            <td>debut</td>
-                                            <td><%= Faker::Lorem.paragraphs(3).join(' ') %></td>
-                                            <td>3-비고</td>
-                                        </tr>
-                                        <tr>
-                                            <td>fandom</td>
-                                            <td>boddy</td>
-                                            <td>3-비고</td>
-                                        </tr>
-                                    <% end %>
+                                        <% @wiki.infos.each do |info| %>
+                                            <tr>
+                                                <td><%= info.title %></td>
+                                                <td><%= info.content&.html_safe %></td>
+                                                <td><%= auto_link(info.url, :html => { :target => '_blank', :alt => 'debut' }) %></td>
+                                            </tr>
+                                        <% end %>
                                     </tbody>
                                 </table>
                             </div>
                             <div class="col-md-1"></div>
-                        </div>
-
-                        <!-- Main official-site -->
-                        <div class="row" style="display: none;">
-                            <div id="main-official-sites" class="col-md-12 wrap-box">
-                                <h2 class="sub_title">official sites</h2>
-                                <ul class="site-info">
-                                    <% %w(hompage youtube twitter instagram vlive).each do |site| %>
-                                        <li>
-                                            <a class="member-link" href="#" onclick="return false;"><%= site %></a>
-                                        </li>
-                                    <% end %>
-                                </ul>
-                            </div>
                         </div>
 
                         <!-- Main members-info -->
@@ -136,14 +75,10 @@
                                     <div class="col-sm-2 col-xs-3">
                                         <ul class="member-thumbnail">
                                             <li>
-                                                <% if @fandom.id == 2 %>
-                                                    <img src="/wiki_dummy/<%= member_wiki.name %>.jpg" alt="<%= member_wiki.name %> image">
-                                                <% else %>
-                                                    <img src="https://cdn.namuwikiusercontent.com/4f/4f829d37d93e3e91b3bc57dc69ae33854708a0b22acc7b0297929bedf1f403c3.jpg?e=1498567954&k=tj6niBbw_0AmXEEbJlc7WQ" alt="<%= member_wiki.name %> image">
-                                                <% end %>
+                                                <a href="<%= fandom_wikis_path(@fandom, w: member_wiki.id) %>" class="member-link"><img src="<%= member_wiki.image %>" alt="<%= member_wiki.name %> image"></a>
                                             </li>
                                             <li>
-                                                <a class="member-link" href="#" onclick="return false;"><%= member_wiki.name %></a>
+                                                <a class="member-link" href="<%= fandom_wikis_path(@fandom, w: member_wiki.id) %>"><%= member_wiki.name %></a>
                                             </li>
                                         </ul>
                                     </div>
@@ -152,100 +87,26 @@
                         </div>
 
                         <!-- Main sections -->
-                        <%# i=1; sections.each do |section| %>
-                            <!--<div class="row">-->
-                                <!--<div id="main-section-<%#= i %>" class="col-md-12 wrap-box wiki-section">-->
-                                    <!--<h2 class="sub_title"><%#= section %>-->
-                                        <!--<a href="#" class="btn btn-default pull-right feature feature-logs c-cyan" onclick="return false;">logs</a>-->
-                                        <!--<a href="#" class="btn btn-default pull-right feature feature-edit c-cyan" onclick="return false;">edit</a>-->
-                                    <!--</h2>-->
-                                    <!--<div class="section-contents">-->
-                                        <!--<%#== Faker::Lorem.paragraphs(15).join('<br>') %>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <%# i+=1; end %>
-
-                        <div class="row">
-                            <div id="main-section-<%#= i %>" class="col-md-12 wrap-box wiki-section">
-                                <h2 class="sub_title">1. preview
-                                    <a href="#" class="btn btn-default pull-right feature feature-logs c-cyan" onclick="return false;">logs</a>
-                                    <a href="#" class="btn btn-default pull-right feature feature-edit c-cyan" onclick="return false;">edit</a>
-                                </h2>
-                                <div class="section-contents">
-                                    <%#== Faker::Lorem.paragraphs(15).join('<br>') %>
-                                    <img src="/wiki_dummy/preview.png" alt="" style="max-width: 100%; max-height: 300px;"><br>
-
-                                    "ONE IN A MILLION! Hello, TWICE! "<br>
-                                    TWICE is a nine-member multinational girl group that has appeared in entertainment company JYP Entertainment for five years since miss A, meaning that the name of the team means once with an eye and once with an ear.<br>
-                                    Mnet's survival program, SIXTEEN, has been selected as a member of the Tweedies, and has been selected as a member of NOW, Jung Yeon, Momo, Sana, Ji Hyo, Mina, Ta Hyun, Chae Young,<br>
-                                    From its debut year of 2015 to 2016, it has grown to become one of the best idol groups in Korea, with huge record and explosive growth.<br>
+                        <% @sections.each do |section| %>
+                            <% post = section.wiki_posts.last %>
+                            <div class="row">
+                                <div id="main-section-<%= section.id %>" class="col-md-12 wrap-box wiki-section" data-post="<%= post.id %>">
+                                    <h2 class="sub_title"><%= "#{section.sort_num}. #{post.title}" %>
+                                        <a href="<%= edit_fandom_wiki_post_path(@fandom, post, wiki_pointer_id: section.id) %>" onclick="<%= @onclick_display %>" class="btn btn-default feature feature-edit c-cyan">edit</a>
+                                        <a href="<%= fandom_wiki_posts_path(@fandom, wiki_pointer_id: section.id) %>" class="btn btn-default feature feature-logs c-cyan">view records</a>
+                                    </h2>
+                                    <div class="section-contents">
+                                        <%== post.content %>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        <% end %>
 
                         <div class="row">
-                            <div id="main-section-<%#= i %>" class="col-md-12 wrap-box wiki-section">
-                                <h2 class="sub_title">2. member
-                                    <a href="#" class="btn btn-default pull-right feature feature-logs c-cyan" onclick="return false;">logs</a>
-                                    <a href="#" class="btn btn-default pull-right feature feature-edit c-cyan" onclick="return false;">edit</a>
+                            <div id="main-section-add" class="col-md-12 wrap-box wiki-section" data-post="0">
+                                <h2 class="sub_title" style="text-align: center">
+                                    <a href="<%= new_fandom_wiki_post_path(@fandom, wiki_id: @wiki.id, sort_num: @sections.last_sort_num) %>" onclick="<%= @onclick_display %>" class="btn btn-default feature feature-add c-cyan"><span class="zmdi zmdi-plus-circle"></span> add</a>
                                 </h2>
-                                <div class="section-contents">
-                                    <%#== Faker::Lorem.paragraphs(15).join('<br>') %>
-                                    <!--<img src="/wiki_dummy/preview.png" alt=""><br>-->
-
-                                    The TWICE members were selected from the survival program SIXTEEN, which was aired on Mnet for about two months from May 5, 2017 to July 7, 2015. The original capacity was 7, but Park Jin-young had no word over SIXTEEN, but in addition to the 7 finalists who came to the final stage, he announced that he would select two more members to make TWICE a more perfect group. In addition, there was a debate about equity in Momo's selection.<br>
-                                    Anyway, after debuting, the JYP tastes and the public's choices are generally well-matched and selected as the best members, and the controversy described in the above paragraph is almost disappearing and getting a good response. In particular, Momowa Tsuwi, who has been selected as an additional actor, has been actively working as a performance center and visual center, greatly contributing to TWICE's recognition and stage composition, and Momowa Tsui's selection has been reevaluated in a good sense.<br>
-                                    Of the K-pop girl groups belonging to major marketing companies, Japanese were selected as three members after the circle (Momo, Sana, Mina). In the past, there were members of K-POP Girls Group from Japan, such as Edo Shu, Ayumi, and Late Right Taxes, but they came from the Korean-Japanese family, and when they were not Korean-Japanese, they debuted in 2007 with the multinational group circle (China + Japan) It has been a long time since the cat member Sansei (original name: Ayatsu Otsuka) from Fukuoka. In addition, all of these Japanese members are from the Kansai region, precisely the Keihan Priesthood.<br>
-                                    In the case of Tsuwi, he made his debut as a Korean idol for the first time among Taiwanese. Ember, Mark and Henry, unlike Tsuwi, grew up in the US and Canada as Taiwanese-American, Canadian, respectively. There were other Korean idols with Chinese nationality, but for the first time, Taiwanese nationality was born and raised in Taiwan. In fact, the Greater China media <Bin and Ilbo> used the phrase "Taiwanese sister" (a younger sister from Taiwan) at Nissen Heroes' Shita in Zwei, and had several reporters in the Taiwanese press on SIXTEEN.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div id="main-section-<%#= i %>" class="col-md-12 wrap-box wiki-section">
-                                <h2 class="sub_title">3. features
-                                    <a href="#" class="btn btn-default pull-right feature feature-logs c-cyan" onclick="return false;">logs</a>
-                                    <a href="#" class="btn btn-default pull-right feature feature-edit c-cyan" onclick="return false;">edit</a>
-                                </h2>
-                                <div class="section-contents">
-                                    <%#== Faker::Lorem.paragraphs(15).join('<br>') %>
-                                    <!--<img src="/wiki_dummy/preview.png" alt=""><br>-->
-
-                                    • First of all, it is good and bright whether or not the educational effect on the personality (truth, sincerity, modesty) that the members should have as an entertainer generally pursued by JYP. Also, from the time of trainee to SIXTEEN, all the members who cried with all kinds of heart trouble and laughed and laughed, and all nine of them seemed to be considerably strong,<br>
-                                    • Unusually, members come from three countries. There are five Koreans (Nae Yeon, Jung Yeon, Ji Hyo, Dae Hyun, Chae Young), three Japanese (Momo, Sana, Mina) and one Taiwanese (Tsuwi).<br>
-                                    • Fans say they do not seem to have a smile of capitalism. Generally, it keeps a bright smile and there are occasional cases among performers who have a lot of evaluations about the goodness of the people and the goodness of the people, and it shows up immediately after the music broadcast, after the fan signing, and after the recording.<br>
-                                    • <img src="/wiki_dummy/feature1.jpg" alt="" style="max-width: 100%; max-height: 300px;"><br>
-                                    TWICE 9 facial composite photographs.<br>
-                                    There is a sense that the average visuals of the team are so good that there is actually a group of nine visual members among the fans, so the nickname is "a group of pretty kids next to pretty girls next to pretty girls." So the arts and media have been pushing these images quite a bit, and there are a lot of nationalities in Korea, Japan, and China, and there are many stories about this before the debut. We are upgraded even more. In addition, as seen from various videos including TWICE TV, it is evaluated that it is armed with individuality and charm that each member is not common in all nine members because it is full of visual sense as well as artistic sensibility.<br>
-                                    • The whole team is not able to keep confidentiality because the honesty is the main weapon. Aka Spoilers. It is presumed that this is because members are far away from mysticism. If you do not mind, you can practice choreographed choreography or special colabo stage just in front of the crowd, so you can guess what stage it will be. Especially, during the preparation of the new song, other singers hide their concept and hairstyle thoroughly, while the TWICE members have been photographed in their team uniforms.  In particular, Sana, a representative Spaniel, spends all kinds of spoons unconsciously. (See personal document.) Since mid-2016, not only Sana but also other members are spontaneously or intentionally spouting various sports. At the Idol Athletics Championships, I played the next title song!<br>
-                                    • The average dancer is like an entertainer of JYP. The main dancer, Momo, is among the members of the girl group. As a result of this emphasis, in the performing arts, as well as performing a cover dance for a man's idol choreography, he dances with his paws, Lee Ae-ra shows a chore choreographed in harmony with his life, even playing ballads. If you have one thing missing, it's very easy to play the idol. But it can be interpreted as a strategy that captures Twice fans' hearts. Many people can easily follow the main choreography of each title song with the choreography of the point, because it is easy and concise. The cover dancing application team of TT in the global cover dance contest held at K-POP channel 1theK This is one of the most popular factors of global popularity, breaking the 1,000 team and making the most articles related to the past.<br>
-                                    • The singing voice is evaluated as passable. The song consists of Momo, Sana, Mina, Tsuwi, and Tae Hyun and Chae Young who are in charge of the rap. What is unusual is that the main vocalist Ji-hyo and lead vocalist Ji-sun who is responsible for sharing the ritual are surprisingly similar to each other. The second lead vocal, Jyun Yeon, who plays alternate roles with Nao Yeon, is also similar, but the division is going on. On the other hand, JiHyo-Na Yeon Combi knows that the first person to listen is the same person, I am amazed at the coincidence of the method of vocalization. The correct distinction is in pronunciation and ending, but the ending is relatively long. Also, because Ji-hyeo crushes a lot of pronunciation when singing, it can be distinguished by this. In the sub vocal line, there are members with distinctive voices. For example, in the precious love of the second album, Sana and Mina sing the chorus, respectively, and Zuwi smoothly processes the final climax part, and Momo takes on the bouncing part of the song. Mina is also active in Touchdown. The rapper line is not bad for Chaplin, but it has a tendency to have a rap part as needed, so it is still not enough compared to the professional wrappers of other groups. I can not show my talent with excellent singing ability except for the vocal line, Nae Yeon, Jung Yeon and Ji Hyo, but it seems to be improved and seems to have a lot of efforts. However, the sub vocal Mina and Sana 's ability rose to nearly the vocal three people.<br>
-                                    • Because the vocal tendency that JYP pursues emphasizes the feeling rather than the explosive treble or the stable voice, the vocals of TWICE also reflect the JYP group's unique feelings.<br>
-                                    • In terms of tone and concept digestion, it gets popular. Basically, the vocal line Ji-hyo, Nae-yon's voice can be heard comfortably, without any sense of rejection, and is suitable for various genres. Also, the rest of the sub vocals also have a variety of appealing voices, so they are not uncomfortable to listen to. TWICE's uncompromising average dancing ability and unique vocals combined with a sense of discomfort have expanded the concept of TWICE's digestible concept. You can see that TWICE can digest various concepts even if you look at CHEER UP, TT music video including debut song OOH-AHH. The usual music broadcast activity shows a cheerful and cute cheerleader concept, but in the special stage of other awards ceremony, it shows a stage of a sexy version with a little femininity, and succeeded in introducing various concepts without being limited to one concept. It is a certain advantage of TWICE that the concept that can be digested even if it sees the senior idols is wide. Also, since it is a new group of people, it is necessary to consider the fact that it is likely to develop dance, song or lap.<br>
-                                    • Apart from singing voice and tone, opinions about whether the postural power including pronunciation are somewhat weak are often seen. For example, when CHEER UP was released for the first time, the response to the fact that it did not recognize the lyrics was significant. Color pop, which is a pursuing genre, is a song that has a tempo that is fast and bouncy, and it is a problem that many foreign members are involved. The title track, composed by Black Eyed Peas, compared to other songs on the mini 3 album, shows that the lyrics do not work exceptionally. Black Eyed Peas In this magazine interview, one of the factors that makes the audience listen to blurry household lyrics is that one of the factors is that the producers are intended. In the first place, it seems to be making Monde Green in mind.<br>
-                                    • Domestic members are also popular, but the foreign members Mina, Sana, Momo and Tsuwi are called "Misamotsu". Search results You can find various YouTube and fan pages.<br>
-                                    • Other grades are remarkable, but they are particularly strong in YouTube music videos. In 2015, OOH-AHH and CHEER UP in 2016, K-pop girl group music video hit No. 1 in two years. This is the best time for YouTube to be viewed as a girl group since 2014, when YouTube has been filtering out duplicate and illegal advocacy hits. The music video itself is perfect and the idea is good, but there is also TWINE in the overseas fandom of offline activity is almost impossible, because YouTube is the main fan activity.<br>
-                                    • The explosive power of the sound record is good, but the most remarkable thing is the long run record. CHEER UP has the top 10 record of the longest group of girl group melon together with the legendary hit song of the senior group, and all the songs except the debut piece are elegant and have never been out of charts out of melon 100 The In May of 2017, each song began to run in reverse, and all 4 songs of the so-called chitty naci were shown in the canton of 38th place in melon. Related articles<br>
-                                    • During the SIXTEEN period, the representative chewyun was a double hyeon without saying two words, but since his debut, the members are also gaining appeal by gradually exploding chewyunmi. For example, if you are acting like a childlike appearance like Tsuwi and Mina, or if your voice is very comical, or if you were a gag character after your debut as a member of the group who had a depressing impression before your debut like Momo. Especially, Jung-yeon is a member who has a lot of charm from a certain point of time, and it is a member who has a face of a cloth and a face of a cloth of a cloth with an original feature, and Nae-yeon is the first sister and shows excellent leadership at SIXTEEN. And become the rank 9th, become the tongue, and suddenly become the ear, the case and so on. Outside the stage is also very cute and attractive.<br>
-                                    • It is characterized by the fan base being evenly distributed to all members. Of course, it is clear that the most recognized members of the general public are not fans. However, when people who know TWICE in various communities refer to their preferred member names, TWICE members are said to be relatively uniform, while other groups have one or two well-known members. There are nine entrances in the crazy combination between fans, but it is true that there is no ending, but in fact, all nine of them went up to the main line in the popular female voters'<br>
-                                    • Since the fan service is quite hot (reverse tactics, YouTube promise footage, special fan signage, etc.) and the scale is different, TWICE is often called Hyejase, which is a compound word of the internet hoe 'Hyeja' and TWICE.<br>
-                                    • <img src="/wiki_dummy/feature2.gif" alt="" style="max-width: 100%; max-height: 300px;"><br>
-                                    • Each member 's appearance and personality is different and different from each other. There is a lot of fans who are attracted to one member and get tired and find the charm of other members, so it is hard to get out of this group's charm. A revolving door. Among the members, there are no so-called barriers and holes, and as mentioned above, it can be considered as a reason for the feature that the fan base is distributed evenly.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div id="main-section-<%#= i %>" class="col-md-12 wrap-box wiki-section">
-                                <h2 class="sub_title">4. music albums
-                                    <a href="#" class="btn btn-default pull-right feature feature-logs c-cyan" onclick="return false;">logs</a>
-                                    <a href="#" class="btn btn-default pull-right feature feature-edit c-cyan" onclick="return false;">edit</a>
-                                </h2>
-                                <div class="section-contents">
-                                    <%#== Faker::Lorem.paragraphs(15).join('<br>') %>
-                                    <img src="/wiki_dummy/album.png" alt="" style="max-width: 100%; max-height: 300px;">
-                                </div>
                             </div>
                         </div>
 

@@ -1,0 +1,62 @@
+<%
+    case type
+    when 'main-wiki'
+        section_id      = 'wiki'
+        section_color   = 'bgm-deeporange'
+    when 'sub-wiki'
+        section_id      = 'wiki-' + wiki.id.to_s
+        section_color   = 'bgm-orange'
+    end
+
+    section_title = 'Wiki - ' + wiki.name
+
+%>
+
+<section id="<%= section_id %>">
+    <div class="card">
+        <div class="card-header <%= section_color %>">
+            <h2><%= section_title %> <small>Official Common Information</small></h2>
+            <% if type == 'main-wiki' %>
+                <a href="#" class="btn btn-default btn-float add-new_wiki" onclick="return false"><span class="zmdi zmdi-plus"></span> <span>add member</span></a>
+            <% else %>
+                <a href="#" class="btn btn-default btn-float wiki-slideToggle" onclick="sectionSlideToggle('card-body-<%= section_id %>'); return false;"><span class="zmdi zmdi-minus"></span></a>
+            <% end %>
+        </div>
+        <div class="card-body card-padding" style="padding-bottom: 80px; <%= 'display: none;' if type == 'sub-wiki' %>" id="card-body-<%= section_id %>">
+            <form action="/console/save_planet_wiki" method="post" enctype="multipart/form-data">
+                <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+
+                <input type="hidden" name="wiki[id]" value="<%= wiki.id %>">
+                <input type="hidden" name="wiki[fandom_id]" value="<%= wiki.fandom_id %>">
+                <input type="hidden" name="wiki[wiki_id]" value="<%= wiki.wiki_id %>">
+
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="zmdi zmdi-face"></i> name</span>
+                    <div class="fg-line">
+                        <input type="text" name="wiki[name]" value="<%= wiki.name %>" class="form-control input-lg" placeholder="What is the name of this planet's Celeb?">
+                    </div>
+                </div>
+
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon"><i class="zmdi zmdi-wallpaper"></i> main image</span>
+                    <div class="fg-line">
+                        <input type="text" name="wiki[image]" value="<%= wiki.image %>" class="form-control input-lg" placeholder="Put your (fandom)planet's logo address">
+                    </div>
+                </div>
+
+                <div class="row wiki-saveBtn">
+                    <button type="submit" class="btn btn-success btn-lg pull-right">save</button>
+                    <% if type == 'sub-wiki' %>
+                        <a href="/console/delete_subwiki/<%= wiki.id %>" class="btn btn-danger btn-lg pull-right m-r-10" onclick="return confirm('Are you sure?')">delete</a>
+                    <% end %>
+                </div>
+
+                <%= render partial: '/backoffice/partials/wiki_info_form_slot', collection: wiki.infos, as: :info %>
+
+                <div class="row wiki-addInfo wiki-<%= wiki.id %>">
+                    <a onclick="addWikiInfo('<%= wiki.id %>'); return false;" class="btn btn-warning btn-lg">add row slot</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

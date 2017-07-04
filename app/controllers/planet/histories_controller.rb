@@ -57,7 +57,8 @@ class Planet::HistoriesController < ApplicationController
             if is_second_level
                 redirect_to fandom_histories_path(params[:fandom_id])
             else
-                return render '/planet/histories/create'
+                redirect_to :back
+                # return render '/planet/histories/create'
             end
         else
             return render json: { data: @history, status: :unprocessable_entity, message: message }
@@ -101,7 +102,7 @@ class Planet::HistoriesController < ApplicationController
     def destroy
         @history.destroy
         respond_to do |format|
-            format.html { redirect_to histories_url, notice: 'History was successfully destroyed.' }
+            format.html { redirect_to :back, notice: 'History was successfully destroyed.' }
             format.json { head :no_content }
         end
     end

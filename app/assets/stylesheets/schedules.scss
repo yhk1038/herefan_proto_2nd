@@ -3,68 +3,145 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #dataImgSet{
-  display: none !important;
+    display: none !important;
 }
 
 #calendar .fc-day-number {
-  padding-left: 10px !important;
-  color: #CCC;
-  text-align: left !important;
+    padding-left: 10px !important;
+    color: #CCC;
+    text-align: left !important;
 }
 @media screen and (min-width: 991px) {
-  #calendar .fc-day-number {
-    font-size: 18px;
-    letter-spacing: -2px;
-  }
+    #calendar .fc-day-number {
+        font-size: 18px;
+        letter-spacing: -2px;
+    }
 }
 
 .fc-event .fc-title {
-  padding: 2px 8px;
-  display: block;
-  cursor: pointer;
-  text-overflow: ellipsis;
-  overflow-x: hidden;
+    padding: 2px 8px;
+    display: block;
+    cursor: pointer;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
 }
 
 .fc-day-grid-event .fc-content {
-  white-space: nowrap;
-  overflow: hidden;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .popover{
-  z-index: 4;
-
-  .zmdi{
-    position: relative;
-    float: right;
-    top: 5px;
-    right: 5px;
-    cursor: pointer;
-  }
-
-  .popover_img{
-    width: 100%;
-    padding: 5px;
-
-    img{
-      max-width: 100%;
-      max-height: 150px;
+    z-index: 4;
+    
+    .zmdi{
+        position: relative;
+        float: right;
+        top: 5px;
+        right: 5px;
+        cursor: pointer;
     }
-  }
+    
+    .popover_img{
+        width: 100%;
+        padding: 5px;
+        
+        img{
+            max-width: 100%;
+            max-height: 150px;
+        }
+    }
 }
 
 .popover_actions{
-  a{
-    width: 50%;
-    min-width: 75px
-  }
+    a{
+        width: 50%;
+        min-width: 75px
+    }
 }
 
 #calendar{
+    
+    .fc-toolbar{
+        background-color: #323232;
+        background-size: contain;
+        background-position: center;
+    }
+}
 
-  .fc-toolbar{
-    background-color: #323232;
-    background-size: contain;
-    background-position: center;
-  }
+#event_point-title,
+#event_point-title-edit{
+    font-size: 22px;
+    font-weight: 400;
+    color: #1bacaa;
+}
+#event_point-date,
+#event_point-date-edit{
+    margin: 10px 0 0;
+    font-size: 15px;
+    font-weight: 300;
+    color: #666666;
+}
+
+.event_point-image-box,
+.event_point-image-box-edit{
+    width: 100%;
+    max-height: 400px;
+    text-align: center;
+}
+#event_point-image,
+#event_point-image-edit{
+    max-width: 100%;
+    max-height: 400px;
+}
+
+.no_image_message,
+#event_point-description,
+#event_point-description-edit{
+    font-size: 16px;
+    font-weight: 300;
+    color: #666666;
+    font-family: 'Nunito', sans-serif !important;
+}
+.no_image_message{
+    font-style: italic;
+    opacity: 0.7;
+    text-align: right;
+    font-size: 13px;
+}
+#event_point-description,
+#event_point-description-edit{
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    white-space: pre-line;
+    margin-top: 20px;
+}
+
+#event_point-edit{
+
+}
+
+#event-modalFooter{
+    button{
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: #ccc;
+        padding: 6px 15px;
+        font-size: 30px;
+        cursor: default;
+        
+        .zmdi{
+            cursor: pointer;
+            
+            &:hover{
+                color: #999999;
+            }
+        }
+        
+        &:hover{
+            background: transparent;
+        }
+    }
 }

@@ -21,6 +21,7 @@ gem 'rails_admin_rollincode', '~> 1.0'
 
 # App method expanding module
 gem 'rails_autolink'
+gem 'summernote-rails'
 
 # plugin group for coding
 gem 'awesome_print'         # 콘솔에서 자료구조를 위상에 따라 전개
@@ -43,7 +44,7 @@ gem 'letter_opener', group: :development # 개발 시, 실제로 이메일을 �
 
 # 페이지 뷰를 깔끔하게 보이도록 하기 위해서 아래의 두 젬을 추가로 설치한다.
 # gem 'bootstrap-sass'
-# gem 'simple_form'
+gem 'simple_form'
 
 
 # ==============================================================================

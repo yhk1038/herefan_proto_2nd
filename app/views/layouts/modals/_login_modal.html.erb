@@ -1,0 +1,29 @@
+<!-- Modal -->
+<div class="modal fade" id="login_modal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md" style="width: 500px;">
+        <div class="modal-content">
+            <div class="modal-header" style="background: #ffde55; padding: 0 26px; border-top-left-radius: 3px; border-top-right-radius: 3px;">
+                <button type="button" class="login-close close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <div class="modal-title title">
+                    <div class="hf-logo"></div>
+                </div>
+                <!--<p class="modal-title title herefan_special_font">Welcome to HereFan</p>-->
+
+            </div>
+            <div class="modal-body">
+                <a class="hf-btn btn-default sns-login sns-login-fb" href="<%= user_facebook_omniauth_authorize_path %>">
+                    <span class="zmdi zmdi-facebook"></span> login with facebook
+                </a>
+                <a class="hf-btn btn-default sns-login sns-login-tw" href="<%= user_twitter_omniauth_authorize_path %>">
+                    <span class="zmdi zmdi-twitter"></span> login with twitter
+                </a>
+                <a class="hf-btn btn-default sns-login sns-login-gg" href="<%= user_google_oauth2_omniauth_authorize_path %>">
+                    <span class="zmdi zmdi-google"></span> login with google
+                </a>
+            </div>
+            <div class="modal-footer">
+                <p>by login, you agree to out <a href="#" class="special_link terms_link">terms</a> and <a href="#" class="special_link privacy_link">privacy</a>.</p>
+            </div>
+        </div>
+    </div>
+</div>

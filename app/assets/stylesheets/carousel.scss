@@ -1,0 +1,354 @@
+@import "utility/utill";
+
+/********************************/
+/*        Carousel Style        */
+/********************************/
+
+.carousel-fade {
+    .carousel-inner {
+        .item,
+        .active.left,
+        .active.right{
+            opacity: 0;
+        }
+        
+        .active,
+        .next.left,
+        .next.right{
+            opacity: 1;
+        }
+        
+        .item {
+            -webkit-transition-property: opacity;
+            transition-property: opacity;
+        }
+        
+        .next,
+        .prev,
+        .active.left,
+        .active.right{
+            left: 0;
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+        }
+    }
+    
+    .carousel-control {
+        z-index: 2;
+        opacity: 1;
+    }
+}
+
+.carousel-control{
+    & > span{
+        -webkit-transition: all 200ms ease;
+        -moz-transition: all 200ms ease;
+        -ms-transition: all 200ms ease;
+        -o-transition: all 200ms ease;
+        transition: all 200ms ease;
+        opacity: 0;
+    }
+    
+    &:hover > span{
+        opacity: 1;
+    }
+}
+
+.carousel {
+    padding-top: 60px;
+    
+    .carousel-caption{
+        height: 100%;
+        background: initial;
+        display: block;
+        background-size: 100% 100% !important;
+        background-position: 35px 30px !important;
+        background-repeat: no-repeat !important;
+        
+        &:before{
+            width: 280px !important;
+            height: 280px !important;
+            top: 20px !important;
+            left: 0 !important;
+            border: none !important;
+        }
+    }
+    
+    .carousel-indicators{
+        background: initial;
+        z-index: 10;
+    }
+    
+    .carousel-inner {
+        & > .item.active {
+            & > .carousel-img{
+                height: 260px !important;
+                background-size: 75%;
+                background-color: $hf-color_yellow !important;
+            }
+        }
+    }
+}
+
+.carousel-inner .carousel-img{
+    width: 100%;
+    height: 350px;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+}
+
+
+
+
+
+
+.channel .carousel-inner > .item.active > .carousel-img:after{
+    content: '';
+    width: 100%;
+    height: 350px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.gradient-wrapper{
+    width: 960px;
+    position: absolute;
+    height: 260px;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.channel {
+    &.carousel { padding: initial; }
+    .carousel-inner .carousel-img {
+        background-size: auto 350px;
+        background-position-y: -100px !important;
+        
+        &:before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+    }
+    
+    .planet-gradient{
+        width: $hf-header-gradient-pannel-width;
+        cursor: default;
+        
+        &.left{
+            left: $hf-header-inner-left;
+            background-image: linear-gradient(to right, rgba(255, 222, 85, 1) 0%, rgba(255, 222, 85, 0.2) 50%, rgba(255, 222, 85, 0.0001) 100%);
+        }
+        &.right{
+            right: $hf-header-inner-right;
+            background-image: linear-gradient(to left, rgba(255, 222, 85, 1) 0%, rgba(255, 222, 85, 0.2) 50%, rgba(255, 222, 85, 0.0001) 100%);
+        }
+    }
+    
+    &.carousel .carousel-caption {
+        height: 100%;
+        
+        &:before {
+            content: '';
+            width: 90px;
+            height: 90px;
+            background-color: rgba(0, 0, 0, 0.75);
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 42%;
+            margin: 0 auto;
+            border: 1px solid #dedede;
+            border-radius: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    
+        .text_shadow{
+            text-shadow: 0 0 1px rgba(0, 0, 0, 0.4);
+        }
+        
+        .btn.waves-circle{
+            width: 40px;
+            height: 40px;
+            font-size: 16px;
+            
+            span{
+                position: relative;
+                top: -5px;
+            }
+            
+            &:nth-child(1){
+                top: 110px;
+                left: -40px;
+            }
+            &:nth-child(2){
+                top: 60px;
+            }
+            &:nth-child(3){
+                top: 110px;
+                right: -40px;
+            }
+        }
+    
+        .channel_info{
+            box-sizing: border-box;
+            width: 210px;
+            height: 100px;
+            position: absolute;
+            top: 100px;
+            right: 0;
+            left: 0;
+            margin: 40px auto;
+            padding: 10px 0;
+        
+            .channel_followBtn{
+                position: relative;
+                float: left;
+                left: 0;
+                right: initial;
+                bottom: initial;
+    
+                min-width: 80px;
+                height: 30px;
+                margin: 0 0 0 3px;
+                padding: 3px 12px;
+                
+                background: transparent;
+                border: 1px solid #fff;
+                cursor: pointer;
+                
+                font-size: 16px;
+                font-weight: 300;
+                text-align: center;
+                text-transform: capitalize;
+                text-shadow: 0 0 1px rgba(0, 0, 0, 0.4);
+    
+                &.following{
+        
+                    &:not(.active){
+                        margin-left: 20px;
+                    }
+        
+                    span{
+                        color: #fff !important;
+                        font-weight: 700;
+            
+                        &.zmdi{
+                            &.zmdi-star{
+                                &:before{
+                                    content: '\f27d';
+                                    display: block !important;
+                                }
+                            }
+                        }
+                    }
+                }
+    
+                span{
+                    color: #eee;
+                }
+                &:hover{
+                    font-weight: 700;
+        
+                    span{
+                        color: #ffffff;
+                    }
+                }
+    
+                span:before{
+                    display: none;
+                }
+            }
+        
+            &:before{
+                content: '';
+                width: 80px;
+                height: 80px;
+                position: absolute;
+                top: -75px;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: 0 auto;
+                background-color: #ffffff;
+                border-radius: 40px;
+                background-size: cover;
+            }
+        }
+    
+        .channel_name,
+        .channel_follow_count{
+            position: relative !important;
+            top: 0 !important;
+            text-align: center !important;
+        }
+        .channel_name{
+            position: absolute;
+            bottom: 70px;
+            left: 0;
+            right: 0;
+            font-size: 22px;
+            text-shadow: none;
+            font-weight: 700;
+            margin: 0 !important;
+        }
+        .channel_follow_count{
+            color: #ddd;
+            margin: 0 0 10px 2px;
+    
+            position: absolute;
+            bottom: 45px;
+            left: 0;
+            right: 0;
+            
+            font-size: 15px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.75);
+            text-shadow: none;
+            text-transform: capitalize;
+    
+            .count { font-size: 17px }
+        }
+    }
+}
+
+
+
+
+
+#home-carousel{
+    &.carousel{
+        .carousel-inner{
+            .item{
+                .carousel-img{
+                    height: 300px !important;
+                    background-size: cover;
+                }
+                .carousel-caption{
+                    span{
+                        font-size: 35px;
+                        font-weight: 700;
+                        position: relative;
+                        top: 87px;
+                        font-family: nunito, sans-serif;
+                        text-shadow: 0 0 5px rgba(0,0,0,0.75);
+                    }
+                }
+            }
+        }
+        
+        .carousel-control{
+            span:first-child{
+                margin-top: 20px !important;
+            }
+        }
+    }
+}

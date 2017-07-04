@@ -44,7 +44,7 @@ class LinksController < ApplicationController
     def update
         respond_to do |format|
             if @link.update(link_params)
-                format.html { redirect_to @link, notice: 'Link was successfully updated.' }
+                format.html { redirect_to fandom_path(@link.fandom), notice: 'Link was successfully updated.' }
                 format.json { render :show, status: :ok, location: @link }
             else
                 format.html { render :edit }

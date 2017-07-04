@@ -1,18 +1,23 @@
 <%= render partial: '/fandoms/partials/planet_header' %>
 
-<%= render partial: '/layouts/sub_nav', locals: {tabs: @tabs} %>
+<%= render partial: '/layouts/partials/sub_nav', locals: {tabs: @tabs} %>
 
-<%= render partial: '/layouts/toolbar' %>
+<%= render partial: '/layouts/partials/toolbar' %>
 
-<%= render partial: '/layouts/link_section' %>
+<%= render partial: '/links/partials/link_section' %>
 
-<% if user_signed_in? && is_my_fandom?(fandom: @fandom, user: current_user) %>
-    <button class="btn btn-danger btn-float wave-effect" style="bottom: 50px; right: 3%; position: fixed !important; z-index: 3;"  data-toggle="modal" data-target="#add_link_modal">
-        <i class="zmdi zmdi-plus"></i>
-    </button>
+<button id="goTopBtn_renewal" class="btn bgm-white btn-float" onclick="goTopScroll()">
+    <i class="zmdi zmdi-arrow-right"></i>
+</button>
 
+<button id="addLinkBtn_renewal" class="btn bgm-white btn-float" onclick="<%= valid_display_on_user_level(is_my_fandom?(user: @user, fandom: @fandom)) %>" data-toggle="modal" data-target="#add_link_modal">
+    <i class="zmdi zmdi-edit"></i>
+</button>
+
+<% if user_signed_in? && is_my_fandom?(fandom: @fandom, user: @user) %>
     <!-- Modal -->
-    <%= render '/fandoms/modal_link_upload' %>
+    <%= render partial: '/fandoms/modal_link_upload', locals: { modal_type: 'add' } %>
+    <%= render partial: '/fandoms/modal_link_upload', locals: { modal_type: 'edit' } %>
 <% end %>
 
 <div style="display: none;">
@@ -36,3 +41,8 @@
     <%= link_to 'Edit', edit_fandom_path(@fandom) %> |
     <%= link_to 'Back', fandoms_path %>
 </div>
+<style>
+    body{
+        background-color: transparent;
+    }
+</style>

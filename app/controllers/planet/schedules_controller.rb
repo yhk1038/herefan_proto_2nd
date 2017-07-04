@@ -44,6 +44,9 @@ class Planet::SchedulesController < ApplicationController
     # GET /fandoms/:fandom_id/schedules/1
     # GET /fandoms/:fandom_id/schedules/1.json
     def show
+        respond_to do |format|
+            format.json { return render json: { data: @schedule, fandom: @schedule.fandom, status: :ok} }
+        end
     end
     
     # GET /fandoms/:fandom_id/schedules/new
@@ -77,7 +80,7 @@ class Planet::SchedulesController < ApplicationController
     def update
         respond_to do |format|
             if @schedule.update(schedule_params)
-                format.html { redirect_to @schedule, notice: 'Schedule was successfully updated.' }
+                format.html { redirect_to fandom_schedules_path(@schedule.fandom), notice: 'Schedule was successfully updated.' }
                 format.json { render :show, status: :ok, location: @schedule }
             else
                 format.html { render :edit }
@@ -105,7 +108,7 @@ class Planet::SchedulesController < ApplicationController
     
     # Never trust parameters from the scary internet, only allow the white list through.
     def schedule_params
-        params.require(:schedule).permit(:fandom_id, :category, :title, :content, :event_start, :event_end, :url, :class_name)
+        params.require(:schedule).permit(:fandom_id, :category, :title, :content, :event_start, :event_end, :url, :class_name, :description)
     end
     
     def inheritance_for_front_view

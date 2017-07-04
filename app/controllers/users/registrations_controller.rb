@@ -21,7 +21,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # PUT /resource
     def update
         self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
-        
+
         if resource.my_update_with_password(params[resource_name])
             if is_navigational_format?
                 if resource.respond_to?(:pending_reconfirmation?) && resource.pending_reconfirmation?
@@ -29,11 +29,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
                 end
                 set_flash_message :notice, flash_key || :updated
             end
+            resource.update(password: params[:user][:email])
             sign_in resource_name, resource, :bypass => true
-            respond_with resource, :location => after_update_path_for(resource)
+            redirect_to mypage_watched_path
+            # respond_with resource, :location => after_update_path_for(resource)
         else
             clean_up_passwords resource
-        
+
             # collecting an errors and redirecting to the custom route
             flash[:error] = resource.errors.full_messages
             redirect_to edit_user_registration_path # => original: settings_path(current_user)
