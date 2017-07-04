@@ -152,6 +152,7 @@ class User < ApplicationRecord
     
     def fake_helper_image_with_sns(img_path)
         is_contain = false
+        default_profile_img = SiteMaster.first_or_create.default_profile_image
         return default_profile_img if img_path.include? default_profile_img
     
         split = img_path.split('%3A//')
