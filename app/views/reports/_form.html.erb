@@ -1,0 +1,17 @@
+<%= simple_form_for(@report) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :user %>
+    <%= f.association :link %>
+    <%= f.association :wiki_post %>
+    <%= f.association :history %>
+    <%= f.association :schedule %>
+    <%= f.association :fandom %>
+    <%= f.input :content %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

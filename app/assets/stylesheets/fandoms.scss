@@ -3,371 +3,343 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 html, body { height: 100% }
 
-#header{
-  background: none;
-  box-shadow: none !important;
-  -webkit-transition: all 300ms ease;
-  -moz-transition: all 300ms ease;
-  -ms-transition: all 300ms ease;
-  -o-transition: all 300ms ease;
-  transition: all 300ms ease;
-
-  &.init_header {
-    background-color: #2196f3 !important;
-    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3) !important;
-  }
-}
-
 section#page_header{
-  width: 100%;
-  height: 250px;
-  margin-bottom: 25px;
-
-  p.message {
-    text-align: center;
-    color: #fff;
-    font-size: 25px;
-    padding-top: 140px;
-  }
+    width: 100%;
+    //height: 250px;
+    height: 230px;
+    margin-bottom: 25px;
+    
+    p.message {
+        text-align: center;
+        color: #343e9d;// design/ color: #fff;
+        font-size: 28px;// design/ font-size: 25px;
+        padding-top: 120px;// design/ padding-top: 140px;
+        font-weight: 700;// design
+    }
 }
 
 section#sorting_methods {
-
-  .methods-wrapper {
-    float: right;
-
-    .label_text {
-      text-transform: uppercase;
+    
+    .methods-wrapper {
+        float: right;
+        
+        .label_text {
+            text-transform: uppercase;
+        }
     }
-  }
 }
 
 section#channels {
-  padding-top: 5px;
-
-  div.row > .col-md_2 {
-    padding: 0 6px;
-
-    .card {
-      .hf-e-header{
-        height: 100px;
-
-        &:before{
-          content: '';
-          width: 100%;
-          height: 100%;
-          position: absolute;
-          margin: 0px -50%;
-          background: rgba(0, 0, 0, 0.35);
+    padding-top: 5px;
+    padding-bottom: 50px;
+    
+    & > .row{
+        text-align: left;
+        max-width: 960px;
+        margin: auto;
+        padding: 0 60px;
+        
+        .published{
+            width: 250px;
+            margin: 30px 10px 10px;
+            height: 300px;
+            display: inline-table;
         }
-      }
-
-      .background_img{
-        background-size: cover;
-        background-position: center;
-      }
-
-      .profile_img{
-        border-radius: 100%;
-        box-shadow: none;
-        border: 1px solid #eaeaea;
-        z-index: 1;
-        bottom: -36px;
-        width: 72px;
-        height: 72px;
-      }
-
-      .absolute_center{
-        position: absolute;
-        left: 0;
-        right: 0;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .hf-e-body{
-        margin-top: 50px;
-
-        .text{
-          margin: 0;
-          line-height: 100%;
-          font-size: 20px;
-          font-weight: 400;
-          font-family: inherit;
-          color: #000000;
-        }
-
-        .text-sm{
-          font-size: 14px;
-          color: #5e5e5e;
-        }
-
-        .pv-follow{
-          margin: 10px -20px 20px;
-          padding: 5px;
-        }
-      }
     }
-  }
+    
+    div.row > .col-md_2 {
+        padding: 0 6px;
+        
+        .card {
+            .hf-e-header{
+                height: 100px;
+                
+                &:before{
+                    content: '';
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    margin: 0px -50%;
+                    background: rgba(0, 0, 0, 0.35);
+                }
+            }
+            
+            .background_img{
+                background-size: cover;
+                background-position: center;
+            }
+            
+            .profile_img{
+                border-radius: 100%;
+                box-shadow: none;
+                border: 1px solid #eaeaea;
+                z-index: 1;
+                bottom: -36px;
+                width: 72px;
+                height: 72px;
+            }
+            
+            .absolute_center{
+                position: absolute;
+                left: 0;
+                right: 0;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .hf-e-body{
+                margin-top: 50px;
+                
+                .text{
+                    margin: 0;
+                    line-height: 100%;
+                    font-size: 20px;
+                    font-weight: 400;
+                    font-family: inherit;
+                    color: #000000;
+                }
+                
+                .text-sm{
+                    font-size: 14px;
+                    color: #5e5e5e;
+                }
+                
+                .pv-follow{
+                    margin: 10px -20px 20px;
+                    padding: 5px;
+                }
+            }
+        }
+    }
 }
 
-.channel {
-  &.carousel { padding: initial; }
-  .carousel-inner .carousel-img {
-    background-color: rgb(113, 94, 62);
-    background-size: auto 350px !important;
-    background-position-y: 0 !important;
-
-    &:before {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 100%;
-    }
-  }
-
-  &.carousel .carousel-caption {
-    background: rgba(251, 173, 62, 0.75);
-    height: 100%;
-
-    &:before {
-      content: '';
-      width: 90px;
-      height: 90px;
-      background-color: #000;
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 42%;
-      margin: 0 auto;
-      border: 1px solid #dedede;
-      border-radius: 100%;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
-
-    .btn.waves-circle{
-      width: 40px;
-      height: 40px;
-      font-size: 16px;
-
-      span{
-        position: relative;
-        top: -5px;
-      }
-
-      &:nth-child(1){
-        top: 110px;
-        left: -40px;
-      }
-      &:nth-child(2){
-        top: 60px;
-      }
-      &:nth-child(3){
-        top: 110px;
-        right: -40px;
-      }
-    }
-
-    .channel_name {
-      position: absolute;
-      bottom: 70px;
-      left: 0;
-      right: 0;
-      //margin-top: 110px;
-      font-size: 22px;
-      font-weight: 600;
-      text-shadow: none;
-    }
-    .channel_follow_count {
-      position: absolute;
-      bottom: 45px;
-      left: 0;
-      right: 0;
-      font-weight: 500;
-
-      font-size: 15px;
-      color: rgba(255, 255, 255, 0.75);
-      text-shadow: none;
-      text-transform: capitalize;
-
-      .count { font-size: 17px }
-    }
-  }
-}
 
 section.contents_box {
-  padding-top: 35px;
-
-  .task{
-    margin-bottom: 20px;
-  }
-
-  .bp-header {
-
-    .user_profile {
-      position: absolute;
-      width: 100%;
-      height: 60px;
-      margin-top: -60px;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.35) 75%, rgba(0, 0, 0, 0.01) 100%);
-
-      .lv-item {
-        padding: 5px 0 0 17px;
-
-        img{
-          border-radius: 100%;
-          border: 1px solid #fff;
-          width: 40px !important;
-        }
-
-        .lv-title, .lv-small {
-          color: #ffffff;
-          text-overflow: ellipsis;
-          overflow: hidden;
-          max-height: 20px;
-          white-space: pre;
-          max-width: 90%;
-        }
-        .lv-title{
-          font-weight: 600;
-          font-size: 15px;
-        }
-      }
+    padding-top: 50px;
+    
+    .task{
+        margin-bottom: 20px;
     }
-
-    .bp-title {
-      h2 {
-        margin-bottom: 10px;
-      }
+    
+    .bp-header {
+        
+        .user_profile {
+            position: absolute;
+            width: 100%;
+            height: 60px;
+            margin-top: -60px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.35) 75%, rgba(0, 0, 0, 0.01) 100%);
+            
+            .lv-item {
+                padding: 5px 0 0 17px;
+                
+                img{
+                    border-radius: 100%;
+                    border: 1px solid #fff;
+                    width: 40px !important;
+                }
+                
+                .lv-title, .lv-small {
+                    color: #ffffff;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    max-height: 20px;
+                    white-space: pre;
+                    max-width: 90%;
+                }
+                .lv-title{
+                    font-weight: 600;
+                    font-size: 15px;
+                }
+            }
+        }
+        
+        .bp-title {
+            h2 {
+                margin-bottom: 10px;
+            }
+        }
     }
-  }
-
-  .msg{
-    color: #333;
-    font-weight: 600;
-  }
-  .url{
-    text-align: right;
-    color: #a3a3a3;
-    font-size: 11px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    max-width: 100%;
-    float: right;
-  }
-
-
+    
+    .msg{
+        color: #333;
+        font-weight: 600;
+    }
+    .url{
+        text-align: right;
+        color: #a3a3a3;
+        font-size: 11px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        max-width: 100%;
+        float: right;
+    }
+    
+    
 }
 
 
 .modal-body > .input-group i.input-helper{
-  top: 4px;
-  position: relative;
-  left: -25px;
+    top: 4px;
+    position: relative;
+    left: -25px;
 }
 .modal-body > .input-group .label_text{
-  font-size: 10px;
+    font-size: 10px;
 }
 
 
 .inactive {
-  cursor: not-allowed;
-
-  .hf-e-body {
-    .pv-follow{
-      height: 30px;
-
-      li{
-        z-index: 3;
-        color: #fff !important;
+    cursor: not-allowed;
+    
+    .hf-e-body {
+        .pv-follow{
+            height: 30px;
+            
+            li{
+                z-index: 3;
+                color: #fff !important;
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 65px;
+                font-weight: bold;
+                font-family: -webkit-pictograph !important;
+                font-size: 17px !important;
+                -webkit-transition: all 350ms ease;
+                -moz-transition: all 350ms ease;
+                -ms-transition: all 350ms ease;
+                -o-transition: all 350ms ease;
+                transition: all 350ms ease;
+                
+                &:after {
+                    content: 'show proposers';
+                    display: block;
+                    margin-bottom: 20px;
+                    line-height: 140%;
+                    font-size: xx-large;
+                    opacity: 0;
+                    -webkit-transition: all 350ms ease;
+                    -moz-transition: all 350ms ease;
+                    -ms-transition: all 350ms ease;
+                    -o-transition: all 350ms ease;
+                    transition: all 350ms ease;
+                }
+                
+                &:hover:after{
+                    opacity: 1;
+                }
+            }
+        }
+        
+        .proposed_follow_btn {
+            position: absolute;
+            bottom: 60px;
+            z-index: 2;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            padding: 0 16px;
+            font-size: 22px;
+        }
+    }
+    
+    &:before {
+        content: 'comming soon';
         position: absolute;
+        width: 100%;
+        height: 100%;
         left: 0;
-        right: 0;
-        top: 65px;
-        font-weight: bold;
-        font-family: -webkit-pictograph !important;
-        font-size: 17px !important;
-        -webkit-transition: all 350ms ease;
-        -moz-transition: all 350ms ease;
-        -ms-transition: all 350ms ease;
-        -o-transition: all 350ms ease;
-        transition: all 350ms ease;
-
-        &:after {
-          content: 'show proposers';
-          display: block;
-          margin-bottom: 20px;
-          line-height: 140%;
-          font-size: xx-large;
-          opacity: 0;
-          -webkit-transition: all 350ms ease;
-          -moz-transition: all 350ms ease;
-          -ms-transition: all 350ms ease;
-          -o-transition: all 350ms ease;
-          transition: all 350ms ease;
-        }
-
-        &:hover:after{
-          opacity: 1;
-        }
-      }
+        top: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 2;
+        color: #fff;
+        padding: 22px 10px;
+        font-size: 25px;
+        font-family: cursive;
+        font-weight: 500;
     }
-
-    .proposed_follow_btn {
-      position: absolute;
-      bottom: 60px;
-      z-index: 2;
-      left: 0;
-      right: 0;
-      margin: 0 auto;
-      padding: 0 16px;
-      font-size: 22px;
-    }
-  }
-
-  &:before {
-    content: 'comming soon';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 2;
-    color: #fff;
-    padding: 22px 10px;
-    font-size: 25px;
-    font-family: cursive;
-    font-weight: 500;
-  }
 }
 
 #suggest_btn {
-  top: 220px;
-  right: 3%;
-  position: absolute !important;
-  z-index: 3;
-  font-size: 11px;
-  background-color: transparent !important;
-  box-shadow: none;
-  text-transform: initial;
+    top: 200px;// design/ top: 220px;
+    right: 3%;
+    position: absolute !important;
+    z-index: 3;
+    font-size: 11px;
+    background-color: transparent !important;
+    box-shadow: none;
+    text-transform: initial;
 }
-.unpublished_channels {
-  h2 {
-    color: #777;
-    font-weight: 700;
-    text-transform: capitalize;
 
-    small {
-      display: block;
-      text-transform: none;
-      margin-top: 8px;
-      margin-bottom: 20px;
-      color: #9E9E9E;
-      line-height: 140%;
-      font-size: 14px;
+#channels .unpublished_channels {
+    margin: 72px auto 0 !important;
+    
+    h2 {
+        padding-left: 10px;
+        color: #343e9d;
+        text-align: left;
+        font-size: 35px;
+        font-weight: 700;
+        text-transform: capitalize;
+        
+        small {
+            display: block;
+            text-transform: none;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            color: #666;
+            line-height: 140%;
+            font-size: 16px;
+            font-weight: 400;
+    
+            span{
+                color: #1bacaa;
+                cursor: pointer;
+        
+                &:hover{
+                    font-weight: 600;
+                }
+            }
+        }
     }
-  }
+    
+    .inactive{
+        &:before {
+            content: '' !important;
+            height: 180px !important;
+            background: rgba(7, 23, 75, 0.61) !important;
+        }
+        
+        .pv-follow{
+            max-height: 0;
+            
+            li{
+                font-family: 'Nunito', sans-serif !important;
+                &:after{
+                    content: '10 more followers to go!' !important;
+                    opacity: 1 !important;
+                    font-weight: 600;
+                    font-size: 16px;
+                    color: #FFFFFF;
+                    position: absolute;
+                    bottom: -80px;
+                    left: 0;
+                    right: 0;
+                }
+            }
+        }
+    }
+    
+    .unpublished{
+        width: 250px;
+        margin: 30px 10px 10px;
+        height: 270px;
+        display: inline-table;
+        
+        h2{
+            text-align: center;
+        }
+    }
 }
+

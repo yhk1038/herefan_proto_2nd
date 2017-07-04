@@ -1,5 +1,10 @@
 $(document).ready(function () {
 
+    $('#edit_toggleBtn').click(function () {
+        swal('MODE CHANGED','','success');
+        $('.history-edit_toggle').toggle();
+    });
+
     /*
      * ========================================
      *      툴바 인덱스
@@ -101,9 +106,10 @@ $(document).ready(function () {
      * 히스토리 추가하는 함수
      */
     $('#history_add_line-edit').click(function () {
-        $('#timeline-add-title').hide();
-        $('#timeline-add-title-edit').show();
-        $('.lightbox-item2').hide();
+        // $('#timeline-add-title').hide();
+        // $('#timeline-add-title-edit').show();
+        // $('.lightbox-item2').hide();
+        $('#eventUploadModal').modal();
     });
     $('#history_add_line-save').click(function () {
         $(this).attr('style', 'opacity: 0.25;').text('save ...');
@@ -119,11 +125,22 @@ $(document).ready(function () {
      * 히스토리 편집하는 함수
      */
     $('.history-edit').click(function () {
-        var history_id = $(this).data('history');
+        var title       = $(this).data('title');
+        var date        = $(this).data('date');
+        var fandom_id   = $(this).data('fandom');
+        var id          = $(this).data('history');
+        var delete_history_path = '/fandoms/'+fandom_id+'/histories/'+id;
 
-        $('#timeline-'+history_id+'-title').hide();
-        $('#timeline-'+history_id+'-title-edit').show();
-        $('.lightbox-item2').hide();
+        $('#removeHistoryBtn-form').attr('action','').attr('action', delete_history_path);
+        $('#editHistoryEvent-event_date').empty().val(date);
+        $('#editHistoryEvent-title').empty().val(title);
+
+        $('#editEventModal').modal();
+        // var history_id = $(this).data('history');
+        //
+        // $('#timeline-'+history_id+'-title').hide();
+        // $('#timeline-'+history_id+'-title-edit').show();
+        // $('.lightbox-item2').hide();
     });
     $('.history-save').click(function () {
         $(this).attr('style', 'opacity: 0.25;').text('save ...');
@@ -271,4 +288,12 @@ function fnMove(seq) {
         400
     )
 }
-
+function fnMove_wiki(seq) {
+    var offset = $('#main-section-'+seq).offset();
+    $('html, body').animate(
+        {
+            scrollTop : offset.top - 50
+        },
+        400
+    )
+}

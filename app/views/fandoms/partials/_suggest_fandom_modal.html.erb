@@ -1,0 +1,50 @@
+<div class="modal fade" id="suggest_channel_modal" tabindex="-1" role="dialog" aria-labelledby="addLinkModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title">Fandom Suggestions</h2>
+            </div>
+            <form action="<%= fandoms_path %>" method="post">
+                <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+                <div class="modal-body">
+                    <p class="m-b-0 f-16">step 1. Name of the Fandom</p>
+                    <div class="input-group fg-float m-t-10 w-100">
+                        <div class="fg-line">
+                            <input type="text" class="form-control fg-input" name="fandom[name]" id="link_url" required>
+                            <label class="fg-label">Artist's Official Name (Eng)</label>
+                        </div>
+                    </div>
+
+                    <p class="m-b-0 m-t-30 f-16">step 2. Logo of the Fandom</p>
+                    <div class="input-group fg-float m-t-10 w-100">
+                        <div class="fg-line">
+                            <input type="text" class="form-control fg-input" name="fandom[profile_img]" id="link_url" required>
+                            <label class="fg-label">Artist's Official Logo image (Only URL)</label>
+                        </div>
+                    </div>
+
+                    <p class="m-b-0 m-t-30 f-16">step 3. Background image</p>
+                    <div class="input-group fg-float m-t-10 w-100">
+                        <div class="fg-line">
+                            <input type="text" class="form-control fg-input" name="fandom[background_img]" id="link_url" required>
+                            <label class="fg-label">Artist's Official Background image (Only URL)</label>
+                        </div>
+                    </div>
+
+                    <p class="m-b-0 m-t-30 f-16" style="color: #999999; text-align: center;">You can not add groups that already exist, or<br>individual member of the group as planets.</p>
+                    <div class="checkbox" style="text-align: center;">
+                        <label>
+                            <input type="checkbox" value="" required>
+                            <i class="input-helper"></i>I Agree
+                        </label>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" id="saveBtn" class="btn">submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

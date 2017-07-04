@@ -10,11 +10,23 @@ module NavbarHelper
         end
     end
     
+    
+    def is_active_NavBarMenu? menu
+        is_active = false
+        if params[:controller] == menu[:controller]
+            is_active = true
+            if params[:controller] == 'fandoms' && params[:action] != 'index'
+                is_active = false
+            end
+        end
+        is_active
+    end
+    
     private
     
     def nav_menu_lists_desktop
         lists = []
-        lists << { name: app_home, path: home_my_path, controller: 'home' }
+        lists << { name: app_home, path: root_path, controller: 'home' }
         lists << { name: app_fandom, path: fandoms_path, controller: 'fandoms' }
         lists
     end

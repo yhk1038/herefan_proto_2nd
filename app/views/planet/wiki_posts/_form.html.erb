@@ -1,0 +1,51 @@
+<%= form_for(wiki_post, url: "/fandoms/#{@fandom.id}/wiki_posts") do |f| %>
+    <% if wiki_post.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(wiki_post.errors.count, "error") %> prohibited this wiki_post from being saved:</h2>
+
+            <ul>
+                <% wiki_post.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+    <%= f.hidden_field :user_id, value: @user.id %>
+    <%= f.hidden_field :wiki_id, value: @wiki.id %>
+
+    <div class="field hidden_field">
+        <%= f.number_field :wiki_pointer_id %>
+    </div>
+
+    <div id="wiki_post_row_count-edit_box" class="field hidden_field hidden_toggle">
+        <%= f.number_field :row_count, value: @wiki_pointer.sort_num, require: true %>
+    </div>
+
+    <div id="wiki_post_title-edit_box" class="field hidden_field hidden_toggle">
+        <%= f.text_field :title, require: true %>
+        <span id="hidden_closer"><i class="zmdi zmdi-close"></i></span>
+    </div>
+
+    <div class="field">
+        <div data-provider="editor"></div>
+        <% if wiki_post.content %>
+            <%= f.text_area :content, as: :summernote, class: 'edit-mode' %>
+        <% else %>
+            <%= f.text_area :content, as: :summernote, class: 'create-mode' %>
+        <% end %>
+    </div>
+
+    <div class="field m-t-15">
+        <label for="wiki_post_commit_msg">description</label>
+        <input placeholder="Tell us about the change you made :)" type="text" name="wiki_post[commit_msg]" id="wiki_post_commit_msg" required>
+    </div>
+
+    <div class="field hidden_field">
+        <%= f.label :url %>
+        <%= f.text_field :url %>
+    </div>
+
+    <div class="actions">
+        <%= f.submit 'save' %>
+    </div>
+<% end %>

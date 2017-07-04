@@ -1,0 +1,55 @@
+<link href="/template/vendors/summernote/dist/summernote.css" rel="stylesheet">
+
+<!-- Javascript Libraries -->
+<script src="/template/vendors/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="/template/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<script src="/template/vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/template/vendors/bower_components/Waves/dist/waves.min.js"></script>
+<script src="/template/vendors/bootstrap-growl/bootstrap-growl.min.js"></script>
+<script src="/template/vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.min.js"></script>
+<script src="/template/vendors/bower_components/moment/min/moment.min.js"></script>
+<script src="/template/vendors/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+<script src="/template/vendors/summernote/dist/summernote.js"></script>
+<!--<script src="/template/vendors/summernote/dist/summernote-updated.js"></script>-->
+
+<!-- Placeholder for IE9 -->
+<!--[if IE 9 ]>
+<script src="/template/vendors/bower_components/jquery-placeholder/jquery.placeholder.min.js"></script>
+<![endif]-->
+
+<script src="/template/vendors/bower_components/chosen/chosen.jquery.min.js"></script>
+<script src="/template/vendors/fileinput/fileinput.min.js"></script>
+<script src="/template/vendors/input-mask/input-mask.min.js"></script>
+<script src="/template/vendors/farbtastic/farbtastic.min.js"></script>
+
+<%= render '/layouts/components/common_jsLibSet' %>
+
+<script>
+    $(document).ready(function () {
+        $('[data-provider="editor"]').summernote({
+            height: 450,
+            onImageUpload: function (files) {
+                sendFile(files[0]);
+            }
+        }).code($('#wiki_post_content').val());
+
+        function sendFile(file, editor, welEditable) {
+            data = new FormData();
+            data.append("file", file);
+            data.append('fandom_id', $(document).context.URL.replace('/fandoms/', ' ').split(' ')[1].replace('/wiki_posts', ' ').split(' ')[0]);
+            data.append('authenticity_token', _hf_);
+            $.ajax({
+                data: data,
+                type: "POST",
+                url: '/summernote_imageUpload',
+                cache: false,
+                contentType: false,
+                processData: false
+            }).done(function (obj) {
+                console.log(editor);
+                $('[data-provider="editor"]').summernote('editor.insertImage', obj.url);
+            })
+        }
+    })
+</script>

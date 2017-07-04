@@ -12,16 +12,28 @@ class User < ApplicationRecord
            :omniauthable, :omniauth_providers => [:facebook, :twitter, :google_oauth2]
 
     # has_many :links
+    has_many :fd_confs
+    belongs_to :fd_conf
+    
     has_many :myfandoms, dependent: :destroy
     has_many :fandoms, through: :myfandoms
     has_many :histories
     has_many :links
+    has_many :wiki_posts
     has_many :visited_links, dependent: :destroy
     has_many :likes, dependent: :destroy
     has_many :clips, dependent: :destroy
 
     def fandom_lists
         self.myfandoms.all&.map{|mf| mf.fandom}
+    end
+    
+    def is_planet_editor?(fandom)
+        fandom.user_ids.include? self.id
+    end
+    
+    def profile_img
+        self.img.nil? ? fake_helper_image_with_sns(self.image.to_s) : self.img
     end
     
     # after_create :set_default_role, if: Proc.new { User.count > 1 }
@@ -136,5 +148,20 @@ class User < ApplicationRecord
     private
     def set_default_role
         add_role :user
+    end
+    
+    def fake_helper_image_with_sns(img_path)
+        is_contain = false
+        return default_profile_img if img_path.include? default_profile_img
+    
+        split = img_path.split('%3A//')
+        path        = split.last
+        protocol    = split.first.split('/').last
+    
+        sns_asset_domains.each do |domain|
+            is_contain = true if path.include? domain
+        end
+    
+        return is_contain ? protocol + path : img_path
     end
 end

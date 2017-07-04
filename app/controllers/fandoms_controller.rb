@@ -1,13 +1,28 @@
 class FandomsController < ApplicationController
     include FandomsHelper
+    include UsersHelper
     before_action :set_fandom, only: [:show, :edit, :update, :destroy]
     before_action :my_published_fandoms
     
     # GET /fandoms
     # GET /fandoms.json
     def index
-        @fandoms = Fandom.published.all.sort_by { |fandom| 0 - fandom.myfandoms.count }
-        @fandoms_not_active = Fandom.unpublished.all.sort_by { |fandom| 0 - fandom.myfandoms.count }
+        method = params[:method] ? params[:method] : 'popular'
+        
+        case method
+        when 'popular'
+            @fandoms = Fandom.published.all.sort_by { |fandom| 0 - fandom.myfandoms.count }
+            @fandoms_not_active = Fandom.unpublished.all.sort_by { |fandom| 0 - fandom.myfandoms.count }
+            
+        when 'recent'
+            @fandoms = Fandom.published.all.sort { |a, b| a.published_updated_at <=> b.published_updated_at }
+            @fandoms_not_active = Fandom.unpublished.order(created_at: :desc).to_a
+            
+        when 'abc'
+            @fandoms = Fandom.published.all.sort { |a, b| a.config.fd_name <=> b.config.fd_name }
+            @fandoms_not_active = Fandom.unpublished.all.sort { |a, b| a.config.fd_name <=> b.config.fd_name }
+        end
+        
         @my_fandoms = current_user.fandoms.published.ids if user_signed_in?
     end
     
@@ -79,6 +94,7 @@ class FandomsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_fandom
         @fandom = Fandom.find(params[:id])
+        @config = @fandom.configs.count.zero? ? make_fandom_config(@fandom) : @fandom.config
     end
     
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -1,11 +1,11 @@
-<%= render partial: '/mypage/partials/plane_header', locals: {color_class: 'bgm-pink', style: ''} %>
+<%= render partial: '/mypage/partials/header', locals: {color_class: '', style: 'background-color: #ffde55;'} %>
 
-<%= render partial: '/layouts/sub_nav', locals: {tabs: @tabs} %>
+<%= render partial: '/layouts/partials/sub_nav', locals: {tabs: @tabs} %>
 
-<%= render partial: '/layouts/toolbar' %>
+<%= render partial: '/layouts/partials/toolbar' %>
 
 <% if !@links.count.zero? %>
-    <%= render partial: '/layouts/link_section' %>
+    <%= render partial: '/links/partials/link_section' %>
 <% else %>
     <section style="text-align: center">
         <h1 style="margin: 40px 0; color: #666;">Meet various contents about your K-Dol<br>that you haven't seen yet!</h1>

@@ -1,6 +1,6 @@
 <%= render partial: '/fandoms/partials/planet_header' %>
 
-<%= render partial: '/layouts/sub_nav', locals: {tabs: @tabs} %>
+<%= render partial: '/layouts/partials/sub_nav', locals: {tabs: @tabs} %>
 
 <!--<section id="main">-->
 <section id="content" class="" style="margin: 50px 0 0;">
@@ -18,7 +18,7 @@
         <div class="col-md-1"></div>
 
 
-        <% if user_signed_in? && current_user.admin %>
+        <% if user_signed_in? && (current_user.admin || current_user.is_planet_editor?(@fandom)) %>
             <!-- Add event -->
             <div class="modal fade" id="addNew-event" data-backdrop="static" data-keyboard="false">
                 <div class="modal-dialog">
@@ -39,6 +39,13 @@
                                     <label for="eventContent">Event Image (Url)</label>
                                     <div class="fg-line">
                                         <input type="text" class="input-sm form-control" id="eventContent" placeholder="eg: url address of sth relative image">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="eventDescription">Event Description</label>
+                                    <div class="fg-line">
+                                        <textarea class="auto-size form-control" id="eventDescription" placeholder="Short descriptions about the schedule and what not"></textarea>
                                     </div>
                                 </div>
 
@@ -75,8 +82,131 @@
     </div>
 </section>
 <div id="dataImgSet">
+    <span id="schedule_fandom" data-fandom="<%= @fandom.id %>"></span>
     <% @schedules.each do |schedule| %>
-        <span id="schedule_image-<%= schedule.id %>" fandom_id="<%= @fandom.id %>"><%= schedule.content %></span>
+        <span id="schedule_image-<%= schedule.id %>" class="spanImg" fandom_id="<%= @fandom.id %>"><%= schedule.content %></span>
     <% end %>
 </div>
 <!--</section>-->
+
+
+
+
+<!-- Event Show -->
+<div class="modal fade" id="event-modal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <input type="hidden" name="schedule[id]">
+            <input type="hidden" name="schedule[fandom_id]">
+            <input type="hidden" name="schedule[class_name]">
+
+            <div class="modal-header">
+                <h4 class="modal-title" id="event_point-title"></h4>
+                <p id="event_point-date"></p>
+            </div>
+            <div class="modal-body">
+                <div class="event_point-image-box">
+                    <img id="event_point-image" src="" alt="">
+                </div>
+                <pre id="event_point-description"></pre>
+            </div>
+
+            <div id="event-modalFooter" class="modal-footer" data-confirmation="<%= user_signed_in? && (current_user.is_planet_editor?(@fandom) || current_user.admin) ? 'admin' : 'visitor' %>">
+                <% if user_signed_in? && (current_user.admin || current_user.is_planet_editor?(@fandom)) %>
+                    <a id="event_point-edit" href="#" onclick="" class="btn btn-default btn-info pull-left" target="_blank">Edit</a>
+                    <a id="event_point-delete" href="#" class="delete_schedule btn btn-default btn-danger pull-left" onclick="">Delete</a>
+                <% end %>
+                <button type="button" class="btn btn-link" data-dismiss="modal"><span class="zmdi zmdi-close"></span></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% if user_signed_in? && (current_user.admin || current_user.is_planet_editor?(@fandom)) %>
+<!-- Event Edit -->
+<div class="modal fade" id="event-modal-edit" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="form-horizontal event_point-image-box-edit" action="/fandoms/{fandom_id}/schedules/{id}" method="post" style="height: initial;">
+                <div class="modal-header">
+                    <div class="input-group input-group-lg" style="width: 100%;">
+                        <div class="fg-line">
+                            <input id="event_point-title-edit" name="schedule[title]" type="text" class="form-control modal-title input-lg" placeholder="Event Title" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group form-group">
+                        <span class="input-group-addon"><i class="zmdi zmdi-calendar"></i></span>
+                        <div class="dtp-container fg-line">
+                            <input type="text" id="event_point-date-edit" class="form-control date-picker" placeholder="Click here...">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="event_point-image-edit" class="col-sm-2 control-label">Image Url</label>
+                        <div class="col-sm-10">
+                            <div class="fg-line">
+                                <input type="text" name="schedule[content]" class="form-control input-sm" id="event_point-image-edit">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="event_point-description-edit" class="col-sm-2 control-label">Description</label>
+                        <div class="col-sm-10">
+                            <div class="fg-line">
+                                <textarea name="schedule[description]" class="form-control auto-size input-sm" rows="3" id="event_point-description-edit" style="color: #000; margin: 0; border-bottom: 1px solid #e0e0e0;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="eventName" class="col-sm-2 control-label">Tag Color</label>
+                        <div class="event-tag col-sm-10" style="text-align: left;">
+                            <span data-tag="bgm-teal"   class="bgm-teal"></span>
+                            <span data-tag="bgm-red"    class="bgm-red"></span>
+                            <span data-tag="bgm-pink"   class="bgm-pink"></span>
+                            <span data-tag="bgm-blue"   class="bgm-blue"></span>
+                            <span data-tag="bgm-lime"   class="bgm-lime"></span>
+                            <span data-tag="bgm-green"  class="bgm-green"></span>
+                            <span data-tag="bgm-cyan"   class="bgm-cyan"></span>
+                            <span data-tag="bgm-orange" class="bgm-orange"></span>
+                            <span data-tag="bgm-purple" class="bgm-purple"></span>
+                            <span data-tag="bgm-gray"   class="bgm-gray"></span>
+                            <span data-tag="bgm-black"  class="bgm-black"></span>
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="schedule[event_start]">
+                    <input type="hidden" name="schedule[event_end]">
+                    <input type="hidden" name="schedule[class_name]">
+
+                    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+                    <input type="hidden" name="_method" value="put" />
+
+                    <div class="form-group" style="margin: 40px 0 0;">
+                        <div class="col-sm-12" style="text-align: center;">
+                            <button id="editUpdateBtn" type="submit" class="btn btn-default btn-info no-waves">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div id="event-modalFooter-edit" class="modal-footer" data-confirmation="<%= user_signed_in? && current_user.is_planet_editor?(@fandom) ? 'admin' : 'visitor' %>">
+                <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<style>
+    #editUpdateBtn{
+        width: 100px;
+        height: 45px;
+        font-size: 18px;
+        text-transform: capitalize;
+        box-shadow: none;
+    }
+</style>
+<% end %>

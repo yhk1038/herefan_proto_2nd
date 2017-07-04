@@ -3,326 +3,333 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .bp-header {
-  .link_main_image {
-    width: 100%;
-    background: #000;
-    min-height: 150px;
-  }
+    .link_main_image {
+        width: 100%;
+        background: #000;
+        min-height: 150px;
+    }
 }
 
 
 .user_profile {
-
-  .media {
-    margin-top: 5px;
-
-    .pull-left {
-      padding-right: 0;
-
-      .lv-img-sm {
-        width: 40px;
-        height: 40px;
-        border: 1px solid #fff;
-      }
+    
+    .media {
+        margin-top: 5px;
+        
+        .pull-left {
+            padding-right: 0;
+            
+            .lv-img-sm {
+                width: 40px;
+                height: 40px;
+                border: 1px solid #fff;
+            }
+        }
+        
+        .media-body {
+            padding-left: 10px;
+        }
     }
-
-    .media-body {
-      padding-left: 10px;
-    }
-  }
 }
 
 
 .actions_box{
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 100%;
-  margin: 0;
-  padding: 25px 0 0;
-  list-style: none;
-  max-width: 180px;
-  min-width: 90px;
-
-  .action {
-    position: relative;
-    float: left;
-    text-align: right;
-    width: 50%;
+    position: absolute;
+    top: 0;
+    right: 0;
     height: 100%;
-    padding-right: 10px;
-    cursor: pointer;
-
-    &.maum{
-      .zmdi-favorite-outline{
-        color: #FFFFFF !important;
-      }
-      .zmdi-favorite{
-        color: #e91e63 !important;
-      }
-    }
-    &.viewcount{
-
-    }
-
-    span {
-      color: #fff;
-
-      &:nth-child(1) {
+    margin: 0;
+    padding: 25px 0 0;
+    list-style: none;
+    max-width: 180px;
+    min-width: 90px;
+    
+    .action {
         position: relative;
-        top: 3px;
-        font-size: 20px;
-      }
-      &:nth-child(2) {
-        margin-left: 3px;
-      }
+        //float: left;
+        text-align: right;
+        //width: 50%;
+        height: 100%;
+        padding-right: 10px;
+        cursor: pointer;
+        
+        &.maum{
+            .zmdi-favorite-outline{
+                color: #FFFFFF !important;
+            }
+            .zmdi-favorite{
+                color: #e91e63 !important;
+            }
+        }
+        &.viewcount{
+        
+        }
+        
+        span {
+            color: #fff;
+            
+            &:nth-child(1) {
+                position: relative;
+                top: 3px;
+                font-size: 20px;
+            }
+            &:nth-child(2) {
+                margin-left: 3px;
+            }
+        }
     }
-  }
 }
 
 
 .clip_btn{
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .clip{
-  display: none;
-  color: rgba(255, 235, 59, 0.75);
-  position: absolute;
-  right: 10px;
-  top: -8px;
-  font-size: 40px;
-
-  -webkit-transition: all 250ms ease;
-  -moz-transition: all 250ms ease;
-  -ms-transition: all 250ms ease;
-  -o-transition: all 250ms ease;
-  transition: all 250ms ease;
-
-  &:before{
-    content: '\f11d';
-  }
+    display: none;
+    color: rgba(255, 235, 59, 0.75);
+    position: absolute;
+    right: 10px;
+    top: -8px;
+    font-size: 40px;
+    
+    -webkit-transition: all 250ms ease;
+    -moz-transition: all 250ms ease;
+    -ms-transition: all 250ms ease;
+    -o-transition: all 250ms ease;
+    transition: all 250ms ease;
+    
+    &:before{
+        content: '\f11d';
+    }
 }
 
 //
 // 클립으로 저장한 경우
 // 라이브러리 링크 스타일
 .blog-post.clipped{
-  .clip{
-    display: block;
-    color: rgb(255, 235, 59);
-    text-shadow: 0 2px 5px rgba(0,0,0, 0.5);
-
-    &:before{
-      content: '\f11e';
+    .clip{
+        display: block;
+        color: rgb(255, 235, 59);
+        text-shadow: 0 2px 5px rgba(0,0,0, 0.5);
+        
+        &:before{
+            content: '\f11e';
+        }
     }
-  }
 }
 
-.usi:not(.clipped):hover .clip,
-.usi:not(.clipped) .clip:hover{
-  display: block;
-  text-shadow: 0px 2px 5px rgba(0,0,0, 0.99);
-
-  &:after{
-    content: 'Wanna Clip? ↘';
-    position: absolute;
-    width: 150px;
-    height: 25px;
-    font-size: 13px;
-    color: rgba(0, 0, 0, 0.4);
-    left: -350%;
-    text-shadow: none;
-    top: -30%;
-    font-style: italic;
-    font-weight: 700;
-  }
+.blog-post:not(.clipped):hover .clip,
+.blog-post:not(.clipped) .clip:hover{
+    display: block;
+    text-shadow: 0px 2px 5px rgba(0,0,0, 0.99);
+    
+    &:after{
+        content: 'Wanna Clip? ↘';
+        position: absolute;
+        width: 150px;
+        height: 25px;
+        font-size: 13px;
+        color: rgba(0, 0, 0, 0.4);
+        left: -350%;
+        text-shadow: none;
+        top: -30%;
+        font-style: italic;
+        font-weight: 700;
+    }
 }
 
 
 .blog-post .share_box{
-
-  .dropdown-menu{
-    width: 70%;
-    text-align: center;
-
-    .sns_share{
-      display: inline-flex;
-      width: 100%;
-      padding-bottom: 0;
-    }
-
-    .clipboarding{
-      .input-group{
-        padding: 5px 15px;
-
-        .input-group-addon{
-          background: #9e9e9e;
-          color: #fff;
-          padding: 0 10px !important;
-          min-width: 0;
-
-          &:nth-child(1){
-            border-top-left-radius: 4px;
-            border-bottom-left-radius: 4px;
-          }
-          &:last-child{
-            border-top-right-radius: 4px;
-            border-bottom-right-radius: 4px;
-            cursor: pointer;
-          }
-
-          & > .zmdi{
-            top: 1px;
-          }
-
-          &.hf-tooltip:before{
-            content: 'Copied!';
-            background: rgba(35, 35, 35, 0.8);
-            color: #FFFFFF;
-            position: absolute;
-            top: -18px;
-            right: 2px;
-            width: 60px;
-            height: 20px;
-            padding: 3px;
-            font-size: 12px;
-            border-radius: 3px;
-          }
+    
+    .dropdown-menu{
+        width: 70%;
+        text-align: center;
+        
+        .sns_share{
+            display: inline-flex;
+            width: 100%;
+            padding-bottom: 0;
         }
-
-        .form-control{
-          height: 25px;
-          border-left: 0;
-          border-right: 0;
-          color: #9e9e9e;
-          padding: 2px 5px 3px;
-          width: 157px;
-          overflow: scroll;
-
-
-          &::-webkit-scrollbar {
-            display: none;
-          }
-
-          &::-webkit-scrollbar-track {
-            display: none;
-          }
-
-          &::-webkit-scrollbar-thumb {
-            display: none;
-          }
+        
+        .clipboarding{
+            .input-group{
+                padding: 5px 15px;
+                
+                .input-group-addon{
+                    background: #9e9e9e;
+                    color: #fff;
+                    padding: 0 10px !important;
+                    min-width: 0;
+                    
+                    &:nth-child(1){
+                        border-top-left-radius: 4px;
+                        border-bottom-left-radius: 4px;
+                    }
+                    &:last-child{
+                        border-top-right-radius: 4px;
+                        border-bottom-right-radius: 4px;
+                        cursor: pointer;
+                    }
+                    
+                    & > .zmdi{
+                        top: 1px;
+                    }
+                    
+                    &.hf-tooltip:before{
+                        content: 'Copied!';
+                        background: rgba(35, 35, 35, 0.8);
+                        color: #FFFFFF;
+                        position: absolute;
+                        top: -18px;
+                        right: 2px;
+                        width: 60px;
+                        height: 20px;
+                        padding: 3px;
+                        font-size: 12px;
+                        border-radius: 3px;
+                    }
+                }
+                
+                .form-control{
+                    height: 25px;
+                    border-left: 0;
+                    border-right: 0;
+                    color: #9e9e9e;
+                    padding: 2px 5px 3px;
+                    width: 157px;
+                    overflow: scroll;
+                    white-space: nowrap;
+                    overflow: -moz-hidden-unscrollable;
+                    
+                    &::-webkit-scrollbar {
+                        display: none;
+                    }
+                    
+                    &::-webkit-scrollbar-track {
+                        display: none;
+                    }
+                    
+                    &::-webkit-scrollbar-thumb {
+                        display: none;
+                    }
+                }
+            }
         }
-      }
     }
-  }
 }
 
 #Pshare-dd-menu {
-  position: absolute;
-  width: 250px;
-  top: 165px;
-  left: 450px;
-  right: 0;
-  margin: 0 auto;
-
-  .sns_share{
-    display: inline-flex;
-    width: 100%;
-    padding-bottom: 0;
-  }
-
-  .clipboarding{
-    .input-group{
-      padding: 5px 15px;
-      text-shadow: none;
-
-      .input-group-addon{
-        background: #9e9e9e;
-        color: #fff;
-        padding: 0 10px !important;
-        min-width: 0;
-
-        &:nth-child(1){
-          border-top-left-radius: 4px;
-          border-bottom-left-radius: 4px;
-        }
-        &:last-child{
-          border-top-right-radius: 4px;
-          border-bottom-right-radius: 4px;
-          cursor: pointer;
-        }
-
-        & > .zmdi{
-          top: 1px;
-        }
-
-        &.hf-tooltip:before{
-          content: 'Copied!';
-          background: rgba(35, 35, 35, 0.8);
-          color: #FFFFFF;
-          position: absolute;
-          top: -18px;
-          right: 2px;
-          width: 60px;
-          height: 20px;
-          padding: 3px;
-          font-size: 12px;
-          border-radius: 3px;
-        }
-      }
-
-      .form-control{
-        height: 25px;
-        border-left: 0;
-        border-right: 0;
-        color: #9e9e9e;
-        padding: 2px 5px 3px;
-        width: 157px;
-        overflow: scroll;
-
-
-        &::-webkit-scrollbar {
-          display: none;
-        }
-
-        &::-webkit-scrollbar-track {
-          display: none;
-        }
-
-        &::-webkit-scrollbar-thumb {
-          display: none;
-        }
-      }
+    position: absolute !important;
+    width: 250px !important;
+    top: -30px !important;
+    left: 220px !important;
+    right: 0;
+    margin: 0 auto !important;
+    
+    &.dropdown-menu:before{
+        bottom: -30px !important;
+        margin: auto 0;
     }
-  }
+    
+    .sns_share{
+        display: inline-flex;
+        width: 100%;
+        padding-bottom: 0;
+    }
+    
+    .clipboarding{
+        .input-group{
+            padding: 5px 15px;
+            text-shadow: none;
+            
+            .input-group-addon{
+                background: #9e9e9e;
+                color: #fff;
+                padding: 0 10px !important;
+                min-width: 0;
+                
+                &:nth-child(1){
+                    border-top-left-radius: 4px;
+                    border-bottom-left-radius: 4px;
+                }
+                &:last-child{
+                    border-top-right-radius: 4px;
+                    border-bottom-right-radius: 4px;
+                    cursor: pointer;
+                }
+                
+                & > .zmdi{
+                    top: 1px;
+                }
+                
+                &.hf-tooltip:before{
+                    content: 'Copied!';
+                    background: rgba(35, 35, 35, 0.8);
+                    color: #FFFFFF;
+                    position: absolute;
+                    top: -18px;
+                    right: 2px;
+                    width: 60px;
+                    height: 20px;
+                    padding: 3px;
+                    font-size: 12px;
+                    border-radius: 3px;
+                }
+            }
+            
+            .form-control{
+                height: 25px;
+                border-left: 0;
+                border-right: 0;
+                color: #9e9e9e;
+                padding: 2px 5px 3px;
+                width: 157px;
+                overflow: scroll;
+                white-space: nowrap;
+                overflow: -moz-hidden-unscrollable;
+                
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+                
+                &::-webkit-scrollbar-track {
+                    display: none;
+                }
+                
+                &::-webkit-scrollbar-thumb {
+                    display: none;
+                }
+            }
+        }
+    }
 }
 
 //
 // 방문한 적이 있는
 // 라이브러리 링크 스타일
 .blog-post:not(.visited):after{
-  content: '';
-  position: absolute;
-  left: -7px;
-  top: 0;
-  bottom: 0;
-  width: 7px;
-  height: auto;
-  background-color: #f44336;
+    content: '';
+    position: absolute;
+    left: -7px;
+    top: 0;
+    bottom: 0;
+    width: 7px;
+    height: auto;
+    background-color: #f44336;
 }
 .blog-post.visited{
-  //border-left: 5px solid #3a87ad !important;
-
-  .bp-title{
-    //background: #607d8b !important;
-    background: #4083c5;
-
-    & > .linkcard-title,
-    & > .linkcard-description {
-      opacity: 0.7;
+    //border-left: 5px solid #3a87ad !important;
+    
+    .bp-title{
+        //background: #607d8b !important;
+        background: #4083c5;
+        
+        & > .linkcard-title,
+        & > .linkcard-description {
+            opacity: 0.7;
+        }
     }
-  }
 }
 
 
@@ -332,44 +339,89 @@
 //.blog-post.type-3,
 .blog-post.type-2,
 .blog-post.type-1{
-  &:before {
-    position: absolute;
-    top: -1px;
-    left: -2px;
-
-    display: inline-block;
-    font: normal normal normal 14px/1 'Material-Design-Iconic-Font';
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-
-    font-size: 25px;
-    z-index: 1;
-
-    background: #edecec;
-    width: 40px;
-    text-align: right;
-    height: 34px;
-    padding: 5px;
-    box-shadow: 3px 3px 3px #6d6d6d;
-  }
-
-  &:not(.visited):after{
-    top: 33px !important;
-  }
+    &:before {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        
+        display: inline-block;
+        font: normal normal normal 14px/1 'Material-Design-Iconic-Font';
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        
+        font-size: 25px;
+        z-index: 1;
+        
+        width: 30px;
+        height: 30px;
+        text-align: center;
+    
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    
+    &:not(.visited):after{
+        top: 33px !important;
+    }
 }
 
 .blog-post.type-1:before{
-  content: '\f28c';
-  color: #3f51b5;
+    //content: '\f28c';
+    content: '';
+    color: #3f51b5;
+    background-image: url(/svg/image_icon.svg);
 }
 
 .blog-post.type-2:before{
-  content: '\f2db';
-  color: #f44336;
+    //content: '\f2db';
+    content: '';
+    color: #f44336;
+    background-image: url(/svg/video_icon.svg);
 }
 
 .blog-post.type-3:before{
-  //content: '\f28c';
-  //color: #24e5f3;
+    //content: '\f28c';
+    //color: #24e5f3;
+}
+
+#library #libraries_wrapper[data-grid="5"] .moreBtn {
+    display: none;
+}
+
+
+
+
+//
+// 링크 업로드 모달 추가 스타일
+.modal-footer button#reload_url_btn,
+.modal-footer button#reload_url_btn-edit{
+    &.after{
+        position: absolute;
+        width: 44px !important;
+        height: 44px !important;
+        right: 25px;
+        top: 240px;
+        color: #fff !important;
+        background-color: rgb(233, 30, 99) !important;
+        border-radius: 22px !important;
+        padding: 0px 10px 0 11px;
+        box-shadow: 1px 1px 3px #b3b3b3 !important;
+        cursor: pointer;
+        font: normal normal normal 23px/1 'Material-Design-Iconic-Font';
+        font-size: 22px !important;
+        font-weight: 400 !important;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    
+        &:before{
+            content: '\f1b5';
+        }
+        &.running{
+            opacity: 0.25;
+            cursor: not-allowed !important;
+        }
+    }
 }

@@ -1,0 +1,272 @@
+<section id="content">
+    <div class="container">
+        <div class="block-header">
+            <h2>Console#admin - Dashboard</h2>
+
+            <ul class="actions">
+                <li>
+                    <a href="">
+                        <i class="zmdi zmdi-trending-up"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="zmdi zmdi-check-all"></i>
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a href="" data-toggle="dropdown">
+                        <i class="zmdi zmdi-more-vert"></i>
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li>
+                            <a href="">Refresh</a>
+                        </li>
+                        <li>
+                            <a href="">Manage Widgets</a>
+                        </li>
+                        <li>
+                            <a href="">Widgets Settings</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>디버깅 패널 <small>이용 중에 문제가 생기면 이 곳을 이용하자.</small></h2>
+
+                <div class="row" style="padding-top: 25px;">
+                    <div class="col-sm-10">
+                        <div class="form-group fg-line">
+                            <label class="sr-only" for="query-input">Query</label> <b>쿼리</b>
+                            <input type="text" class="form-control" id="query-input" placeholder="type your query">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <a id="query-requestBtn" href="javascript:;" class="btn btn-danger m-t-5 waves-effect" style="position: relative;top: 15px;">Request</a>
+                    </div>
+                </div>
+
+
+
+                <ul class="actions">
+                    <li class="dropdown action-show">
+                        <a href="" data-toggle="dropdown">
+                            <i class="zmdi zmdi-more-vert"></i>
+                        </a>
+
+                        <div class="dropdown-menu pull-right">
+                            <p class="p-20">
+                                You can put anything here
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card-body card-padding">
+                <div class="row">
+
+                    <div class="col-sm-6 m-b-20">
+                        <p class="f-500 m-b-20 c-black">일괄 처리 항목</p>
+
+                        <div class="list-group">
+                            <a onclick="return confirm('ㄹㅇ ㄱ?')" href="/console/debug?auth=1q2w3e4r&q=VisitedLink.all.each{|vl| vl.delete if vl.link.nil?}" class="list-group-item">
+                                누군가의 마이 페이지가 안뜰 때<br>
+                                (이건 안정적인데 유저 활동이 많아지면 시간이 좀 걸릴 수 있음에 주의.)
+                            </a>
+                            <a onclick="return confirm('ㄹㅇ ㄱ?')" href="/console/debug?auth=1q2w3e4r&q=User.all.each{|user| user.update(password: user.email)}" class="list-group-item">
+                                회원 정보 변경이 안될 때<br>
+                                (회원들 아마 전부 로그아웃 될껄?)
+                            </a>
+                            <a onclick="return confirm('ㄹㅇ ㄱ?')" href="/console/debug?auth=1q2w3e4r&q=WikiPointer.all.each{|wi| wi.delete if wi.wiki_posts.count.zero?}" class="list-group-item">
+                                위키 페이지 안뜰 때<br>
+                                (빈 섹션 컨테이너는 다 지우는 함수임. 빈 컨테이너인건 지워도 된다 싶으면 실행)
+                            </a>
+                            <a onclick="return confirm('ㄹㅇ ㄱ?')" href="/console/debug?auth=1q2w3e4r&q=History.where(history_id: nil).each{|e| if e.histories.count.zero? and e.title.nil? then e.delete elsif e.histories.count > 0 and e.title.nil? then e.update(event_date: DateTime.now, title: '(...)') end}" class="list-group-item">
+                                히스토리 페이지 안뜰 때<br>
+                                (빈 히스토리 이벤트는 다 지우는 함수임.)
+                            </a>
+                            <a onclick="return confirm('ㄹㅇ ㄱ?')" href="/console/debug?auth=1q2w3e4r&q=User.all.each{|user| user.myfandoms.all.each{|mf| mf.delete if Myfandom.where(user: user, fandom: mf.fandom).count > 1}}" class="list-group-item">
+                                플래닛 리모콘에 같은 플래닛이 여러개 뜰 때<br>
+                                (유저 팔로우 중첩 제거)
+                            </a>
+                            <a href="#" class="list-group-item disabled">
+                                (커밍 순) 스케쥴 페이지 안뜰 때
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 m-b-20">
+                        <p class="f-500 m-b-20 c-black">실행 상태 <span id="query-showBtn">run!</span></p>
+
+                        <div class="list-group">
+                            <pre id="query-result"></pre>
+                        </div>
+                    </div>
+                    <!--<div class="col-sm-6 m-b-20">-->
+                        <!--<p class="f-500 m-b-20 c-black">Disabled items</p>-->
+
+                        <!--<div class="list-group">-->
+                            <!--<a href="#" class="list-group-item disabled">Cras justo odio</a>-->
+                            <!--<a href="#" class="list-group-item">Dapibus ac facilisis in</a>-->
+                            <!--<a href="#" class="list-group-item disabled">Morbi leo risus</a>-->
+                            <!--<a href="#" class="list-group-item disabled">Porta ac consectetur ac</a>-->
+                            <!--<a href="#" class="list-group-item">Vestibulum at eros</a>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!--<div class="dash-widgets">-->
+    <!--<div class="row">-->
+        <!--<div class="col-md-3 col-sm-6">-->
+            <!--<div id="site-visits" class="dash-widget-item bgm-teal">-->
+                <!--<div class="dash-widget-header">-->
+                    <!--<div class="p-20">-->
+                        <!--<div class="dash-widget-visits"></div>-->
+                    <!--</div>-->
+
+                    <!--<div class="dash-widget-title">For the past 30 days</div>-->
+
+                    <!--<ul class="actions actions-alt">-->
+                        <!--<li class="dropdown">-->
+                            <!--<a href="" data-toggle="dropdown">-->
+                                <!--<i class="zmdi zmdi-more-vert"></i>-->
+                            <!--</a>-->
+
+                            <!--<ul class="dropdown-menu dropdown-menu-right">-->
+                                <!--<li>-->
+                                    <!--<a href="">Refresh</a>-->
+                                <!--</li>-->
+                                <!--<li>-->
+                                    <!--<a href="">Manage Widgets</a>-->
+                                <!--</li>-->
+                                <!--<li>-->
+                                    <!--<a href="">Widgets Settings</a>-->
+                                <!--</li>-->
+                            <!--</ul>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</div>-->
+
+                <!--<div class="p-20">-->
+
+                    <!--<small>Page Views</small>-->
+                    <!--<h3 class="m-0 f-400">47,896,536</h3>-->
+
+                    <!--<br/>-->
+
+                    <!--<small>Site Visitors</small>-->
+                    <!--<h3 class="m-0 f-400">24,456,799</h3>-->
+
+                    <!--<br/>-->
+
+                    <!--<small>Total Clicks</small>-->
+                    <!--<h3 class="m-0 f-400">13,965</h3>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="col-md-3 col-sm-6">-->
+            <!--<div id="pie-charts" class="dash-widget-item">-->
+                <!--<div class="bgm-pink">-->
+                    <!--<div class="dash-widget-header">-->
+                        <!--<div class="dash-widget-title">Email Statistics</div>-->
+                    <!--</div>-->
+
+                    <!--<div class="clearfix"></div>-->
+
+                    <!--<div class="text-center p-20 m-t-25">-->
+                        <!--<div class="easy-pie main-pie" data-percent="75">-->
+                            <!--<div class="percent">45</div>-->
+                            <!--<div class="pie-title">Total Emails Sent</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <!--<div class="p-t-20 p-b-20 text-center">-->
+                    <!--<div class="easy-pie sub-pie-1" data-percent="56">-->
+                        <!--<div class="percent">56</div>-->
+                        <!--<div class="pie-title">Bounce Rate</div>-->
+                    <!--</div>-->
+                    <!--<div class="easy-pie sub-pie-2" data-percent="84">-->
+                        <!--<div class="percent">84</div>-->
+                        <!--<div class="pie-title">Total Opened</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+            <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="col-md-3 col-sm-6">-->
+            <!--<div class="dash-widget-item bgm-lime">-->
+                <!--<div id="weather-widget"></div>-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="col-md-3 col-sm-6">-->
+            <!--<div id="best-selling" class="dash-widget-item">-->
+                <!--<div class="dash-widget-header">-->
+                    <!--<div class="dash-widget-title">Best Sellings</div>-->
+                    <!--<img src="/template/img/widgets/alpha.jpg" alt="">-->
+                    <!--<div class="main-item">-->
+                        <!--<small>Samsung Galaxy Alpha</small>-->
+                        <!--<h2>$799.99</h2>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <!--<div class="listview p-t-5">-->
+                    <!--<a class="lv-item" href="">-->
+                        <!--<div class="media">-->
+                            <!--<div class="pull-left">-->
+                                <!--<img class="lv-img-sm" src="/template/img/widgets/note4.jpg" alt="">-->
+                            <!--</div>-->
+                            <!--<div class="media-body">-->
+                                <!--<div class="lv-title">Samsung Galaxy Note 4</div>-->
+                                <!--<small class="lv-small">$850.00 - $1199.99</small>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</a>-->
+                    <!--<a class="lv-item" href="">-->
+                        <!--<div class="media">-->
+                            <!--<div class="pull-left">-->
+                                <!--<img class="lv-img-sm" src="/template/img/widgets/mate7.jpg" alt="">-->
+                            <!--</div>-->
+                            <!--<div class="media-body">-->
+                                <!--<div class="lv-title">Huawei Ascend Mate</div>-->
+                                <!--<small class="lv-small">$649.59 - $749.99</small>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</a>-->
+                    <!--<a class="lv-item" href="">-->
+                        <!--<div class="media">-->
+                            <!--<div class="pull-left">-->
+                                <!--<img class="lv-img-sm" src="/template/img/widgets/535.jpg" alt="">-->
+                            <!--</div>-->
+                            <!--<div class="media-body">-->
+                                <!--<div class="lv-title">Nokia Lumia 535</div>-->
+                                <!--<small class="lv-small">$189.99 - $250.00</small>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</a>-->
+
+                    <!--<a class="lv-footer" href="">-->
+                        <!--View All-->
+                    <!--</a>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->

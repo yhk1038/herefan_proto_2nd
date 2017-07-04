@@ -1,0 +1,67 @@
+<%= render partial: '/fandoms/partials/planet_header' %>
+
+<%= render partial: '/layouts/partials/sub_nav', locals: {tabs: @tabs} %>
+
+<section id="wiki-ground" data-page="post">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="main_contents-box" class="card">
+                    <p><%= link_to '< record list', fandom_wiki_posts_path(@fandom, wiki_pointer_id: @wiki_pointer.id) %></p>
+                    <p>
+                        <%= "#{@wiki_pointer.sort_num}. #{@wiki_posts.last.title}" %>
+                        <span class="detail-version" style="font-size: 18px; color: #666;">Ver. <%= @wiki_posts.ids.index(@wiki_post.id) + 1 %></span>
+                        <span class="detail-datetime" style="font-size: 16px; font-weight: 400; color: #999;"><%= @wiki_post.created_at.strftime('%B %e, %Y %l:%M %p') %></span>
+                    </p>
+
+                    <div class="author">
+                        <p>edited by :</p>
+                        <p><img src="<%= @wiki_post.user.img ? @wiki_post.user.img : @wiki_post.user.image.to_s %>"><span><%= @wiki_post.user.nickname %></span></p>
+                        <p>Description :</p>
+                        <p><%= @wiki_post.commit_msg %></p>
+                    </div>
+
+                    <div>
+                        <p><%== @wiki_post.content %></p>
+                    </div>
+
+                    <div class="pagenation">
+                        <ul>
+                            <% bp = before_wiki_post %>
+                            <% np = next_wiki_post %>
+
+                            <% unless bp[:end] %>
+                                <li class="<%= 'lastit' if np[:end] %>">
+                                    <a href="<%= bp[:url] %>" onclick="<%= 'return false;' if bp[:end] %>"><span class="_label label_prev"><i class="zmdi zmdi-chevron-up"></i> prev</span> <span><%= bp[:end] ? 'End of list (start with current post)' : bp[:msg].truncate(70) %></span></a>
+                                </li>
+                            <% end %>
+                            <% unless np[:end] %>
+                                <li>
+                                    <a href="<%= np[:url] %>" onclick="<%= 'return false;' if np[:end] %>"><span class="_label label_next"><i class="zmdi zmdi-chevron-down"></i> next</span> <span><%= np[:end] ? 'End of list (end with currrent post)' : np[:msg].truncate(70) %></span></a>
+                                </li>
+                            <% end %>
+                        </ul>
+                    </div>
+
+                    <!--<#%= link_to 'New Wiki Post', new_fandom_wiki_post_path(@fandom) %>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .border{
+        border: 1px solid #000000;
+    }
+    .table-bordered {
+        border: 2px solid #e0e0e0;
+    }
+</style>
+
+
+
+<!--
+<%#= link_to 'Edit', edit_wiki_post_path(@wiki_post) %> |
+<%#= link_to 'Back', wiki_posts_path %>
+-->

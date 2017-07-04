@@ -1,0 +1,94 @@
+<%
+    link.card_init(get_current_user_id)
+    info = get_link_info(link, @user)
+%>
+<div class="task">
+    <div id="link_<%= link.id %>"
+         class="card blog-post link_wrapping_anchor no-mute <%= 'usi' if user_signed_in? %> <%= link.clip_display %> <%= link.visit_display %> <%= link.type_display %>"
+         data-content_id="<%= link.id %>"
+         data-typee="<%= link.typee %>"
+         data-content_time="<%= link.created_at.to_s %>"
+         data-hf_like_count="<%= link.likes.count %>"
+         data-hf_visit_count="<%= link.visited_count %>"
+         data-hf_clip_count="<%= link.clips.count %>"
+         noiser="<%= get_current_user_id %>">
+        <div class="bp-header">
+            <a href="<%= link.url %>" target="_blank">
+                <a class="clip_btn" onclick="<%= info[:no_follow_script] %>" action_status="<%= link.clip_remote_method %>" action_target="<%= link.clip_remote_target %>" action_noiser="<%= get_current_user_id %>">
+                    <span id="cliped_<%= link.id %>" class="clip zmdi zmdi-bookmark-outline"></span>
+                </a>
+                <a href="<%= link.url %>" target="_blank">
+                    <img class="link_main_image" src="<%= link.image %>" height="171" alt="">
+                </a>
+                <ul class="actions actions-alt moreBtn">
+                    <li class="dropdown">
+                        <a href="#" class="no-vl" data-toggle="dropdown" aria-expanded="false"><i class="zmdi zmdi-more-vert"></i></a>
+                        <ul class="dropdown-menu no-vl dropdown-menu-right">
+                            <% if permitted_user?(link, @user, current_user) %>
+                                <li><%= link_to 'edit', 'javascript:;', onclick: info[:edit_script] %></li>
+                                <li><%= button_to 'Destroy', link, method: :delete, onclick: "return confirm('Are you sure?')", class: 'likes_link_to' %></li>
+                            <% else %>
+                                <li><%= link_to 'report', 'javascript:;', onclick: info[:report_script] %></li>
+                            <% end %>
+                        </ul>
+                    </li>
+                </ul>
+            </a>
+            <a href="<%= link.url %>" target="_blank" class="bp-title">
+                <h2 class="linkcard-title"><%== link.title %></h2>
+                <small class="linkcard-description"><%== link.description.truncate(100) %></small>
+                <p class="link-url"><%= link.url %></p>
+            </a>
+            <ul id="actions_<%= link.id %>" class="actions_box design row">
+                <a class="col-xs-6 action viewcount" href="<%= link.url %>" target="_blank">
+                    <span class="zmdi zmdi-eye"></span> <span class="counter"><%= link.visited_count %></span>
+                </a>
+                <a class="col-xs-5 action maum" onclick="<%= info[:no_follow_script] %>" action_status="<%= link.like_remote_method %>" action_target="<%= link.like_remote_target %>" action_noiser="<%= get_current_user_id %>">
+                    <span class="zmdi <%= link.like_display %>"></span> <span class="counter"><%= link.likes.count %></span>
+                </a>
+                <div class="dropdown share_box col-xs-1">
+                    <a data-toggle="dropdown" aria-expanded="false" class="no-vl"><i class="zmdi zmdi-share"></i></a>
+                    <ul class="dropdown-menu pull-right no-vl go-social" style="width: 250px;">
+                        <li role="presentation" class="dropdown-header">share this contents!</li>
+                        <li class="sns_share card-body clearfix">
+                            <a class="col-xs-4" href="http://www.facebook.com/sharer/sharer.php?u=<%= link.url %>" onclick="window.open(this.href); return false"><img src="/template/img/social/facebook-128.png" class="img-responsive" alt=""></a>
+                            <a class="col-xs-4" href="https://twitter.com/intent/tweet?text=<%= link.message.gsub(' ','_') %>&url=<%= link.url %>" onclick="window.open(this.href); return false"><img src="/template/img/social/twitter-128.png" class="img-responsive" alt=""></a>
+                            <a class="col-xs-4" href="https://plus.google.com/share?url=<%= link.url %>" onclick="window.open(this.href); return false"><img src="/template/img/social/googleplus-128.png" class="img-responsive" alt=""></a>
+                        </li>
+                        <li class="divider"></li>
+                        <li class="clipboarding">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="zmdi zmdi-globe"></i></span>
+                                <div id="text_url_<%= link.id %>" class="form-control fc-alt" aria-label="Amount (to the nearest dollar)"><%= link.url %></div>
+                                <span target="<%= link.id %>" onclick="copyToClipboard('#text_url_<%= link.id %>')" class="input-group-addon url_copy"><i class="zmdi zmdi-copy"></i></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </ul>
+        </div>
+
+        <a href="<%= link.url %>" target="_blank">
+            <div class="user_profile">
+                <div class="lv-item">
+                    <div class="media">
+
+                        <div class="pull-left">
+                            <div class="lv-img-sm bg_img_cover" style="background: url('<%= info[:author].profile_img %>');" data-pin-nopin="true"></div>
+                        </div>
+                        <div class="media-body">
+                            <div class="lv-title"><%= info[:author].nickname %></div>
+                            <small class="lv-small"><%= distance_of_time_in_words(link.created_at.to_time, Time.now) %> before</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <a href="<%= link.url %>" target="_blank">
+            <div class="p-20 msg-box">
+                <p class="msg"><%= link.message %></p>
+            </div>
+        </a>
+    </div>
+</div>

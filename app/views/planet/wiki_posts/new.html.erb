@@ -1,0 +1,40 @@
+<%= render partial: '/fandoms/partials/planet_header' %>
+
+<%= render partial: '/layouts/partials/sub_nav', locals: {tabs: @tabs} %>
+
+<section id="wiki-ground" data-page="new">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="main_contents-box" class="card">
+                    <p><%= @fandom.name %></p>
+                    <p><span class="edge"><%== "#{@wiki_pointer.sort_num}. #{'<span style="font-style: italic;">Click for Enter the title of this section plz :)</span>'.html_safe}" %></span></p>
+
+                    <div class="m-t-20">
+                        <%= render 'form', wiki_post: @wiki_post %>
+
+                        <!--
+                        <%#= link_to 'Show', fandom_wiki_post_path(@fandom, @wiki_post) %> |
+                        <%#= link_to 'Back', :back %>
+                        -->
+                    </div>
+
+                    <br>
+
+                    <!--<#%= link_to 'New Wiki Post', new_fandom_wiki_post_path(@fandom) %>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .border{
+        border: 1px solid #000000;
+    }
+    .table-bordered {
+        border: 2px solid #e0e0e0;
+    }
+</style>
+
+<%= link_to 'Back', fandom_wikis_path(@fandom) %>

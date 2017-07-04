@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  wiki: one
+  title: MyString
+  content: MyText
+  commit_msg: MyString
+  row_count: 1
+  url: MyString
+
+two:
+  user: two
+  wiki: two
+  title: MyString
+  content: MyText
+  commit_msg: MyString
+  row_count: 1
+  url: MyString

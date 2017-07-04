@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  wiki: one
+  sort_num: 1
+
+two:
+  wiki: two
+  sort_num: 1

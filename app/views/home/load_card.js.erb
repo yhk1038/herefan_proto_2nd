@@ -1,0 +1,35 @@
+
+////////// Start Solution
+
+var links = [];
+
+<% @links.each do |link| %>
+
+    var link_dom = $("<%= escape_javascript(render '/links/partials/link_card', link: link) %>")[0];
+
+    links.push(link_dom);
+
+<% end %>
+
+// console.log('links array: ', links);
+// console.log('grid size: ', grid_size);
+
+// Call prepend function in Grid-a-licious
+
+// console.log('links array size: ', links.length);
+if (links.length < 30 && links.length > 0){
+    $("#libraries_wrapper").gridalicious('append', links);
+    bindingActions();
+    $load_count = 'end';
+
+} else if (links.length === 0) {
+    swal('Finished!', '', 'info');
+    $load_count = 'end';
+
+} else {
+    $("#libraries_wrapper").gridalicious('append', links);
+    bindingActions();
+    $load_count = $load_count + 1;
+}
+
+////////// End Solution

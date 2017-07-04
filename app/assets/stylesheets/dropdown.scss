@@ -1,0 +1,36 @@
+@import "utility/utill";
+
+// 드롭다운 엣지 기본
+.dropdown-menu{
+    &:before {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 0;
+        top: -20px;
+        right: 15px;
+        border-bottom: 10px solid #fff;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-top: 10px solid transparent;
+        
+    }
+}
+
+// 개별 플래닛 페이지 공유 드롭다운의 엣지
+#Pshare-dd-menu {
+    &.dropdown-menu{
+        &:before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            top: 60px;
+            left: -20px;
+            border-bottom: 10px solid transparent;
+            border-left: 10px solid transparent;
+            border-right: 10px solid #FFF;
+            border-top: 10px solid transparent;
+        }
+    }
+}

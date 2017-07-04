@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fandom: one
+  user: one
+  userlists: MyText
+  fd_logo: MyString
+  fd_bg_img: MyString
+  fd_bg_color: MyString
+
+two:
+  fandom: two
+  user: two
+  userlists: MyText
+  fd_logo: MyString
+  fd_bg_img: MyString
+  fd_bg_color: MyString

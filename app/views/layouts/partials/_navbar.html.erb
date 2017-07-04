@@ -1,0 +1,97 @@
+<header id="header" class="hf-transition clearfix" data-current-skin="blue">
+    <ul class="container header-inner">
+        <li id="menu-trigger" data-trigger="#sidebar" class="only-show-xs">
+            <div class="line-wrap">
+                <div class="line top"></div>
+                <div class="line center"></div>
+                <div class="line bottom"></div>
+            </div>
+        </li>
+
+        <li class="logo">
+            <a href="<%= root_path %>">
+                <img src="/svg/main_logo2.svg" alt="">
+            </a>
+        </li>
+
+        <li class="main_menu hidden-xs">
+            <ul class="top-menu">
+                <% nav_menu_lists.each do |menu| %>
+                    <li class="<%= 'active' if is_active_NavBarMenu? menu %>">
+                        <%= link_to menu[:name], menu[:path] %>
+                    </li>
+                <% end %>
+            </ul>
+        </li>
+
+        <li class="pull-right">
+            <ul class="top-menu">
+                <!--<li id="top-search">-->
+                    <!--<a href=""><i class="tm-icon zmdi zmdi-search"></i></a>-->
+                <!--</li>-->
+
+                <% if user_signed_in? %>
+                    <li id="top-fandoms" class="topFD">
+                        <a href="#" onclick="return false;" class="active">
+                            my planets <i class="zmdi zmdi-caret-up"></i>
+                        </a>
+                    </li>
+                <% end %>
+
+                <li class="dropdown hidden-xs" style="padding: 2px 0; width: 110px;">
+                    <% if user_signed_in? %>
+                        <%= link_to '', data: {toggle: 'dropdown'} do %>
+                            <ul class="new_nav_profile">
+                                <li class="nav_profile2"><div class="bg_img_cover" style="background: url(<%= current_user.img.nil? ? image_with_sns(current_user.image.to_s) : current_user.img %>)"></div></li>
+                                <li class="nav_profile2-name"><%= current_user.nickname %> <i class="zmdi zmdi-caret-down"></i></li>
+                            </ul>
+                        <% end %>
+                        <div class="dropdown-menu dropdown-menu-lg pull-right" style="width: 80px; top: 50px; right: 30px; min-width: 150px;">
+                            <div class="listview">
+                                <div class="lv-body" style="min-height: initial;">
+                                    <a class="lv-item" href="<%= mypage_watched_path %>">
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <div class="lv-title">my page</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <% if current_user.try(:admin?) %>
+                                        <a class="lv-item" href="/admin">
+                                            <div class="media">
+                                                <div class="media-body">
+                                                    <div class="lv-title">admin</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    <% end %>
+                                    <div class="lv-item" style="border-bottom: none">
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <a class="lv-title signout" href="/users/sign_out">logout</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% else %>
+                        <%= link_to 'Login', '', id: 'login_button', class: 'btn btn-default no-waves', method: :delete, data: {toggle: 'modal', target: '#login_modal'} %>
+                    <% end %>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <!-- Top Search Content -->
+    <!--<div id="top-search-wrap">-->
+        <!--<div class="tsw-inner">-->
+            <!--<input type="text">-->
+            <!--<i id="top-search-close" class="zmdi zmdi-close"></i>-->
+        <!--</div>-->
+    <!--</div>-->
+</header>
+
+<% if user_signed_in? %>
+    <%= render '/layouts/partials/my_fandoms' %>
+<% end %>
