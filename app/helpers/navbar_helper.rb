@@ -10,6 +10,18 @@ module NavbarHelper
         end
     end
     
+    
+    def is_active_NavBarMenu? menu
+        is_active = false
+        if params[:controller] == menu[:controller]
+            is_active = true
+            if params[:controller] == 'fandoms' && params[:action] != 'index'
+                is_active = false
+            end
+        end
+        is_active
+    end
+    
     private
     
     def nav_menu_lists_desktop

@@ -1,4 +1,317 @@
-#header.init_header {
-    background-color: #ffde55 !important;
-    //box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1) !important;
+@import "utility/utill";
+
+/********************************/
+/*      Follow List Style       */
+/********************************/
+
+// 플래닛 리모콘 > 버튼
+#top-fandoms a:not(.active){
+    .zmdi-caret-up:before{
+        content: '\f2f2';
+    }
+}
+
+
+// 플래닛 리모콘 > 박스
+#follow_list_box{
+    top: 75px !important;
+    
+    &.hi_de{
+        top: -15px !important;
+    }
+}
+
+@media (max-width: 430px) {
+    #follow_list_box {
+        display: none;
+    }
+}
+
+
+// 팔로우 리모콘 그룹
+#follow_list_box {
+    position: fixed;
+    top: 72px;
+    right: 10%;
+    background: none;
+    text-align: right;
+    z-index: 4;
+    text-shadow: 1px 1px 2px #000;
+    
+    .follow_list_wrap{
+        .follow_move {
+            display: none;
+            font-size: 48px;
+            color: #eaeaea;
+            position: relative;
+            cursor: pointer;
+        
+            &.follow_left{
+                float: left;
+                left: 0;
+            }
+            &.follow_right{
+                float: right;
+                right: 0;
+            }
+        }
+    }
+}
+
+#follow_list_box .follow_list_wrap .follow_list{
+    max-width: 94%;
+    display: inline-block;
+    padding: 10px 5px;
+    position: relative;
+    top: 0;
+    
+    &:hover{
+        top: -10px;
+        
+        .follow_artists{
+            border: 1px solid #00c9c6;
+            
+            span{
+                opacity: 1;
+                display: block;
+            }
+        }
+    }
+    &.active{
+        top: -100px;
+    }
+    
+    // 팔로우 플래닛 뱃지 : 로고
+    .follow_artists{
+        width: 42px;
+        height: 42px;
+        border: 2px solid #efefef;
+        border-radius: 100px;
+        position: relative;
+        display: inline-flex;
+        margin: 2px 5px 0;
+        cursor: pointer;
+        box-shadow: 0 2px 1px rgba(0, 0, 0, 0.5);
+        background-repeat: no-repeat !important;
+        background-size: cover !important;
+        background-position: center !important;
+        background-color: #FFFFFF !important;
+        
+        & > span{
+            display: none;
+            
+            position: absolute;
+            width: 100px;
+            height: 34px;
+            
+            bottom: -40px;
+            left: -30px;
+            right: 0;
+            margin-left: auto;
+            margin-right: auto;
+            
+            color: #FFFFFF;
+            font-size: 15px;
+            font-weight: 600;
+            text-shadow: 0 2px 1px rgba(0, 0, 0, 0.5);
+            line-height: 1;
+            text-align: center;
+            
+            transition: all 200ms ease;
+        }
+    }
+}
+
+
+// 팔로우 플래닛 추가하는 버튼 (없어진듯?)
+#add_follow_btn.follow_artists {
+    background: #777;
+    
+    & > span:nth-child(1){
+        width: initial;
+        height: initial;
+        left: 0;
+        bottom: initial;
+        margin: 7.5px 13px;
+        font-size: 25px;
+        color: #fff;
+        text-shadow: none;
+        opacity: 1;
+        transition: all 400ms ease;
+    }
+    
+    &:hover span:nth-child(1){
+        transform: rotate(180deg);
+    }
+}
+
+
+/********************************/
+/*        Navigation Bar        */
+/********************************/
+
+// 로그인 버튼
+#login_button{
+    position: relative;
+    top: 1px;
+    font-family: nunito, sans-serif;
+    font-weight: 600;
+    color: #00c9c6;
+    background: none;
+    box-shadow: none;
+}
+
+
+// 메인 로고
+#header .logo{
+    position: absolute;
+    left: 30%;
+    right: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-weight: bold;
+    
+    top: 0;         // design
+    height: 100%;   // design
+    
+    a{ // design
+        padding: 0;
+        height: 100%;
+        
+        img{ // design
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+        }
+    }
+}
+
+#header .logo .hf-logo{
+    width: 45px;
+    height: 35px;
+}
+
+
+// 메인 네비게이션바
+#header{
+    z-index: 11;
+    min-height: 60px;
+    background-color: $hf-color_yellow;
+    box-shadow: none !important;
+    
+    &.init_header {     // 전환 네비게이션바 스타일
+        background-color: $hf-color_yellow !important;
+    }
+    
+    .header-inner{
+        padding: 11px 0;
+    }
+    
+    .main_menu a,
+    .top-menu > li a,
+    .top-menu .topFD a{
+        color: #999999;
+        font-size: 16px;
+        text-shadow: 0 0 1px rgba(0, 0, 0, 0.3) !important;
+        
+        &:hover{
+            color: #FFFFFF;
+        }
+    }
+    
+    .main_menu{
+        margin-left: 29px;
+        
+        a{
+            text-transform: uppercase;
+            padding: 7px 20px;
+            font-weight: 700;
+        }
+        
+        .active a{
+            color: #00c9c6 !important;
+        }
+    }
+    
+    .top-menu{
+        & > li{
+            &:before{
+                display: none; // 이거 하나로 상단 좌측 li 의 hover 효과를 무력화 시켰음.
+            }
+        }
+        
+        .topFD{
+            a{
+                font-weight: 700;
+                padding: 7px 0;
+                text-transform: capitalize;
+                
+                &.active{
+                    color: #00c9c6;
+                }
+            }
+        }
+    }
+}
+
+// 네비바 프로필
+#header .top-menu .new_nav_profile{
+    
+    .nav_profile2 {
+        margin: 0 30px;
+        
+        & > .bg_img_cover{
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            top: -3px;
+            left: 0;
+            right: 0;
+            margin: auto;
+            border: 1px solid #ccc;
+        }
+    }
+    
+    .nav_profile2-name {
+        display: none !important;
+    }
+}
+
+// 프로필 사진 클릭 시 떨어지는 드롭다운
+#header .top-menu .dropdown-menu{
+    
+    .listview{
+        
+        .lv-body{
+            padding: 0;
+            
+            .lv-item{
+                padding: 10px 0;
+                border-bottom: 1px solid #ccc;
+                &:hover{
+                    background: #ccc !important;
+                }
+                
+                .media{
+                    .media-body{
+                        .lv-title{
+                            text-align: center;
+                            text-transform: capitalize;
+                            font-weight: 400;
+                            font-size: 18px;
+                            
+                            &.signout{
+                                font-weight: 600;
+                                color: #1bacaa;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

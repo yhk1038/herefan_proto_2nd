@@ -1,38 +1,20 @@
 <%
-    user = link.user
-    user ||= User.first
-    current_user_id = get_current_user_id
-
-    myclips = Clip.where(link: link, user_id: current_user_id)
-    myclips_already = myclips.count.zero? ? false : true
-
-    mylikes = Like.where(link: link, user_id: current_user_id)
-    mylikes_already = mylikes.count.zero? ? false : true
-
-    myvisites = VisitedLink.where(link: link, user_id: current_user_id)
-    myvisites_already = myvisites.count.zero? ? false : true
-
-    visited_count = link.visited_links.pluck(:viewcount).inject(:+)
-
-    open_edit_fandom_modal = "open_edit_modal(#{link.id})"
-    my_fandom = is_my_fandom?(user: @user, fandom: link.fandom)
-    @edit_display       = valid_display_on_user_level(my_fandom, script: open_edit_fandom_modal)
-    @report_display    = valid_display_on_user_level(my_fandom, script: "report_alert(#{link.id}, #{@user&.id ? @user.id : 0});")
-    @noNeedFollow_display = valid_display_on_user_level(my_fandom, mute_level: 'follower')
+    link.card_init(get_current_user_id)
+    info = get_link_info(link, @user)
 %>
 <div class="task">
     <div id="link_<%= link.id %>"
-         class="card blog-post link_wrapping_anchor no-mute <%= 'usi' if user_signed_in? %> <%= 'clipped' if myclips_already %> <%= 'visited' if myvisites_already %> <%= link.typee && link.typee >= 1 && link.typee <= 3 ? "type-#{link.typee}" : '' %>"
+         class="card blog-post link_wrapping_anchor no-mute <%= 'usi' if user_signed_in? %> <%= link.clip_display %> <%= link.visit_display %> <%= link.type_display %>"
          data-content_id="<%= link.id %>"
          data-typee="<%= link.typee %>"
          data-content_time="<%= link.created_at.to_s %>"
          data-hf_like_count="<%= link.likes.count %>"
-         data-hf_visit_count="<%= visited_count %>"
+         data-hf_visit_count="<%= link.visited_count %>"
          data-hf_clip_count="<%= link.clips.count %>"
-         noiser="<%= current_user_id %>">
+         noiser="<%= get_current_user_id %>">
         <div class="bp-header">
             <a href="<%= link.url %>" target="_blank">
-                <a class="clip_btn" onclick="<%= @noNeedFollow_display %>" action_status="<%= myclips_already ? 'delete' : 'post' %>" action_target="<%= myclips_already ? myclips.take.id : link.id %>" action_noiser="<%= current_user_id %>">
+                <a class="clip_btn" onclick="<%= info[:no_follow_script] %>" action_status="<%= link.clip_remote_method %>" action_target="<%= link.clip_remote_target %>" action_noiser="<%= get_current_user_id %>">
                     <span id="cliped_<%= link.id %>" class="clip zmdi zmdi-bookmark-outline"></span>
                 </a>
                 <a href="<%= link.url %>" target="_blank">
@@ -42,11 +24,11 @@
                     <li class="dropdown">
                         <a href="#" class="no-vl" data-toggle="dropdown" aria-expanded="false"><i class="zmdi zmdi-more-vert"></i></a>
                         <ul class="dropdown-menu no-vl dropdown-menu-right">
-                            <% if link.user == current_user || @user&.is_planet_editor?(link.fandom) || @user&.admin %>
-                                <li><%= link_to 'edit', 'javascript:;', onclick: @edit_display %></li>
+                            <% if permitted_user?(link, @user, current_user) %>
+                                <li><%= link_to 'edit', 'javascript:;', onclick: info[:edit_script] %></li>
                                 <li><%= button_to 'Destroy', link, method: :delete, onclick: "return confirm('Are you sure?')", class: 'likes_link_to' %></li>
                             <% else %>
-                                <li><%= link_to 'report', 'javascript:;', onclick: @report_display %></li>
+                                <li><%= link_to 'report', 'javascript:;', onclick: info[:report_script] %></li>
                             <% end %>
                         </ul>
                     </li>
@@ -59,10 +41,10 @@
             </a>
             <ul id="actions_<%= link.id %>" class="actions_box design row">
                 <a class="col-xs-6 action viewcount" href="<%= link.url %>" target="_blank">
-                    <span class="zmdi zmdi-eye"></span> <span class="counter"><%= visited_count ? visited_count : 0 %></span>
+                    <span class="zmdi zmdi-eye"></span> <span class="counter"><%= link.visited_count %></span>
                 </a>
-                <a class="col-xs-5 action maum" onclick="<%= @noNeedFollow_display %>" action_status="<%= mylikes_already ? 'delete' : 'post' %>" action_target="<%= mylikes_already ? mylikes.take.id : link.id %>" action_noiser="<%= current_user_id %>">
-                    <span class="zmdi zmdi-favorite<%= '-outline' unless mylikes_already %>"></span> <span class="counter"><%= link.likes.count %></span>
+                <a class="col-xs-5 action maum" onclick="<%= info[:no_follow_script] %>" action_status="<%= link.like_remote_method %>" action_target="<%= link.like_remote_target %>" action_noiser="<%= get_current_user_id %>">
+                    <span class="zmdi <%= link.like_display %>"></span> <span class="counter"><%= link.likes.count %></span>
                 </a>
                 <div class="dropdown share_box col-xs-1">
                     <a data-toggle="dropdown" aria-expanded="false" class="no-vl"><i class="zmdi zmdi-share"></i></a>
@@ -92,10 +74,10 @@
                     <div class="media">
 
                         <div class="pull-left">
-                            <div class="lv-img-sm bg_img_cover" style="background: url('<%= user.img.nil? ? image_with_sns(user.image.to_s) : user.img %>');" data-pin-nopin="true"></div>
+                            <div class="lv-img-sm bg_img_cover" style="background: url('<%= info[:author].profile_img %>');" data-pin-nopin="true"></div>
                         </div>
                         <div class="media-body">
-                            <div class="lv-title"><%= user.nickname %></div>
+                            <div class="lv-title"><%= info[:author].nickname %></div>
                             <small class="lv-small"><%= distance_of_time_in_words(link.created_at.to_time, Time.now) %> before</small>
                         </div>
                     </div>

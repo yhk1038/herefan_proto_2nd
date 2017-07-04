@@ -1,4 +1,4 @@
-<header id="header" class=" clearfix" data-current-skin="blue">
+<header id="header" class="hf-transition clearfix" data-current-skin="blue">
     <ul class="container header-inner">
         <li id="menu-trigger" data-trigger="#sidebar" class="only-show-xs">
             <div class="line-wrap">
@@ -9,7 +9,6 @@
         </li>
 
         <li class="logo">
-            <%#= link_to app_title, root_path, class: '' %>
             <a href="<%= root_path %>">
                 <img src="/svg/main_logo2.svg" alt="">
             </a>
@@ -18,16 +17,7 @@
         <li class="main_menu hidden-xs">
             <ul class="top-menu">
                 <% nav_menu_lists.each do |menu| %>
-                    <%
-                        is_active = false
-                        if params[:controller] == menu[:controller]
-                            is_active = true
-                            if params[:controller] == 'fandoms' && params[:action] != 'index'
-                                is_active = false
-                            end
-                        end
-                    %>
-                    <li class="<%= 'active' if is_active %>">
+                    <li class="<%= 'active' if is_active_NavBarMenu? menu %>">
                         <%= link_to menu[:name], menu[:path] %>
                     </li>
                 <% end %>
@@ -41,7 +31,7 @@
                 <!--</li>-->
 
                 <% if user_signed_in? %>
-                    <li id="top-fandoms">
+                    <li id="top-fandoms" class="topFD">
                         <a href="#" onclick="return false;" class="active">
                             my planets <i class="zmdi zmdi-caret-up"></i>
                         </a>
@@ -78,7 +68,6 @@
                                     <div class="lv-item" style="border-bottom: none">
                                         <div class="media">
                                             <div class="media-body">
-                                                <!--<a class="hf-btn btn-default btn-warning" href="/users/sign_out" style="width: 100%; text-align: center; text-transform: capitalize">logout</a>-->
                                                 <a class="lv-title signout" href="/users/sign_out">logout</a>
                                             </div>
                                         </div>
@@ -95,12 +84,12 @@
     </ul>
 
     <!-- Top Search Content -->
-    <div id="top-search-wrap">
-        <div class="tsw-inner">
-            <input type="text">
-            <i id="top-search-close" class="zmdi zmdi-close"></i>
-        </div>
-    </div>
+    <!--<div id="top-search-wrap">-->
+        <!--<div class="tsw-inner">-->
+            <!--<input type="text">-->
+            <!--<i id="top-search-close" class="zmdi zmdi-close"></i>-->
+        <!--</div>-->
+    <!--</div>-->
 </header>
 
 <% if user_signed_in? %>

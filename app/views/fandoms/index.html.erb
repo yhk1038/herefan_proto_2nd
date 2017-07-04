@@ -4,7 +4,7 @@
     <!--Do you want to suggest a new Channel?-->
 <!--</button>-->
 
-<section id="channels" class="container card" style="padding-bottom: 50px;">
+<section id="channels" class="container card">
     <div id="sorting_methods">
         <div class="row">
             <div class="col-sm-6"></div>
@@ -20,15 +20,15 @@
             </div>
         </div>
     </div>
-    <div class="row" style="text-align: left; max-width: 960px; margin: auto; padding: 0 60px;">
+    <div class="row">
         <%= render partial: '/fandoms/partials/planet_card_onSelect_published', collection: @fandoms, as: :fandom, locals: {user: @user} %>
     </div>
 
     <% unless @fandoms_not_active.count.zero? %>
         <div class="hf-hr-wrap" style="padding: 0 25%;"></div>
 
-        <div class="row unpublished_channels" style="text-align: left; max-width: 960px; margin-left: auto; margin-right: auto; padding: 0 60px;">
-            <h2 style="text-align: left">fandom waiting list
+        <div class="row unpublished_channels">
+            <h2>fandom waiting list
                 <small>
                     These channels are in preparation.
                     <br>When the proposal reaches 50 people, it will be issued to the official channel.<br>
@@ -63,15 +63,6 @@
         color: #000;
         font-weight: 600;
     }
-    /*div.checkbox label.checked{*/
-        /*color: #000;*/
-        /*font-weight: 600;*/
-    /*}*/
-    /*#suggest_channel_modal .modal-footer #saveBtn:not(.checked){*/
-        /*background: #8fd0cf !important;*/
-        /*color: #DDDDDD !important;*/
-        /*font-size: 16px !important;*/
-    /*}*/
     #suggest_channel_modal .modal-footer #saveBtn{
         background: #00c9c6 !important;
         color: #eeeeee !important;

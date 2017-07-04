@@ -195,6 +195,24 @@
                 &:hover{
                     font-weight: 600;
                 }
+    
+                &.feature-add{
+                    padding: 6px 20px;
+                    background-image: none;
+                    background-color: transparent !important;
+                    box-shadow: none;
+                    font-weight: 600 !important;
+                    font-size: 22px;
+                    margin-left: 0;
+                    text-transform: capitalize;
+        
+                    .zmdi{
+                        font-size: 25px;
+                        position: relative;
+                        top: 2px;
+                        margin-right: 5px;
+                    }
+                }
                 
                 &.feature-edit{
                 
@@ -217,6 +235,12 @@
 }
 
 #wiki-ground {
+    & > .container{
+        & > .row{
+            margin-top: 1px;
+        }
+    }
+    
     .wrap-box{
         margin-top: 40px;
     }
@@ -238,6 +262,8 @@
     }
     
     #contents_widget-box{
+        width: 230px;
+        
         ul,ol,li{
             padding-left: 0;
         }

@@ -1,10 +1,10 @@
-<div id="follow_list_box" class="pull-right">
+<div id="follow_list_box" class="pull-right hf-transition-200">
     <div class="follow_list_wrap">
-        <a href="" class="follow_left follow_move">
+        <a href="" class="follow_left follow_move hf-transition-150">
             <span class="zmdi zmdi-chevron-left"></span>
         </a>
         <% @my_published_fandoms.each do |fandom| %>
-            <div class="follow_list">
+            <div class="follow_list hf-transition-200">
                 <%= link_to fandom_path(fandom) do %>
                     <div class="follow_artists" style="background: url('<%= fandom.config.fd_logo %>');">
                         <span><%= fandom.config.fd_name %></span>
@@ -12,15 +12,7 @@
                 <% end %>
             </div>
         <% end %>
-        <!--<div class="follow_list">-->
-            <!--<%#= link_to fandoms_path do %>-->
-                <!--<div id="add_follow_btn" class="follow_artists">-->
-                    <!--<span class="zmdi zmdi-plus"></span>-->
-                    <!--<span>Add Channels</span>-->
-                <!--</div>-->
-            <!--<%# end %>-->
-        <!--</div>-->
-        <a href="" class="follow_right follow_move">
+        <a href="" class="follow_right follow_move hf-transition-150">
             <span class="zmdi zmdi-chevron-right"></span>
         </a>
     </div>

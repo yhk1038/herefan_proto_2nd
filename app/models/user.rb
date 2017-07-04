@@ -32,6 +32,10 @@ class User < ApplicationRecord
         fandom.user_ids.include? self.id
     end
     
+    def profile_img
+        self.img.nil? ? fake_helper_image_with_sns(self.image.to_s) : self.img
+    end
+    
     # after_create :set_default_role, if: Proc.new { User.count > 1 }
 
     TEMP_EMAIL_PREFIX = 'change@me'
@@ -144,5 +148,20 @@ class User < ApplicationRecord
     private
     def set_default_role
         add_role :user
+    end
+    
+    def fake_helper_image_with_sns(img_path)
+        is_contain = false
+        return default_profile_img if img_path.include? default_profile_img
+    
+        split = img_path.split('%3A//')
+        path        = split.last
+        protocol    = split.first.split('/').last
+    
+        sns_asset_domains.each do |domain|
+            is_contain = true if path.include? domain
+        end
+    
+        return is_contain ? protocol + path : img_path
     end
 end
