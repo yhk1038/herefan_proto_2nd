@@ -1,7 +1,7 @@
 class Backoffice::ConsoleController < ApplicationController
     include WikisHelper
     
-    before_action :check_login
+    before_action :check_login, except: [:admin, :debug]
     before_action :check_authorize
     before_action :set_fandom, only: [:setting_planet]
     before_action :set_info, only: [:update_wiki_info, :delete_wiki_info]

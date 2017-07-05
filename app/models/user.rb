@@ -48,10 +48,18 @@ class User < ApplicationRecord
     ## DEVISE OFFICAIL GUIDE
     def self.from_omniauth(auth)
         u = where(provider: auth.provider, uid: auth.uid).first
+        u = recoverage(auth) if u.nil?
+        
         if u.nil?
             u = User.create do |user|
                 email = auth.info.email
-                if email then user.email = email else user.email = (auth.info.name.gsub(' ','_') + TEMP_EMAIL_HEREFAN) end
+                unless email
+                    email = auth.info.name.gsub(' ', '_') + TEMP_EMAIL_HEREFAN
+                end
+                if User.where(email: email).count > 0
+                    email = "#{auth.provider}_user-"+email
+                end
+                user.email      = email
                 user.password   = user.email
                 user.provider   = auth.provider
                 user.uid        = auth.uid
@@ -67,6 +75,47 @@ class User < ApplicationRecord
         end
         
         return u
+    end
+
+    # 인증 앱 변경으로 인해, 같은 소셜 계정이지만 provider의 uid 값이 변경되는 현상이 있었다.
+    # 이로 인해 서버에서는 새로운 user로 인식해 가입을 시도하지만, 기존 가입된 동일계정의 email과 email이 중복되어 create 과정에서 오류가 발생했다.
+    # 따라서 인증 앱 변경 시점인 2017-07-05 일을 기준으로 이전에 가입된 계정들을 '기존 user'로 분류하고,
+    # 이들에 한해 다음의 로직을 적용하여 해결했다.
+    # > 같은 provider일때 email이 중복되지만 uid만 다른 경우에,
+    # > 기존 계정의 uid를 새로운 인증 앱에서 반환하는 uid로 변경한 뒤,
+    # > 새로운 계정 생성을 막고, 기존 계정을 현재 세션으로 인식하도록 기존 계정을 반환한다.
+    def self.recoverage(auth)
+	puts "\n\n\n\nrecoverage in\n\n\n\n\n"
+        email = auth.info.email
+	puts "auth.info.email =  #{email}"
+	puts ''
+
+        email = auth.info.name.gsub(' ','_') + TEMP_EMAIL_HEREFAN unless email
+	puts "email changed? email = #{email}"
+	puts ''
+
+        user = User.where(provider: auth.provider, email: email).take
+        unless user
+            if User.where(email: email).count > 0
+                
+            end
+        end
+	puts "taken user = id: #{user&.id}, email: #{user&.email}, provider: #{user&.provider}, original_uid: #{user&.uid}, new_uid: #{auth.uid}"
+	puts ''
+
+	puts "is update target? #{user&.created_at.to_time > Time.new(2017, 7, 6) ? 'false' : 'true'}, created_at: #{user&.created_at.to_time}" unless user.nil?
+	puts "this user is nil" if user.nil?
+        return nil if user.nil? || (user.created_at.to_time > Time.new(2017, 7, 6))
+	puts 'NO SKIPPED! IT WILL UPDATE!'
+	puts ''
+
+        if user.update(uid: auth.uid)
+            puts "Success: [ id: #{user&.id}, email: #{user&.email}, provider: #{user&.provider}, this_uid: #{user&.uid}, new_uid: #{auth.uid} ]"
+        else
+            puts "Fail: [ id: #{user&.id}, email: #{user&.email}, provider: #{user&.provider}, this_uid: #{user&.uid}, new_uid: #{auth.uid} ]"
+        end
+        puts "\n\n\n\n"
+        return user
     end
 
     ## GITBOOK GUIDE

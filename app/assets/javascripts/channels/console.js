@@ -114,7 +114,7 @@ function execAdminKey() {
 
 // // 버튼 href 속성에 쿼리를 완성
 $('#query-input').on('keyup', function () {
-    var query = '/console/debug?auth='+ execAdminKey + '&q=' + $(this).val();
+    var query = '/console/debug?auth='+ execAdminKey() + '&q=' + $(this).val();
     $('#query-requestBtn').attr('href', query);
 });
 
@@ -137,7 +137,7 @@ $('#query-input').on('keypress', function (e) {
 function call_query_for_show() {
     var appendPoint = $('#query-result');
     var query_str = $('#query-input').val();
-    var url = '/console/debug?status=show&auth='+ execAdminKey + '&q='+query_str;
+    var url = '/console/debug?status=show&auth='+ execAdminKey() + '&q='+query_str;
 
     var req = $.ajax({
         url: url,
