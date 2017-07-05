@@ -85,36 +85,12 @@ class User < ApplicationRecord
     # > 기존 계정의 uid를 새로운 인증 앱에서 반환하는 uid로 변경한 뒤,
     # > 새로운 계정 생성을 막고, 기존 계정을 현재 세션으로 인식하도록 기존 계정을 반환한다.
     def self.recoverage(auth)
-	puts "\n\n\n\nrecoverage in\n\n\n\n\n"
         email = auth.info.email
-	puts "auth.info.email =  #{email}"
-	puts ''
-
         email = auth.info.name.gsub(' ','_') + TEMP_EMAIL_HEREFAN unless email
-	puts "email changed? email = #{email}"
-	puts ''
-
         user = User.where(provider: auth.provider, email: email).take
-        unless user
-            if User.where(email: email).count > 0
-                
-            end
-        end
-	puts "taken user = id: #{user&.id}, email: #{user&.email}, provider: #{user&.provider}, original_uid: #{user&.uid}, new_uid: #{auth.uid}"
-	puts ''
-
-	puts "is update target? #{user&.created_at.to_time > Time.new(2017, 7, 6) ? 'false' : 'true'}, created_at: #{user&.created_at.to_time}" unless user.nil?
-	puts "this user is nil" if user.nil?
         return nil if user.nil? || (user.created_at.to_time > Time.new(2017, 7, 6))
-	puts 'NO SKIPPED! IT WILL UPDATE!'
-	puts ''
 
-        if user.update(uid: auth.uid)
-            puts "Success: [ id: #{user&.id}, email: #{user&.email}, provider: #{user&.provider}, this_uid: #{user&.uid}, new_uid: #{auth.uid} ]"
-        else
-            puts "Fail: [ id: #{user&.id}, email: #{user&.email}, provider: #{user&.provider}, this_uid: #{user&.uid}, new_uid: #{auth.uid} ]"
-        end
-        puts "\n\n\n\n"
+        user.update(uid: auth.uid)
         return user
     end
 

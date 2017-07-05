@@ -20,27 +20,6 @@
     <%= render partial: '/fandoms/modal_link_upload', locals: { modal_type: 'edit' } %>
 <% end %>
 
-<div style="display: none;">
-    <p id="notice"><%= notice %></p>
-
-    <p>
-        <strong>Name:</strong>
-        <%= @fandom.name %>
-    </p>
-
-    <p>
-        <strong>Profile img:</strong>
-        <%= @fandom.profile_img %>
-    </p>
-
-    <p>
-        <strong>Background img:</strong>
-        <%= @fandom.background_img %>
-    </p>
-
-    <%= link_to 'Edit', edit_fandom_path(@fandom) %> |
-    <%= link_to 'Back', fandoms_path %>
-</div>
 <style>
     body{
         background-color: transparent;
